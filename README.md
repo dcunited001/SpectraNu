@@ -1,6 +1,9 @@
 Spectra
 =======
 
+**N.B.** -> this library will be moved to replace dcunited001/Spectra at
+some point. Soooo, actually using it is not recommended yet
+
 rewriting this library for like the fifth time, since cocoapods is broken.
 
 
