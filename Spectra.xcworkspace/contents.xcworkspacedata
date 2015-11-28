@@ -17,4 +17,7 @@
          location = "group:Spectra.swift">
       </FileRef>
    </Group>
+   <FileRef
+      location = "group:Carthage">
+   </FileRef>
 </Workspace>
