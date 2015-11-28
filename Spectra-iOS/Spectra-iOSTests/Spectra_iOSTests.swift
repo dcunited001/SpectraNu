@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Spectra_iOS
+@testable import SpectraiOS
 
 class Spectra_iOSTests: XCTestCase {
     

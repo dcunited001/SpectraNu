@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "43EAF8311C0A2FF500EA2B30"
-               BuildableName = "Spectra-iOS.framework"
-               BlueprintName = "Spectra-iOS"
-               ReferencedContainer = "container:Spectra-iOS.xcodeproj">
+               BuildableName = "SpectraiOS.framework"
+               BlueprintName = "SpectraiOS"
+               ReferencedContainer = "container:SpectraiOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "43EAF83B1C0A2FF500EA2B30"
-               BuildableName = "Spectra-iOSTests.xctest"
-               BlueprintName = "Spectra-iOSTests"
-               ReferencedContainer = "container:Spectra-iOS.xcodeproj">
+               BuildableName = "SpectraiOS.xctest"
+               BlueprintName = "SpectraiOSTests"
+               ReferencedContainer = "container:SpectraiOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "43EAF8311C0A2FF500EA2B30"
-            BuildableName = "Spectra-iOS.framework"
-            BlueprintName = "Spectra-iOS"
-            ReferencedContainer = "container:Spectra-iOS.xcodeproj">
+            BuildableName = "SpectraiOS.framework"
+            BlueprintName = "SpectraiOS"
+            ReferencedContainer = "container:SpectraiOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "43EAF8311C0A2FF500EA2B30"
-            BuildableName = "Spectra-iOS.framework"
-            BlueprintName = "Spectra-iOS"
-            ReferencedContainer = "container:Spectra-iOS.xcodeproj">
+            BuildableName = "SpectraiOS.framework"
+            BlueprintName = "SpectraiOS"
+            ReferencedContainer = "container:SpectraiOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "43EAF8311C0A2FF500EA2B30"
-            BuildableName = "Spectra-iOS.framework"
-            BlueprintName = "Spectra-iOS"
-            ReferencedContainer = "container:Spectra-iOS.xcodeproj">
+            BuildableName = "SpectraiOS.framework"
+            BlueprintName = "SpectraiOS"
+            ReferencedContainer = "container:SpectraiOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

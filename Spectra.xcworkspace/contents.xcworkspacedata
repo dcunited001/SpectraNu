@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Spectra-OSX/Spectra-OSX.xcodeproj">
+      location = "group:/Users/dc/dev/apple/Spectra3/Spectra-OSX/SpectraOSX.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Spectra-iOS/Spectra-iOS.xcodeproj">
+      location = "group:/Users/dc/dev/apple/Spectra3/Spectra-iOS/SpectraiOS.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:README.md">
