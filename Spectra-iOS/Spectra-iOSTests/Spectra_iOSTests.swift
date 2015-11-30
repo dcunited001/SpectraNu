@@ -12,6 +12,10 @@ import Nimble
 
 class SpectraOSXTests: QuickSpec {
     override func spec() {
-        expect(Spectra.foo()).to(beTrue())
+        describe("a test") {
+            it("tests something") {
+                expect(Spectra.foo()).to(beTrue())
+            }
+        }
     }
 }
