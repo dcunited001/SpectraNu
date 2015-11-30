@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:SpectraiOSExamples/SpectraiOSExamples.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:SpectraOSXExamples/SpectraOSXExamples.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Carthage/Checkouts/Quick/Quick.xcodeproj">
    </FileRef>
    <FileRef
