@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		431735C11C0CD9FF00681C8E /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431735BF1C0CD9FF00681C8E /* Spectra.swift */; };
 		4353A2A61C0A3E1200E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A41C0A3E1200E5FC52 /* Nimble.framework */; };
 		4353A2A71C0A3E1200E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A51C0A3E1200E5FC52 /* Quick.framework */; };
 		43EAF8361C0A2FF500EA2B30 /* Spectra-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43EAF83D1C0A2FF500EA2B30 /* SpectraiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* SpectraiOS.framework */; };
 		43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8411C0A2FF500EA2B30 /* Spectra_iOSTests.swift */; };
-		43EAF8731C0A30BD00EA2B30 /* Spectra in Resources */ = {isa = PBXBuildFile; fileRef = 43EAF8721C0A30BD00EA2B30 /* Spectra */; };
-		43EAF8741C0A311600EA2B30 /* Spectra in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8721C0A30BD00EA2B30 /* Spectra */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		431735BF1C0CD9FF00681C8E /* Spectra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectra.swift; sourceTree = "<group>"; };
 		4353A2A41C0A3E1200E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A51C0A3E1200E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		43EAF8321C0A2FF500EA2B30 /* SpectraiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpectraiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,7 +35,6 @@
 		43EAF83C1C0A2FF500EA2B30 /* SpectraiOSSpec.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectraiOSSpec.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8411C0A2FF500EA2B30 /* Spectra_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spectra_iOSTests.swift; sourceTree = "<group>"; };
 		43EAF8431C0A2FF500EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		43EAF8721C0A30BD00EA2B30 /* Spectra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spectra; path = ../Spectra; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +58,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		431735C01C0CD9FF00681C8E /* Spectra */ = {
+			isa = PBXGroup;
+			children = (
+				431735BF1C0CD9FF00681C8E /* Spectra.swift */,
+			);
+			name = Spectra;
+			path = ../../Spectra;
+			sourceTree = "<group>";
+		};
 		43EAF8281C0A2FF500EA2B30 = {
 			isa = PBXGroup;
 			children = (
 				4353A2A41C0A3E1200E5FC52 /* Nimble.framework */,
 				4353A2A51C0A3E1200E5FC52 /* Quick.framework */,
-				43EAF8721C0A30BD00EA2B30 /* Spectra */,
 				43EAF8341C0A2FF500EA2B30 /* Spectra-iOS */,
 				43EAF8401C0A2FF500EA2B30 /* Spectra-iOSTests */,
 				43EAF8331C0A2FF500EA2B30 /* Products */,
@@ -83,6 +90,7 @@
 		43EAF8341C0A2FF500EA2B30 /* Spectra-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				431735C01C0CD9FF00681C8E /* Spectra */,
 				43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */,
 				43EAF8371C0A2FF500EA2B30 /* Info.plist */,
 			);
@@ -189,7 +197,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43EAF8731C0A30BD00EA2B30 /* Spectra in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43EAF8741C0A311600EA2B30 /* Spectra in Sources */,
+				431735C11C0CD9FF00681C8E /* Spectra.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		431735BE1C0CD9E600681C8E /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431735BC1C0CD9E600681C8E /* Spectra.swift */; };
+		431735C21C0CDA8E00681C8E /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431735BC1C0CD9E600681C8E /* Spectra.swift */; };
 		4353A2AB1C0A437F00E5FC52 /* SpectraOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */; };
-		43EAF8711C0A30AF00EA2B30 /* Spectra in Resources */ = {isa = PBXBuildFile; fileRef = 43EAF8701C0A30AF00EA2B30 /* Spectra */; };
-		43EAF8751C0A312600EA2B30 /* Spectra in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8701C0A30AF00EA2B30 /* Spectra */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		431735BC1C0CD9E600681C8E /* Spectra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectra.swift; sourceTree = "<group>"; };
 		4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpectraOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,7 +36,6 @@
 		43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectraOSXSpec.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spectra_OSXTests.swift; sourceTree = "<group>"; };
 		43EAF8671C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		43EAF8701C0A30AF00EA2B30 /* Spectra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spectra; path = ../Spectra; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +59,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		431735BD1C0CD9E600681C8E /* Spectra */ = {
+			isa = PBXGroup;
+			children = (
+				431735BC1C0CD9E600681C8E /* Spectra.swift */,
+			);
+			name = Spectra;
+			path = ../../Spectra;
+			sourceTree = "<group>";
+		};
 		43EAF84C1C0A301300EA2B30 = {
 			isa = PBXGroup;
 			children = (
 				4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */,
 				4353A2A11C0A3DFF00E5FC52 /* Quick.framework */,
-				43EAF8701C0A30AF00EA2B30 /* Spectra */,
 				43EAF8581C0A301300EA2B30 /* Spectra-OSX */,
 				43EAF8641C0A301300EA2B30 /* Spectra-OSXTests */,
 				43EAF8571C0A301300EA2B30 /* Products */,
@@ -83,6 +91,7 @@
 		43EAF8581C0A301300EA2B30 /* Spectra-OSX */ = {
 			isa = PBXGroup;
 			children = (
+				431735BD1C0CD9E600681C8E /* Spectra */,
 				43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */,
 				43EAF85B1C0A301300EA2B30 /* Info.plist */,
 			);
@@ -189,7 +198,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43EAF8711C0A30AF00EA2B30 /* Spectra in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43EAF8751C0A312600EA2B30 /* Spectra in Sources */,
+				431735BE1C0CD9E600681C8E /* Spectra.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431735C21C0CDA8E00681C8E /* Spectra.swift in Sources */,
 				43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
