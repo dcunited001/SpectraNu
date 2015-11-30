@@ -7,9 +7,11 @@
 //
 
 @testable import SpectraOSX
-//import Quick
-//import Nimble
+import Quick
+import Nimble
 
 class SpectraOSXTests: QuickSpec {
-    
+    override func spec() {
+        //Spectra.foo()
+    }
 }
