@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4353A2AB1C0A437F00E5FC52 /* SpectraOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */; };
-		4353A2AC1C0A439C00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
-		4353A2AD1C0A439C00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
+		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
+		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */; };
 		43EAF8711C0A30AF00EA2B30 /* Spectra in Resources */ = {isa = PBXBuildFile; fileRef = 43EAF8701C0A30AF00EA2B30 /* Spectra */; };
@@ -32,7 +32,7 @@
 		43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpectraOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-OSX.h"; sourceTree = "<group>"; };
 		43EAF85B1C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		43EAF8601C0A301300EA2B30 /* SpectraOSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectraOSX.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectraOSXSpec.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spectra_OSXTests.swift; sourceTree = "<group>"; };
 		43EAF8671C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43EAF8701C0A30AF00EA2B30 /* Spectra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spectra; path = ../Spectra; sourceTree = "<group>"; };
@@ -50,9 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4353A2AC1C0A439C00E5FC52 /* Nimble.framework in Frameworks */,
-				4353A2AD1C0A439C00E5FC52 /* Quick.framework in Frameworks */,
 				4353A2AB1C0A437F00E5FC52 /* SpectraOSX.framework in Frameworks */,
+				4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */,
+				4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */,
-				43EAF8601C0A301300EA2B30 /* SpectraOSX.xctest */,
+				43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,7 +145,7 @@
 			);
 			name = SpectraOSXTests;
 			productName = "Spectra-OSXTests";
-			productReference = 43EAF8601C0A301300EA2B30 /* SpectraOSX.xctest */;
+			productReference = 43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -324,6 +324,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/Mac";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "Spectra-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -342,6 +343,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/Mac";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "Spectra-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -356,10 +358,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/Mac";
 				INFOPLIST_FILE = "Spectra-OSXTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSXTests";
-				PRODUCT_NAME = SpectraOSX;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = SpectraOSXSpec;
 			};
 			name = Debug;
 		};
@@ -367,10 +371,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/Mac";
 				INFOPLIST_FILE = "Spectra-OSXTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSXTests";
-				PRODUCT_NAME = SpectraOSX;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = SpectraOSXSpec;
 			};
 			name = Release;
 		};

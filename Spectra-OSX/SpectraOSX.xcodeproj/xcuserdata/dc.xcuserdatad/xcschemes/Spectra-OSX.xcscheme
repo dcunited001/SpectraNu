@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "43EAF85F1C0A301300EA2B30"
-               BuildableName = "SpectraOSX.xctest"
+               BuildableName = "SpectraOSXSpec.xctest"
                BlueprintName = "SpectraOSXTests"
                ReferencedContainer = "container:SpectraOSX.xcodeproj">
             </BuildableReference>
