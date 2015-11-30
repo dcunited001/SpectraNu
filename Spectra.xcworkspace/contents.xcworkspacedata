@@ -2,10 +2,16 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/dc/dev/apple/Spectra3/Spectra-OSX/SpectraOSX.xcodeproj">
+      location = "group:Carthage/Checkouts/Quick/Quick.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/dc/dev/apple/Spectra3/Spectra-iOS/SpectraiOS.xcodeproj">
+      location = "group:Carthage/Checkouts/Nimble/Nimble.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Spectra-OSX/SpectraOSX.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Spectra-iOS/SpectraiOS.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:README.md">
