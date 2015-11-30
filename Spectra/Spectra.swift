@@ -10,7 +10,7 @@ import Foundation
 
 class Spectra {
 
-    func foo() -> Bool {
+    class func foo() -> Bool {
         return true
     }
     
