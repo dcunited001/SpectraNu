@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Spectra {
+public class Spectra {
 
-    class func foo() -> Bool {
+    public class func foo() -> Bool {
         return true
     }
     
