@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		431735BE1C0CD9E600681C8E /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431735BC1C0CD9E600681C8E /* Spectra.swift */; };
-		431735C21C0CDA8E00681C8E /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431735BC1C0CD9E600681C8E /* Spectra.swift */; };
 		4353A2AB1C0A437F00E5FC52 /* SpectraOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
@@ -223,7 +222,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				431735C21C0CDA8E00681C8E /* Spectra.swift in Sources */,
 				43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
