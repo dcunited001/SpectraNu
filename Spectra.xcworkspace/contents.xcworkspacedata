@@ -22,9 +22,23 @@
    <FileRef
       location = "group:README.md">
    </FileRef>
+   <FileRef
+      location = "group:LICENSE">
+   </FileRef>
    <Group
       location = "container:Spectra"
       name = "Spectra">
+      <Group
+         location = "container:"
+         name = "Resources">
+         <Group
+            location = "container:"
+            name = "Assets">
+            <FileRef
+               location = "group:Spectra3D.xsd">
+            </FileRef>
+         </Group>
+      </Group>
       <FileRef
          location = "group:Spectra.swift">
       </FileRef>

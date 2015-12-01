@@ -1,0 +1,518 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="S3D"
+    xmlns="S3D"
+    elementFormDefault="qualified">
+    
+    <!-- TODO:
+     * required and defaults
+     * OptionSet types, where value is bitmasked
+     -->
+    
+    <!-- TODO:
+     * add in
+     -->
+    
+    <xs:complexType name="mtlFunction">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="name" type="xs:string" />
+    </xs:complexType>
+    <xs:element name="vertex-function" type="mtlFunction" />
+    <xs:element name="fragment-function" type="mtlFunction" />
+    <xs:element name="compute-function" type="mtlFunction" />
+    
+    <xs:simpleType name="mtlVertexBufferLayoutDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="stride" type="xs:integer" default="0" /> <!-- restriction: multiple of 4 bytes -->
+        <xs:attribute name="step-function" type="mtlVertexStepFunction" />
+        <xs:attribute name="step-rate" type="xs:integer"/>
+    </xs:complexType>
+    <xs:element name="vertex-buffer-layout-descriptor" type="mtlVertexBufferLayoutDescriptor" />
+    
+    <xs:simpleType name="mtlVertexAttributeDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="format" type="mtlVertexFormat" />
+        <xs:attribute name="offset" type="xs:integer" />
+        <xs:attribute name="buffer-index" type="xs:integer" default="0" />
+    </xs:complexType>
+    <xs:element name="vertex-attribute-descriptor" type="mtlVertexAttributeDescriptor" />
+    
+    <xs:complexType name="mtlVertexAttributeDescriptorArray">
+        <xs:sequence>
+            <xs:element ref="vertex-attribute-descriptor" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="vertex-attribute-descriptors" type="mtlVertexAttributeDescriptorArray" />
+    
+    <xs:complexType name="mtlVertexBufferLayoutDescriptorArray">
+        <xs:sequence>
+            <xs:element ref="vertex-buffer-layout-descriptor" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="vertex-buffer-layout-descriptors" type="mtlVertexBufferLayoutDescriptorArray" />
+    
+    <xs:complexType name="mtlVertexDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:all>
+            <xs:element ref="vertex-attribute-descriptors" />
+            <xs:element ref="vertex-buffer-layout-descriptors" />
+        </xs:all>
+    </xs:complexType>
+    <xs:element name="vertex-descriptor" type="mtlVertexDescriptor" />
+    
+    <xs:complexType name="mtlTextureDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="texture-type" type="mtlTextureType" default="Texture2D" />
+        <xs:attribute name="pixel-format" type="mtlPixelFormat" default="RGBAUnorm" />
+        <xs:attribute name="width" type="xs:integer" default="1" />
+        <xs:attribute name="height" type="xs:integer" default="1" />
+        <xs:attribute name="depth" type="xs:integer" default="1" />
+        <xs:attribute name="mipmap-level-count" type="xs:integer" default="1" /> <!-- constraints -->
+        <xs:attribute name="sample-count" type="xs:integer" default="1" /><!-- constraints -->
+        <xs:attribute name="array-length" type="xs:integer" default="1" /><!-- constraint: 1 to 2048 -->
+        <xs:attribute name="resource-options" type="mtlResourceOptions" /> <!-- default? -->
+        <xs:attribute name="cpu-cache-mode" type="mtlCpuCacheMode" default="DefaultCache" />
+        <xs:attribute name="storage-mode" type="mtlStorageMode" default="Shared" /> <!-- docs say default=Auto -->
+        <xs:attribute name="usage" type="mtlTextureUsage" default="RenderTarget" />
+    </xs:complexType>
+    <xs:element name="texture-descriptor" type="mtlTextureDescriptor" />
+    
+    <xs:complexType name="mtlSamplerDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="label" type="xs:string" />
+        <xs:attribute name="min-filter" type="mtlSamplerMinMagFilter" default="Nearest" />
+        <xs:attribute name="mag-filter" type="mtlSamplerMinMagFilter" default="Nearest" />
+        <xs:attribute name="mip-filter" type="MtlSamplerMipFilter" default="NotMipmapped" />
+        <xs:attribute name="max-anisotropy" type="xs:integer" default="1" />
+        <xs:attribute name="s-address-mode" type="mtlSamplerAddressMode" default="ClampToEdge" />
+        <xs:attribute name="t-address-mode" type="mtlSamplerAddressMode" default="ClampToEdge" />
+        <xs:attribute name="r-address-mode" type="mtlSamplerAddressMode" default="ClampToEdge" />
+        <xs:attribute name="normalized-coordinates" type="xs:boolean" default="true" />
+        <xs:attribute name="lod-min-clamp" type="xs:float" default="0.0" />
+        <xs:attribute name="lod-max-clamp" type="xs:float" default="INF" />
+        <xs:attribute name="lod-average" type="xs:boolean" default="false" />
+        <xs:attribute name="compare-function" type="mtlCompareFunction" default="never" />
+    </xs:complexType>
+    <xs:element name="sampler-descriptor" type="mtlSamplerDescriptor" />
+    
+    <xs:complexType name="mtlStencilDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="stencil-compare-function" type="mtlCompareFunction" default="Always" />
+        <xs:attribute name="stencil-failure-operation" type="mtlStencilOperation" default="Keep" />
+        <xs:attribute name="depth-failure-operation" type="mtlStencilOperation" default="Keep" />
+        <xs:attribute name="depth-stencil-pass-operation" type="mtlStencilOperation" default="Keep" />
+        <xs:attribute name="read-mask" type="xs:integer" /> <!-- uint32 --> <!-- default: all ones -->
+        <xs:attribute name="write-mask" type="xs:integer" /> <!-- uint32 --> <!-- default: all ones -->
+    </xs:complexType>
+    <xs:element name="stencil-descriptor" type="mltStencilDescriptor" />
+    
+    <xs:complexType name="mtlDepthStencilDescriptor"> <!-- complexType -->
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="label" type="xs:string" />
+        <xs:attribute name="depth-compare-function" type="mtlCompareFunction" default="Always" />
+        <xs:attribute name="depth-write-enabled" type="xs:boolean" default="false" />
+        <xs:attribute name="front-face-stencil-ref" type="xs:string" default="nil" /> <!-- complexType -->
+        <xs:attribute name="back-face-stencil-ref" type="xs:string" default="nil" /> <!-- complexType -->
+    </xs:element>
+    <xs:element name="depth-stencil-descriptor" type="mtlDepthStencilDescriptor" />
+    
+    <xs:complexType name="mtlRenderPipelineColorAttachmentDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="pixel-format" type="mtlPixelFormat" /> <!-- match render pipeline state pixel-format -->
+        <xs:attribute name="blending-enabled" type="xs:boolean" default="false" />
+        <xs:attribute name="source-rgb-blend-factor" type="mtlBlendFactor" default="One" />
+        <xs:attribute name="destination-rgb-blend-factor" type="mtlBlendFactor" default="Zero" />
+        <xs:attribute name="rgb-blend-operation" type="mtlBlendOperation" default="Add" />
+        <xs:attribute name="source-alpha-blend-factor" type="mtlBlendFactor" default="One" />
+        <xs:attribute name="destination-alpha-blend-factor" type="mtlBlendFactor" default="Zero" />
+        <xs:attribute name="alpha-blend-operation" type="mtlBlendOperation" default="Add" />
+        <xs:attribute name="write-mask-ref" type="mtlColorWriteMask" default="All" /> <!-- complexType(optionSet) -->
+    </xs:complexType>
+    <xs:element name="render-pipeline-color-attachment-descriptor" type="mtlRenderPipelineColorAttachmentDescriptor"/>
+    
+    <xs:complexType name="mtlRenderPipelineDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="label" type="xs:string" />
+        <xs:attribute name="vertex-function-ref" type="xs:string" />  <!-- complexType -->
+        <xs:attribute name="fragment-function-ref" type="xs:string" />  <!-- complexType -->
+        <xs:attribute name="vertex-descriptor-ref" type="xs:string" />  <!-- complexType -->
+        <xs:attribute name="sample-count" type="xs:integer" default="1" />  <!-- complexType -->
+        <xs:attribute name="alpha-to-coverage-enabled" type="xs:boolean" default="false" />
+        <xs:attribute name="alpha-to-one-enabled" type="xs:boolean" default="false" />
+        <xs:attribute name="rasterization-enabled" type="xs:boolean" default="true" />
+        <!-- complexType & sequenceType -->
+        <!-- colorAttachments: MTLRenderPipelineColorAttachmentDescriptorArray -->
+        <xs:attribute name="depth-attachment-pixel-format" type="mtlPixelFormat" default="Invalid" />
+        <xs:attribute name="stencil-attachment-pixel-format" type="mtlPixelFormat" default="Invalid" />
+    </xs:complexType>
+    <xs:element name="render-pipeline-descriptor" type="mtlRenderPipelineDescriptor"/>
+    
+    <xs:complexType name="mtlRenderPassAttachmentDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="texture-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="level" type="xs:integer" default="0" />
+        <xs:attribute name="slice" type="xs:integer" default="0" />
+        <xs:attribute name="depth-plane" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-texture-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="resolve-level" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-slice" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-depth-plane" type="xs:integer" default="0" />
+        <xs:attribute name="load-action" type="mtlLoadAction" default="DontCare" />
+        <xs:attribute name="store-action" type="mtlStoreAction" default="DontCare" />
+    </xs:complexType>
+    <xs:element name="render-pass-attachment-descriptor" type="mtlRenderPassAttachmentDescriptor" />
+    
+    <xs:complexType name="mtlRenderPassColorAttachmentDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="texture-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="level" type="xs:integer" default="0" />
+        <xs:attribute name="slice" type="xs:integer" default="0" />
+        <xs:attribute name="depth-plane" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-texture-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="resolve-level" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-slice" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-depth-plane" type="xs:integer" default="0" />
+        <xs:attribute name="load-action" type="mtlLoadAction" default="DontCare" />
+        <xs:attribute name="store-action" type="mtlStoreAction" default="DontCare" />
+        <!-- public var clearColor: MTLClearColor --> <!-- default: rgba(0,0,0,1) -->
+    </xs:complexType>
+    <xs:element name="render-pass-color-attachment-descriptor" type="mtlRenderPassColorAttachmentDescriptor" />
+    
+    <xs:complexType name="mtlRenderPassColorAttachmentDescriptorArray">
+        <xs:sequence>
+            <xs:element ref="render-pass-color-attachment-descriptor" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="render-pass-color-attachment-descriptors" type="mtlRenderPassColorAttachmentDescriptorArray" />
+    
+    <xs:complexType name="mtlRenderPassDepthAttachmentDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="texture-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="level" type="xs:integer" default="0" />
+        <xs:attribute name="slice" type="xs:integer" default="0" />
+        <xs:attribute name="depth-plane" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-texture-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="resolve-level" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-slice" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-depth-plane" type="xs:integer" default="0" />
+        <xs:attribute name="load-action" type="mtlLoadAction" default="DontCare" />
+        <xs:attribute name="store-action" type="mtlStoreAction" default="DontCare" />
+        <xs:attribute name="clear-depth" type="xs:double" default="1.0" />
+        <xs:attribute name="depth-resolve-filter" type="mtlMultisampleDepthResolveFilter" default="Sample0" />
+    </xs:complexType>
+    <xs:element name="render-pass-depth-attachment-descriptor" type="mtlRenderPassDepthAttachmentDescriptor" />
+    
+    <xs:complexType name="mtlRenderPassDepthAttachmentDescriptorArray">
+        <xs:sequence>
+            <xs:element ref="render-pass-depth-attachment-descriptor" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="render-pass-depth-attachment-descriptors" type="mtlRenderPassDepthAttachmentDescriptorArray" />
+    
+    <xs:complexType name="mtlRenderPassStencilAttachmentDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="texture-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="level" type="xs:integer" default="0" />
+        <xs:attribute name="slice" type="xs:integer" default="0" />
+        <xs:attribute name="depth-plane" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-texture-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="resolve-level" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-slice" type="xs:integer" default="0" />
+        <xs:attribute name="resolve-depth-plane" type="xs:integer" default="0" />
+        <xs:attribute name="load-action" type="mtlLoadAction" default="DontCare" />
+        <xs:attribute name="store-action" type="mtlStoreAction" default="DontCare" />
+        <xs:attribute name="clear-stencil" type="xs:integer" default="0" />
+    </xs:complexType>
+    <xs:element name="render-pass-stencil-attachment-descriptor" type="mtlRenderPassStencilAttachmentDescriptor" />
+    
+    <xs:complexType name="mtlRenderPassStencilAttachmentDescriptorArray">
+        <xs:sequence>
+            <xs:element ref="render-pass-stencil-attachment-descriptor" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="render-pass-stencil-attachment-descriptors" type="mtlRenderPassStencilAttachmentDescriptorArray" />
+    
+    <!-- can be updated during render passes -->
+    <xs:complexType name="mtlRenderPassDescriptor">
+        <xs:all>
+            <xs:element ref="render-pass-color-attachment-descriptors" />
+            <xs:element ref="render-pass-depth-attachment-descriptors" />
+            <xs:element ref="render-pass-stencil-attachment-descriptors" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="mtlComputePipelineDescriptor">
+        <xs:attribute name="key" type="xs:string" />
+        <xs:attribute name="ref" type="xs:string" />
+        <xs:attribute name="label" type="xs:string" />
+        <xs:attribute name="compute-function-ref" type="xs:string" /> <!-- complexType -->
+        <xs:attribute name="thread-group-size-is-multiple-of-thread-execution-width" type="xs:boolean" default="false" />
+    </xs:complexType>
+    <xs:element name="compute-pipeline-descriptor" type="mtlComputePipelineDescriptor" />
+    
+    <!-- enums -->
+    
+    <xs:simpleType name="mtlVertexStepFunction" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0" value="Constant"/>
+            <xs:enumeration id="1" value="PerVertex"/>
+            <xs:enumeration id="2" value="PerInstance"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlCompareFunction" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0" value="Never"/>
+            <xs:enumeration id="1" value="Less"/>
+            <xs:enumeration id="2" value="Equal"/>
+            <xs:enumeration id="3" value="LessEqual"/>
+            <xs:enumeration id="4" value="Greater"/>
+            <xs:enumeration id="5" value="NotEqual"/>
+            <xs:enumeration id="6" value="GreaterEqual"/>
+            <xs:enumeration id="7" value="Always"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlStencilOperation" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0" value="Keep"/>
+            <xs:enumeration id="1" value="Zero"/>
+            <xs:enumeration id="2" value="Replace"/>
+            <xs:enumeration id="3" value="IncrementClamp"/>
+            <xs:enumeration id="4" value="DecrementClamp"/>
+            <xs:enumeration id="5" value="Invert"/>
+            <xs:enumeration id="6" value="IncrementWrap"/>
+            <xs:enumeration id="7" value="DecrementWrap"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlVertexFormat" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Invalid"/>
+            <xs:enumeration id="1"  value="UChar2"/>
+            <xs:enumeration id="2"  value="UChar3"/>
+            <xs:enumeration id="3"  value="UChar4"/>
+            <xs:enumeration id="4"  value="Char2"/>
+            <xs:enumeration id="5"  value="Char3"/>
+            <xs:enumeration id="6"  value="Char4"/>
+            <xs:enumeration id="7"  value="UChar2Normalized"/>
+            <xs:enumeration id="8"  value="UChar3Normalized"/>
+            <xs:enumeration id="9"  value="UChar4Normalized"/>
+            <xs:enumeration id="10" value="Char2Normalized"/>
+            <xs:enumeration id="11" value="Char3Normalized"/>
+            <xs:enumeration id="12" value="Char4Normalized"/>
+            <xs:enumeration id="13" value="UShort2"/>
+            <xs:enumeration id="14" value="UShort3"/>
+            <xs:enumeration id="15" value="UShort4"/>
+            <xs:enumeration id="16" value="Short2"/>
+            <xs:enumeration id="17" value="Short3"/>
+            <xs:enumeration id="18" value="Short4"/>
+            <xs:enumeration id="19" value="UShort2Normalized"/>
+            <xs:enumeration id="20" value="UShort3Normalized"/>
+            <xs:enumeration id="21" value="UShort4Normalized"/>
+            <xs:enumeration id="22" value="Short2Normalized"/>
+            <xs:enumeration id="23" value="Short3Normalized"/>
+            <xs:enumeration id="24" value="Short4Normalized"/>
+            <xs:enumeration id="25" value="Half2"/>
+            <xs:enumeration id="26" value="Half3"/>
+            <xs:enumeration id="27" value="Half4"/>
+            <xs:enumeration id="28" value="Float"/>
+            <xs:enumeration id="29" value="Float2"/>
+            <xs:enumeration id="30" value="Float3"/>
+            <xs:enumeration id="31" value="Float4"/>
+            <xs:enumeration id="32" value="Int"/>
+            <xs:enumeration id="33" value="Int2"/>
+            <xs:enumeration id="34" value="Int3"/>
+            <xs:enumeration id="35" value="Int4"/>
+            <xs:enumeration id="36" value="UInt"/>
+            <xs:enumeration id="37" value="UInt2"/>
+            <xs:enumeration id="38" value="UInt3"/>
+            <xs:enumeration id="39" value="UInt4"/>
+            <xs:enumeration id="40" value="Int1010102Normalized"/>
+            <xs:enumeration id="41" value="UInt1010102Normalized"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlBlendFactor" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Zero"/>
+            <xs:enumeration id="1"  value="One"/>
+            <xs:enumeration id="2"  value="SourceColor"/>
+            <xs:enumeration id="3"  value="OneMinusSourceColor"/>
+            <xs:enumeration id="4"  value="SourceAlpha"/>
+            <xs:enumeration id="5"  value="OneMinusSourceAlpha"/>
+            <xs:enumeration id="6"  value="DestinationColor"/>
+            <xs:enumeration id="7"  value="OneMinusDestinationColor"/>
+            <xs:enumeration id="8"  value="DestinationAlpha"/>
+            <xs:enumeration id="9"  value="OneMinusDestinationAlpha"/>
+            <xs:enumeration id="10" value="SourceAlphaSaturated"/>
+            <xs:enumeration id="11" value="BlendColor"/>
+            <xs:enumeration id="12" value="OneMinusBlendColor"/>
+            <xs:enumeration id="13" value="BlendAlpha"/>
+            <xs:enumeration id="14" value="OneMinusBlendAlpha"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlBlendOperation" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Add"/>
+            <xs:enumeration id="1"  value="Subtract"/>
+            <xs:enumeration id="2"  value="ReverseSubtract"/>
+            <xs:enumeration id="3"  value="Min"/>
+            <xs:enumeration id="4"  value="Max"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlLoadAction" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="DontCare"/>
+            <xs:enumeration id="1"  value="Load"/>
+            <xs:enumeration id="2"  value="Clear"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlStoreAction" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="DontCare"/>
+            <xs:enumeration id="1"  value="Store"/>
+            <xs:enumeration id="2"  value="MultisampleResolve"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlMultisampleDepthResolveFilter" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Sample0"/>
+            <xs:enumeration id="1"  value="Min"/>
+            <xs:enumeration id="2"  value="Max"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlSamplerMinMagFilter" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Nearest"/>
+            <xs:enumeration id="1"  value="Linear"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlSamplerMipFilter" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="NotMipmapped"/>
+            <xs:enumeration id="1"  value="Nearest"/>
+            <xs:enumeration id="2"  value="Linear"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlSamplerAddressMode" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="NotMipmapped"/>
+            <xs:enumeration id="1"  value="Nearest"/>
+            <xs:enumeration id="2"  value="Linear"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlSamplerAddressMode" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="ClampToEdge"/>
+            <xs:enumeration id="1"  value="MirrorClampToEdge"/>
+            <xs:enumeration id="2"  value="Repeat"/>
+            <xs:enumeration id="3"  value="MirrorRepeat"/>
+            <xs:enumeration id="4"  value="ClampToZero"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlTextureType" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Type1D"/>
+            <xs:enumeration id="1"  value="Type1DArray"/>
+            <xs:enumeration id="2"  value="Type2D"/>
+            <xs:enumeration id="3"  value="Type2DArray"/>
+            <xs:enumeration id="4"  value="Type2DMultisample"/>
+            <xs:enumeration id="5"  value="TypeCube"/>
+            <xs:enumeration id="7"  value="Type3D"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlTextureUsage" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Unknown"/>
+            <xs:enumeration id="1"  value="ShaderRead"/>
+            <xs:enumeration id="2"  value="ShaderWrite"/>
+            <xs:enumeration id="3"  value="RenderTarget"/>
+            <xs:enumeration id="4"  value="PixelFormatView"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlCpuCacheMode" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="DefaultCache"/>
+            <xs:enumeration id="1"  value="WriteCombined"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlStorageMode" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Shared"/>
+            <xs:enumeration id="1"  value="Private"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="mtlPurgeableState" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="KeepCurrent"/>
+            <xs:enumeration id="1"  value="NonVolatile"/>
+            <xs:enumeration id="2"  value="Volatile"/>
+            <xs:enumeration id="3"  value="Empty"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- TODO:
+     * MTLResourceOptions (it's OptionSetType)
+     * MTLColorWriteMask (just set to int?)
+     * MTLClearColor (Double x 4, red, green, blue, alpha)
+     * mostly use order that xs:enumeration is read in, instead of id
+     -->
+    
+    <xs:simpleType name="mtlPixelFormat" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Invalid"/>
+            <xs:enumeration id="1"  value="A8Unorm"/>
+            <xs:enumeration id="80"  value="BGRA8Unorm"/>
+            <xs:enumeration id="123"  value="RGBA32Uint"/>
+            <xs:enumeration id="124"  value="RGBA32Sint"/>
+            <xs:enumeration id="125"  value="RGBA32Float"/>
+            <xs:enumeration id="252" value="Depth32Float"/>
+            <xs:enumeration id="253" value="Stencil8"/>
+            <!-- TODO:
+             * finish adding color formats
+             -->
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!--@available(iOS 8.0, *)-->
+    <!--public struct MTLColorWriteMask : OptionSetType {-->
+    <!--public init(rawValue: UInt)-->
+    <!---->
+    <!--public static var None: MTLColorWriteMask { get }-->
+    <!--public static var Red: MTLColorWriteMask { get }-->
+    <!--public static var Green: MTLColorWriteMask { get }-->
+    <!--public static var Blue: MTLColorWriteMask { get }-->
+    <!--public static var Alpha: MTLColorWriteMask { get }-->
+    <!--public static var All: MTLColorWriteMask { get }-->
+    <!--}-->
+    
+</xs:schema>
