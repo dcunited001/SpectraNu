@@ -26,18 +26,130 @@
       location = "group:LICENSE">
    </FileRef>
    <Group
+      location = "container:Resources"
+      name = "Resources">
+      <Group
+         location = "group:Assets"
+         name = "Assets">
+         <FileRef
+            location = "group:Spectra3D.xsd">
+         </FileRef>
+      </Group>
+   </Group>
+   <Group
       location = "container:Spectra"
       name = "Spectra">
       <Group
-         location = "container:"
-         name = "Resources">
-         <Group
-            location = "container:"
-            name = "Assets">
-            <FileRef
-               location = "group:Spectra3D.xsd">
-            </FileRef>
-         </Group>
+         location = "group:S3DXML"
+         name = "S3DXML">
+         <FileRef
+            location = "group:DescriptorManager.swift">
+         </FileRef>
+         <FileRef
+            location = "group:S3DXML.swift">
+         </FileRef>
+         <FileRef
+            location = "group:S3DXSD.swift">
+         </FileRef>
+         <FileRef
+            location = "group:SceneGraphXML.swift">
+         </FileRef>
+         <FileRef
+            location = "group:StateManager.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Node"
+         name = "Node">
+         <FileRef
+            location = "group:Camable.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Mesh.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Modelable.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Node.swift">
+         </FileRef>
+         <FileRef
+            location = "group:NodeResource.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Perspectable.swift">
+         </FileRef>
+         <FileRef
+            location = "group:SceneGraph.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Uniformable.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Vertexable.swift">
+         </FileRef>
+         <FileRef
+            location = "group:WorldView.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:MeshGenerators"
+         name = "MeshGenerators">
+         <FileRef
+            location = "group:BasicTriangle.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Cube.swift">
+         </FileRef>
+         <FileRef
+            location = "group:MeshGenerator.swift">
+         </FileRef>
+         <FileRef
+            location = "group:PlatonicSolids.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Quad.swift">
+         </FileRef>
+         <FileRef
+            location = "group:TriangularQuadLatticeGenerator.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Classes"
+         name = "Classes">
+         <FileRef
+            location = "group:BufferPool.swift">
+         </FileRef>
+         <FileRef
+            location = "group:BufferTexture.swift">
+         </FileRef>
+         <FileRef
+            location = "group:EncodableData.swift">
+         </FileRef>
+         <FileRef
+            location = "group:InflightResourceManager.swift">
+         </FileRef>
+         <FileRef
+            location = "group:PipelineGenerator.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Renderer.swift">
+         </FileRef>
+         <FileRef
+            location = "group:RenderStage.swift">
+         </FileRef>
+         <FileRef
+            location = "group:RenderStrategy.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Scene.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Transform3D.swift">
+         </FileRef>
+         <FileRef
+            location = "group:View.swift">
+         </FileRef>
       </Group>
       <FileRef
          location = "group:Spectra.swift">
