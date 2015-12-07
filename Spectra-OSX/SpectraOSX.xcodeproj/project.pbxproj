@@ -41,6 +41,8 @@
 		4338B7741C138805007D3DF6 /* SceneGraphXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7541C138805007D3DF6 /* SceneGraphXML.swift */; };
 		4338B7751C138805007D3DF6 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7551C138805007D3DF6 /* StateManager.swift */; };
 		4338B7BA1C16348A007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
+		4338B7C11C163C10007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BF1C163C10007D3DF6 /* Metal.framework */; };
+		4338B7C21C163C10007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C01C163C10007D3DF6 /* MetalKit.framework */; };
 		4353A2AB1C0A437F00E5FC52 /* SpectraOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
@@ -94,6 +96,8 @@
 		4338B7541C138805007D3DF6 /* SceneGraphXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneGraphXML.swift; path = S3DXML/SceneGraphXML.swift; sourceTree = "<group>"; };
 		4338B7551C138805007D3DF6 /* StateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StateManager.swift; path = S3DXML/StateManager.swift; sourceTree = "<group>"; };
 		4338B7B91C16348A007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
+		4338B7BF1C163C10007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		4338B7C01C163C10007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		436CA1951C0E1BA80076C627 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../Resources; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4338B7C11C163C10007D3DF6 /* Metal.framework in Frameworks */,
+				4338B7C21C163C10007D3DF6 /* MetalKit.framework in Frameworks */,
 				4338B7BA1C16348A007D3DF6 /* Fuzi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,6 +185,8 @@
 		43EAF84C1C0A301300EA2B30 = {
 			isa = PBXGroup;
 			children = (
+				4338B7BF1C163C10007D3DF6 /* Metal.framework */,
+				4338B7C01C163C10007D3DF6 /* MetalKit.framework */,
 				436CA1951C0E1BA80076C627 /* Resources */,
 				4338B7B91C16348A007D3DF6 /* Fuzi.framework */,
 				4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */,
