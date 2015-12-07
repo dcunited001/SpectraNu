@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Metal
 
 public protocol RenderStrategy: class {
     var renderStages: [RenderStage] { get set }

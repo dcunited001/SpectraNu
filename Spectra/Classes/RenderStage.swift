@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Metal
 
 public typealias NodeGroupz = [String:Node]
 public typealias RenderStageNodeSelect = ((NodeGroupz, [String]) -> [Node])
