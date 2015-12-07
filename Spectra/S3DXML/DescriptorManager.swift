@@ -8,7 +8,7 @@
 
 import Foundation
 import Metal
-import Ono
+import Fuzi
 
 public class SpectraDescriptorManager {
     public var library: MTLLibrary // TODO: support multiple libraries?

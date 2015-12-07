@@ -8,7 +8,7 @@
 
 import Foundation
 import Metal
-import Ono
+import Fuzi
 
 public class S3DXML {
     public var xml: ONOXMLDocument?

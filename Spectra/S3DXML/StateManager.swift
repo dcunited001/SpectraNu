@@ -8,7 +8,6 @@
 
 import Foundation
 import Metal
-import Ono
 
 // TODO: remove 'spectra' from class
 public class SpectraStateManager {

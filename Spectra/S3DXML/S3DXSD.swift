@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Ono
+import Fuzi
 
 public class S3DMtlEnum {
     var name: String
