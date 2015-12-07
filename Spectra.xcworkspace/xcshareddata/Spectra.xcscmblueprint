@@ -4,15 +4,19 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "A78B45A85CFCBB83EE989C9075E716FC25610219" : 0,
     "95438028B10BBB846574013D29F154A00556A9D1" : 0,
-    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : 0
+    "9A76F17C6068412484158A754CBD274391008322" : 0,
+    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : 0,
+    "A7FB94794D37B7728F6B46975BE5E9D999585A35" : 0,
+    "A78B45A85CFCBB83EE989C9075E716FC25610219" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E8084DA6-7D0C-4F4F-B73B-16F1D33B37D0",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "A78B45A85CFCBB83EE989C9075E716FC25610219" : "Spectra3\/",
     "95438028B10BBB846574013D29F154A00556A9D1" : "Spectra3\/Carthage\/Checkouts\/Nimble\/",
-    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : "Spectra3\/Carthage\/Checkouts\/Quick\/"
+    "9A76F17C6068412484158A754CBD274391008322" : "Spectra3\/Carthage\/Checkouts\/Ono\/",
+    "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : "Spectra3\/Carthage\/Checkouts\/Quick\/",
+    "A7FB94794D37B7728F6B46975BE5E9D999585A35" : "Spectra3\/Carthage\/Checkouts\/Fuzi\/",
+    "A78B45A85CFCBB83EE989C9075E716FC25610219" : "Spectra3\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Spectra",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -24,9 +28,19 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1"
     },
     {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mattt\/Ono.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9A76F17C6068412484158A754CBD274391008322"
+    },
+    {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:dcunited001\/SpectraNu.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A78B45A85CFCBB83EE989C9075E716FC25610219"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cezheng\/Fuzi.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A7FB94794D37B7728F6B46975BE5E9D999585A35"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Quick.git",
