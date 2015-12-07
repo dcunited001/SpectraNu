@@ -4,3 +4,9 @@
 [submodule "Carthage/Checkouts/Quick"]
 	path = Carthage/Checkouts/Quick
 	url = https://github.com/Quick/Quick.git
+[submodule "Carthage/Checkouts/Ono"]
+	path = Carthage/Checkouts/Ono
+	url = https://github.com/mattt/Ono.git
+[submodule "Carthage/Checkouts/Fuzi"]
+	path = Carthage/Checkouts/Fuzi
+	url = https://github.com/cezheng/Fuzi.git
