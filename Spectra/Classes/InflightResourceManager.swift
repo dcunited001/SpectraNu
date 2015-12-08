@@ -5,6 +5,7 @@
 //  Created by David Conner on 10/6/15.
 //
 
+import Foundation
 let kInflightResourceCountDefault = 3 // three is magic number
 
 public class InflightResourceManager {
