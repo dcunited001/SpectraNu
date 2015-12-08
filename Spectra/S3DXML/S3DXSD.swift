@@ -13,7 +13,7 @@ public class S3DMtlEnum {
     var name: String
     var values: [String: Int] = [:] // private?
     
-    public init(elem: ONOXMLElement) {
+    public init(elem: XMLElement) {
         values = [:]
         name = elem.valueForAttribute("name") as! String
         let valuesSelector = "xs:restriction > xs:enumeration"
@@ -34,14 +34,15 @@ public class S3DMtlEnum {
 //        default: val
 //        }
 //    }
+    
 }
 
 public class S3DXSD {
-    var xsd: ONOXMLDocument?
+    var xsd: XMLDocument?
     var enumTypes: [String: S3DMtlEnum] = [:]
     
     public init(data: NSData) {
-        xsd = try! ONOXMLDocument(data: data)
+        xsd = try! XMLDocument(data: data)
     }
 
     public class func readXSD(filename: String) -> NSData {
