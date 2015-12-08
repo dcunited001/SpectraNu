@@ -12,10 +12,20 @@ import Metal
 import simd
 
 public class SceneGraphXML {
-    public var xml: ONOXMLDocument?
+    public var xml: XMLDocument?
     
     public init(data: NSData) {
-        xml = try! ONOXMLDocument(data: data)
+        do {
+            xml = try XMLDocument(data: data)
+        } catch let err as XMLError {
+            switch err {
+            case .ParserFailure, .InvalidData: print(err)
+            case .LibXMLError(let code, let message): print("libxml error code: \(code), message: \(message)")
+            case .NoError: print("wth this should not appear") // catch(let err) must be exhaustive
+            }
+        } catch let err {
+            print("error: \(err)")
+        }
     }
     
     // TODO: methods to specify load order?
@@ -23,18 +33,17 @@ public class SceneGraphXML {
     //   - but then load all/some of their data using generators or whatever?
     
     public func parse(sceneGraph: SceneGraph, options: [String: AnyObject] = [:]) -> SceneGraph {
-        for child in xml!.rootElement.children {            
-            let elem = child as! ONOXMLElement
-            let tag = elem.tag
-            let key = elem.valueForAttribute("key") as? String
+        for child in xml!.root!.children {
+            let tag = child.tag!
+            let key = child.attributes["key"]
             
             switch tag {
             case "view":
-                sceneGraph.views[key!] = sceneGraph.views[key!] ?? SGXMLViewNode().parse(sceneGraph, elem: elem)
+                sceneGraph.views[key!] = sceneGraph.views[key!] ?? SGXMLViewNode().parse(sceneGraph, elem: child)
             case "perspective":
-                sceneGraph.perspectives[key!] = sceneGraph.perspectives[key!] ?? SGXMLPerspectiveNode().parse(sceneGraph, elem: elem)
+                sceneGraph.perspectives[key!] = sceneGraph.perspectives[key!] ?? SGXMLPerspectiveNode().parse(sceneGraph, elem: child)
             case "camera":
-                sceneGraph.cameras[key!] = sceneGraph.cameras[key!] ?? SGXMLCameraNode().parse(sceneGraph, elem: elem)
+                sceneGraph.cameras[key!] = sceneGraph.cameras[key!] ?? SGXMLCameraNode().parse(sceneGraph, elem: child)
             default:
                 break
             }
@@ -60,7 +69,7 @@ public class SceneGraphXML {
 public protocol SGXMLNodeParser {
     typealias NodeType
     
-    func parse(sceneGraph: SceneGraph, elem: ONOXMLElement, options: [String: AnyObject]) -> NodeType
+    func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String: AnyObject]) -> NodeType
 }
 
 public class SGXMLSimd {
@@ -97,18 +106,18 @@ public class SGXMLSimd {
 public class SGXMLUniformsNode: SGXMLNodeParser {
     public typealias NodeType = Uniformable
     
-    public func parse(sceneGraph: SceneGraph, elem: ONOXMLElement, options: [String : AnyObject] = [:]) -> NodeType {
+    public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
         let node = BaseUniforms()
         
-        if let pos = elem.valueForAttribute("pos") as? String {
+        if let pos = elem.attributes["pos"] {
             node.uniformPosition = SGXMLSimd.parseFloat4(pos)
         }
         
-        if let rotation = elem.valueForAttribute("rotation") as? String {
+        if let rotation = elem.attributes["rotation"] {
             node.uniformRotation = SGXMLSimd.parseFloat4(rotation)
         }
         
-        if let scale = elem.valueForAttribute("scale") as? String {
+        if let scale = elem.attributes["scale"] {
             node.uniformScale = SGXMLSimd.parseFloat4(scale)
         }
         
@@ -121,10 +130,10 @@ public class SGXMLUniformsNode: SGXMLNodeParser {
 public class SGXMLViewNode: SGXMLNodeParser {
     public typealias NodeType = WorldView
     
-    public func parse(sceneGraph: SceneGraph, elem: ONOXMLElement, options: [String: AnyObject] = [:]) -> NodeType {
+    public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String: AnyObject] = [:]) -> NodeType {
         
         var node: NodeType
-        if let nodeType = elem.valueForAttribute("type") as? String {
+        if let nodeType = elem.attributes["type"] {
             if let monad = sceneGraph.getViewMonad(nodeType) {
                 node = monad()
             } else {
@@ -134,7 +143,7 @@ public class SGXMLViewNode: SGXMLNodeParser {
             node = BaseWorldView()
         }
         
-        if let uniforms = elem.firstChildWithTag("uniforms") {
+        if let uniforms = elem.attributes["uniforms"] {
             node.uniforms = SGXMLUniformsNode().parse(sceneGraph, elem: uniforms)
         }
         
@@ -145,10 +154,10 @@ public class SGXMLViewNode: SGXMLNodeParser {
 public class SGXMLCameraNode: SGXMLNodeParser {
     public typealias NodeType = Camable
     
-    public func parse(sceneGraph: SceneGraph, elem: ONOXMLElement, options: [String : AnyObject] = [:]) -> NodeType {
+    public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
         
         var node: NodeType
-        if let nodeType = elem.valueForAttribute("type") as? String {
+        if let nodeType = elem.attributes["type"] {
             if let monad = sceneGraph.getCameraMonad(nodeType) {
                 node = monad()
             } else {
@@ -158,15 +167,15 @@ public class SGXMLCameraNode: SGXMLNodeParser {
             node = BaseCamera()
         }
         
-        if let eye = elem.valueForAttribute("eye") as? String {
+        if let eye = elem.attributes["eye"] {
             node.camEye = SGXMLSimd.parseFloat4(eye)
         }
         
-        if let center = elem.valueForAttribute("center") as? String {
+        if let center = elem.attributes["center"] {
             node.camCenter = SGXMLSimd.parseFloat4(center)
         }
         
-        if let up = elem.valueForAttribute("up") as? String {
+        if let up = elem.attributes["up"] {
             node.camUp = SGXMLSimd.parseFloat4(up)
         }
         
@@ -177,10 +186,10 @@ public class SGXMLCameraNode: SGXMLNodeParser {
 public class SGXMLPerspectiveNode: SGXMLNodeParser {
     public typealias NodeType = Perspectable
     
-    public func parse(sceneGraph: SceneGraph, elem: ONOXMLElement, options: [String : AnyObject] = [:]) -> NodeType {
+    public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
         var node = BasePerspectable()
         
-        if let type = elem.valueForAttribute("type") as? String {
+        if let type = elem.attributes["type"] {
             node.perspectiveType = type
         }
         
@@ -199,7 +208,7 @@ public class SGXMLPerspectiveNode: SGXMLNodeParser {
 public class SGXMLMeshGeneratorNode: SGXMLNodeParser {
     public typealias NodeType = MeshGenerator
     
-    public func parse(sceneGraph: SceneGraph, elem: ONOXMLElement, options: [String : AnyObject]) -> NodeType {
+    public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject]) -> NodeType {
         
         var node: NodeType
         var meshGenArgs: [String: String] = [:]
@@ -210,7 +219,7 @@ public class SGXMLMeshGeneratorNode: SGXMLNodeParser {
             meshGenArgs[argName] = argValue
         }
         
-        if let nodeType = elem.valueForAttribute("type") as? String {
+        if let nodeType = elem.attributes["type"] {
             if let monad = sceneGraph.getMeshGeneratorMonad(nodeType) {
                 node = monad(meshGenArgs)
             } else {
@@ -227,7 +236,7 @@ public class SGXMLMeshGeneratorNode: SGXMLNodeParser {
 public class SGXMLMeshNode: SGXMLNodeParser {
     public typealias NodeType = Mesh
     
-    public func parse(sceneGraph: SceneGraph, elem: ONOXMLElement, options: [String : AnyObject]) -> NodeType {
+    public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject]) -> NodeType {
         //TODO: mesh monads for each mesh type?
         var node: Mesh = BaseMesh()
         
