@@ -20,7 +20,7 @@ public class S3DXML {
             switch err {
             case .ParserFailure, .InvalidData: print(err)
             case .LibXMLError(let code, let message): print("libxml error code: \(code), message: \(message)")
-            case .NoError: print("wth this should not appear") // catch(let err) must be exhaustive
+            default: break
             }
         } catch let err {
             print("error: \(err)")

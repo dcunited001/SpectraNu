@@ -15,11 +15,11 @@ public class S3DMtlEnum {
     
     public init(elem: XMLElement) {
         values = [:]
-        name = elem.valueForAttribute("name") as! String
+        name = elem.attributes["name"]!
         let valuesSelector = "xs:restriction > xs:enumeration"
-        elem.enumerateElementsWithCSS(valuesSelector) { (el, idx, stop) -> Void in
-            let val = el.valueForAttribute("id") as! String
-            let key = el.valueForAttribute("value") as! String
+        for child in elem.css(valuesSelector) {
+            let val = child.attributes["id"]!
+            let key = child.attributes["value"]!
             self.values[key] = Int(val)
         }
     }
@@ -38,11 +38,21 @@ public class S3DMtlEnum {
 }
 
 public class S3DXSD {
-    var xsd: XMLDocument?
+    public var xsd: XMLDocument?
     var enumTypes: [String: S3DMtlEnum] = [:]
     
     public init(data: NSData) {
-        xsd = try! XMLDocument(data: data)
+        do {
+            xsd = try XMLDocument(data: data)
+        } catch let err as XMLError {
+            switch err {
+            case .ParserFailure, .InvalidData: print(err)
+            case .LibXMLError(let code, let message): print("libxml error code: \(code), message: \(message)")
+            default: break
+            }
+        } catch let err {
+            print("error: \(err)")
+        }
     }
 
     public class func readXSD(filename: String) -> NSData {
@@ -56,8 +66,9 @@ public class S3DXSD {
 
     public func parseEnumTypes() {
         let enumTypesSelector = "xs:simpleType[mtl-enum=true]"
-        xsd!.enumerateElementsWithCSS(enumTypesSelector) { (elem, idx, stop) -> Void in
-            let enumType = S3DMtlEnum(elem: elem)
+        
+        for enumChild in xsd!.css(enumTypesSelector) {
+            let enumType = S3DMtlEnum(elem: enumChild)
             self.enumTypes[enumType.name] = enumType
         }
     }

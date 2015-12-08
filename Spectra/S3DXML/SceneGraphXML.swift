@@ -21,7 +21,7 @@ public class SceneGraphXML {
             switch err {
             case .ParserFailure, .InvalidData: print(err)
             case .LibXMLError(let code, let message): print("libxml error code: \(code), message: \(message)")
-            case .NoError: print("wth this should not appear") // catch(let err) must be exhaustive
+            default: break
             }
         } catch let err {
             print("error: \(err)")
@@ -143,7 +143,7 @@ public class SGXMLViewNode: SGXMLNodeParser {
             node = BaseWorldView()
         }
         
-        if let uniforms = elem.attributes["uniforms"] {
+        if let uniforms = elem.firstChild(tag: "uniforms") {
             node.uniforms = SGXMLUniformsNode().parse(sceneGraph, elem: uniforms)
         }
         
@@ -194,10 +194,9 @@ public class SGXMLPerspectiveNode: SGXMLNodeParser {
         }
         
         let argsSelector = "perspective-arg"
-        elem.enumerateElementsWithCSS(argsSelector) {(el, idx, stop) in
-            let argName = el.valueForAttribute("name") as! String
-            let argValue = el.valueForAttribute("value") as! String
-            
+        for child in elem.css(argsSelector) {
+            let argName = child.attributes["name"]!
+            let argValue = child.attributes["value"]!
             node.perspectiveArgs[argName] = Float(argValue)
         }
         
@@ -213,9 +212,9 @@ public class SGXMLMeshGeneratorNode: SGXMLNodeParser {
         var node: NodeType
         var meshGenArgs: [String: String] = [:]
         let argsSelector = "mesh-generator-arg"
-        elem.enumerateElementsWithCSS(argsSelector) {(el, idx, stop) in
-            let argName = el.valueForAttribute("name") as! String
-            let argValue = el.valueForAttribute("value") as! String
+        for child in elem.css(argsSelector) {
+            let argName = child.attributes["name"]!
+            let argValue = child.attributes["value"]!
             meshGenArgs[argName] = argValue
         }
         
