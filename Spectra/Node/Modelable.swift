@@ -6,6 +6,7 @@
 //
 //
 
+import Foundation
 import simd
 
 public protocol Modelable: class {
