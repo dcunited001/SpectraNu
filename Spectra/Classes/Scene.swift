@@ -6,6 +6,7 @@
 //  Copyright © 2015 Spectra. All rights reserved.
 //
 
+import QuartzCore
 import Metal
 import simd
 
