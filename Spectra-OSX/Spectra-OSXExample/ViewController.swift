@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  SpectraOSXExamples
+//  Spectra-OSXExample
 //
-//  Created by David Conner on 11/30/15.
+//  Created by David Conner on 12/9/15.
 //  Copyright © 2015 Spectra. All rights reserved.
 //
 
@@ -15,7 +15,6 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        Spectra.foo()
     }
 
     override var representedObject: AnyObject? {

@@ -59,12 +59,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		43EAF83E1C0A2FF500EA2B30 /* PBXContainerItemProxy */ = {
+		4338B8871C18BEAA007D3DF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43EAF8291C0A2FF500EA2B30 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 43EAF8311C0A2FF500EA2B30;
-			remoteInfo = "Spectra-iOS";
+			remoteInfo = SpectraiOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -258,6 +258,13 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		4338B8A31C18C1F9007D3DF6 /* Spectra-iOSExample */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Spectra-iOSExample";
+			sourceTree = "<group>";
+		};
 		43EAF8281C0A2FF500EA2B30 = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +277,7 @@
 				4338B7B71C16345F007D3DF6 /* Fuzi.framework */,
 				43EAF8341C0A2FF500EA2B30 /* Spectra-iOS */,
 				43EAF8401C0A2FF500EA2B30 /* Spectra-iOSTests */,
+				4338B8A31C18C1F9007D3DF6 /* Spectra-iOSExample */,
 				43EAF8331C0A2FF500EA2B30 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -347,7 +355,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				43EAF83F1C0A2FF500EA2B30 /* PBXTargetDependency */,
+				4338B8881C18BEAA007D3DF6 /* PBXTargetDependency */,
 			);
 			name = SpectraiOSTests;
 			productName = "Spectra-iOSTests";
@@ -466,10 +474,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		43EAF83F1C0A2FF500EA2B30 /* PBXTargetDependency */ = {
+		4338B8881C18BEAA007D3DF6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43EAF8311C0A2FF500EA2B30 /* SpectraiOS */;
-			targetProxy = 43EAF83E1C0A2FF500EA2B30 /* PBXContainerItemProxy */;
+			targetProxy = 4338B8871C18BEAA007D3DF6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

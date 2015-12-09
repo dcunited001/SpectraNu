@@ -11,18 +11,21 @@
 		431735D21C0CE07900681C8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431735D11C0CE07900681C8E /* ViewController.swift */; };
 		431735D41C0CE07900681C8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 431735D31C0CE07900681C8E /* Assets.xcassets */; };
 		431735D71C0CE07900681C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431735D51C0CE07900681C8E /* Main.storyboard */; };
-		431735DF1C0CE98200681C8E /* SpectraOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431735DE1C0CE98200681C8E /* SpectraOSX.framework */; };
-		431735E01C0CE98200681C8E /* SpectraOSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 431735DE1C0CE98200681C8E /* SpectraOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4338B89D1C18C128007D3DF6 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B89C1C18C128007D3DF6 /* Spectra.framework */; };
+		4338B89E1C18C128007D3DF6 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B89C1C18C128007D3DF6 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4338B8A01C18C141007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B89F1C18C141007D3DF6 /* Fuzi.framework */; };
+		4338B8A11C18C141007D3DF6 /* Fuzi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B89F1C18C141007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		431735E11C0CE98200681C8E /* Embed Frameworks */ = {
+		4338B89B1C18C0EF007D3DF6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				431735E01C0CE98200681C8E /* SpectraOSX.framework in Embed Frameworks */,
+				4338B8A11C18C141007D3DF6 /* Fuzi.framework in Embed Frameworks */,
+				4338B89E1C18C128007D3DF6 /* Spectra.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,7 +39,8 @@
 		431735D31C0CE07900681C8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		431735D61C0CE07900681C8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		431735D81C0CE07900681C8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		431735DE1C0CE98200681C8E /* SpectraOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SpectraOSX.framework; path = "/Users/dc/Library/Developer/Xcode/DerivedData/Spectra-cfocsqcnoxenejbbfuxnungaqyiw/Build/Products/Debug/SpectraOSX.framework"; sourceTree = "<absolute>"; };
+		4338B89C1C18C128007D3DF6 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Spectra.framework; path = "/Users/dc/Library/Developer/Xcode/DerivedData/Spectra-cfocsqcnoxenejbbfuxnungaqyiw/Build/Products/Debug/Spectra.framework"; sourceTree = "<absolute>"; };
+		4338B89F1C18C141007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +48,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				431735DF1C0CE98200681C8E /* SpectraOSX.framework in Frameworks */,
+				4338B8A01C18C141007D3DF6 /* Fuzi.framework in Frameworks */,
+				4338B89D1C18C128007D3DF6 /* Spectra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +59,8 @@
 		431735C31C0CE07900681C8E = {
 			isa = PBXGroup;
 			children = (
-				431735DE1C0CE98200681C8E /* SpectraOSX.framework */,
+				4338B89F1C18C141007D3DF6 /* Fuzi.framework */,
+				4338B89C1C18C128007D3DF6 /* Spectra.framework */,
 				431735CE1C0CE07900681C8E /* SpectraOSXExamples */,
 				431735CD1C0CE07900681C8E /* Products */,
 			);
@@ -90,7 +96,7 @@
 				431735C81C0CE07900681C8E /* Sources */,
 				431735C91C0CE07900681C8E /* Frameworks */,
 				431735CA1C0CE07900681C8E /* Resources */,
-				431735E11C0CE98200681C8E /* Embed Frameworks */,
+				4338B89B1C18C0EF007D3DF6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -293,6 +299,7 @@
 				431735DD1C0CE07900681C8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

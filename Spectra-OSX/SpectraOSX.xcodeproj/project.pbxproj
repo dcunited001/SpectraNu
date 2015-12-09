@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4338B7351C1387E6007D3DF6 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7341C1387E6007D3DF6 /* Spectra.swift */; };
-		4338B7BA1C16348A007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4338B7C11C163C10007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BF1C163C10007D3DF6 /* Metal.framework */; };
 		4338B7C21C163C10007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C01C163C10007D3DF6 /* MetalKit.framework */; };
 		4338B7C41C176745007D3DF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C31C176745007D3DF6 /* Foundation.framework */; };
@@ -50,6 +49,14 @@
 		4338B8841C18B3AF007D3DF6 /* Transform3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8611C18B3AF007D3DF6 /* Transform3D.swift */; };
 		4338B8851C18B3AF007D3DF6 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8621C18B3AF007D3DF6 /* View.swift */; };
 		4338B8861C18B3AF007D3DF6 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8641C18B3AF007D3DF6 /* Spectra.swift */; };
+		4338B8AB1C18C278007D3DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8AA1C18C278007D3DF6 /* AppDelegate.swift */; };
+		4338B8AD1C18C278007D3DF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8AC1C18C278007D3DF6 /* ViewController.swift */; };
+		4338B8AF1C18C278007D3DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8AE1C18C278007D3DF6 /* Assets.xcassets */; };
+		4338B8B21C18C278007D3DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8B01C18C278007D3DF6 /* Main.storyboard */; };
+		4338B8C41C18C497007D3DF6 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; };
+		4338B8C51C18C497007D3DF6 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4338B8C81C18CE48007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
+		4338B8C91C18CE57007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4353A2AB1C0A437F00E5FC52 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
@@ -59,6 +66,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4338B8C61C18C497007D3DF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43EAF8551C0A301300EA2B30;
+			remoteInfo = SpectraOSX;
+		};
 		43EAF8621C0A301300EA2B30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
@@ -67,6 +81,20 @@
 			remoteInfo = "Spectra-OSX";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4338B8C31C18C48E007D3DF6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4338B8C51C18C497007D3DF6 /* Spectra.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4338B7341C1387E6007D3DF6 /* Spectra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectra.swift; sourceTree = "<group>"; };
@@ -112,6 +140,12 @@
 		4338B8611C18B3AF007D3DF6 /* Transform3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transform3D.swift; sourceTree = "<group>"; };
 		4338B8621C18B3AF007D3DF6 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		4338B8641C18B3AF007D3DF6 /* Spectra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectra.swift; sourceTree = "<group>"; };
+		4338B8A81C18C278007D3DF6 /* Spectra-OSXExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spectra-OSXExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4338B8AA1C18C278007D3DF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4338B8AC1C18C278007D3DF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4338B8AE1C18C278007D3DF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4338B8B11C18C278007D3DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4338B8B31C18C278007D3DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		436CA1951C0E1BA80076C627 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../Resources; sourceTree = "<group>"; };
@@ -124,6 +158,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4338B8A51C18C278007D3DF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4338B8C91C18CE57007D3DF6 /* Fuzi.framework in Frameworks */,
+				4338B8C41C18C497007D3DF6 /* Spectra.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43EAF8521C0A301300EA2B30 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -131,7 +174,7 @@
 				4338B7C41C176745007D3DF6 /* Foundation.framework in Frameworks */,
 				4338B7C11C163C10007D3DF6 /* Metal.framework in Frameworks */,
 				4338B7C21C163C10007D3DF6 /* MetalKit.framework in Frameworks */,
-				4338B7BA1C16348A007D3DF6 /* Fuzi.framework in Frameworks */,
+				4338B8C81C18CE48007D3DF6 /* Fuzi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +301,18 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		4338B8A91C18C278007D3DF6 /* Spectra-OSXExample */ = {
+			isa = PBXGroup;
+			children = (
+				4338B8AA1C18C278007D3DF6 /* AppDelegate.swift */,
+				4338B8AC1C18C278007D3DF6 /* ViewController.swift */,
+				4338B8AE1C18C278007D3DF6 /* Assets.xcassets */,
+				4338B8B01C18C278007D3DF6 /* Main.storyboard */,
+				4338B8B31C18C278007D3DF6 /* Info.plist */,
+			);
+			path = "Spectra-OSXExample";
+			sourceTree = "<group>";
+		};
 		43EAF84C1C0A301300EA2B30 = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +325,7 @@
 				4353A2A11C0A3DFF00E5FC52 /* Quick.framework */,
 				43EAF8581C0A301300EA2B30 /* Spectra-OSX */,
 				43EAF8641C0A301300EA2B30 /* Spectra-OSXTests */,
+				4338B8A91C18C278007D3DF6 /* Spectra-OSXExample */,
 				43EAF8571C0A301300EA2B30 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -279,6 +335,7 @@
 			children = (
 				43EAF8561C0A301300EA2B30 /* Spectra.framework */,
 				43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */,
+				4338B8A81C18C278007D3DF6 /* Spectra-OSXExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -318,6 +375,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		4338B8A71C18C278007D3DF6 /* Spectra-OSXExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4338B8B41C18C278007D3DF6 /* Build configuration list for PBXNativeTarget "Spectra-OSXExample" */;
+			buildPhases = (
+				4338B8A41C18C278007D3DF6 /* Sources */,
+				4338B8A51C18C278007D3DF6 /* Frameworks */,
+				4338B8A61C18C278007D3DF6 /* Resources */,
+				4338B8C31C18C48E007D3DF6 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4338B8C71C18C497007D3DF6 /* PBXTargetDependency */,
+			);
+			name = "Spectra-OSXExample";
+			productName = "Spectra-OSXExample";
+			productReference = 4338B8A81C18C278007D3DF6 /* Spectra-OSXExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		43EAF8551C0A301300EA2B30 /* SpectraOSX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43EAF86A1C0A301300EA2B30 /* Build configuration list for PBXNativeTarget "SpectraOSX" */;
@@ -364,6 +440,9 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Spectra;
 				TargetAttributes = {
+					4338B8A71C18C278007D3DF6 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 					43EAF8551C0A301300EA2B30 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
@@ -378,6 +457,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 43EAF84C1C0A301300EA2B30;
 			productRefGroup = 43EAF8571C0A301300EA2B30 /* Products */;
@@ -386,11 +466,21 @@
 			targets = (
 				43EAF8551C0A301300EA2B30 /* SpectraOSX */,
 				43EAF85F1C0A301300EA2B30 /* SpectraOSXTests */,
+				4338B8A71C18C278007D3DF6 /* Spectra-OSXExample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4338B8A61C18C278007D3DF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4338B8AF1C18C278007D3DF6 /* Assets.xcassets in Resources */,
+				4338B8B21C18C278007D3DF6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43EAF8541C0A301300EA2B30 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -411,6 +501,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4338B8A41C18C278007D3DF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4338B8AD1C18C278007D3DF6 /* ViewController.swift in Sources */,
+				4338B8AB1C18C278007D3DF6 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43EAF8511C0A301300EA2B30 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -466,6 +565,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4338B8C71C18C497007D3DF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
+			targetProxy = 4338B8C61C18C497007D3DF6 /* PBXContainerItemProxy */;
+		};
 		43EAF8631C0A301300EA2B30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
@@ -473,7 +577,44 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		4338B8B01C18C278007D3DF6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4338B8B11C18C278007D3DF6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		4338B8B51C18C278007D3DF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = "Spectra-OSXExample/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSXExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4338B8B61C18C278007D3DF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = "Spectra-OSXExample/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSXExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		43EAF8681C0A301300EA2B30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -632,6 +773,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4338B8B41C18C278007D3DF6 /* Build configuration list for PBXNativeTarget "Spectra-OSXExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4338B8B51C18C278007D3DF6 /* Debug */,
+				4338B8B61C18C278007D3DF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		43EAF8501C0A301300EA2B30 /* Build configuration list for PBXProject "SpectraOSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
