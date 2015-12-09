@@ -162,7 +162,6 @@ public class S3DXMLMTLVertexBufferLayoutDescriptorNode: S3DXMLNodeParser {
     public typealias NodeType = MTLVertexBufferLayoutDescriptor
     
     public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-
         let bufferLayoutDesc = NodeType()
         
         let stride = elem.attributes["stride"]!
@@ -456,8 +455,8 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
         }
         
         let colorAttachSelector = "color-attachment-descriptors > color-attachment-descriptor"
-        elem.enumerateElementsWithCSS(colorAttachSelector) {(el, idx, stop) in
-            if let colorAttachRef = el.valueForAttribute("ref") as? String {
+        for (idx, el) in elem.css(colorAttachSelector).enumerate() {
+            if let colorAttachRef = el.attributes["ref"] {
                 let colorAttach = descriptorManager.colorAttachmentDescriptors[colorAttachRef]!
                 desc.colorAttachments[Int(idx)] = colorAttach
             } else {
@@ -666,9 +665,9 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
     public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
         let desc = NodeType()
         
-        let AttachSelector = "render-pass-color-attachment-descriptors > render-pass-color-attachment-descriptor"
-        elem.enumerateElementsWithCSS(AttachSelector) {(el, idx, stop) in
-            if let colorAttachRef = el.valueForAttribute("ref") as? String {
+        let attachSelector = "render-pass-color-attachment-descriptors > render-pass-color-attachment-descriptor"
+        for (idx, el) in elem.css(attachSelector).enumerate() {
+            if let colorAttachRef = el.attributes["ref"] {
                 let colorAttach = descriptorManager.renderPassColorAttachmentDescriptors[colorAttachRef]!
                 desc.colorAttachments[Int(idx)] = colorAttach
             } else {
@@ -677,8 +676,8 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
             }
         }
         
-        if let depthAttachTag = elem.firstChildWithTag("render-pass-depth-attachment-descriptor") {
-            if let depthAttachName = depthAttachTag.valueForAttribute("ref") as? String {
+        if let depthAttachTag = elem.firstChild(tag: "render-pass-depth-attachment-descriptor") {
+            if let depthAttachName = depthAttachTag.attributes["ref"] {
                 desc.depthAttachment = descriptorManager.renderPassDepthAttachmentDescriptors[depthAttachName]!
             } else {
                 let node = S3DXMLMTLRenderPassDepthAttachmentDescriptorNode()
@@ -686,8 +685,8 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
             }
         }
         
-        if let stencilAttachTag = elem.firstChildWithTag("render-pass-stencil-attachment-descriptor") {
-            if let stencilAttachName = stencilAttachTag.valueForAttribute("ref") as? String {
+        if let stencilAttachTag = elem.firstChild(tag: "render-pass-stencil-attachment-descriptor") {
+            if let stencilAttachName = stencilAttachTag.attributes["ref"] {
                 desc.stencilAttachment = descriptorManager.renderPassStencilAttachmentDescriptors[stencilAttachName]!
             } else {
                 let node = S3DXMLMTLRenderPassStencilAttachmentDescriptorNode()
