@@ -8,6 +8,7 @@
 
 import Cocoa
 import Spectra
+import Fuzi
 
 class ViewController: NSViewController {
 
