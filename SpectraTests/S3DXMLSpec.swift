@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SpectraOSX
+import Spectra
 import Fuzi
 import Quick
 import Nimble
@@ -109,7 +109,8 @@ class S3DXMLSpec: QuickSpec {
                 expect(desc.normalizedCoordinates) == false
                 expect(desc.lodMinClamp) == 1.0
                 expect(desc.lodMaxClamp) == 10.0
-                expect(desc.lodAverage) == true
+//                TODO: fix lodAverage (unavailable on OSX)
+//                expect(desc.lodAverage) == true
                 expect(desc.compareFunction) == MTLCompareFunction.Always
             }
         }
@@ -201,7 +202,8 @@ class S3DXMLSpec: QuickSpec {
                 expect(desc.loadAction) == MTLLoadAction.Load
                 expect(desc.storeAction) == MTLStoreAction.Store
                 expect(desc.clearDepth) == 2.0
-                expect(desc.depthResolveFilter) == MTLMultisampleDepthResolveFilter.Min
+//                TODO: MTLMultisampleDepthResolveFilter not available in iOS
+//                expect(desc.depthResolveFilter) == MTLMultisampleDepthResolveFilter.Min
             }
         }
         

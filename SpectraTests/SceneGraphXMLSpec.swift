@@ -7,8 +7,7 @@
 //
 
 import Foundation
-
-import SpectraOSX
+import Spectra
 import Fuzi
 import Quick
 import Nimble
