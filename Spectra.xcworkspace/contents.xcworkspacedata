@@ -164,6 +164,29 @@
          location = "group:Spectra.swift">
       </FileRef>
    </Group>
+   <Group
+      location = "container:SpectraTests"
+      name = "SpectraTests">
+      <FileRef
+         location = "group:S3DXMLSpec.swift">
+      </FileRef>
+      <FileRef
+         location = "group:S3DXSDSpec.swift">
+      </FileRef>
+      <FileRef
+         location = "group:SceneGraphXMLSpec.swift">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "SpectraTestsResources">
+      <FileRef
+         location = "group:SpectraTestsResources/S3DXMLTest.xml">
+      </FileRef>
+      <FileRef
+         location = "group:SpectraTestsResources/SceneGraphXMLTest.xml">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:Carthage">
    </FileRef>
