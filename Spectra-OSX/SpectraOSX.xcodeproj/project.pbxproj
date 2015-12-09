@@ -53,10 +53,7 @@
 		4338B8AD1C18C278007D3DF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8AC1C18C278007D3DF6 /* ViewController.swift */; };
 		4338B8AF1C18C278007D3DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8AE1C18C278007D3DF6 /* Assets.xcassets */; };
 		4338B8B21C18C278007D3DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8B01C18C278007D3DF6 /* Main.storyboard */; };
-		4338B8C41C18C497007D3DF6 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; };
-		4338B8C51C18C497007D3DF6 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4338B8C81C18CE48007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
-		4338B8C91C18CE57007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4353A2AB1C0A437F00E5FC52 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
@@ -66,13 +63,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4338B8C61C18C497007D3DF6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43EAF8551C0A301300EA2B30;
-			remoteInfo = SpectraOSX;
-		};
 		43EAF8621C0A301300EA2B30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
@@ -81,20 +71,6 @@
 			remoteInfo = "Spectra-OSX";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		4338B8C31C18C48E007D3DF6 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				4338B8C51C18C497007D3DF6 /* Spectra.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4338B7341C1387E6007D3DF6 /* Spectra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectra.swift; sourceTree = "<group>"; };
@@ -162,8 +138,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4338B8C91C18CE57007D3DF6 /* Fuzi.framework in Frameworks */,
-				4338B8C41C18C497007D3DF6 /* Spectra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,12 +356,10 @@
 				4338B8A41C18C278007D3DF6 /* Sources */,
 				4338B8A51C18C278007D3DF6 /* Frameworks */,
 				4338B8A61C18C278007D3DF6 /* Resources */,
-				4338B8C31C18C48E007D3DF6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4338B8C71C18C497007D3DF6 /* PBXTargetDependency */,
 			);
 			name = "Spectra-OSXExample";
 			productName = "Spectra-OSXExample";
@@ -565,11 +537,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4338B8C71C18C497007D3DF6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
-			targetProxy = 4338B8C61C18C497007D3DF6 /* PBXContainerItemProxy */;
-		};
 		43EAF8631C0A301300EA2B30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
@@ -594,7 +561,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/Mac";
 				INFOPLIST_FILE = "Spectra-OSXExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSXExample";
@@ -607,7 +574,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/Mac";
 				INFOPLIST_FILE = "Spectra-OSXExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSXExample";

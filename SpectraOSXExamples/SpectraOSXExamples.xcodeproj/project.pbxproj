@@ -13,8 +13,6 @@
 		431735D71C0CE07900681C8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431735D51C0CE07900681C8E /* Main.storyboard */; };
 		4338B89D1C18C128007D3DF6 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B89C1C18C128007D3DF6 /* Spectra.framework */; };
 		4338B89E1C18C128007D3DF6 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B89C1C18C128007D3DF6 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4338B8A01C18C141007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B89F1C18C141007D3DF6 /* Fuzi.framework */; };
-		4338B8A11C18C141007D3DF6 /* Fuzi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B89F1C18C141007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +22,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4338B8A11C18C141007D3DF6 /* Fuzi.framework in Embed Frameworks */,
 				4338B89E1C18C128007D3DF6 /* Spectra.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -48,7 +45,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4338B8A01C18C141007D3DF6 /* Fuzi.framework in Frameworks */,
 				4338B89D1C18C128007D3DF6 /* Spectra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
