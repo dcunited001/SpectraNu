@@ -63,6 +63,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4338B8E01C18F109007D3DF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43EAF8551C0A301300EA2B30;
+			remoteInfo = SpectraOSX;
+		};
 		43EAF8621C0A301300EA2B30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
@@ -360,6 +367,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4338B8E11C18F109007D3DF6 /* PBXTargetDependency */,
 			);
 			name = "Spectra-OSXExample";
 			productName = "Spectra-OSXExample";
@@ -537,6 +545,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4338B8E11C18F109007D3DF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
+			targetProxy = 4338B8E01C18F109007D3DF6 /* PBXContainerItemProxy */;
+		};
 		43EAF8631C0A301300EA2B30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
