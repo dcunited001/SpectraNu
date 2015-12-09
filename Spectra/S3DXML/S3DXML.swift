@@ -363,8 +363,8 @@ public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
             depthDesc.depthWriteEnabled = true
         }
         
-        if let frontFaceTag = elem.firstChildWithTag("front-face-stencil") {
-            if let frontFaceName = frontFaceTag.valueForAttribute("ref") as? String {
+        if let frontFaceTag = elem.firstChild(tag: "front-face-stencil") {
+            if let frontFaceName = frontFaceTag.attributes["ref"] {
                 depthDesc.frontFaceStencil = descriptorManager.stencilDescriptors[frontFaceName]!
             } else {
                 let node = S3DXMLMTLStencilDescriptorNode()
@@ -372,8 +372,8 @@ public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
             }
         }
         
-        if let backFaceTag = elem.firstChildWithTag("back-face-stencil") {
-            if let backFaceName = backFaceTag.valueForAttribute("ref") as? String {
+        if let backFaceTag = elem.firstChild(tag: "back-face-stencil") {
+            if let backFaceName = backFaceTag.attributes["ref"] {
                 depthDesc.backFaceStencil = descriptorManager.stencilDescriptors[backFaceName]!
             } else {
                 let node = S3DXMLMTLStencilDescriptorNode()
@@ -440,20 +440,20 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
     public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
         let desc = NodeType()
         
-        if let vertexFunctionTag = elem.attributes["vertex-function"] {
-            if let vertexFunctionName = vertexFunctionTag.valueForAttribute("ref") as? String {
+        if let vertexFunctionTag = elem.firstChild(tag: "vertex-function") {
+            if let vertexFunctionName = vertexFunctionTag.attributes["ref"] {
                 desc.vertexFunction = descriptorManager.vertexFunctions[vertexFunctionName]!
             }
         }
         
-        if let fragmentFunctionTag = elem.attributes["fragment-function"] {
-            if let fragmentFunctionName = fragmentFunctionTag.valueForAttribute("ref") as? String {
+        if let fragmentFunctionTag = elem.firstChild(tag: "fragment-function") {
+            if let fragmentFunctionName = fragmentFunctionTag.attributes["ref"] {
                 desc.fragmentFunction = descriptorManager.fragmentFunctions[fragmentFunctionName]!
             }
         }
         
-        if let vertexDescTag = elem.attributes["vertex-descriptor"] {
-            if let vertexDescName = vertexDescTag.valueForAttribute("ref") as? String {
+        if let vertexDescTag = elem.firstChild(tag: "vertex-descriptor") {
+            if let vertexDescName = vertexDescTag.attributes["ref"] {
                 print(descriptorManager.vertexDescriptors)
                 desc.vertexDescriptor = descriptorManager.vertexDescriptors[vertexDescName]!
             }
