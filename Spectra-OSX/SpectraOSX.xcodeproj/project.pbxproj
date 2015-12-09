@@ -50,7 +50,7 @@
 		4338B8841C18B3AF007D3DF6 /* Transform3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8611C18B3AF007D3DF6 /* Transform3D.swift */; };
 		4338B8851C18B3AF007D3DF6 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8621C18B3AF007D3DF6 /* View.swift */; };
 		4338B8861C18B3AF007D3DF6 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8641C18B3AF007D3DF6 /* Spectra.swift */; };
-		4353A2AB1C0A437F00E5FC52 /* SpectraOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */; };
+		4353A2AB1C0A437F00E5FC52 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
 		436CA1961C0E1BA80076C627 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 436CA1951C0E1BA80076C627 /* Resources */; };
@@ -115,7 +115,7 @@
 		4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		436CA1951C0E1BA80076C627 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../Resources; sourceTree = "<group>"; };
-		43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpectraOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43EAF8561C0A301300EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-OSX.h"; sourceTree = "<group>"; };
 		43EAF85B1C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectraOSXSpec.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,7 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4353A2AB1C0A437F00E5FC52 /* SpectraOSX.framework in Frameworks */,
+				4353A2AB1C0A437F00E5FC52 /* Spectra.framework in Frameworks */,
 				4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */,
 				4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */,
 			);
@@ -277,7 +277,7 @@
 		43EAF8571C0A301300EA2B30 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */,
+				43EAF8561C0A301300EA2B30 /* Spectra.framework */,
 				43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */,
 			);
 			name = Products;
@@ -333,7 +333,7 @@
 			);
 			name = SpectraOSX;
 			productName = "Spectra-OSX";
-			productReference = 43EAF8561C0A301300EA2B30 /* SpectraOSX.framework */;
+			productReference = 43EAF8561C0A301300EA2B30 /* Spectra.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		43EAF85F1C0A301300EA2B30 /* SpectraOSXTests */ = {
@@ -575,8 +575,8 @@
 				INFOPLIST_FILE = "Spectra-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSX";
-				PRODUCT_NAME = SpectraOSX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spectra.Spectra;
+				PRODUCT_NAME = Spectra;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -597,8 +597,8 @@
 				INFOPLIST_FILE = "Spectra-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSX";
-				PRODUCT_NAME = SpectraOSX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spectra.Spectra;
+				PRODUCT_NAME = Spectra;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

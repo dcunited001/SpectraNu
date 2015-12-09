@@ -6,7 +6,7 @@
 //  Copyright © 2015 Spectra. All rights reserved.
 //
 
-@testable import SpectraOSX
+@testable import Spectra
 import Quick
 import Nimble
 

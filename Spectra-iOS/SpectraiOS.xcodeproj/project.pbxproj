@@ -54,7 +54,7 @@
 		4353A2A71C0A3E1200E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A51C0A3E1200E5FC52 /* Quick.framework */; };
 		436CA1941C0E1B810076C627 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 436CA1931C0E1B810076C627 /* Resources */; };
 		43EAF8361C0A2FF500EA2B30 /* Spectra-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43EAF83D1C0A2FF500EA2B30 /* SpectraiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* SpectraiOS.framework */; };
+		43EAF83D1C0A2FF500EA2B30 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; };
 		43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8411C0A2FF500EA2B30 /* Spectra_iOSTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -115,7 +115,7 @@
 		4353A2A41C0A3E1200E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A51C0A3E1200E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		436CA1931C0E1B810076C627 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../Resources; sourceTree = "<group>"; };
-		43EAF8321C0A2FF500EA2B30 /* SpectraiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpectraiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43EAF8321C0A2FF500EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-iOS.h"; sourceTree = "<group>"; };
 		43EAF8371C0A2FF500EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43EAF83C1C0A2FF500EA2B30 /* SpectraiOSSpec.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectraiOSSpec.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,7 +141,7 @@
 			files = (
 				4353A2A61C0A3E1200E5FC52 /* Nimble.framework in Frameworks */,
 				4353A2A71C0A3E1200E5FC52 /* Quick.framework in Frameworks */,
-				43EAF83D1C0A2FF500EA2B30 /* SpectraiOS.framework in Frameworks */,
+				43EAF83D1C0A2FF500EA2B30 /* Spectra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +277,7 @@
 		43EAF8331C0A2FF500EA2B30 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				43EAF8321C0A2FF500EA2B30 /* SpectraiOS.framework */,
+				43EAF8321C0A2FF500EA2B30 /* Spectra.framework */,
 				43EAF83C1C0A2FF500EA2B30 /* SpectraiOSSpec.xctest */,
 			);
 			name = Products;
@@ -333,7 +333,7 @@
 			);
 			name = SpectraiOS;
 			productName = "Spectra-iOS";
-			productReference = 43EAF8321C0A2FF500EA2B30 /* SpectraiOS.framework */;
+			productReference = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		43EAF83B1C0A2FF500EA2B30 /* SpectraiOSTests */ = {
@@ -576,7 +576,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-iOS";
-				PRODUCT_NAME = SpectraiOS;
+				PRODUCT_NAME = Spectra;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -594,7 +594,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-iOS";
-				PRODUCT_NAME = SpectraiOS;
+				PRODUCT_NAME = Spectra;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
