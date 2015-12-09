@@ -7,18 +7,19 @@
 //
 
 import Foundation
-import Spectra
-import Ono
+
+import SpectraOSX
+import Fuzi
 import Quick
 import Nimble
 import Metal
 import simd
 
-class CustomView: Spectra.BaseWorldView {
+class CustomView: BaseWorldView {
     var customVar: String?
 }
 
-class CustomCamera: Spectra.BaseCamera {
+class CustomCamera: BaseCamera {
     var customVar: String?
 }
 

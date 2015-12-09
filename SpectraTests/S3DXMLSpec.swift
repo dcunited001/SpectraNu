@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Spectra
-import Ono
+import SpectraOSX
+import Fuzi
 import Quick
 import Nimble
 import Metal
