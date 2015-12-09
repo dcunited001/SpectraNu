@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Spectra-iOSExample.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>4338B8CD1C18DC92007D3DF6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>43EAF8311C0A2FF500EA2B30</key>
 		<dict>
 			<key>primary</key>
