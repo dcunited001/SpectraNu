@@ -120,20 +120,16 @@ public class S3DXMLMTLVertexDescriptorNode: S3DXMLNodeParser {
     public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String: AnyObject] = [:]) -> NodeType {
         let vertexDesc = NodeType()
         
-        var attrIdx = 0
         let attributeDescSelector = "vertex-attribute-descriptors > vertex-attribute-descriptor"
-        elem.css(attributeDescSelector).map { child in
+        for (idx, child) in elem.css(attributeDescSelector).enumerate() {
             let node = S3DXMLMTLVertexAttributeDescriptorNode()
-            vertexDesc.attributes[attrIdx] = node.parse(descriptorManager, elem: child)
-            attrIdx++
+            vertexDesc.attributes[idx] = node.parse(descriptorManager, elem: child)
         }
         
-        var layoutIdx = 0
         let bufferLayoutDescSelector = "vertex-buffer-layout-descriptors > vertex-buffer-layout-descriptor"
-        elem.css(bufferLayoutDescSelector).map { child in
+        for (idx, child) in elem.css(bufferLayoutDescSelector).enumerate() {
             let node = S3DXMLMTLVertexBufferLayoutDescriptorNode()
-            vertexDesc.layouts[layoutIdx] = node.parse(descriptorManager, elem: child)
-            layoutIdx++
+            vertexDesc.layouts[idx] = node.parse(descriptorManager, elem: child)
         }
         
         return vertexDesc
