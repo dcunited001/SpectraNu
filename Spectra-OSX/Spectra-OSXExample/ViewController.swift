@@ -9,11 +9,18 @@
 import Cocoa
 import Spectra
 import Fuzi
+import Metal
 
 class ViewController: NSViewController {
+    
+    var device: MTLDevice?
+    var library: MTLLibrary?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        device = MTLCreateSystemDefaultDevice()
+        library = device!.newDefaultLibrary()
 
         // Do any additional setup after loading the view.
     }
@@ -23,7 +30,6 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
 
 }
 

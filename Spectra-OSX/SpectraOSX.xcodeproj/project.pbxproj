@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4312E2F01C1A115200330B34 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4312E2EF1C1A115200330B34 /* BasicShaders.metal */; };
 		4338B7C11C163C10007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BF1C163C10007D3DF6 /* Metal.framework */; };
 		4338B7C21C163C10007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C01C163C10007D3DF6 /* MetalKit.framework */; };
 		4338B7C41C176745007D3DF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C31C176745007D3DF6 /* Foundation.framework */; };
@@ -99,6 +100,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4312E2EF1C1A115200330B34 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4338B7B91C16348A007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 		4338B7BF1C163C10007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4338B7C01C163C10007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -310,6 +312,7 @@
 				4338B8AE1C18C278007D3DF6 /* Assets.xcassets */,
 				4338B8B01C18C278007D3DF6 /* Main.storyboard */,
 				4338B8B31C18C278007D3DF6 /* Info.plist */,
+				4312E2EF1C1A115200330B34 /* BasicShaders.metal */,
 			);
 			path = "Spectra-OSXExample";
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 			files = (
 				4338B8AD1C18C278007D3DF6 /* ViewController.swift in Sources */,
 				4338B8AB1C18C278007D3DF6 /* AppDelegate.swift in Sources */,
+				4312E2F01C1A115200330B34 /* BasicShaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
