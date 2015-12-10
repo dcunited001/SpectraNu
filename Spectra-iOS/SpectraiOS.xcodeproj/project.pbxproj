@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		431735C11C0CD9FF00681C8E /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431735BF1C0CD9FF00681C8E /* Spectra.swift */; };
 		4338B7B81C16345F007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
 		4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BB1C163BFC007D3DF6 /* Metal.framework */; };
 		4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */; };
@@ -17,39 +16,6 @@
 		4338B7EF1C18B331007D3DF6 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7EB1C18B331007D3DF6 /* S3DXMLSpec.swift */; };
 		4338B7F01C18B331007D3DF6 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7EC1C18B331007D3DF6 /* S3DXSDSpec.swift */; };
 		4338B7F11C18B331007D3DF6 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7ED1C18B331007D3DF6 /* SceneGraphXMLSpec.swift */; };
-		4338B81F1C18B39A007D3DF6 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */; };
-		4338B8201C18B39A007D3DF6 /* S3DXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FA1C18B39A007D3DF6 /* S3DXML.swift */; };
-		4338B8211C18B39A007D3DF6 /* S3DXSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FB1C18B39A007D3DF6 /* S3DXSD.swift */; };
-		4338B8221C18B39A007D3DF6 /* SceneGraphXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FC1C18B39A007D3DF6 /* SceneGraphXML.swift */; };
-		4338B8231C18B39A007D3DF6 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FD1C18B39A007D3DF6 /* StateManager.swift */; };
-		4338B8241C18B39A007D3DF6 /* Camable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FF1C18B39A007D3DF6 /* Camable.swift */; };
-		4338B8251C18B39A007D3DF6 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8001C18B39A007D3DF6 /* Mesh.swift */; };
-		4338B8261C18B39A007D3DF6 /* Modelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8011C18B39A007D3DF6 /* Modelable.swift */; };
-		4338B8271C18B39A007D3DF6 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8021C18B39A007D3DF6 /* Node.swift */; };
-		4338B8281C18B39A007D3DF6 /* NodeResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8031C18B39A007D3DF6 /* NodeResource.swift */; };
-		4338B8291C18B39A007D3DF6 /* Perspectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8041C18B39A007D3DF6 /* Perspectable.swift */; };
-		4338B82A1C18B39A007D3DF6 /* SceneGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8051C18B39A007D3DF6 /* SceneGraph.swift */; };
-		4338B82B1C18B39A007D3DF6 /* Uniformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8061C18B39A007D3DF6 /* Uniformable.swift */; };
-		4338B82C1C18B39A007D3DF6 /* Vertexable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8071C18B39A007D3DF6 /* Vertexable.swift */; };
-		4338B82D1C18B39A007D3DF6 /* WorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8081C18B39A007D3DF6 /* WorldView.swift */; };
-		4338B82E1C18B39A007D3DF6 /* BasicTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80A1C18B39A007D3DF6 /* BasicTriangle.swift */; };
-		4338B82F1C18B39A007D3DF6 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80B1C18B39A007D3DF6 /* Cube.swift */; };
-		4338B8301C18B39A007D3DF6 /* MeshGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80C1C18B39A007D3DF6 /* MeshGenerator.swift */; };
-		4338B8311C18B39A007D3DF6 /* PlatonicSolids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80D1C18B39A007D3DF6 /* PlatonicSolids.swift */; };
-		4338B8321C18B39A007D3DF6 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80E1C18B39A007D3DF6 /* Quad.swift */; };
-		4338B8331C18B39A007D3DF6 /* TriangularQuadLatticeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80F1C18B39A007D3DF6 /* TriangularQuadLatticeGenerator.swift */; };
-		4338B8341C18B39A007D3DF6 /* BufferPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8111C18B39A007D3DF6 /* BufferPool.swift */; };
-		4338B8351C18B39A007D3DF6 /* BufferTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8121C18B39A007D3DF6 /* BufferTexture.swift */; };
-		4338B8361C18B39A007D3DF6 /* EncodableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8131C18B39A007D3DF6 /* EncodableData.swift */; };
-		4338B8371C18B39A007D3DF6 /* InflightResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8141C18B39A007D3DF6 /* InflightResourceManager.swift */; };
-		4338B8381C18B39A007D3DF6 /* PipelineGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8151C18B39A007D3DF6 /* PipelineGenerator.swift */; };
-		4338B8391C18B39A007D3DF6 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8161C18B39A007D3DF6 /* Renderer.swift */; };
-		4338B83A1C18B39A007D3DF6 /* RenderStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8171C18B39A007D3DF6 /* RenderStage.swift */; };
-		4338B83B1C18B39A007D3DF6 /* RenderStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8181C18B39A007D3DF6 /* RenderStrategy.swift */; };
-		4338B83C1C18B39A007D3DF6 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8191C18B39A007D3DF6 /* Scene.swift */; };
-		4338B83D1C18B39A007D3DF6 /* Transform3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81A1C18B39A007D3DF6 /* Transform3D.swift */; };
-		4338B83E1C18B39A007D3DF6 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81B1C18B39A007D3DF6 /* View.swift */; };
-		4338B83F1C18B39A007D3DF6 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81D1C18B39A007D3DF6 /* Spectra.swift */; };
 		4338B8D11C18DC92007D3DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8D01C18DC92007D3DF6 /* AppDelegate.swift */; };
 		4338B8D31C18DC92007D3DF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8D21C18DC92007D3DF6 /* ViewController.swift */; };
 		4338B8D61C18DC92007D3DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D41C18DC92007D3DF6 /* Main.storyboard */; };
@@ -62,6 +28,39 @@
 		4371E8701C18FEF8001D1C39 /* SpectraAssets in Resources */ = {isa = PBXBuildFile; fileRef = 4371E86F1C18FEF8001D1C39 /* SpectraAssets */; };
 		4371E8731C190543001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A41C0A3E1200E5FC52 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E8741C190543001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A51C0A3E1200E5FC52 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4371E89B1C190952001D1C39 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */; };
+		4371E89C1C190952001D1C39 /* S3DXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FA1C18B39A007D3DF6 /* S3DXML.swift */; };
+		4371E89D1C190952001D1C39 /* S3DXSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FB1C18B39A007D3DF6 /* S3DXSD.swift */; };
+		4371E89E1C190952001D1C39 /* SceneGraphXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FC1C18B39A007D3DF6 /* SceneGraphXML.swift */; };
+		4371E89F1C190952001D1C39 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FD1C18B39A007D3DF6 /* StateManager.swift */; };
+		4371E8A01C190957001D1C39 /* Camable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FF1C18B39A007D3DF6 /* Camable.swift */; };
+		4371E8A11C190957001D1C39 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8001C18B39A007D3DF6 /* Mesh.swift */; };
+		4371E8A21C190957001D1C39 /* Modelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8011C18B39A007D3DF6 /* Modelable.swift */; };
+		4371E8A31C190957001D1C39 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8021C18B39A007D3DF6 /* Node.swift */; };
+		4371E8A41C190957001D1C39 /* NodeResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8031C18B39A007D3DF6 /* NodeResource.swift */; };
+		4371E8A51C190957001D1C39 /* Perspectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8041C18B39A007D3DF6 /* Perspectable.swift */; };
+		4371E8A61C190957001D1C39 /* SceneGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8051C18B39A007D3DF6 /* SceneGraph.swift */; };
+		4371E8A71C190957001D1C39 /* Uniformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8061C18B39A007D3DF6 /* Uniformable.swift */; };
+		4371E8A81C190957001D1C39 /* Vertexable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8071C18B39A007D3DF6 /* Vertexable.swift */; };
+		4371E8A91C190957001D1C39 /* WorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8081C18B39A007D3DF6 /* WorldView.swift */; };
+		4371E8AA1C19095C001D1C39 /* BasicTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80A1C18B39A007D3DF6 /* BasicTriangle.swift */; };
+		4371E8AB1C19095C001D1C39 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80B1C18B39A007D3DF6 /* Cube.swift */; };
+		4371E8AC1C19095C001D1C39 /* MeshGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80C1C18B39A007D3DF6 /* MeshGenerator.swift */; };
+		4371E8AD1C19095C001D1C39 /* PlatonicSolids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80D1C18B39A007D3DF6 /* PlatonicSolids.swift */; };
+		4371E8AE1C19095C001D1C39 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80E1C18B39A007D3DF6 /* Quad.swift */; };
+		4371E8AF1C19095C001D1C39 /* TriangularQuadLatticeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80F1C18B39A007D3DF6 /* TriangularQuadLatticeGenerator.swift */; };
+		4371E8B01C190960001D1C39 /* BufferPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8111C18B39A007D3DF6 /* BufferPool.swift */; };
+		4371E8B11C190960001D1C39 /* BufferTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8121C18B39A007D3DF6 /* BufferTexture.swift */; };
+		4371E8B21C190960001D1C39 /* EncodableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8131C18B39A007D3DF6 /* EncodableData.swift */; };
+		4371E8B31C190960001D1C39 /* InflightResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8141C18B39A007D3DF6 /* InflightResourceManager.swift */; };
+		4371E8B41C190960001D1C39 /* PipelineGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8151C18B39A007D3DF6 /* PipelineGenerator.swift */; };
+		4371E8B51C190960001D1C39 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8161C18B39A007D3DF6 /* Renderer.swift */; };
+		4371E8B61C190960001D1C39 /* RenderStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8171C18B39A007D3DF6 /* RenderStage.swift */; };
+		4371E8B71C190960001D1C39 /* RenderStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8181C18B39A007D3DF6 /* RenderStrategy.swift */; };
+		4371E8B81C190960001D1C39 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8191C18B39A007D3DF6 /* Scene.swift */; };
+		4371E8B91C190960001D1C39 /* Transform3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81A1C18B39A007D3DF6 /* Transform3D.swift */; };
+		4371E8BA1C190960001D1C39 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81B1C18B39A007D3DF6 /* View.swift */; };
+		4371E8BB1C190980001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81D1C18B39A007D3DF6 /* Spectra.swift */; };
 		43EAF8361C0A2FF500EA2B30 /* Spectra-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43EAF83D1C0A2FF500EA2B30 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; };
 		43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8411C0A2FF500EA2B30 /* Spectra_iOSTests.swift */; };
@@ -111,7 +110,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		431735BF1C0CD9FF00681C8E /* Spectra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectra.swift; sourceTree = "<group>"; };
 		4338B7B71C16345F007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 		4338B7BB1C163BFC007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -209,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				4338B81E1C18B39A007D3DF6 /* Common */,
-				431735BF1C0CD9FF00681C8E /* Spectra.swift */,
 			);
 			name = Spectra;
 			path = ../../Spectra;
@@ -550,7 +547,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				431735C11C0CD9FF00681C8E /* Spectra.swift in Sources */,
+				4371E8A71C190957001D1C39 /* Uniformable.swift in Sources */,
+				4371E8A01C190957001D1C39 /* Camable.swift in Sources */,
+				4371E8A81C190957001D1C39 /* Vertexable.swift in Sources */,
+				4371E8A31C190957001D1C39 /* Node.swift in Sources */,
+				4371E8A21C190957001D1C39 /* Modelable.swift in Sources */,
+				4371E8B61C190960001D1C39 /* RenderStage.swift in Sources */,
+				4371E8A51C190957001D1C39 /* Perspectable.swift in Sources */,
+				4371E8B21C190960001D1C39 /* EncodableData.swift in Sources */,
+				4371E89D1C190952001D1C39 /* S3DXSD.swift in Sources */,
+				4371E8AC1C19095C001D1C39 /* MeshGenerator.swift in Sources */,
+				4371E8A41C190957001D1C39 /* NodeResource.swift in Sources */,
+				4371E8B11C190960001D1C39 /* BufferTexture.swift in Sources */,
+				4371E8B71C190960001D1C39 /* RenderStrategy.swift in Sources */,
+				4371E8A11C190957001D1C39 /* Mesh.swift in Sources */,
+				4371E89C1C190952001D1C39 /* S3DXML.swift in Sources */,
+				4371E8B41C190960001D1C39 /* PipelineGenerator.swift in Sources */,
+				4371E89B1C190952001D1C39 /* DescriptorManager.swift in Sources */,
+				4371E89F1C190952001D1C39 /* StateManager.swift in Sources */,
+				4371E8B51C190960001D1C39 /* Renderer.swift in Sources */,
+				4371E8AA1C19095C001D1C39 /* BasicTriangle.swift in Sources */,
+				4371E8BB1C190980001D1C39 /* Spectra.swift in Sources */,
+				4371E8BA1C190960001D1C39 /* View.swift in Sources */,
+				4371E89E1C190952001D1C39 /* SceneGraphXML.swift in Sources */,
+				4371E8AE1C19095C001D1C39 /* Quad.swift in Sources */,
+				4371E8B31C190960001D1C39 /* InflightResourceManager.swift in Sources */,
+				4371E8B01C190960001D1C39 /* BufferPool.swift in Sources */,
+				4371E8AB1C19095C001D1C39 /* Cube.swift in Sources */,
+				4371E8B81C190960001D1C39 /* Scene.swift in Sources */,
+				4371E8A91C190957001D1C39 /* WorldView.swift in Sources */,
+				4371E8AF1C19095C001D1C39 /* TriangularQuadLatticeGenerator.swift in Sources */,
+				4371E8A61C190957001D1C39 /* SceneGraph.swift in Sources */,
+				4371E8AD1C19095C001D1C39 /* PlatonicSolids.swift in Sources */,
+				4371E8B91C190960001D1C39 /* Transform3D.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,43 +587,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4338B83A1C18B39A007D3DF6 /* RenderStage.swift in Sources */,
-				4338B8351C18B39A007D3DF6 /* BufferTexture.swift in Sources */,
-				4338B8321C18B39A007D3DF6 /* Quad.swift in Sources */,
-				4338B83B1C18B39A007D3DF6 /* RenderStrategy.swift in Sources */,
-				4338B8231C18B39A007D3DF6 /* StateManager.swift in Sources */,
-				4338B8251C18B39A007D3DF6 /* Mesh.swift in Sources */,
-				4338B8241C18B39A007D3DF6 /* Camable.swift in Sources */,
-				4338B8361C18B39A007D3DF6 /* EncodableData.swift in Sources */,
-				4338B8281C18B39A007D3DF6 /* NodeResource.swift in Sources */,
-				4338B8331C18B39A007D3DF6 /* TriangularQuadLatticeGenerator.swift in Sources */,
-				4338B83C1C18B39A007D3DF6 /* Scene.swift in Sources */,
-				4338B8371C18B39A007D3DF6 /* InflightResourceManager.swift in Sources */,
-				4338B8201C18B39A007D3DF6 /* S3DXML.swift in Sources */,
-				4338B82F1C18B39A007D3DF6 /* Cube.swift in Sources */,
-				4338B82C1C18B39A007D3DF6 /* Vertexable.swift in Sources */,
-				4338B8391C18B39A007D3DF6 /* Renderer.swift in Sources */,
 				43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */,
-				4338B83F1C18B39A007D3DF6 /* Spectra.swift in Sources */,
-				4338B8381C18B39A007D3DF6 /* PipelineGenerator.swift in Sources */,
-				4338B8271C18B39A007D3DF6 /* Node.swift in Sources */,
-				4338B81F1C18B39A007D3DF6 /* DescriptorManager.swift in Sources */,
-				4338B82D1C18B39A007D3DF6 /* WorldView.swift in Sources */,
-				4338B82E1C18B39A007D3DF6 /* BasicTriangle.swift in Sources */,
-				4338B8301C18B39A007D3DF6 /* MeshGenerator.swift in Sources */,
 				4338B7EF1C18B331007D3DF6 /* S3DXMLSpec.swift in Sources */,
-				4338B82B1C18B39A007D3DF6 /* Uniformable.swift in Sources */,
-				4338B8291C18B39A007D3DF6 /* Perspectable.swift in Sources */,
-				4338B8261C18B39A007D3DF6 /* Modelable.swift in Sources */,
-				4338B8311C18B39A007D3DF6 /* PlatonicSolids.swift in Sources */,
-				4338B82A1C18B39A007D3DF6 /* SceneGraph.swift in Sources */,
-				4338B8211C18B39A007D3DF6 /* S3DXSD.swift in Sources */,
 				4338B7F11C18B331007D3DF6 /* SceneGraphXMLSpec.swift in Sources */,
-				4338B83D1C18B39A007D3DF6 /* Transform3D.swift in Sources */,
-				4338B83E1C18B39A007D3DF6 /* View.swift in Sources */,
 				4338B7F01C18B331007D3DF6 /* S3DXSDSpec.swift in Sources */,
-				4338B8221C18B39A007D3DF6 /* SceneGraphXML.swift in Sources */,
-				4338B8341C18B39A007D3DF6 /* BufferPool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
