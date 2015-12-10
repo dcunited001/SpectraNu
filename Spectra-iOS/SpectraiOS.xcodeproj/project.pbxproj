@@ -788,7 +788,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
 				INFOPLIST_FILE = "Spectra-iOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-iOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spectra.SpectraiOSTests;
 				PRODUCT_NAME = SpectraiOSSpec;
 			};
 			name = Debug;
@@ -799,7 +799,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
 				INFOPLIST_FILE = "Spectra-iOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-iOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spectra.SpectraiOSTests;
 				PRODUCT_NAME = SpectraiOSSpec;
 			};
 			name = Release;
