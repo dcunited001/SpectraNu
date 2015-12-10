@@ -9,7 +9,7 @@
 //// https://github.com/Quick/Quick
 //
 //import Foundation
-//import Spectra
+//@testable import Spectra
 //import Ono
 //import Quick
 //import Nimble

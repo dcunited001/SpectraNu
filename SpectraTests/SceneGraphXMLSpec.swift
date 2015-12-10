@@ -6,8 +6,8 @@
 //  Copyright © 2015 CocoaPods. All rights reserved.
 //
 
+@testable import Spectra
 import Foundation
-import Spectra
 import Fuzi
 import Quick
 import Nimble
