@@ -62,8 +62,9 @@
 		4371E8BA1C190960001D1C39 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81B1C18B39A007D3DF6 /* View.swift */; };
 		4371E8BB1C190980001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81D1C18B39A007D3DF6 /* Spectra.swift */; };
 		4371E8C61C190E94001D1C39 /* TestShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4371E8C51C190E94001D1C39 /* TestShaders.metal */; };
+		4371E8CF1C19105E001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
+		4371E8D01C191060001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43EAF8361C0A2FF500EA2B30 /* Spectra-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43EAF83D1C0A2FF500EA2B30 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; };
 		43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8411C0A2FF500EA2B30 /* Spectra_iOSTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,7 @@
 			files = (
 				4371E8731C190543001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */,
 				4371E8741C190543001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */,
+				4371E8D01C191060001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */,
 			);
 			name = "Copy Quick/Nimble Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,7 +200,7 @@
 			files = (
 				4353A2A61C0A3E1200E5FC52 /* Nimble.framework in Frameworks */,
 				4353A2A71C0A3E1200E5FC52 /* Quick.framework in Frameworks */,
-				43EAF83D1C0A2FF500EA2B30 /* Spectra.framework in Frameworks */,
+				4371E8CF1C19105E001D1C39 /* Fuzi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
