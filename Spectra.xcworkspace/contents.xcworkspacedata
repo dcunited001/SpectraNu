@@ -29,17 +29,6 @@
       location = "group:LICENSE">
    </FileRef>
    <Group
-      location = "container:Resources"
-      name = "Resources">
-      <Group
-         location = "group:Assets"
-         name = "Assets">
-         <FileRef
-            location = "group:Spectra3D.xsd">
-         </FileRef>
-      </Group>
-   </Group>
-   <Group
       location = "container:Spectra"
       name = "Spectra">
       <Group
