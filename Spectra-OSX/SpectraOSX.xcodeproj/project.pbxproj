@@ -58,6 +58,9 @@
 		4371E8C81C190EA0001D1C39 /* TestShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4371E8C71C190EA0001D1C39 /* TestShaders.metal */; };
 		4371E8CD1C191011001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4371E8CE1C191015001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4371E8D11C1910DC001D1C39 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F21C18B363007D3DF6 /* S3DXMLSpec.swift */; };
+		4371E8D21C1910DC001D1C39 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F31C18B363007D3DF6 /* S3DXSDSpec.swift */; };
+		4371E8D31C1910DC001D1C39 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F41C18B363007D3DF6 /* SceneGraphXMLSpec.swift */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */; };
 /* End PBXBuildFile section */
@@ -554,8 +557,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4371E8D31C1910DC001D1C39 /* SceneGraphXMLSpec.swift in Sources */,
+				4371E8D11C1910DC001D1C39 /* S3DXMLSpec.swift in Sources */,
 				4371E8C81C190EA0001D1C39 /* TestShaders.metal in Sources */,
 				43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */,
+				4371E8D21C1910DC001D1C39 /* S3DXSDSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
