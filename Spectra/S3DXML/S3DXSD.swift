@@ -56,10 +56,8 @@ public class S3DXSD {
     }
 
     public class func readXSD(filename: String) -> NSData {
-        let podBundle = NSBundle(forClass: S3DXSD.self)
-        let bundleUrl = podBundle.URLForResource("Spectra", withExtension: "bundle")
-        let bundle = NSBundle(URL: bundleUrl!)
-        let path = bundle!.pathForResource(filename, ofType: "xsd")
+        let bundle = NSBundle(forClass: S3DXSD.self)
+        let path = bundle.pathForResource(filename, ofType: "xsd")
         let data = NSData(contentsOfFile: path!)
         return data!
     }
