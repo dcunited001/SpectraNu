@@ -55,6 +55,8 @@
 		4338B8D61C18DC92007D3DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D41C18DC92007D3DF6 /* Main.storyboard */; };
 		4338B8D81C18DC92007D3DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D71C18DC92007D3DF6 /* Assets.xcassets */; };
 		4338B8DB1C18DC92007D3DF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D91C18DC92007D3DF6 /* LaunchScreen.storyboard */; };
+		4338B8F61C18F9DF007D3DF6 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B8F51C18F9DF007D3DF6 /* Spectra.framework */; };
+		4338B8F81C18F9DF007D3DF6 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B8F51C18F9DF007D3DF6 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4353A2A61C0A3E1200E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A41C0A3E1200E5FC52 /* Nimble.framework */; };
 		4353A2A71C0A3E1200E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A51C0A3E1200E5FC52 /* Quick.framework */; };
 		436CA1941C0E1B810076C627 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 436CA1931C0E1B810076C627 /* Resources */; };
@@ -79,6 +81,20 @@
 			remoteInfo = SpectraiOS;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4338B8F71C18F9DF007D3DF6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4338B8F81C18F9DF007D3DF6 /* Spectra.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		431735BF1C0CD9FF00681C8E /* Spectra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectra.swift; sourceTree = "<group>"; };
@@ -131,6 +147,7 @@
 		4338B8D71C18DC92007D3DF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4338B8DA1C18DC92007D3DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4338B8DC1C18DC92007D3DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4338B8F51C18F9DF007D3DF6 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Spectra.framework; path = "/Users/dc/Library/Developer/Xcode/DerivedData/Spectra-cfocsqcnoxenejbbfuxnungaqyiw/Build/Products/Debug/Spectra.framework"; sourceTree = "<absolute>"; };
 		4353A2A41C0A3E1200E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A51C0A3E1200E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		436CA1931C0E1B810076C627 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../Resources; sourceTree = "<group>"; };
@@ -147,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4338B8F61C18F9DF007D3DF6 /* Spectra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +318,7 @@
 		43EAF8281C0A2FF500EA2B30 = {
 			isa = PBXGroup;
 			children = (
+				4338B8F51C18F9DF007D3DF6 /* Spectra.framework */,
 				4338B7C51C17674C007D3DF6 /* Foundation.framework */,
 				4338B7BB1C163BFC007D3DF6 /* Metal.framework */,
 				4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */,
@@ -367,6 +386,7 @@
 				4338B8CB1C18DC92007D3DF6 /* Frameworks */,
 				4338B8CC1C18DC92007D3DF6 /* Resources */,
 				4338B8E41C18F24D007D3DF6 /* Copy Carthage Frameworks */,
+				4338B8F71C18F9DF007D3DF6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
