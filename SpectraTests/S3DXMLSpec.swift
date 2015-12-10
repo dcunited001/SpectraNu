@@ -8,10 +8,8 @@
 
 @testable import Spectra
 import Foundation
-import Fuzi
 import Quick
 import Nimble
-import Metal
 
 class S3DXMLSpec: QuickSpec {
     override func spec() {
