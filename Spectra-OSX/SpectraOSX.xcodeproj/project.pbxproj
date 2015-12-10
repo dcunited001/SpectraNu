@@ -13,9 +13,6 @@
 		4338B7C41C176745007D3DF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C31C176745007D3DF6 /* Foundation.framework */; };
 		4338B7D21C18B140007D3DF6 /* S3DXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4338B7D01C18B140007D3DF6 /* S3DXMLTest.xml */; };
 		4338B7D31C18B140007D3DF6 /* SceneGraphXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4338B7D11C18B140007D3DF6 /* SceneGraphXMLTest.xml */; };
-		4338B7F61C18B363007D3DF6 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F21C18B363007D3DF6 /* S3DXMLSpec.swift */; };
-		4338B7F71C18B363007D3DF6 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F31C18B363007D3DF6 /* S3DXSDSpec.swift */; };
-		4338B7F81C18B363007D3DF6 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F41C18B363007D3DF6 /* SceneGraphXMLSpec.swift */; };
 		4338B8661C18B3AF007D3DF6 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8401C18B3AF007D3DF6 /* DescriptorManager.swift */; };
 		4338B8671C18B3AF007D3DF6 /* S3DXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8411C18B3AF007D3DF6 /* S3DXML.swift */; };
 		4338B8681C18B3AF007D3DF6 /* S3DXSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8421C18B3AF007D3DF6 /* S3DXSD.swift */; };
@@ -54,10 +51,14 @@
 		4338B8AF1C18C278007D3DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8AE1C18C278007D3DF6 /* Assets.xcassets */; };
 		4338B8B21C18C278007D3DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8B01C18C278007D3DF6 /* Main.storyboard */; };
 		4338B8C81C18CE48007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
-		4353A2AB1C0A437F00E5FC52 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
 		4371E86E1C18FEE0001D1C39 /* SpectraAssets in Resources */ = {isa = PBXBuildFile; fileRef = 4371E86D1C18FEE0001D1C39 /* SpectraAssets */; };
+		4371E8761C190570001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4371E8771C190570001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4371E8781C190786001D1C39 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F21C18B363007D3DF6 /* S3DXMLSpec.swift */; };
+		4371E8791C190786001D1C39 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F31C18B363007D3DF6 /* S3DXSDSpec.swift */; };
+		4371E87A1C190786001D1C39 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F41C18B363007D3DF6 /* SceneGraphXMLSpec.swift */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,21 @@
 			remoteInfo = "Spectra-OSX";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4371E8751C19055D001D1C39 /* Copy Quick/Nimble Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4371E8761C190570001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */,
+				4371E8771C190570001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */,
+			);
+			name = "Copy Quick/Nimble Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4338B7341C1387E6007D3DF6 /* Spectra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spectra.swift; sourceTree = "<group>"; };
@@ -163,7 +179,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4353A2AB1C0A437F00E5FC52 /* Spectra.framework in Frameworks */,
 				4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */,
 				4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */,
 			);
@@ -399,6 +414,7 @@
 				43EAF85C1C0A301300EA2B30 /* Sources */,
 				43EAF85D1C0A301300EA2B30 /* Frameworks */,
 				43EAF85E1C0A301300EA2B30 /* Resources */,
+				4371E8751C19055D001D1C39 /* Copy Quick/Nimble Frameworks */,
 			);
 			buildRules = (
 			);
@@ -505,6 +521,7 @@
 				4338B8811C18B3AF007D3DF6 /* RenderStage.swift in Sources */,
 				4338B87C1C18B3AF007D3DF6 /* BufferTexture.swift in Sources */,
 				4338B8791C18B3AF007D3DF6 /* Quad.swift in Sources */,
+				4371E8781C190786001D1C39 /* S3DXMLSpec.swift in Sources */,
 				4338B8821C18B3AF007D3DF6 /* RenderStrategy.swift in Sources */,
 				4338B86A1C18B3AF007D3DF6 /* StateManager.swift in Sources */,
 				4338B86C1C18B3AF007D3DF6 /* Mesh.swift in Sources */,
@@ -512,6 +529,7 @@
 				4338B87D1C18B3AF007D3DF6 /* EncodableData.swift in Sources */,
 				4338B86F1C18B3AF007D3DF6 /* NodeResource.swift in Sources */,
 				4338B87A1C18B3AF007D3DF6 /* TriangularQuadLatticeGenerator.swift in Sources */,
+				4371E8791C190786001D1C39 /* S3DXSDSpec.swift in Sources */,
 				4338B8831C18B3AF007D3DF6 /* Scene.swift in Sources */,
 				4338B87E1C18B3AF007D3DF6 /* InflightResourceManager.swift in Sources */,
 				4338B8671C18B3AF007D3DF6 /* S3DXML.swift in Sources */,
@@ -526,19 +544,17 @@
 				4338B8741C18B3AF007D3DF6 /* WorldView.swift in Sources */,
 				4338B8751C18B3AF007D3DF6 /* BasicTriangle.swift in Sources */,
 				4338B8771C18B3AF007D3DF6 /* MeshGenerator.swift in Sources */,
-				4338B7F61C18B363007D3DF6 /* S3DXMLSpec.swift in Sources */,
 				4338B8721C18B3AF007D3DF6 /* Uniformable.swift in Sources */,
 				4338B8701C18B3AF007D3DF6 /* Perspectable.swift in Sources */,
 				4338B86D1C18B3AF007D3DF6 /* Modelable.swift in Sources */,
 				4338B8781C18B3AF007D3DF6 /* PlatonicSolids.swift in Sources */,
 				4338B8711C18B3AF007D3DF6 /* SceneGraph.swift in Sources */,
 				4338B8681C18B3AF007D3DF6 /* S3DXSD.swift in Sources */,
-				4338B7F81C18B363007D3DF6 /* SceneGraphXMLSpec.swift in Sources */,
 				4338B8841C18B3AF007D3DF6 /* Transform3D.swift in Sources */,
 				4338B8851C18B3AF007D3DF6 /* View.swift in Sources */,
-				4338B7F71C18B363007D3DF6 /* S3DXSDSpec.swift in Sources */,
 				4338B8691C18B3AF007D3DF6 /* SceneGraphXML.swift in Sources */,
 				4338B87B1C18B3AF007D3DF6 /* BufferPool.swift in Sources */,
+				4371E87A1C190786001D1C39 /* SceneGraphXMLSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

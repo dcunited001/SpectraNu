@@ -6,9 +6,9 @@
 //  Copyright © 2015 Spectra. All rights reserved.
 //
 
-@testable import Spectra
 import Quick
 import Nimble
+@testable import Spectra
 
 class SpectraOSXTests: QuickSpec {
     override func spec() {
