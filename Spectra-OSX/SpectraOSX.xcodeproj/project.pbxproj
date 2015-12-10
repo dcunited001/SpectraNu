@@ -22,9 +22,6 @@
 		4371E86E1C18FEE0001D1C39 /* SpectraAssets in Resources */ = {isa = PBXBuildFile; fileRef = 4371E86D1C18FEE0001D1C39 /* SpectraAssets */; };
 		4371E8761C190570001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E8771C190570001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4371E8781C190786001D1C39 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F21C18B363007D3DF6 /* S3DXMLSpec.swift */; };
-		4371E8791C190786001D1C39 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F31C18B363007D3DF6 /* S3DXSDSpec.swift */; };
-		4371E87A1C190786001D1C39 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F41C18B363007D3DF6 /* SceneGraphXMLSpec.swift */; };
 		4371E87B1C190921001D1C39 /* BufferPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8581C18B3AF007D3DF6 /* BufferPool.swift */; };
 		4371E87C1C190921001D1C39 /* BufferTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8591C18B3AF007D3DF6 /* BufferTexture.swift */; };
 		4371E87D1C190921001D1C39 /* EncodableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B85A1C18B3AF007D3DF6 /* EncodableData.swift */; };
@@ -58,11 +55,9 @@
 		4371E8991C190934001D1C39 /* SceneGraphXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8431C18B3AF007D3DF6 /* SceneGraphXML.swift */; };
 		4371E89A1C190934001D1C39 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8441C18B3AF007D3DF6 /* StateManager.swift */; };
 		4371E8BC1C190991001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8641C18B3AF007D3DF6 /* Spectra.swift */; };
-		4371E8BE1C190C1B001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
-		4371E8C01C190C80001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4371E8C11C190CA8001D1C39 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BF1C163C10007D3DF6 /* Metal.framework */; };
-		4371E8C21C190CA8001D1C39 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C01C163C10007D3DF6 /* MetalKit.framework */; };
 		4371E8C81C190EA0001D1C39 /* TestShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4371E8C71C190EA0001D1C39 /* TestShaders.metal */; };
+		4371E8CD1C191011001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
+		4371E8CE1C191015001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */; };
 /* End PBXBuildFile section */
@@ -91,9 +86,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4371E8C01C190C80001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */,
 				4371E8761C190570001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */,
 				4371E8771C190570001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */,
+				4371E8CE1C191015001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */,
 			);
 			name = "Copy Quick/Nimble Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +148,7 @@
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		4371E86D1C18FEE0001D1C39 /* SpectraAssets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SpectraAssets; path = ../SpectraAssets; sourceTree = "<group>"; };
 		4371E8C71C190EA0001D1C39 /* TestShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = TestShaders.metal; path = ../../TestShaders.metal; sourceTree = "<group>"; };
+		4371E8CB1C191005001D1C39 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = "/Users/dc/dev/apple/Spectra3/Spectra-iOS/../Carthage/Build/Mac/Fuzi.framework"; sourceTree = "<absolute>"; };
 		43EAF8561C0A301300EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-OSX.h"; sourceTree = "<group>"; };
 		43EAF85B1C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -184,11 +180,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4371E8C11C190CA8001D1C39 /* Metal.framework in Frameworks */,
-				4371E8C21C190CA8001D1C39 /* MetalKit.framework in Frameworks */,
 				4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */,
 				4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */,
-				4371E8BE1C190C1B001D1C39 /* Fuzi.framework in Frameworks */,
+				4371E8CD1C191011001D1C39 /* Fuzi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +314,7 @@
 		43EAF84C1C0A301300EA2B30 = {
 			isa = PBXGroup;
 			children = (
+				4371E8CB1C191005001D1C39 /* Fuzi.framework */,
 				4338B7C31C176745007D3DF6 /* Foundation.framework */,
 				4338B7BF1C163C10007D3DF6 /* Metal.framework */,
 				4338B7C01C163C10007D3DF6 /* MetalKit.framework */,
@@ -559,11 +554,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4371E8781C190786001D1C39 /* S3DXMLSpec.swift in Sources */,
-				4371E8791C190786001D1C39 /* S3DXSDSpec.swift in Sources */,
 				4371E8C81C190EA0001D1C39 /* TestShaders.metal in Sources */,
 				43EAF8661C0A301300EA2B30 /* Spectra_OSXTests.swift in Sources */,
-				4371E87A1C190786001D1C39 /* SceneGraphXMLSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
