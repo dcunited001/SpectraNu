@@ -216,7 +216,7 @@ public class SGXMLMeshGeneratorNode: SGXMLNodeParser {
         var meshGenArgs: [String: String] = [:]
         let argsSelector = "mesh-generator-args > mesh-generator-arg"
         for child in elem.css(argsSelector) {
-            let argName = child.attributes["key"]!
+            let argName = child.attributes["name"]!
             let argValue = child.attributes["value"]!
             meshGenArgs[argName] = argValue
         }
