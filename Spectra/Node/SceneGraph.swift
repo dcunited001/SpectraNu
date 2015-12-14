@@ -108,10 +108,10 @@ public class SceneGraph {
         registerMeshGeneratorMonad("cube") { (args) in
             return CubeGenerator(args: args)
         }
-        registerMeshGeneratorMonad("cube") { (args) in
+        registerMeshGeneratorMonad("tetrahedron") { (args) in
             return TetrahedronGenerator(args: args)
         }
-        registerMeshGeneratorMonad("cube") { (args) in
+        registerMeshGeneratorMonad("octahedron") { (args) in
             return OctahedronGenerator(args: args)
         }
     }
