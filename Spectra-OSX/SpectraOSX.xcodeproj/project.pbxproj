@@ -67,6 +67,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4334D6841C1F6C3C00D2DCA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4338B8A71C18C278007D3DF6;
+			remoteInfo = "Spectra-OSXExample";
+		};
 		4338B8E01C18F109007D3DF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
@@ -454,6 +461,7 @@
 			);
 			dependencies = (
 				43EAF8631C0A301300EA2B30 /* PBXTargetDependency */,
+				4334D6851C1F6C3C00D2DCA6 /* PBXTargetDependency */,
 			);
 			name = SpectraOSXTests;
 			productName = "Spectra-OSXTests";
@@ -479,6 +487,7 @@
 					};
 					43EAF85F1C0A301300EA2B30 = {
 						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 4338B8A71C18C278007D3DF6;
 					};
 				};
 			};
@@ -597,6 +606,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4334D6851C1F6C3C00D2DCA6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4338B8A71C18C278007D3DF6 /* Spectra-OSXExample */;
+			targetProxy = 4334D6841C1F6C3C00D2DCA6 /* PBXContainerItemProxy */;
+		};
 		4338B8E11C18F109007D3DF6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
@@ -788,6 +802,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.spectra.SpectraOSXTests;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = SpectraOSXSpec;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spectra-OSXExample.app/Contents/MacOS/Spectra-OSXExample";
 			};
 			name = Debug;
 		};
@@ -801,6 +816,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.spectra.SpectraOSXTests;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = SpectraOSXSpec;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spectra-OSXExample.app/Contents/MacOS/Spectra-OSXExample";
 			};
 			name = Release;
 		};

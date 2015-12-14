@@ -69,6 +69,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4334D6861C1F6C5800D2DCA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43EAF8291C0A2FF500EA2B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4338B8CD1C18DC92007D3DF6;
+			remoteInfo = "Spectra-iOSExample";
+		};
 		4338B8871C18BEAA007D3DF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43EAF8291C0A2FF500EA2B30 /* Project object */;
@@ -468,6 +475,7 @@
 			);
 			dependencies = (
 				4338B8881C18BEAA007D3DF6 /* PBXTargetDependency */,
+				4334D6871C1F6C5800D2DCA6 /* PBXTargetDependency */,
 			);
 			name = SpectraiOSTests;
 			productName = "Spectra-iOSTests";
@@ -492,6 +500,7 @@
 					};
 					43EAF83B1C0A2FF500EA2B30 = {
 						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = 4338B8CD1C18DC92007D3DF6;
 					};
 				};
 			};
@@ -628,6 +637,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4334D6871C1F6C5800D2DCA6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4338B8CD1C18DC92007D3DF6 /* Spectra-iOSExample */;
+			targetProxy = 4334D6861C1F6C5800D2DCA6 /* PBXContainerItemProxy */;
+		};
 		4338B8881C18BEAA007D3DF6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43EAF8311C0A2FF500EA2B30 /* SpectraiOS */;
@@ -821,6 +835,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spectra.SpectraiOSTests;
 				PRODUCT_NAME = SpectraiOSSpec;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spectra-iOSExample.app/Spectra-iOSExample";
 			};
 			name = Debug;
 		};
@@ -832,6 +847,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spectra.SpectraiOSTests;
 				PRODUCT_NAME = SpectraiOSSpec;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spectra-iOSExample.app/Spectra-iOSExample";
 			};
 			name = Release;
 		};
