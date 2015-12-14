@@ -55,6 +55,10 @@ class SceneGraphXMLSpec: QuickSpec {
         let defaultUniformsRotation = float4(1,0,0,0)
         let defaultUniformsScale = float4(1,1,1,0)
         
+        sceneGraph.registerMeshGeneratorMonad("triangularQuadTesselationGen") { args in
+            return TriangularQuadTesselationGenerator(args: args)
+        }
+        
         describe("SGXMLUniformsNode") {
             it("parses uniforms nodes") {
                 let u = sceneGraph.views["world"]!.uniforms
@@ -118,17 +122,19 @@ class SceneGraphXMLSpec: QuickSpec {
         }
         
         describe("SGXMLMeshGeneratorNode") {
+            
+            
             let customArgs = ["rowCount": 10, "colCount": 10]
             let cubeGen = sceneGraph.meshGenerators["cubeGen"]! as! CubeGenerator
-            let latticeGen = sceneGraph.meshGenerators["latticeGen"]! as! TriangularQuadLatticeGenerator
+            let tesselationGen = sceneGraph.meshGenerators["triangularQuadTesselationGen"]! as! TriangularQuadTesselationGenerator
             
             it("parses meshes without args") {
                 expect(cubeGen.getVertices().count) == 8
             }
             
             it("passes args to mesh generator monad for custom generator types") {
-                expect(latticeGen.rowCount) == 10
-                expect(latticeGen.colCount) == 10
+                expect(tesselationGen.rowCount) == 100
+                expect(tesselationGen.colCount) == 100
 //                expect(latticeGen.getVertices().count) == 0
 //                expect(latticeGen.getVertices().count) == 121
             }

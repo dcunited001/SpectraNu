@@ -1,5 +1,5 @@
 //
-//  TriangularQuadLatticeGenerator.swift
+//  TriangularQuadTesselationGenerator.swift
 //  Pods
 //
 //  Created by David Conner on 10/22/15.
@@ -9,7 +9,7 @@
 import Foundation
 import simd
 
-class TriangularQuadLatticeGenerator: MeshGenerator {
+class TriangularQuadTesselationGenerator: MeshGenerator {
     
     var rowCount: Int = 10
     var colCount: Int = 10
