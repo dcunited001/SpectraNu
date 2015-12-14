@@ -169,9 +169,6 @@
       <FileRef
          location = "group:SpectraTestsResources/SceneGraphXMLTest.xml">
       </FileRef>
-      <FileRef
-         location = "group:TestShaders.metal">
-      </FileRef>
    </Group>
    <FileRef
       location = "group:Carthage">

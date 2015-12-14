@@ -61,7 +61,6 @@
 		4371E8B91C190960001D1C39 /* Transform3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81A1C18B39A007D3DF6 /* Transform3D.swift */; };
 		4371E8BA1C190960001D1C39 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81B1C18B39A007D3DF6 /* View.swift */; };
 		4371E8BB1C190980001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81D1C18B39A007D3DF6 /* Spectra.swift */; };
-		4371E8C61C190E94001D1C39 /* TestShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4371E8C51C190E94001D1C39 /* TestShaders.metal */; };
 		4371E8CF1C19105E001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
 		4371E8D01C191060001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43EAF8361C0A2FF500EA2B30 /* Spectra-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -165,7 +164,6 @@
 		4353A2A41C0A3E1200E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A51C0A3E1200E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		4371E86F1C18FEF8001D1C39 /* SpectraAssets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SpectraAssets; path = ../SpectraAssets; sourceTree = "<group>"; };
-		4371E8C51C190E94001D1C39 /* TestShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = TestShaders.metal; path = ../../TestShaders.metal; sourceTree = "<group>"; };
 		43EAF8321C0A2FF500EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-iOS.h"; sourceTree = "<group>"; };
 		43EAF8371C0A2FF500EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 			children = (
 				4338B7CB1C18B126007D3DF6 /* S3DXMLTest.xml */,
 				4338B7CC1C18B126007D3DF6 /* SceneGraphXMLTest.xml */,
-				4371E8C51C190E94001D1C39 /* TestShaders.metal */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -594,7 +591,6 @@
 			files = (
 				43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */,
 				4338B7EF1C18B331007D3DF6 /* S3DXMLSpec.swift in Sources */,
-				4371E8C61C190E94001D1C39 /* TestShaders.metal in Sources */,
 				4338B7F11C18B331007D3DF6 /* SceneGraphXMLSpec.swift in Sources */,
 				4338B7F01C18B331007D3DF6 /* S3DXSDSpec.swift in Sources */,
 			);
