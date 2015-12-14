@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4312E2F01C1A115200330B34 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4312E2EF1C1A115200330B34 /* BasicShaders.metal */; };
-		4334D6831C1F5E8F00D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */; };
+		4334D6881C1F6D2900D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */; };
+		4334D68D1C1F6EE300D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */; };
 		4338B7C11C163C10007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BF1C163C10007D3DF6 /* Metal.framework */; };
 		4338B7C21C163C10007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C01C163C10007D3DF6 /* MetalKit.framework */; };
 		4338B7C41C176745007D3DF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C31C176745007D3DF6 /* Foundation.framework */; };
@@ -21,7 +21,6 @@
 		4338B8C81C18CE48007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
-		4371E86E1C18FEE0001D1C39 /* SpectraAssets in Resources */ = {isa = PBXBuildFile; fileRef = 4371E86D1C18FEE0001D1C39 /* SpectraAssets */; };
 		4371E8761C190570001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E8771C190570001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E87B1C190921001D1C39 /* BufferPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8581C18B3AF007D3DF6 /* BufferPool.swift */; };
@@ -107,8 +106,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4312E2EF1C1A115200330B34 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
+		4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
 		4338B7B91C16348A007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 		4338B7BF1C163C10007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4338B7C01C163C10007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -159,7 +158,6 @@
 		4338B8B31C18C278007D3DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
-		4371E86D1C18FEE0001D1C39 /* SpectraAssets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SpectraAssets; path = ../SpectraAssets; sourceTree = "<group>"; };
 		4371E8CB1C191005001D1C39 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = "/Users/dc/dev/apple/Spectra3/Spectra-iOS/../Carthage/Build/Mac/Fuzi.framework"; sourceTree = "<absolute>"; };
 		43EAF8561C0A301300EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-OSX.h"; sourceTree = "<group>"; };
@@ -344,7 +342,6 @@
 				4338B8AE1C18C278007D3DF6 /* Assets.xcassets */,
 				4338B8B01C18C278007D3DF6 /* Main.storyboard */,
 				4338B8B31C18C278007D3DF6 /* Info.plist */,
-				4312E2EF1C1A115200330B34 /* BasicShaders.metal */,
 			);
 			path = "Spectra-OSXExample";
 			sourceTree = "<group>";
@@ -363,7 +360,6 @@
 				43EAF8641C0A301300EA2B30 /* Spectra-OSXTests */,
 				4338B8A91C18C278007D3DF6 /* Spectra-OSXExample */,
 				43EAF8571C0A301300EA2B30 /* Products */,
-				4371E86D1C18FEE0001D1C39 /* SpectraAssets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -380,6 +376,7 @@
 		43EAF8581C0A301300EA2B30 /* Spectra-OSX */ = {
 			isa = PBXGroup;
 			children = (
+				4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */,
 				43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */,
 				4338B7311C13879C007D3DF6 /* Spectra */,
 				43EAF85B1C0A301300EA2B30 /* Info.plist */,
@@ -525,7 +522,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4371E86E1C18FEE0001D1C39 /* SpectraAssets in Resources */,
+				4334D68D1C1F6EE300D2DCA6 /* Spectra3D.xsd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,8 +544,7 @@
 			files = (
 				4338B8AD1C18C278007D3DF6 /* ViewController.swift in Sources */,
 				4338B8AB1C18C278007D3DF6 /* AppDelegate.swift in Sources */,
-				4312E2F01C1A115200330B34 /* BasicShaders.metal in Sources */,
-				4334D6831C1F5E8F00D2DCA6 /* BasicShaders.metal in Sources */,
+				4334D6881C1F6D2900D2DCA6 /* BasicShaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

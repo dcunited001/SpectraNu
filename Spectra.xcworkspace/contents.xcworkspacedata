@@ -148,6 +148,13 @@
       </FileRef>
    </Group>
    <Group
+      location = "container:SpectraAssets"
+      name = "SpectraAssets">
+      <FileRef
+         location = "group:Spectra3D.xsd">
+      </FileRef>
+   </Group>
+   <Group
       location = "container:SpectraTests"
       name = "SpectraTests">
       <FileRef

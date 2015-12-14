@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4334D67E1C1F5E7700D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */; };
+		4334D68E1C1F6EF600D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */; };
 		4338B7B81C16345F007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
 		4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BB1C163BFC007D3DF6 /* Metal.framework */; };
 		4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */; };
@@ -26,7 +27,6 @@
 		4338B8FE1C18FBB5007D3DF6 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4353A2A61C0A3E1200E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A41C0A3E1200E5FC52 /* Nimble.framework */; };
 		4353A2A71C0A3E1200E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A51C0A3E1200E5FC52 /* Quick.framework */; };
-		4371E8701C18FEF8001D1C39 /* SpectraAssets in Resources */ = {isa = PBXBuildFile; fileRef = 4371E86F1C18FEF8001D1C39 /* SpectraAssets */; };
 		4371E8731C190543001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A41C0A3E1200E5FC52 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E8741C190543001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A51C0A3E1200E5FC52 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E89B1C190952001D1C39 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */; };
@@ -121,6 +121,7 @@
 
 /* Begin PBXFileReference section */
 		4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
+		4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
 		4338B7B71C16345F007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 		4338B7BB1C163BFC007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -172,7 +173,6 @@
 		4338B8DC1C18DC92007D3DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4353A2A41C0A3E1200E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A51C0A3E1200E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
-		4371E86F1C18FEF8001D1C39 /* SpectraAssets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SpectraAssets; path = ../SpectraAssets; sourceTree = "<group>"; };
 		43EAF8321C0A2FF500EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-iOS.h"; sourceTree = "<group>"; };
 		43EAF8371C0A2FF500EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -375,7 +375,6 @@
 				43EAF8401C0A2FF500EA2B30 /* Spectra-iOSTests */,
 				4338B8CF1C18DC92007D3DF6 /* Spectra-iOSExample */,
 				43EAF8331C0A2FF500EA2B30 /* Products */,
-				4371E86F1C18FEF8001D1C39 /* SpectraAssets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -392,6 +391,7 @@
 		43EAF8341C0A2FF500EA2B30 /* Spectra-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */,
 				431735C01C0CD9FF00681C8E /* Spectra */,
 				43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */,
 				43EAF8371C0A2FF500EA2B30 /* Info.plist */,
@@ -539,7 +539,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4371E8701C18FEF8001D1C39 /* SpectraAssets in Resources */,
+				4334D68E1C1F6EF600D2DCA6 /* Spectra3D.xsd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
