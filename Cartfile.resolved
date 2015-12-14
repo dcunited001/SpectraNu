@@ -1,3 +1,4 @@
+github "syedhali/EZAudio" "1.1.2"
 github "cezheng/Fuzi" "0.3.0"
 github "Quick/Nimble" "v3.0.0"
 github "Quick/Quick" "v0.8.0"

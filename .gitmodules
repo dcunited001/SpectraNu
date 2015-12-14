@@ -10,3 +10,6 @@
 [submodule "Carthage/Checkouts/Fuzi"]
 	path = Carthage/Checkouts/Fuzi
 	url = https://github.com/cezheng/Fuzi.git
+[submodule "Carthage/Checkouts/EZAudio"]
+	path = Carthage/Checkouts/EZAudio
+	url = https://github.com/syedhali/EZAudio.git
