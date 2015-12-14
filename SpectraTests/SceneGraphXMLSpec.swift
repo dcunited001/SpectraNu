@@ -118,20 +118,20 @@ class SceneGraphXMLSpec: QuickSpec {
         }
         
         describe("SGXMLMeshGeneratorNode") {
-//            let customArgs = ["rowCount": 10, "colCount": 10]
-//            let cubeGen = sceneGraph.meshGenerators["cubeGen"]! as! CubeGenerator
-//            let latticeGen = sceneGraph.meshGenerators["latticeGen"]! as! TriangularQuadLatticeGenerator
-//            
-//            it("parses meshes without args") {
-//                expect(cubeGen.getVertices().count) == 8
-//            }
-//            
-//            it("passes args to mesh generator monad for custom generator types") {
-//                expect(latticeGen.rowCount) == 100
-//                expect(latticeGen.colCount) == 100
-////                expect(latticeGen.getVertices().count) == 0
-////                expect(latticeGen.getVertices().count) == 121
-//            }
+            let customArgs = ["rowCount": 10, "colCount": 10]
+            let cubeGen = sceneGraph.meshGenerators["cubeGen"]! as! CubeGenerator
+            let latticeGen = sceneGraph.meshGenerators["latticeGen"]! as! TriangularQuadLatticeGenerator
+            
+            it("parses meshes without args") {
+                expect(cubeGen.getVertices().count) == 8
+            }
+            
+            it("passes args to mesh generator monad for custom generator types") {
+                expect(latticeGen.rowCount) == 10
+                expect(latticeGen.colCount) == 10
+//                expect(latticeGen.getVertices().count) == 0
+//                expect(latticeGen.getVertices().count) == 121
+            }
         }
         
         describe("SGXMLMeshNode") {
