@@ -137,7 +137,11 @@ class SceneGraphXMLSpec: QuickSpec {
         }
         
         describe("SGXMLMeshNode") {
+            let cubeMesh = sceneGraph.meshes["cubeMesh"]!
             
+            it("instantiates meshes using mesh generators") {
+                expect(cubeMesh.data["pos"]!.count == 8)
+            }
         }
     }
     

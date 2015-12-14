@@ -46,8 +46,8 @@ public class SceneGraphXML {
                 sceneGraph.cameras[key!] = sceneGraph.cameras[key!] ?? SGXMLCameraNode().parse(sceneGraph, elem: child)
             case "mesh-generator":
                 sceneGraph.meshGenerators[key!] = sceneGraph.meshGenerators[key!] ?? SGXMLMeshGeneratorNode().parse(sceneGraph, elem: child)
-            //case "mesh":
-                
+            case "mesh":
+                sceneGraph.meshes[key!] = sceneGraph.meshes[key!] ?? SGXMLMeshNode().parse(sceneGraph, elem: child)
             default:
                 break
             }
@@ -240,10 +240,12 @@ public class SGXMLMeshNode: SGXMLNodeParser {
     
     public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
         //TODO: mesh monads for each mesh type?
-        let node: Mesh = BaseMesh()
+        let meshGenRef = elem.attributes["mesh-generator"]!
+        let meshGen = sceneGraph.meshGenerators[meshGenRef]!
         
-        // i'd really rather lazily evaluate the node
-        
+        var node: Mesh = BaseMesh()
+        node.data = meshGen.getData()
+        node.dataMaps = meshGen.getDataMaps()
         
         return node
     }

@@ -41,7 +41,7 @@
     </mesh-generator>
     
     <!-- create mesh using generator -->
-    <mesh key="cubeMesh" mesh-generator-ref="cubeGen" />
+    <mesh key="cubeMesh" mesh-generator="cubeGen" />
 
     <!-- create mesh by specifying points -->
     
