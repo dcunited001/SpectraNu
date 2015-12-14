@@ -27,7 +27,7 @@ extension Perspectable {
     }
     
     public func calcPerspectiveFov() -> float4x4 {
-        let fov = perspectiveArgs["fov"]!
+        _ = perspectiveArgs["fov"]!
         let angle = perspectiveArgs["angle"]!
         let aspect = perspectiveArgs["aspect"]!
         let near = perspectiveArgs["near"]!
@@ -37,7 +37,7 @@ extension Perspectable {
     }
     
     public func calcPerspectiveFrustumOC() -> float4x4 {
-        let fov = perspectiveArgs["fov"]!
+        _ = perspectiveArgs["fov"]!
         let angle = perspectiveArgs["angle"]!
         let aspect = perspectiveArgs["aspect"]!
         let near = perspectiveArgs["near"]!

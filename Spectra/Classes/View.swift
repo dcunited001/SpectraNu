@@ -113,7 +113,7 @@ public class BaseView: MTKView {
         }
         
         //N.B. the app does not necessarily need to use currentRenderPassDescriptor
-        var renderPassDescriptor = setupRenderPassDescriptor(drawable, renderPassDescriptor: currentRenderPassDescriptor!)
+        let renderPassDescriptor = setupRenderPassDescriptor(drawable, renderPassDescriptor: currentRenderPassDescriptor!)
         self.renderDelegate?.renderObjects(drawable, renderPassDescriptor: renderPassDescriptor, commandBuffer: cmdBuffer, inflightResourcesIndex: inflightResources.index)
         
         cmdBuffer.presentDrawable(drawable)

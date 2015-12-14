@@ -69,7 +69,7 @@ extension BufferPool {
     // TODO: remove getBuffer()
     // - this should only be accessed with index provided by semaphore
     public func getBuffer() -> EncodableBuffer {
-        var buffer = buffers[buffersIndex]
+        let buffer = buffers[buffersIndex]
         buffersIndex = (buffersIndex + 1) % buffersCount
         
         // return the buffer unmodified and let the user determine how to write to it

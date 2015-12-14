@@ -9,7 +9,7 @@
 import Foundation
 import simd
 
-class TriangularQuadTesselationGenerator: MeshGenerator {
+public class TriangularQuadTesselationGenerator: MeshGenerator {
     
     var rowCount: Int = 10
     var colCount: Int = 10

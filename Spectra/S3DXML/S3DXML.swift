@@ -508,7 +508,7 @@ public class S3DXMLMTLComputePipelineDescriptorNode: S3DXMLNodeParser {
         if let label = elem.attributes["label"] {
             desc.label = label
         }
-        if let threadGroupSizeIsMultiple = elem.attributes["thread-group-size-is-multiple-of-thread-execution-width"] {
+        if let _ = elem.attributes["thread-group-size-is-multiple-of-thread-execution-width"] {
             desc.threadGroupSizeIsMultipleOfThreadExecutionWidth = true
         }
         
@@ -604,7 +604,7 @@ public class S3DXMLMTLRenderPassDepthAttachmentDescriptorNode: S3DXMLNodeParser 
         }
         if let depthResolveFilter = elem.attributes["depth-resolve-filter"] {
             let mtlEnum = descriptorManager.mtlEnums["mtlMultisampleDepthResolveFilter"]!
-            let enumVal = UInt(mtlEnum.getValue(depthResolveFilter))
+            _ = UInt(mtlEnum.getValue(depthResolveFilter))
             
             //TODO: unavailable in OSX?
             //desc.depthResolveFilter = MTLMultisampleDepthResolveFilter(rawValue: enumVal)!

@@ -121,7 +121,6 @@ class SceneGraphXMLSpec: QuickSpec {
         }
         
         describe("SGXMLMeshGeneratorNode") {
-            let customArgs = ["rowCount": 10, "colCount": 10]
             let cubeGen = sceneGraph.meshGenerators["cubeGen"]! as! CubeGenerator
             let tesselationGen = sceneGraph.meshGenerators["tesselationGen"]! as! TriangularQuadTesselationGenerator
             

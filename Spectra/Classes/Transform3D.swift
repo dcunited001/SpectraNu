@@ -64,7 +64,7 @@ public class Transform3D {
     }
     
     class func rotate(r: float4) -> float4x4{
-        var a = radiansOverPi(r.w)
+        let a = radiansOverPi(r.w)
         var c:Float = 0.0
         var s:Float = 0.0
         __sincospif(a, &c, &s)
@@ -89,7 +89,7 @@ public class Transform3D {
             w.y * u.z - v.x,
             w.z * u.z + c, 0.0]
         
-        var S:float4 = [0.0, 0.0, 0.0, 1.0]
+        let S:float4 = [0.0, 0.0, 0.0, 1.0]
         
         return float4x4(rows: [P, Q, R, S])
     }

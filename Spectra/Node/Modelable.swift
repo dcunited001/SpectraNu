@@ -50,7 +50,7 @@ extension Modelable {
 
 // TODO: use Self class for blocks in rotatable/translatable/scalable?
 
-protocol Rotatable: Modelable {
+public protocol Rotatable: Modelable {
     var rotationRate: Float { get set }
     func rotateForTime(t: CFTimeInterval, block: (Rotatable -> Float)?)
     
@@ -72,7 +72,7 @@ extension Rotatable {
     }
 }
 
-protocol Translatable: Modelable {
+public protocol Translatable: Modelable {
     var translationRate: Float { get set }
     func translateForTime(t: CFTimeInterval, block: (Translatable -> float4)?)
 }
@@ -84,7 +84,7 @@ extension Translatable {
     }
 }
 
-protocol Scalable: Modelable {
+public protocol Scalable: Modelable {
     var scaleRate: Float { get set }
     func scaleForTime(t: CFTimeInterval, block: (Scalable -> float4)?)
 }

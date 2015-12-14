@@ -191,7 +191,7 @@ public class SGXMLPerspectiveNode: SGXMLNodeParser {
     public typealias NodeType = Perspectable
     
     public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        var node = BasePerspectable()
+        let node = BasePerspectable()
         
         if let type = elem.attributes["type"] {
             node.perspectiveType = type
@@ -240,7 +240,7 @@ public class SGXMLMeshNode: SGXMLNodeParser {
     
     public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
         //TODO: mesh monads for each mesh type?
-        var node: Mesh = BaseMesh()
+        let node: Mesh = BaseMesh()
         
         // i'd really rather lazily evaluate the node
         

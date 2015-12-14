@@ -63,7 +63,7 @@ public class RenderPipelineGenerator {
     }
     
     public func generate(device: MTLDevice, vertexFunction: String, fragmentFunction: String, setupDescriptor: RenderPipelineDescriptorSetupBlock? = nil) -> MTLRenderPipelineState? {
-        var pipelineStateDescriptor = generateDescriptor(vertexFunction, fragmentFunction: fragmentFunction, setupDescriptor: setupDescriptor)
+        let pipelineStateDescriptor = generateDescriptor(vertexFunction, fragmentFunction: fragmentFunction, setupDescriptor: setupDescriptor)
         return generateFromDescriptor(device, pipelineStateDescriptor: pipelineStateDescriptor!)
     }
     
