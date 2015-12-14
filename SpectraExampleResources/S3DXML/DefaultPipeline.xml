@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <vertex-function key="basic_color_vertex"/>
+    <fragment-function key="basic_color_fragment"/>
+    
+    <vertex-descriptor key="common_vertex_desc">
+        <vertex-attribute-descriptors>
+            <vertex-attribute-descriptor name="pos"   format="Float4" offset="0" buffer-index="0" />
+            <vertex-attribute-descriptor name="rgba"  format="Float4" offset="16" buffer-index="0" />
+            <vertex-attribute-descriptor name="tex"   format="Float2" offset="32" buffer-index="0" />
+            <vertex-attribute-descriptor name="extra" format="Float2" offset="40" buffer-index="0" />
+        </vertex-attribute-descriptors>
+        
+        <vertex-buffer-layout-descriptors>
+            <vertex-buffer-layout-descriptor stride="48" step-function="PerVertex" step-rate="1" />
+        </vertex-buffer-layout-descriptors>
+    </vertex-descriptor>
+    
+    <render-pipeline-descriptor key="render_pipeline_desc"
+        label="render-pipeline-descriptor"
+        depth-attachment-pixel-format="Depth32Float"
+        stencil-attachment-pixel-format="Stencil8">
+        <vertex-function ref="basic_color_vertex" />
+        <fragment-function ref="basic_color_fragment" />
+        <vertex-descriptor ref="common_vertex_desc" />
+        <color-attachment-descriptors>
+            <color-attachment-descriptor ref="color_attach_desc" />
+        </color-attachment-descriptors>
+    </render-pipeline-descriptor>
+</root>

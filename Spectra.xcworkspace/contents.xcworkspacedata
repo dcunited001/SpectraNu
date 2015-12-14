@@ -173,10 +173,19 @@
       <Group
          location = "container:SpectraExampleResources/S3DXML"
          name = "S3DXML">
+         <FileRef
+            location = "group:DefaultPipeline.xml">
+         </FileRef>
       </Group>
       <Group
          location = "container:SpectraExampleResources/SceneGraph"
          name = "SceneGraph">
+         <FileRef
+            location = "group:Cube.xml">
+         </FileRef>
+         <FileRef
+            location = "group:DefaultWorld.xml">
+         </FileRef>
       </Group>
       <FileRef
          location = "group:BasicShaders.metal">

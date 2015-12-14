@@ -91,7 +91,7 @@
             <color-attachment-descriptor ref="color_attach_desc" />
         </color-attachment-descriptors>
     </render-pipeline-descriptor>
-        
+    
     <compute-pipeline-descriptor key="compute_pipeline_desc"
         label="compute-pipeline-descriptor"
         thread-group-size-is-multiple-of-thread-execution-width="true">

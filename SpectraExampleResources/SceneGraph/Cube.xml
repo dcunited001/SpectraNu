@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <!-- register cube mesh generator -->
+    <mesh-generator key="cubeGen" type="cube" />
+    
+    <!-- cube mesh, using cubegen -->
+    <mesh key="cubeMesh" mesh-generator-ref="cubeGen" />
+</root>
