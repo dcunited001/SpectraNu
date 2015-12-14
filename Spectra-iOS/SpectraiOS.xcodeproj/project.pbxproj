@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4334D67E1C1F5E7700D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */; };
 		4338B7B81C16345F007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
 		4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BB1C163BFC007D3DF6 /* Metal.framework */; };
 		4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */; };
@@ -112,6 +113,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4338B7B71C16345F007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 		4338B7BB1C163BFC007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -212,6 +214,31 @@
 			);
 			name = Spectra;
 			path = ../../Spectra;
+			sourceTree = "<group>";
+		};
+		4334D67A1C1F5E7700D2DCA6 /* S3DXML */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = S3DXML;
+			sourceTree = "<group>";
+		};
+		4334D67B1C1F5E7700D2DCA6 /* SceneGraph */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SceneGraph;
+			sourceTree = "<group>";
+		};
+		4334D67D1C1F5E7700D2DCA6 /* SpectraExampleResources */ = {
+			isa = PBXGroup;
+			children = (
+				4334D67A1C1F5E7700D2DCA6 /* S3DXML */,
+				4334D67B1C1F5E7700D2DCA6 /* SceneGraph */,
+				4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */,
+			);
+			name = SpectraExampleResources;
+			path = ../../SpectraExampleResources;
 			sourceTree = "<group>";
 		};
 		4338B7CA1C18B116007D3DF6 /* Resources */ = {
@@ -317,6 +344,7 @@
 		4338B8CF1C18DC92007D3DF6 /* Spectra-iOSExample */ = {
 			isa = PBXGroup;
 			children = (
+				4334D67D1C1F5E7700D2DCA6 /* SpectraExampleResources */,
 				4338B8D01C18DC92007D3DF6 /* AppDelegate.swift */,
 				4338B8D21C18DC92007D3DF6 /* ViewController.swift */,
 				4338B8D41C18DC92007D3DF6 /* Main.storyboard */,
@@ -542,6 +570,7 @@
 			files = (
 				4338B8D31C18DC92007D3DF6 /* ViewController.swift in Sources */,
 				4338B8D11C18DC92007D3DF6 /* AppDelegate.swift in Sources */,
+				4334D67E1C1F5E7700D2DCA6 /* BasicShaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
