@@ -161,6 +161,21 @@
       </FileRef>
    </Group>
    <Group
+      location = "container:SpectraExampleResources"
+      name = "SpectraExampleResources">
+      <Group
+         location = "container:SpectraExampleResources/S3DXML"
+         name = "S3DXML">
+      </Group>
+      <Group
+         location = "container:SpectraExampleResources/SceneGraph"
+         name = "SceneGraph">
+      </Group>
+      <FileRef
+         location = "group:BasicShaders.metal">
+      </FileRef>
+   </Group>
+   <Group
       location = "container:"
       name = "SpectraTestsResources">
       <FileRef
