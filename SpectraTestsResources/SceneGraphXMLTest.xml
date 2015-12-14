@@ -33,7 +33,7 @@
     
     <!-- register mesh generators -->
     <mesh-generator key="cubeGen" type="cube" />
-    <mesh-generator key="triangularQuadTesselationGen" type="triangular_quad_tesselation">
+    <mesh-generator key="tesselationGen" type="triangular_quad_tesselation_gen">
         <mesh-generator-args>
             <mesh-generator-arg key="rowCount" type="string" value="100" />
             <mesh-generator-arg key="colCount" type="string" value="100" />
