@@ -160,6 +160,9 @@
       <Group
          location = "container:"
          name = "MeshGenerators">
+         <FileRef
+            location = "group:TriangularQuadTesselationGeneratorSpec.swift">
+         </FileRef>
       </Group>
       <FileRef
          location = "group:S3DXMLSpec.swift">
