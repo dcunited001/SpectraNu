@@ -25,7 +25,8 @@ public class BasicTriangleGenerator: MeshGenerator {
     public func getDataMaps(args: [String: AnyObject] = [:]) -> [String:[[Int]]] {
         return [
             "triangle_vertex_map": getTriangleVertexMap(),
-            "face_vertex_map": getFaceTriangleMap()
+            "face_vertex_map": getFaceVertexMap(),
+            "face_triangle_map": getFaceTriangleMap()
         ]
     }
     

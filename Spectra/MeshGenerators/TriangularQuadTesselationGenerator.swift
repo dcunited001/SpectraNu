@@ -34,7 +34,8 @@ public class TriangularQuadTesselationGenerator: MeshGenerator {
     public func getDataMaps(args: [String: AnyObject] = [:]) -> [String:[[Int]]] {
         return [
             "triangle_vertex_map": getTriangleVertexMap(args),
-            "face_vertex_map": getFaceTriangleMap(args)
+            "face_vertex_map": getFaceVertexMap(args),
+            "face_triangle_map": getFaceTriangleMap(args)
         ]
     }
     
@@ -51,6 +52,9 @@ public class TriangularQuadTesselationGenerator: MeshGenerator {
         return []
     }
     public func getFaceTriangleMap(args: [String: AnyObject] = [:]) -> [[Int]] {
+        return []
+    }
+    public func getFaceVertexMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return []
     }
 }
