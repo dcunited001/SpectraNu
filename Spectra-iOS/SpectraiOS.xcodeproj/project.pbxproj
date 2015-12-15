@@ -12,10 +12,10 @@
 		4334D6901C1F739C00D2DCA6 /* DefaultPipeline.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68F1C1F739C00D2DCA6 /* DefaultPipeline.xml */; };
 		4334D6931C1F73A300D2DCA6 /* Cube.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6911C1F73A300D2DCA6 /* Cube.xml */; };
 		4334D6941C1F73A300D2DCA6 /* DefaultWorld.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6921C1F73A300D2DCA6 /* DefaultWorld.xml */; };
-		4334D6AB1C1F7DF500D2DCA6 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D69B1C1F7DCB00D2DCA6 /* S3DXMLSpec.swift */; };
-		4334D6AC1C1F7DF500D2DCA6 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D69C1C1F7DCB00D2DCA6 /* S3DXSDSpec.swift */; };
-		4334D6AD1C1F7DF500D2DCA6 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D69D1C1F7DCB00D2DCA6 /* SceneGraphXMLSpec.swift */; };
-		4334D6B61C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6B51C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */; };
+		4334D6E61C1FAF4E00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E01C1FAF4E00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */; };
+		4334D6E71C1FAF4E00D2DCA6 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */; };
+		4334D6E81C1FAF4E00D2DCA6 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E31C1FAF4E00D2DCA6 /* S3DXSDSpec.swift */; };
+		4334D6E91C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E41C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift */; };
 		4338B7B81C16345F007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
 		4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BB1C163BFC007D3DF6 /* Metal.framework */; };
 		4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */; };
@@ -129,10 +129,10 @@
 		4334D68F1C1F739C00D2DCA6 /* DefaultPipeline.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DefaultPipeline.xml; sourceTree = "<group>"; };
 		4334D6911C1F73A300D2DCA6 /* Cube.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Cube.xml; sourceTree = "<group>"; };
 		4334D6921C1F73A300D2DCA6 /* DefaultWorld.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DefaultWorld.xml; sourceTree = "<group>"; };
-		4334D69B1C1F7DCB00D2DCA6 /* S3DXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = S3DXMLSpec.swift; path = ../SpectraTests/S3DXMLSpec.swift; sourceTree = "<group>"; };
-		4334D69C1C1F7DCB00D2DCA6 /* S3DXSDSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = S3DXSDSpec.swift; path = ../SpectraTests/S3DXSDSpec.swift; sourceTree = "<group>"; };
-		4334D69D1C1F7DCB00D2DCA6 /* SceneGraphXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneGraphXMLSpec.swift; path = ../SpectraTests/SceneGraphXMLSpec.swift; sourceTree = "<group>"; };
-		4334D6B51C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangularQuadTesselationGeneratorSpec.swift; sourceTree = "<group>"; };
+		4334D6E01C1FAF4E00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangularQuadTesselationGeneratorSpec.swift; sourceTree = "<group>"; };
+		4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXMLSpec.swift; sourceTree = "<group>"; };
+		4334D6E31C1FAF4E00D2DCA6 /* S3DXSDSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXSDSpec.swift; sourceTree = "<group>"; };
+		4334D6E41C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneGraphXMLSpec.swift; sourceTree = "<group>"; };
 		4338B7B71C16345F007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 		4338B7BB1C163BFC007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -259,13 +259,31 @@
 			path = ../../SpectraExampleResources;
 			sourceTree = "<group>";
 		};
-		4334D6AF1C1F918D00D2DCA6 /* MeshGenerators */ = {
+		4334D6DE1C1FAF2B00D2DCA6 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				4334D6B51C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */,
 			);
-			name = MeshGenerators;
-			path = ../SpectraTests/MeshGenerators;
+			path = Specs;
+			sourceTree = "<group>";
+		};
+		4334D6E11C1FAF4E00D2DCA6 /* MeshGenerators */ = {
+			isa = PBXGroup;
+			children = (
+				4334D6E01C1FAF4E00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */,
+			);
+			path = MeshGenerators;
+			sourceTree = "<group>";
+		};
+		4334D6E51C1FAF4E00D2DCA6 /* CommonSpecs */ = {
+			isa = PBXGroup;
+			children = (
+				4334D6E11C1FAF4E00D2DCA6 /* MeshGenerators */,
+				4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */,
+				4334D6E31C1FAF4E00D2DCA6 /* S3DXSDSpec.swift */,
+				4334D6E41C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift */,
+			);
+			name = CommonSpecs;
+			path = ../../SpectraTests;
 			sourceTree = "<group>";
 		};
 		4338B7CA1C18B116007D3DF6 /* Resources */ = {
@@ -275,26 +293,6 @@
 				4338B7CC1C18B126007D3DF6 /* SceneGraphXMLTest.xml */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		4338B7D51C18B24B007D3DF6 /* Specs */ = {
-			isa = PBXGroup;
-			children = (
-				4334D6AF1C1F918D00D2DCA6 /* MeshGenerators */,
-				4338B7EE1C18B331007D3DF6 /* Common */,
-			);
-			path = Specs;
-			sourceTree = "<group>";
-		};
-		4338B7EE1C18B331007D3DF6 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				4334D69B1C1F7DCB00D2DCA6 /* S3DXMLSpec.swift */,
-				4334D69C1C1F7DCB00D2DCA6 /* S3DXSDSpec.swift */,
-				4334D69D1C1F7DCB00D2DCA6 /* SceneGraphXMLSpec.swift */,
-			);
-			name = Common;
-			path = ../../../SpectraTests;
 			sourceTree = "<group>";
 		};
 		4338B7FE1C18B39A007D3DF6 /* S3DXML */ = {
@@ -423,7 +421,8 @@
 		43EAF8401C0A2FF500EA2B30 /* Spectra-iOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				4338B7D51C18B24B007D3DF6 /* Specs */,
+				4334D6E51C1FAF4E00D2DCA6 /* CommonSpecs */,
+				4334D6DE1C1FAF2B00D2DCA6 /* Specs */,
 				4338B7CA1C18B116007D3DF6 /* Resources */,
 				43EAF8411C0A2FF500EA2B30 /* Spectra_iOSTests.swift */,
 				43EAF8431C0A2FF500EA2B30 /* Info.plist */,
@@ -651,11 +650,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4334D6B61C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */,
+				4334D6E91C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift in Sources */,
+				4334D6E71C1FAF4E00D2DCA6 /* S3DXMLSpec.swift in Sources */,
+				4334D6E61C1FAF4E00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */,
 				43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */,
-				4334D6AB1C1F7DF500D2DCA6 /* S3DXMLSpec.swift in Sources */,
-				4334D6AD1C1F7DF500D2DCA6 /* SceneGraphXMLSpec.swift in Sources */,
-				4334D6AC1C1F7DF500D2DCA6 /* S3DXSDSpec.swift in Sources */,
+				4334D6E81C1FAF4E00D2DCA6 /* S3DXSDSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
