@@ -42,6 +42,17 @@
     
     <!-- create mesh using generator -->
     <mesh key="cubeMesh" mesh-generator="cubeGen" />
+    <mesh key="quadMesh" mesh-generator="quadGen" />
+    
+    <!-- create mesh using generator requiring mesh-generator-args -->
+    <mesh key="tesselatedQuad" mesh-generator="tesslationGen" />
+    
+    <!-- create mesh using generator requiring generate-args -->
+    <mesh key="tesselatedQuadRef" mesh-generator="tesselationGen">
+        <generate-args>
+            <generate-arg type="string" name="meshRef" value="quadMesh" />
+        </generate-args>
+    </mesh>
 
     <!-- create mesh by specifying points -->
     

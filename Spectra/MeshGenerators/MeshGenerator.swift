@@ -31,7 +31,7 @@ extension MeshGenerator {
 //    }
     
     //TODO: move to individual generators?
-    public func generate(args: [String: AnyObject]) -> Mesh {
+    public func generate(args: [String: AnyObject] = [:]) -> Mesh {
         let mesh = BaseMesh()
         mesh.data = getData(args)
         mesh.dataMaps = getDataMaps(args)

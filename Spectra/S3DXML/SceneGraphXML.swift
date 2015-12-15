@@ -235,6 +235,10 @@ public class SGXMLMeshGeneratorNode: SGXMLNodeParser {
     }
 }
 
+// two options for mesh node generate arg resolution
+// (1) mesh generators should have a hash of monads to transform each argument?
+// (2) ... what was the other option? jeez
+
 public class SGXMLMeshNode: SGXMLNodeParser {
     public typealias NodeType = Mesh
     
@@ -243,9 +247,8 @@ public class SGXMLMeshNode: SGXMLNodeParser {
         let meshGenRef = elem.attributes["mesh-generator"]!
         let meshGen = sceneGraph.meshGenerators[meshGenRef]!
         
-        var node: Mesh = BaseMesh()
-        node.data = meshGen.getData()
-        node.dataMaps = meshGen.getDataMaps()
+        let generateArgs:[String:AnyObject] = [:]
+        let node = meshGen.generate(generateArgs)
         
         return node
     }
