@@ -157,6 +157,10 @@
    <Group
       location = "container:SpectraTests"
       name = "SpectraTests">
+      <Group
+         location = "container:"
+         name = "MeshGenerators">
+      </Group>
       <FileRef
          location = "group:S3DXMLSpec.swift">
       </FileRef>

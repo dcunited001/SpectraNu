@@ -52,7 +52,7 @@
 		4371E8AC1C19095C001D1C39 /* MeshGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80C1C18B39A007D3DF6 /* MeshGenerator.swift */; };
 		4371E8AD1C19095C001D1C39 /* PlatonicSolids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80D1C18B39A007D3DF6 /* PlatonicSolids.swift */; };
 		4371E8AE1C19095C001D1C39 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80E1C18B39A007D3DF6 /* Quad.swift */; };
-		4371E8AF1C19095C001D1C39 /* TriangularQuadLatticeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80F1C18B39A007D3DF6 /* TriangularQuadLatticeGenerator.swift */; };
+		4371E8AF1C19095C001D1C39 /* TriangularQuadTesselationGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B80F1C18B39A007D3DF6 /* TriangularQuadTesselationGenerator.swift */; };
 		4371E8B01C190960001D1C39 /* BufferPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8111C18B39A007D3DF6 /* BufferPool.swift */; };
 		4371E8B11C190960001D1C39 /* BufferTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8121C18B39A007D3DF6 /* BufferTexture.swift */; };
 		4371E8B21C190960001D1C39 /* EncodableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8131C18B39A007D3DF6 /* EncodableData.swift */; };
@@ -157,7 +157,7 @@
 		4338B80C1C18B39A007D3DF6 /* MeshGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeshGenerator.swift; sourceTree = "<group>"; };
 		4338B80D1C18B39A007D3DF6 /* PlatonicSolids.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatonicSolids.swift; sourceTree = "<group>"; };
 		4338B80E1C18B39A007D3DF6 /* Quad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
-		4338B80F1C18B39A007D3DF6 /* TriangularQuadLatticeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangularQuadLatticeGenerator.swift; sourceTree = "<group>"; };
+		4338B80F1C18B39A007D3DF6 /* TriangularQuadTesselationGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangularQuadTesselationGenerator.swift; sourceTree = "<group>"; };
 		4338B8111C18B39A007D3DF6 /* BufferPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferPool.swift; sourceTree = "<group>"; };
 		4338B8121C18B39A007D3DF6 /* BufferTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferTexture.swift; sourceTree = "<group>"; };
 		4338B8131C18B39A007D3DF6 /* EncodableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodableData.swift; sourceTree = "<group>"; };
@@ -322,7 +322,7 @@
 				4338B80C1C18B39A007D3DF6 /* MeshGenerator.swift */,
 				4338B80D1C18B39A007D3DF6 /* PlatonicSolids.swift */,
 				4338B80E1C18B39A007D3DF6 /* Quad.swift */,
-				4338B80F1C18B39A007D3DF6 /* TriangularQuadLatticeGenerator.swift */,
+				4338B80F1C18B39A007D3DF6 /* TriangularQuadTesselationGenerator.swift */,
 			);
 			path = MeshGenerators;
 			sourceTree = "<group>";
@@ -628,7 +628,7 @@
 				4371E8AB1C19095C001D1C39 /* Cube.swift in Sources */,
 				4371E8B81C190960001D1C39 /* Scene.swift in Sources */,
 				4371E8A91C190957001D1C39 /* WorldView.swift in Sources */,
-				4371E8AF1C19095C001D1C39 /* TriangularQuadLatticeGenerator.swift in Sources */,
+				4371E8AF1C19095C001D1C39 /* TriangularQuadTesselationGenerator.swift in Sources */,
 				4371E8A61C190957001D1C39 /* SceneGraph.swift in Sources */,
 				4371E8AD1C19095C001D1C39 /* PlatonicSolids.swift in Sources */,
 				4371E8B91C190960001D1C39 /* Transform3D.swift in Sources */,
