@@ -14,7 +14,7 @@ public class QuadGenerator: MeshGenerator {
         
     }
     
-    public func getData() -> [String:[float4]] {
+    public func getData(args: [String: AnyObject] = [:]) -> [String:[float4]] {
         return [
             "pos": getVertices(),
             "rgba": getColorCoords(),
@@ -22,14 +22,15 @@ public class QuadGenerator: MeshGenerator {
         ]
     }
     
-    public func getDataMaps() -> [String:[[Int]]] {
+    public func getDataMaps(args: [String: AnyObject] = [:]) -> [String:[[Int]]] {
         return [
             "triangle_vertex_map": getTriangleVertexMap(),
-            "face_vertex_map": getFaceTriangleMap()
+            "face_vertex_map": getFaceVertexMap(),
+            "face_triangle_map": getFaceTriangleMap()
         ]
     }
     
-    public func getVertices() -> [float4] {
+    public func getVertices(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4(-1.0, -1.0, 0.0, 1.0),
             float4(-1.0,  1.0, 0.0, 1.0),
@@ -38,7 +39,7 @@ public class QuadGenerator: MeshGenerator {
         ]
     }
 
-    public func getColorCoords() -> [float4] {
+    public func getColorCoords(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4(1.0, 0.0, 0.0, 1.0),
             float4(0.0, 1.0, 0.0, 1.0),
@@ -47,7 +48,7 @@ public class QuadGenerator: MeshGenerator {
         ]
     }
     
-    public func getTexCoords() -> [float4] {
+    public func getTexCoords(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4(0.0, 0.0, 0.0, 0.0),
             float4(0.0, 1.0, 0.0, 0.0),
@@ -56,18 +57,18 @@ public class QuadGenerator: MeshGenerator {
         ]
     }
     
-    public func getTriangleVertexMap() -> [[Int]] {
+    public func getTriangleVertexMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return [
             [0,1,3],
             [3,2,0]
         ]
     }
     
-    public func getFaceVertexMap() -> [[Int]] {
+    public func getFaceVertexMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return [[0,1,2,3]]
     }
     
-    public func getFaceTriangleMap() -> [[Int]] {
+    public func getFaceTriangleMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return [[0,1]]
     }
 }

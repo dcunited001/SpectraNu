@@ -17,7 +17,7 @@ public class TetrahedronGenerator: MeshGenerator {
         
     }
     
-    public func getData() -> [String:[float4]] {
+    public func getData(args: [String: AnyObject] = [:]) -> [String:[float4]] {
         return [
             "pos": getVertices(),
             "rgba": getColorCoords(),
@@ -25,14 +25,14 @@ public class TetrahedronGenerator: MeshGenerator {
         ]
     }
     
-    public func getDataMaps() -> [String:[[Int]]] {
+    public func getDataMaps(args: [String: AnyObject] = [:]) -> [String:[[Int]]] {
         return [
             "triangle_vertex_map": getTriangleVertexMap(),
             "face_vertex_map": getFaceTriangleMap()
         ]
     }
     
-    public func getVertices() -> [float4] {
+    public func getVertices(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4( 1.0,  1.0,  1.0, 1.0),
             float4(-1.0,  1.0, -1.0, 1.0),
@@ -41,7 +41,7 @@ public class TetrahedronGenerator: MeshGenerator {
         ]
     }
     
-    public func getColorCoords() -> [float4] {
+    public func getColorCoords(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4(1.0, 1.0, 1.0, 1.0),
             float4(1.0, 0.0, 0.0, 1.0),
@@ -50,7 +50,7 @@ public class TetrahedronGenerator: MeshGenerator {
         ]
     }
     
-    public func getTexCoords() -> [float4] {
+    public func getTexCoords(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4(1.0, 1.0, 0.0, 0.0),
             float4(1.0, 0.0, 0.0, 0.0),
@@ -59,7 +59,7 @@ public class TetrahedronGenerator: MeshGenerator {
         ]
     }
     
-    public func getTriangleVertexMap() -> [[Int]] {
+    public func getTriangleVertexMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return [
             [0,1,2],
             [1,3,2],
@@ -68,11 +68,11 @@ public class TetrahedronGenerator: MeshGenerator {
         ]
     }
     
-    public func getFaceVertexMap() -> [[Int]] {
+    public func getFaceVertexMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return getTriangleVertexMap()
     }
     
-    public func getFaceTriangleMap() -> [[Int]] {
+    public func getFaceTriangleMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return (0...3).map { [$0] }
     }
 }
@@ -83,7 +83,7 @@ public class OctahedronGenerator: MeshGenerator {
         
     }
     
-    public func getData() -> [String:[float4]] {
+    public func getData(args: [String: AnyObject] = [:]) -> [String:[float4]] {
         return [
             "pos": getVertices(),
             "rgba": getColorCoords(),
@@ -91,7 +91,7 @@ public class OctahedronGenerator: MeshGenerator {
         ]
     }
     
-    public func getDataMaps() -> [String:[[Int]]] {
+    public func getDataMaps(args: [String: AnyObject] = [:]) -> [String:[[Int]]] {
         return [
             "triangle_vertex_map": getTriangleVertexMap(),
             "face_vertex_map": getFaceTriangleMap()
@@ -101,7 +101,7 @@ public class OctahedronGenerator: MeshGenerator {
     let A = Float(1 / (2 * sqrt(2.0)))
     let B = Float(1 / 2.0)
     
-    public func getVertices() -> [float4] {
+    public func getVertices(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4( 0,  B,  0, 1.0),
             float4( A,  0,  A, 1.0),
@@ -112,7 +112,7 @@ public class OctahedronGenerator: MeshGenerator {
         ]
     }
 
-    public func getColorCoords() -> [float4] {
+    public func getColorCoords(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4(1.0, 1.0, 1.0, 1.0), // white
             float4(1.0, 0.0, 0.0, 1.0), // red
@@ -123,7 +123,7 @@ public class OctahedronGenerator: MeshGenerator {
         ]
     }
 
-    public func getTexCoords() -> [float4] {
+    public func getTexCoords(args: [String: AnyObject] = [:]) -> [float4] {
         return [
             float4(0.0, 0.0, 0.0, 0.0),
             float4(0.0, 1.0, 0.0, 0.0),
@@ -134,7 +134,7 @@ public class OctahedronGenerator: MeshGenerator {
         ]
     }
 
-    public func getTriangleVertexMap() -> [[Int]] {
+    public func getTriangleVertexMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return [
             [0,1,2],
             [0,2,3],
@@ -147,8 +147,8 @@ public class OctahedronGenerator: MeshGenerator {
         ]
     }
 
-    public func getFaceVertexMap() -> [[Int]] {
-        return getTriangleVertexMap()
+    public func getFaceVertexMap(args: [String: AnyObject] = [:]) -> [[Int]] {
+        return getTriangleVertexMap(args)
     }
     
     public func getFaceTriangleMap() -> [[Int]] {

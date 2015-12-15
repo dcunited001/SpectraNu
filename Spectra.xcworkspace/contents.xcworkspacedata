@@ -103,7 +103,7 @@
             location = "group:Quad.swift">
          </FileRef>
          <FileRef
-            location = "group:TriangularQuadLatticeGenerator.swift">
+            location = "group:TriangularQuadTesselationGenerator.swift">
          </FileRef>
       </Group>
       <Group

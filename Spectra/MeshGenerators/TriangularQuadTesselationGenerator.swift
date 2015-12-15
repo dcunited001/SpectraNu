@@ -14,7 +14,7 @@ public class TriangularQuadTesselationGenerator: MeshGenerator {
     var rowCount: Int = 10
     var colCount: Int = 10
     
-    public required init(args: [String: String]) {
+    public required init(args: [String: String] = [:]) {
         if let rCount = args["rowCount"] {
             rowCount = Int(rCount)!
         }
@@ -23,34 +23,34 @@ public class TriangularQuadTesselationGenerator: MeshGenerator {
         }
     }
     
-    public func getData() -> [String:[float4]] {
+    public func getData(args: [String: AnyObject] = [:]) -> [String:[float4]] {
         return [
-            "pos": getVertices(),
-            "rgba": getColorCoords(),
-            "tex": getTexCoords()
+            "pos": getVertices(args),
+            "rgba": getColorCoords(args),
+            "tex": getTexCoords(args)
         ]
     }
     
-    public func getDataMaps() -> [String:[[Int]]] {
+    public func getDataMaps(args: [String: AnyObject] = [:]) -> [String:[[Int]]] {
         return [
-            "triangle_vertex_map": getTriangleVertexMap(),
-            "face_vertex_map": getFaceTriangleMap()
+            "triangle_vertex_map": getTriangleVertexMap(args),
+            "face_vertex_map": getFaceTriangleMap(args)
         ]
     }
     
-    public func getVertices() -> [float4] {
+    public func getVertices(args: [String: AnyObject] = [:]) -> [float4] {
         return []
     }
-    public func getColorCoords() -> [float4] {
+    public func getColorCoords(args: [String: AnyObject] = [:]) -> [float4] {
         return []
     }
-    public func getTexCoords() -> [float4] {
+    public func getTexCoords(args: [String: AnyObject] = [:]) -> [float4] {
         return []
     }
-    public func getTriangleVertexMap() -> [[Int]] {
+    public func getTriangleVertexMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return []
     }
-    public func getFaceTriangleMap() -> [[Int]] {
+    public func getFaceTriangleMap(args: [String: AnyObject] = [:]) -> [[Int]] {
         return []
     }
 }
