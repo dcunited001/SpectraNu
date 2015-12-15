@@ -158,7 +158,7 @@
       location = "container:SpectraTests"
       name = "SpectraTests">
       <Group
-         location = "container:"
+         location = "group:MeshGenerators"
          name = "MeshGenerators">
          <FileRef
             location = "group:TriangularQuadTesselationGeneratorSpec.swift">

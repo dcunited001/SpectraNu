@@ -15,7 +15,7 @@
 		4334D6AB1C1F7DF500D2DCA6 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D69B1C1F7DCB00D2DCA6 /* S3DXMLSpec.swift */; };
 		4334D6AC1C1F7DF500D2DCA6 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D69C1C1F7DCB00D2DCA6 /* S3DXSDSpec.swift */; };
 		4334D6AD1C1F7DF500D2DCA6 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D69D1C1F7DCB00D2DCA6 /* SceneGraphXMLSpec.swift */; };
-		4334D6B01C1F918D00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6AE1C1F918D00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */; };
+		4334D6B61C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6B51C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */; };
 		4338B7B81C16345F007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
 		4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BB1C163BFC007D3DF6 /* Metal.framework */; };
 		4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */; };
@@ -132,7 +132,7 @@
 		4334D69B1C1F7DCB00D2DCA6 /* S3DXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = S3DXMLSpec.swift; path = ../SpectraTests/S3DXMLSpec.swift; sourceTree = "<group>"; };
 		4334D69C1C1F7DCB00D2DCA6 /* S3DXSDSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = S3DXSDSpec.swift; path = ../SpectraTests/S3DXSDSpec.swift; sourceTree = "<group>"; };
 		4334D69D1C1F7DCB00D2DCA6 /* SceneGraphXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneGraphXMLSpec.swift; path = ../SpectraTests/SceneGraphXMLSpec.swift; sourceTree = "<group>"; };
-		4334D6AE1C1F918D00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangularQuadTesselationGeneratorSpec.swift; sourceTree = "<group>"; };
+		4334D6B51C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangularQuadTesselationGeneratorSpec.swift; sourceTree = "<group>"; };
 		4338B7B71C16345F007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 		4338B7BB1C163BFC007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -262,10 +262,10 @@
 		4334D6AF1C1F918D00D2DCA6 /* MeshGenerators */ = {
 			isa = PBXGroup;
 			children = (
-				4334D6AE1C1F918D00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */,
+				4334D6B51C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift */,
 			);
 			name = MeshGenerators;
-			path = ..;
+			path = ../SpectraTests/MeshGenerators;
 			sourceTree = "<group>";
 		};
 		4338B7CA1C18B116007D3DF6 /* Resources */ = {
@@ -651,7 +651,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4334D6B01C1F918D00D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */,
+				4334D6B61C1FA7A200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */,
 				43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */,
 				4334D6AB1C1F7DF500D2DCA6 /* S3DXMLSpec.swift in Sources */,
 				4334D6AD1C1F7DF500D2DCA6 /* SceneGraphXMLSpec.swift in Sources */,
