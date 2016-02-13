@@ -4,21 +4,25 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "9D6FF97A89F512CD81EAE1A971A1D2EB03E03F7C" : 0,
-    "95438028B10BBB846574013D29F154A00556A9D1" : 0,
-    "9A76F17C6068412484158A754CBD274391008322" : 0,
-    "A7FB94794D37B7728F6B46975BE5E9D999585A35" : 0,
     "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : 0,
-    "A78B45A85CFCBB83EE989C9075E716FC25610219" : 0
+    "A78B45A85CFCBB83EE989C9075E716FC25610219" : 0,
+    "95438028B10BBB846574013D29F154A00556A9D1" : 0,
+    "9D6FF97A89F512CD81EAE1A971A1D2EB03E03F7C" : 0,
+    "E084C86B03F81D63323C9E7510697EA528A758C7" : 0,
+    "9C687336314754AFCA9265A68AC9A2D144EDEAD9" : 0,
+    "A7FB94794D37B7728F6B46975BE5E9D999585A35" : 0,
+    "9A76F17C6068412484158A754CBD274391008322" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E8084DA6-7D0C-4F4F-B73B-16F1D33B37D0",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "9D6FF97A89F512CD81EAE1A971A1D2EB03E03F7C" : "Spectra\/Carthage\/Checkouts\/EZAudio\/",
-    "95438028B10BBB846574013D29F154A00556A9D1" : "Spectra3\/Carthage\/Checkouts\/Nimble\/",
-    "9A76F17C6068412484158A754CBD274391008322" : "Spectra3\/Carthage\/Checkouts\/Ono\/",
-    "A7FB94794D37B7728F6B46975BE5E9D999585A35" : "Spectra3\/Carthage\/Checkouts\/Fuzi\/",
     "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64" : "Spectra3\/Carthage\/Checkouts\/Quick\/",
-    "A78B45A85CFCBB83EE989C9075E716FC25610219" : "Spectra3\/"
+    "A78B45A85CFCBB83EE989C9075E716FC25610219" : "Spectra3\/",
+    "95438028B10BBB846574013D29F154A00556A9D1" : "Spectra3\/Carthage\/Checkouts\/Nimble\/",
+    "9D6FF97A89F512CD81EAE1A971A1D2EB03E03F7C" : "Spectra\/Carthage\/Checkouts\/EZAudio\/",
+    "E084C86B03F81D63323C9E7510697EA528A758C7" : "Spectra\/Carthage\/Checkouts\/Swinject\/Carthage\/Checkouts\/xcconfigs\/",
+    "9C687336314754AFCA9265A68AC9A2D144EDEAD9" : "Spectra\/Carthage\/Checkouts\/Swinject\/",
+    "A7FB94794D37B7728F6B46975BE5E9D999585A35" : "Spectra3\/Carthage\/Checkouts\/Fuzi\/",
+    "9A76F17C6068412484158A754CBD274391008322" : "Spectra3\/Carthage\/Checkouts\/Ono\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Spectra",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -33,6 +37,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mattt\/Ono.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9A76F17C6068412484158A754CBD274391008322"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Swinject\/Swinject.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9C687336314754AFCA9265A68AC9A2D144EDEAD9"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/syedhali\/EZAudio.git",
@@ -53,6 +62,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Quick.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jspahrsummers\/xcconfigs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E084C86B03F81D63323C9E7510697EA528A758C7"
     }
   ]
 }

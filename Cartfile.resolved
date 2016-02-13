@@ -1,4 +1,5 @@
-github "syedhali/EZAudio" "f27e29925831d620cf4b8cf36c4e26d814e77542"
+github "syedhali/EZAudio" "1ef90f0ce9431874dd0dfeed9e78a177d71fabd4"
 github "cezheng/Fuzi" "0.3.0"
-github "Quick/Nimble" "v3.0.0"
+github "Quick/Nimble" "v3.1.0"
 github "Quick/Quick" "v0.8.0"
+github "Swinject/Swinject" "1.1.0"
