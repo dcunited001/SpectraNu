@@ -18,7 +18,17 @@ rewriting this library for like the fifth time, since cocoapods is broken.
 
 todo for dependency injection:
 - set up Swinject
+  - finished setting up framework with carthage
+  - need to figure out how to interface with Swinject containers via controllers
+    - want to separate the render pipeline swinject containers from the scene graph swinject containers
+    - lock container for render pipeline after it's initially configured.  for security and whatnot.
 - rewrite metal framework XML parsers to construct a swinject container
-  - maybe add json parsers
+  - replace SpectraDescriptorManager with a class that opens XML/JSON and imports data
+    - configuring swinject containers along the way
+    - swinject makes it much easier (i think) to have references to other nodes in XML
+  - maybe add json parsers ... but probably not.
 - for now, leave it at just handing metal framework objects
   - think about handling nodes, meshes, etc later on
+    - swinject containers, if used for mesh generators, will need to be layered
+  - just use framework to set up render pipelines and use scene graph for nodes
+    - coolest part: collections of renderer functions cleverly piped together
