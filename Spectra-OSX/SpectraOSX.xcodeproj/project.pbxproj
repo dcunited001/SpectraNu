@@ -67,6 +67,8 @@
 		4371E8CD1C191011001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4371E8CE1C191015001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43F6BDBD1C6FBCB900866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; };
+		43F6BDBE1C6FBCC900866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +174,7 @@
 		43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectraOSXSpec.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spectra_OSXTests.swift; sourceTree = "<group>"; };
 		43EAF8671C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = ../Carthage/Build/Mac/Swinject.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43F6BDBD1C6FBCB900866FB1 /* Swinject.framework in Frameworks */,
 				4338B7C41C176745007D3DF6 /* Foundation.framework in Frameworks */,
 				4338B7C11C163C10007D3DF6 /* Metal.framework in Frameworks */,
 				4338B7C21C163C10007D3DF6 /* MetalKit.framework in Frameworks */,
@@ -200,6 +204,7 @@
 				4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */,
 				4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */,
 				4371E8CD1C191011001D1C39 /* Fuzi.framework in Frameworks */,
+				43F6BDBE1C6FBCC900866FB1 /* Swinject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +372,7 @@
 		43EAF84C1C0A301300EA2B30 = {
 			isa = PBXGroup;
 			children = (
+				43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */,
 				4338B7C31C176745007D3DF6 /* Foundation.framework */,
 				4338B7BF1C163C10007D3DF6 /* Metal.framework */,
 				4338B7C01C163C10007D3DF6 /* MetalKit.framework */,

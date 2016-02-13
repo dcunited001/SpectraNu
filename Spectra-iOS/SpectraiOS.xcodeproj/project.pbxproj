@@ -16,7 +16,6 @@
 		4334D6E71C1FAF4E00D2DCA6 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */; };
 		4334D6E81C1FAF4E00D2DCA6 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E31C1FAF4E00D2DCA6 /* S3DXSDSpec.swift */; };
 		4334D6E91C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E41C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift */; };
-		4338B7B81C16345F007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
 		4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BB1C163BFC007D3DF6 /* Metal.framework */; };
 		4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */; };
 		4338B7C61C17674C007D3DF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C51C17674C007D3DF6 /* Foundation.framework */; };
@@ -66,10 +65,14 @@
 		4371E8B91C190960001D1C39 /* Transform3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81A1C18B39A007D3DF6 /* Transform3D.swift */; };
 		4371E8BA1C190960001D1C39 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81B1C18B39A007D3DF6 /* View.swift */; };
 		4371E8BB1C190980001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81D1C18B39A007D3DF6 /* Spectra.swift */; };
-		4371E8CF1C19105E001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; };
-		4371E8D01C191060001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B71C16345F007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43EAF8361C0A2FF500EA2B30 /* Spectra-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8411C0A2FF500EA2B30 /* Spectra_iOSTests.swift */; };
+		43F6BDBB1C6FBCA000866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBA1C6FBCA000866FB1 /* Swinject.framework */; };
+		43F6BDBF1C6FBCE300866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBA1C6FBCA000866FB1 /* Swinject.framework */; };
+		43F6BDC01C6FBCEC00866FB1 /* Swinject.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBA1C6FBCA000866FB1 /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		43F6BDC41C6FBD3200866FB1 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDC31C6FBD3200866FB1 /* Fuzi.framework */; };
+		43F6BDC51C6FBD4A00866FB1 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDC31C6FBD3200866FB1 /* Fuzi.framework */; };
+		43F6BDC61C6FBD4D00866FB1 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDC31C6FBD3200866FB1 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,7 +119,8 @@
 			files = (
 				4371E8731C190543001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */,
 				4371E8741C190543001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */,
-				4371E8D01C191060001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */,
+				43F6BDC61C6FBD4D00866FB1 /* Fuzi.framework in Copy Quick/Nimble Frameworks */,
+				43F6BDC01C6FBCEC00866FB1 /* Swinject.framework in Copy Quick/Nimble Frameworks */,
 			);
 			name = "Copy Quick/Nimble Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,7 +137,6 @@
 		4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXMLSpec.swift; sourceTree = "<group>"; };
 		4334D6E31C1FAF4E00D2DCA6 /* S3DXSDSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXSDSpec.swift; sourceTree = "<group>"; };
 		4334D6E41C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneGraphXMLSpec.swift; sourceTree = "<group>"; };
-		4338B7B71C16345F007D3DF6 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/Mac/Fuzi.framework; sourceTree = "<group>"; };
 		4338B7BB1C163BFC007D3DF6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		4338B7C51C17674C007D3DF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -187,6 +190,8 @@
 		43EAF83C1C0A2FF500EA2B30 /* SpectraiOSSpec.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectraiOSSpec.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8411C0A2FF500EA2B30 /* Spectra_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spectra_iOSTests.swift; sourceTree = "<group>"; };
 		43EAF8431C0A2FF500EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43F6BDBA1C6FBCA000866FB1 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = ../Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
+		43F6BDC31C6FBD3200866FB1 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/iOS/Fuzi.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,7 +210,8 @@
 				4338B7C61C17674C007D3DF6 /* Foundation.framework in Frameworks */,
 				4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */,
 				4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */,
-				4338B7B81C16345F007D3DF6 /* Fuzi.framework in Frameworks */,
+				43F6BDC41C6FBD3200866FB1 /* Fuzi.framework in Frameworks */,
+				43F6BDBB1C6FBCA000866FB1 /* Swinject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +221,8 @@
 			files = (
 				4353A2A61C0A3E1200E5FC52 /* Nimble.framework in Frameworks */,
 				4353A2A71C0A3E1200E5FC52 /* Quick.framework in Frameworks */,
-				4371E8CF1C19105E001D1C39 /* Fuzi.framework in Frameworks */,
+				43F6BDBF1C6FBCE300866FB1 /* Swinject.framework in Frameworks */,
+				43F6BDC51C6FBD4A00866FB1 /* Fuzi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,12 +391,13 @@
 		43EAF8281C0A2FF500EA2B30 = {
 			isa = PBXGroup;
 			children = (
+				43F6BDC31C6FBD3200866FB1 /* Fuzi.framework */,
+				43F6BDBA1C6FBCA000866FB1 /* Swinject.framework */,
 				4338B7C51C17674C007D3DF6 /* Foundation.framework */,
 				4338B7BB1C163BFC007D3DF6 /* Metal.framework */,
 				4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */,
 				4353A2A41C0A3E1200E5FC52 /* Nimble.framework */,
 				4353A2A51C0A3E1200E5FC52 /* Quick.framework */,
-				4338B7B71C16345F007D3DF6 /* Fuzi.framework */,
 				43EAF8341C0A2FF500EA2B30 /* Spectra-iOS */,
 				43EAF8401C0A2FF500EA2B30 /* Spectra-iOSTests */,
 				4338B8CF1C18DC92007D3DF6 /* Spectra-iOSExample */,
@@ -585,6 +593,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/../Carthage/Build/iOS/Fuzi.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/Swinject.framework",
 			);
 			name = "Copy Carthage Frameworks";
 			outputPaths = (
