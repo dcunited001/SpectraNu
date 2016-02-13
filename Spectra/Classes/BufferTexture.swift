@@ -9,6 +9,10 @@
 import Metal
 import simd
 
+#if os(iOS)
+    import UIKit
+#endif
+
 public class BufferTexture {
     public typealias ColorType = float4
     public var size: CGSize
