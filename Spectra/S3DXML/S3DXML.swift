@@ -289,10 +289,11 @@ public class S3DXMLMTLSamplerDescriptorNode: S3DXMLNodeParser {
         if let lodMaxClamp = elem.attributes["lod-max-clamp"] {
             samplerDesc.lodMaxClamp = Float(lodMaxClamp)!
         }
+        #if os(iOS)
         if let _ = elem.attributes["lod-average"] {
-            // TODO: lodAverage only available in iOS !
-            // samplerDesc.lodAverage = true
+             samplerDesc.lodAverage = true
         }
+        #endif
         if let compareFn = elem.attributes["compare-function"] {
             let mtlEnum = descriptorManager.mtlEnums["mtlCompareFunction"]!
             let enumVal = UInt(mtlEnum.getValue(compareFn))
