@@ -8,10 +8,11 @@
 
 import Foundation
 import Fuzi
+import Swinject
 
 public class S3DMtlEnum {
     var name: String
-    var values: [String: Int] = [:] // private?
+    var values: [String: UInt] = [:] // private?
     
     public init(elem: XMLElement) {
         values = [:]
@@ -20,11 +21,13 @@ public class S3DMtlEnum {
         for child in elem.css(valuesSelector) {
             let val = child.attributes["id"]!
             let key = child.attributes["value"]!
-            self.values[key] = Int(val)
+            self.values[key] = UInt(val)
         }
     }
     
-    public func getValue(key: String) -> Int {
+    // TODO: why didn't a simple [String: UInt] dictionary suffice? instead of MtlEnum class?
+    // TODO: why not just use UInt?
+    public func getValue(key: String) -> UInt {
         return values[key]!
     }
     
@@ -62,12 +65,14 @@ public class S3DXSD {
         return data!
     }
 
-    public func parseEnumTypes() {
+    public func parseEnumTypes(container: Container) {
         let enumTypesSelector = "xs:simpleType[mtl-enum=true]"
         
         for enumChild in xsd!.css(enumTypesSelector) {
             let enumType = S3DMtlEnum(elem: enumChild)
-            self.enumTypes[enumType.name] = enumType
+            container.register(S3DMtlEnum.self, name: enumType.name) { _ in
+                return enumType
+            }
         }
     }
 }

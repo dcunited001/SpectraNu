@@ -9,12 +9,14 @@
 import Foundation
 import Metal
 import Fuzi
+import Swinject
 
 public class SpectraDescriptorManager {
     public var library: MTLLibrary // TODO: support multiple libraries?
     
     public var xsd: S3DXSD
-    public var mtlEnums: [String: S3DMtlEnum] = [:]
+    public var container: Container = Container()
+    
     public var vertexFunctions: [String: MTLFunction] = [:]
     public var fragmentFunctions: [String: MTLFunction] = [:]
     public var computeFunctions: [String: MTLFunction] = [:]
@@ -38,7 +40,10 @@ public class SpectraDescriptorManager {
         // just parsing enum types from XSD for now
         let xmlData = S3DXSD.readXSD("Spectra3D")
         xsd = S3DXSD(data: xmlData)
-        xsd.parseEnumTypes()
-        mtlEnums = xsd.enumTypes
+        xsd.parseEnumTypes(container)
+    }
+    
+    public func getMtlEnum(name: String, key: String) -> UInt {
+        return container.resolve(S3DMtlEnum.self, name: name)!.getValue(key)
     }
 }
