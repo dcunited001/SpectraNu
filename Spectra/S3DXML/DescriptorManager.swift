@@ -17,22 +17,66 @@ public class SpectraDescriptorManager {
     public var xsd: S3DXSD
     public var container: Container = Container()
     
-    public var vertexFunctions: [String: MTLFunction] = [:]
-    public var fragmentFunctions: [String: MTLFunction] = [:]
-    public var computeFunctions: [String: MTLFunction] = [:]
+    //TODO: consolidate vertex/fragment/compute functions as getMtlFunction()?
+    public func getVertexFunction(key: String) -> MTLFunction {
+        return container.resolve(MTLFunction.self, name: key)!
+    }
     
-    public var vertexDescriptors: [String: MTLVertexDescriptor] = [:]
-    public var textureDescriptors: [String: MTLTextureDescriptor] = [:]
-    public var samplerDescriptors: [String: MTLSamplerDescriptor] = [:]
-    public var stencilDescriptors: [String: MTLStencilDescriptor] = [:]
-    public var depthStencilDescriptors: [String: MTLDepthStencilDescriptor] = [:]
-    public var colorAttachmentDescriptors: [String: MTLRenderPipelineColorAttachmentDescriptor] = [:]
-    public var renderPipelineDescriptors: [String: MTLRenderPipelineDescriptor] = [:]
-    public var renderPassColorAttachmentDescriptors: [String: MTLRenderPassColorAttachmentDescriptor] = [:]
-    public var renderPassDepthAttachmentDescriptors: [String: MTLRenderPassDepthAttachmentDescriptor] = [:]
-    public var renderPassStencilAttachmentDescriptors: [String: MTLRenderPassStencilAttachmentDescriptor] = [:]
-    public var renderPassDescriptors: [String: MTLRenderPassDescriptor] = [:]
-    public var computePipelineDescriptors: [String: MTLComputePipelineDescriptor] = [:]
+    public func getFragmentFunction(key: String) -> MTLFunction {
+        return container.resolve(MTLFunction.self, name: key)!
+    }
+    
+    public func getComputeFunction(key: String) -> MTLFunction {
+        return container.resolve(MTLFunction.self, name: key)!
+    }
+    
+    public func getVertexDescriptor(key: String) -> MTLVertexDescriptor {
+        return container.resolve(MTLVertexDescriptor.self, name: key)!
+    }
+    
+    public func getTextureDescriptor(key: String) -> MTLTextureDescriptor {
+        return container.resolve(MTLTextureDescriptor.self, name: key)!
+    }
+    
+    public func getSamplerDescriptor(key: String) -> MTLSamplerDescriptor {
+        return container.resolve(MTLSamplerDescriptor.self, name: key)!
+    }
+    
+    public func getStencilDescriptor(key: String) -> MTLStencilDescriptor {
+        return container.resolve(MTLStencilDescriptor.self, name: key)!
+    }
+    
+    public func getDepthStencilDescriptor(key: String) -> MTLDepthStencilDescriptor {
+        return container.resolve(MTLDepthStencilDescriptor.self, name: key)!
+    }
+    
+    public func getColorAttachmentDescriptor(key: String) -> MTLRenderPipelineColorAttachmentDescriptor {
+        return container.resolve(MTLRenderPipelineColorAttachmentDescriptor.self, name: key)!
+    }
+    
+    public func getRenderPipelineDescriptor(key: String) -> MTLRenderPipelineDescriptor {
+        return container.resolve(MTLRenderPipelineDescriptor.self, name: key)!
+    }
+    
+    public func getRenderPassColorAttachmentDescriptor(key: String) -> MTLRenderPassColorAttachmentDescriptor {
+        return container.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: key)!
+    }
+    
+    public func getRenderPassDepthAttachmentDescriptor(key: String) -> MTLRenderPassDepthAttachmentDescriptor {
+        return container.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: key)!
+    }
+    
+    public func getRenderPassStencilAttachmentDescriptor(key: String) -> MTLRenderPassStencilAttachmentDescriptor {
+        return container.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: key)!
+    }
+    
+    public func getRenderPassDescriptor(key: String) -> MTLRenderPassDescriptor {
+        return container.resolve(MTLRenderPassDescriptor.self, name: key)!
+    }
+    
+    public func getComputePipelineDescriptor(key: String) -> MTLComputePipelineDescriptor {
+        return container.resolve(MTLComputePipelineDescriptor.self, name: key)!
+    }
     
     public init(library: MTLLibrary) {
         self.library = library
