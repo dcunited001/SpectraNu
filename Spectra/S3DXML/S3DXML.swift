@@ -9,6 +9,7 @@
 import Foundation
 import Metal
 import Fuzi
+import Swinject
 
 public class S3DXML {
     public var xml: XMLDocument?
@@ -27,53 +28,80 @@ public class S3DXML {
         }
     }
     
-    public func parse(descriptorManager: SpectraDescriptorManager) -> SpectraDescriptorManager {
+    public func parse(library: MTLLibrary, container: Container) -> Container {
         for child in xml!.root!.children {
             let tag = child.tag!
             let key = child.attributes["key"]
             
             switch tag {
-            case "vertex-function":
-                descriptorManager.vertexFunctions[key!] = descriptorManager.vertexFunctions[key!] ?? S3DXMLMTLFunctionNode().parse(descriptorManager, elem: child)
-            case "fragment-function":
-                descriptorManager.fragmentFunctions[key!] = descriptorManager.fragmentFunctions[key!] ?? S3DXMLMTLFunctionNode().parse(descriptorManager, elem: child)
-            case "compute-function":
-                descriptorManager.computeFunctions[key!] = descriptorManager.computeFunctions[key!] ?? S3DXMLMTLFunctionNode().parse(descriptorManager, elem: child)
+            case "vertex-function", "fragment-function", "compute-function":
+                container.register(MTLFunction.self, name: key!) { r in
+                    return S3DXMLMTLFunctionNode(library: library).parse(r, elem: child)
+                }.inObjectScope(.Container)
+                
+//TODO: remove if a single type is sufficient
+//            case "fragment-function":
+//                container.register(MTLFunction.self, name: key!) { _ in
+//                    return S3DXMLMTLFunctionNode().parse(container, elem: child)
+//                }.inObjectScope(.Container)
+//            case "compute-function":
+//                container.register(MTLFunction.self, name: key!) { _ in
+//                    return S3DXMLMTLFunctionNode().parse(container, elem: child)
+//                    }.inObjectScope(.Container)
             case "vertex-descriptor":
-                descriptorManager.vertexDescriptors[key!] = descriptorManager.vertexDescriptors[key!] ?? S3DXMLMTLVertexDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLVertexDescriptor.self, name: key!) { r in
+                    return S3DXMLMTLVertexDescriptorNode().parse(r, elem: child)
+                }.inObjectScope(.Container)
             case "texture-descriptor":
-                descriptorManager.textureDescriptors[key!] = descriptorManager.textureDescriptors[key!] ?? S3DXMLMTLTextureDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLTextureDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "sampler-descriptor":
-                descriptorManager.samplerDescriptors[key!] = descriptorManager.samplerDescriptors[key!] ?? S3DXMLMTLSamplerDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLSamplerDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "stencil-descriptor":
-                descriptorManager.stencilDescriptors[key!] = descriptorManager.stencilDescriptors[key!] ?? S3DXMLMTLStencilDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLStencilDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "depth-stencil-descriptor":
-                descriptorManager.depthStencilDescriptors[key!] = descriptorManager.depthStencilDescriptors[key!] ?? S3DXMLMTLDepthStencilDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLDepthStencilDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "render-pipeline-color-attachment-descriptor":
-                descriptorManager.colorAttachmentDescriptors[key!] = descriptorManager.colorAttachmentDescriptors[key!] ?? S3DXMLMTLColorAttachmentDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "compute-pipeline-descriptor":
-                descriptorManager.computePipelineDescriptors[key!] = descriptorManager.computePipelineDescriptors[key!] ??
-                    S3DXMLMTLComputePipelineDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLComputePipelineDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "render-pipeline-descriptor":
-                descriptorManager.renderPipelineDescriptors[key!] = descriptorManager.renderPipelineDescriptors[key!] ?? S3DXMLMTLRenderPipelineDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLRenderPipelineDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "render-pass-color-attachment-descriptor":
-                descriptorManager.renderPassColorAttachmentDescriptors[key!] = descriptorManager.renderPassColorAttachmentDescriptors[key!] ??
-                    S3DXMLMTLRenderPassColorAttachmentDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLRenderPassColorAttachmentDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "render-pass-depth-attachment-descriptor":
-                descriptorManager.renderPassDepthAttachmentDescriptors[key!] = descriptorManager.renderPassDepthAttachmentDescriptors[key!] ??
-                    S3DXMLMTLRenderPassDepthAttachmentDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "render-pass-stencil-attachment-descriptor":
-                descriptorManager.renderPassStencilAttachmentDescriptors[key!] = descriptorManager.renderPassStencilAttachmentDescriptors[key!] ??
-                    S3DXMLMTLRenderPassStencilAttachmentDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             case "render-pass-descriptor":
-                descriptorManager.renderPassDescriptors[key!] = descriptorManager.renderPassDescriptors[key!] ??
-                    S3DXMLMTLRenderPassDescriptorNode().parse(descriptorManager, elem: child)
+                container.register(MTLRenderPassDescriptor.self, name: key!) { r in
+                    
+                }.inObjectScope(.Container)
             default:
                 break
             }
         }
         
-        return descriptorManager
+        return container
     }
     
 //    public func parseXML(bundle:NSBundle, filename: String) {
@@ -95,30 +123,25 @@ public class S3DXML {
     }
 }
 
-public protocol S3DXMLNodeParser {
-    typealias NodeType
-    
-    func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String: AnyObject]) -> NodeType
-}
-
 //TODO: update valueForAttribute calls with guard statements and better error handling
 
-public class S3DXMLMTLFunctionNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLFunction
+public class S3DXMLMTLFunctionNode {
+    var library: MTLLibrary!
     
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String: AnyObject] = [:]) -> NodeType {
-        let lib = descriptorManager.library
+    public init(library: MTLLibrary) {
+        self.library = library
+    }
+    
+    public func parse(container: Container, elem: XMLElement, options: [String: AnyObject] = [:]) -> MTLFunction {
         let name = elem.attributes["key"]
-        let mtlFunction = lib.newFunctionWithName(name!)
+        let mtlFunction = library.newFunctionWithName(name!)
         return mtlFunction!
     }
 }
 
-public class S3DXMLMTLVertexDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLVertexDescriptor
-    
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String: AnyObject] = [:]) -> NodeType {
-        let vertexDesc = NodeType()
+public class S3DXMLMTLVertexDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String: AnyObject] = [:]) -> MTLVertexDescriptor {
+        let vertexDesc = MTLVertexDescriptor()
         
         let attributeDescSelector = "vertex-attribute-descriptors > vertex-attribute-descriptor"
         for (idx, child) in elem.css(attributeDescSelector).enumerate() {
@@ -136,11 +159,9 @@ public class S3DXMLMTLVertexDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLVertexAttributeDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLVertexAttributeDescriptor
-    
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let vertexAttrDesc = NodeType()
+public class S3DXMLMTLVertexAttributeDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLVertexAttributeDescriptor {
+        let vertexAttrDesc = MTLVertexAttributeDescriptor()
         
         if let format = elem.attributes["format"] {
             let mtlEnum = descriptorManager.mtlEnums["mtlVertexFormat"]!
@@ -158,11 +179,9 @@ public class S3DXMLMTLVertexAttributeDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLVertexBufferLayoutDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLVertexBufferLayoutDescriptor
-    
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let bufferLayoutDesc = NodeType()
+public class S3DXMLMTLVertexBufferLayoutDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLVertexBufferLayoutDescriptor {
+        let bufferLayoutDesc = MTLVertexBufferLayoutDescriptor()
         
         let stride = elem.attributes["stride"]!
         bufferLayoutDesc.stride = Int(stride)!
@@ -180,12 +199,10 @@ public class S3DXMLMTLVertexBufferLayoutDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLTextureDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLTextureDescriptor
-    
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
+public class S3DXMLMTLTextureDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLTextureDescriptor {
         
-        let texDesc = NodeType()
+        let texDesc = MTLTextureDescriptor()
         if let textureType = elem.attributes["texture-type"] {
             let mtlEnum = descriptorManager.mtlEnums["mtlTextureType"]!
             let enumVal = UInt(mtlEnum.getValue(textureType))
@@ -238,11 +255,9 @@ public class S3DXMLMTLTextureDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLSamplerDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLSamplerDescriptor
-    
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let samplerDesc = NodeType()
+public class S3DXMLMTLSamplerDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLSamplerDescriptor {
+        let samplerDesc = MTLSamplerDescriptor()
         
         if let label = elem.attributes["label"] {
             samplerDesc.label = label
@@ -304,11 +319,9 @@ public class S3DXMLMTLSamplerDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLStencilDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLStencilDescriptor
-    
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let stencilDesc = NodeType()
+public class S3DXMLMTLStencilDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLStencilDescriptor {
+        let stencilDesc = MTLStencilDescriptor()
         
         if let stencilCompare = elem.attributes["stencil-compare-function"] {
             let mtlEnum = descriptorManager.mtlEnums["mtlCompareFunction"]!
@@ -341,10 +354,8 @@ public class S3DXMLMTLStencilDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLDepthStencilDescriptor
-    
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
+public class S3DXMLMTLDepthStencilDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLDepthStencilDescriptor {
         let depthDesc = NodeType()
         
         if let label = elem.attributes["label"] {
@@ -381,11 +392,9 @@ public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLColorAttachmentDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLRenderPipelineColorAttachmentDescriptor
-    
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let desc = NodeType()
+public class S3DXMLMTLColorAttachmentDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLRenderPipelineColorAttachmentDescriptor {
+        let desc = MTLRenderPipelineColorAttachmentDescriptor()
         
         if let pixelFormat = elem.attributes["pixel-format"] {
             let mtlEnum = descriptorManager.mtlEnums["mtlPixelFormat"]!
@@ -431,10 +440,9 @@ public class S3DXMLMTLColorAttachmentDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLRenderPipelineDescriptor
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let desc = NodeType()
+public class S3DXMLMTLRenderPipelineDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLRenderPipelineDescriptor {
+        let desc = MTLRenderPipelineDescriptor()
         
         if let vertexFunctionTag = elem.firstChild(tag: "vertex-function") {
             if let vertexFunctionName = vertexFunctionTag.attributes["ref"] {
@@ -496,10 +504,9 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLComputePipelineDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLComputePipelineDescriptor
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let desc = NodeType()
+public class S3DXMLMTLComputePipelineDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLComputePipelineDescriptor {
+        let desc = MTLComputePipelineDescriptor()
         
         if let computeFunctionTag = elem.firstChild(tag: "compute-function") {
             if let computeFunctionName = computeFunctionTag.attributes["ref"] {
@@ -517,10 +524,9 @@ public class S3DXMLMTLComputePipelineDescriptorNode: S3DXMLNodeParser {
     }
 }
 
-public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLRenderPassColorAttachmentDescriptor
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let desc = NodeType()
+public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLRenderPassColorAttachmentDescriptor {
+        let desc = MTLRenderPassColorAttachmentDescriptor()
         
         //TODO: texture & ref
         
@@ -562,10 +568,9 @@ public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode: S3DXMLNodeParser 
     }
 }
 
-public class S3DXMLMTLRenderPassDepthAttachmentDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLRenderPassDepthAttachmentDescriptor
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let desc = NodeType()
+public class S3DXMLMTLRenderPassDepthAttachmentDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLRenderPassDepthAttachmentDescriptor {
+        let desc = MTLRenderPassDepthAttachmentDescriptor()
         
         //TODO: texture & ref
         
@@ -615,10 +620,9 @@ public class S3DXMLMTLRenderPassDepthAttachmentDescriptorNode: S3DXMLNodeParser 
     }
 }
 
-public class S3DXMLMTLRenderPassStencilAttachmentDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLRenderPassStencilAttachmentDescriptor
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let desc = NodeType()
+public class S3DXMLMTLRenderPassStencilAttachmentDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLRenderPassStencilAttachmentDescriptor {
+        let desc = MTLRenderPassStencilAttachmentDescriptor()
         
         //TODO: texture & ref
         
@@ -661,10 +665,9 @@ public class S3DXMLMTLRenderPassStencilAttachmentDescriptorNode: S3DXMLNodeParse
     }
 }
 
-public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
-    public typealias NodeType = MTLRenderPassDescriptor
-    public func parse(descriptorManager: SpectraDescriptorManager, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        let desc = NodeType()
+public class S3DXMLMTLRenderPassDescriptorNode {
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> MTLRenderPassDescriptor {
+        let desc = MTLRenderPassDescriptor()
         
         let attachSelector = "render-pass-color-attachment-descriptors > render-pass-color-attachment-descriptor"
         for (idx, el) in elem.css(attachSelector).enumerate() {
