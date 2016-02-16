@@ -168,9 +168,6 @@
          location = "group:S3DXMLSpec.swift">
       </FileRef>
       <FileRef
-         location = "group:S3DXSDSpec.swift">
-      </FileRef>
-      <FileRef
          location = "group:SceneGraphXMLSpec.swift">
       </FileRef>
    </Group>
