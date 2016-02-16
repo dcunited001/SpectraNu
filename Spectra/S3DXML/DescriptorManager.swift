@@ -46,4 +46,79 @@ public class SpectraDescriptorManager {
     public func getMtlEnum(name: String, key: String) -> UInt {
         return container.resolve(S3DMtlEnum.self, name: name)!.getValue(key)
     }
+    
+    public func parseS3DXML(s3d: S3DXML) {
+        for child in s3d.xml!.root!.children {
+            let tag = child.tag!
+            let key = child.attributes["key"]
+            
+            switch tag {
+            case "vertex-function", "fragment-function", "compute-function":
+                let mtlFunction = S3DXMLMTLFunctionNode(library: library).parse(container, elem: child)
+                container.register(MTLFunction.self, name: key!) { r in
+                    return mtlFunction
+                    }.inObjectScope(.Container)
+                
+                //TODO: remove if a single type is sufficient
+                //            case "fragment-function":
+                //                container.register(MTLFunction.self, name: key!) { _ in
+                //                    return S3DXMLMTLFunctionNode().parse(container, elem: child)
+                //                }.inObjectScope(.Container)
+                //            case "compute-function":
+                //                container.register(MTLFunction.self, name: key!) { _ in
+                //                    return S3DXMLMTLFunctionNode().parse(container, elem: child)
+                //                    }.inObjectScope(.Container)
+            case "vertex-descriptor":
+                container.register(MTLVertexDescriptor.self, name: key!) { r in
+                    return S3DXMLMTLVertexDescriptorNode().parse(r as! Container, elem: child)
+                    }.inObjectScope(.Container)
+            case "texture-descriptor":
+                container.register(MTLTextureDescriptor.self, name: key!) { r in
+                    return S3DXMLMTLTextureDescriptorNode().parse(r as! Container, elem: child)
+                    }.inObjectScope(.Container)
+            case "sampler-descriptor":
+                container.register(MTLSamplerDescriptor.self, name: key!) { r in
+                    return S3DXMLMTLSamplerDescriptorNode().parse(r as! Container, elem: child)
+                    }.inObjectScope(.Container)
+                //            case "stencil-descriptor":
+                //                container.register(MTLStencilDescriptor.self, name: key!) { r in
+                //
+                //                }.inObjectScope(.Container)
+                //            case "depth-stencil-descriptor":
+                //                container.register(MTLDepthStencilDescriptor.self, name: key!) { r in
+                //
+                //                }.inObjectScope(.Container)
+                //            case "render-pipeline-color-attachment-descriptor":
+                //                container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: key!) { r in
+                //
+                //                }.inObjectScope(.Container)
+                //            case "compute-pipeline-descriptor":
+                //                container.register(MTLComputePipelineDescriptor.self, name: key!) { r in
+                //
+                //                }.inObjectScope(.Container)
+                //            case "render-pipeline-descriptor":
+                //                container.register(MTLRenderPipelineDescriptor.self, name: key!) { r in
+                //
+                //                }.inObjectScope(.Container)
+                //            case "render-pass-color-attachment-descriptor":
+                //                container.register(MTLRenderPassColorAttachmentDescriptor.self, name: key!) { r in
+                //
+                //                }.inObjectScope(.Container)
+                //            case "render-pass-depth-attachment-descriptor":
+                //                container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: key!) { r in
+                //
+                //                }.inObjectScope(.Container)
+                //            case "render-pass-stencil-attachment-descriptor":
+                //                container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: key!) { r in
+                //                    
+                //                }.inObjectScope(.Container)
+                //            case "render-pass-descriptor":
+                //                container.register(MTLRenderPassDescriptor.self, name: key!) { r in
+                //                    
+                //                }.inObjectScope(.Container)
+            default:
+                break
+            }
+        }
+    }
 }
