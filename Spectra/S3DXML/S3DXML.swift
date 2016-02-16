@@ -36,7 +36,7 @@ public class S3DXML {
             switch tag {
             case "vertex-function", "fragment-function", "compute-function":
                 container.register(MTLFunction.self, name: key!) { r in
-                    return S3DXMLMTLFunctionNode(library: library).parse(r, elem: child)
+                    return S3DXMLMTLFunctionNode(library: library).parse(r as! Container, elem: child)
                 }.inObjectScope(.Container)
                 
 //TODO: remove if a single type is sufficient
@@ -50,7 +50,7 @@ public class S3DXML {
 //                    }.inObjectScope(.Container)
             case "vertex-descriptor":
                 container.register(MTLVertexDescriptor.self, name: key!) { r in
-                    return S3DXMLMTLVertexDescriptorNode().parse(r, elem: child)
+                    return S3DXMLMTLVertexDescriptorNode().parse(r as! Container, elem: child)
                 }.inObjectScope(.Container)
             case "texture-descriptor":
                 container.register(MTLTextureDescriptor.self, name: key!) { r in
