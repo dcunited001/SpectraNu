@@ -175,9 +175,21 @@ class S3DXMLSpec: QuickSpec {
             }
         }
         
+        describe("S3DXMLMTLClearColorNode") {
+            it("can parse a clear color") {
+                let color = descMan.getClearColor("clear_color_black")
+                expect(color.red) == 0.0
+                expect(color.green) == 0.0
+                expect(color.blue) == 0.0
+                expect(color.alpha) == 1.0
+            }
+        }
+        
         describe("S3DXMLMTLRenderPassColorAttachmentDescriptorNode") {
             it("can parse a render pass color attachment descriptor") {
                 let desc = descMan.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
+                let clearColor = descMan.getClearColor("clear_color_black")
+                
                 expect(desc.level) == 1
                 expect(desc.slice) == 1
                 expect(desc.depthPlane) == 1
@@ -186,7 +198,8 @@ class S3DXMLSpec: QuickSpec {
                 expect(desc.resolveDepthPlane) == 1
                 expect(desc.loadAction) == MTLLoadAction.Load
                 expect(desc.storeAction) == MTLStoreAction.Store
-                //clearColor
+                expect(desc.clearColor.red) == clearColor.red
+                expect(desc.clearColor.alpha) == clearColor.alpha
             }
         }
         

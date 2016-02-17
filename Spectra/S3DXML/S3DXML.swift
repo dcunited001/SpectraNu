@@ -470,6 +470,29 @@ public class S3DXMLMTLComputePipelineDescriptorNode: S3DXMLNodeParser {
     }
 }
 
+public class S3DXMLMTLClearColorNode: S3DXMLNodeParser {
+    public typealias NodeType = MTLClearColor
+    
+    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
+        var clearColor = MTLClearColor()
+        
+        if let red = elem.attributes["clear-red"] {
+            clearColor.red = Double(red)!
+        }
+        if let green = elem.attributes["clear-green"] {
+            clearColor.green = Double(green)!
+        }
+        if let blue = elem.attributes["clear-blue"] {
+            clearColor.blue = Double(blue)!
+        }
+        if let alpha = elem.attributes["clear-alpha"] {
+            clearColor.alpha = Double(alpha)!
+        }
+        
+        return clearColor
+    }
+}
+
 public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode: S3DXMLNodeParser {
     public typealias NodeType = MTLRenderPassColorAttachmentDescriptor
     
@@ -508,6 +531,21 @@ public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode: S3DXMLNodeParser 
             let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlStoreAction")!
             let enumVal = mtlEnum.getValue(storeAction)
             desc.storeAction = MTLStoreAction(rawValue: enumVal)!
+        }
+        
+        if let clearColorTag = elem.firstChild(tag: "clear-color") {
+            if let clearColorName = clearColorTag.attributes["ref"] {
+                desc.clearColor = container.resolve(MTLClearColor.self, name: clearColorName)!
+            } else {
+                let clearColor = S3DXMLMTLClearColorNode().parse(container, elem: clearColorTag)
+                desc.clearColor = clearColor
+                
+                if (clearColorTag.attributes["key"] != nil) {
+                    container.register(MTLClearColor.self, name: clearColorTag.attributes["key"]!) { _ in
+                        return clearColor
+                        }.inObjectScope(.Container)
+                }
+            }
         }
         
         //TODO: clearColor: MTLClearColor // default: rgba(0,0,0,1)

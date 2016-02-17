@@ -58,6 +58,10 @@ public class SpectraDescriptorManager {
         return container.resolve(MTLRenderPipelineDescriptor.self, name: key)!
     }
     
+    public func getClearColor(key: String) -> MTLClearColor {
+        return container.resolve(MTLClearColor.self, name: key)!
+    }
+    
     public func getRenderPassColorAttachmentDescriptor(key: String) -> MTLRenderPassColorAttachmentDescriptor {
         return container.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: key)!
     }
@@ -152,6 +156,11 @@ public class SpectraDescriptorManager {
                 container.register(MTLComputePipelineDescriptor.self, name: key!) { _ in
                     return computePipelineDesc
                     }.inObjectScope(.Container)
+            case "clear-color":
+                let clearColor = S3DXMLMTLClearColorNode().parse(container, elem: child)
+                container.register(MTLClearColor.self, name: key!) { _ in
+                    return clearColor
+                }.inObjectScope(.Container)
             case "render-pass-color-attachment-descriptor":
                 let renderPassColorAttachDesc = S3DXMLMTLRenderPassColorAttachmentDescriptorNode().parse(container, elem: child)
                 container.register(MTLRenderPassColorAttachmentDescriptor.self, name: key!) { _ in
