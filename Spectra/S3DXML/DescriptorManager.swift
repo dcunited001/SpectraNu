@@ -84,6 +84,7 @@ public class SpectraDescriptorManager {
     
     public init(library: MTLLibrary) {
         self.library = library
+        self.container.register(MTLLibrary.self, name: "default") { _ in return library }.inObjectScope(.Container)
         
         // just parsing enum types from XSD for now
         let xmlData = S3DXSD.readXSD("Spectra3D")
@@ -93,6 +94,15 @@ public class SpectraDescriptorManager {
     
     public func getMtlEnum(name: String, key: String) -> UInt {
         return container.resolve(S3DMtlEnum.self, name: name)!.getValue(key)
+    }
+    
+    public func assembleHigherOrderFactories() {
+        //TODO: register factories to produce higher order objects,
+        // at least these, with dependencies that are built with container.resolve() calls
+        // - MTLDepthStencilDescriptor
+        // - MTLColorAttachmentDescriptor
+        // - S3DXMLMTLRenderPipelineDescriptor
+        // - 
     }
     
     public func parseS3DXML(s3d: S3DXML) {
