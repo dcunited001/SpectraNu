@@ -113,16 +113,19 @@ public class SpectraDescriptorManager {
                 //                    return S3DXMLMTLFunctionNode().parse(container, elem: child)
                 //                    }.inObjectScope(.Container)
             case "vertex-descriptor":
+                let vertexDesc = S3DXMLMTLVertexDescriptorNode().parse(container as! Container, elem: child)
                 container.register(MTLVertexDescriptor.self, name: key!) { r in
-                    return S3DXMLMTLVertexDescriptorNode().parse(r as! Container, elem: child)
+                    return vertexDesc
                     }.inObjectScope(.Container)
             case "texture-descriptor":
+                let textureDesc = S3DXMLMTLTextureDescriptorNode().parse(container as! Container, elem: child)
                 container.register(MTLTextureDescriptor.self, name: key!) { r in
-                    return S3DXMLMTLTextureDescriptorNode().parse(r as! Container, elem: child)
+                    return textureDesc
                     }.inObjectScope(.Container)
             case "sampler-descriptor":
+                let samplerDesc = S3DXMLMTLSamplerDescriptorNode().parse(container as! Container, elem: child)
                 container.register(MTLSamplerDescriptor.self, name: key!) { r in
-                    return S3DXMLMTLSamplerDescriptorNode().parse(r as! Container, elem: child)
+                    return samplerDesc
                     }.inObjectScope(.Container)
                 //            case "stencil-descriptor":
                 //                container.register(MTLStencilDescriptor.self, name: key!) { r in
