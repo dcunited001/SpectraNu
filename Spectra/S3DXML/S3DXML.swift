@@ -608,8 +608,6 @@ public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode: S3DXMLNodeParser 
             }
         }
         
-        //TODO: clearColor: MTLClearColor // default: rgba(0,0,0,1)
-        
         return desc
     }
 }

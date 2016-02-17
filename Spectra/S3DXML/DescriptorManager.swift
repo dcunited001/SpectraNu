@@ -102,7 +102,8 @@ public class SpectraDescriptorManager {
         // - MTLDepthStencilDescriptor
         // - MTLColorAttachmentDescriptor
         // - S3DXMLMTLRenderPipelineDescriptor
-        // - 
+
+        assembleRenderPassFactories(container)
     }
     
     public func parseS3DXML(s3d: S3DXML) {
@@ -195,5 +196,70 @@ public class SpectraDescriptorManager {
                 break
             }
         }
+    }
+    
+    private func assembleRenderPassFactories(container: Container) {
+        
+        // TODO: enable updating properties on each? or leave that up to user?
+        
+        // MTLRenderPassColorAttachmentDescriptor
+        
+        container.register(MTLRenderPassColorAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture) in
+            // look up base color attachment by key, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: key)!
+            desc = desc.copy() as! MTLRenderPassColorAttachmentDescriptor
+            desc.texture = texture
+            return desc
+            }.inObjectScope(.None) // .None ensure the function always creates a new object
+        
+        container.register(MTLRenderPassColorAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture, resolveTexture: MTLTexture) in
+            // look up base color attachment by key, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: key)!
+            desc = desc.copy() as! MTLRenderPassColorAttachmentDescriptor
+            desc.texture = texture
+            desc.resolveTexture = resolveTexture
+            return desc
+            }.inObjectScope(.None) // .None ensure the function always creates a new object
+        
+        // MTLRenderPassDepthAttachmentDescriptor
+        
+        container.register(MTLRenderPassDepthAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture) in
+            // look up base color attachment by key, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: key)!
+            desc = desc.copy() as! MTLRenderPassDepthAttachmentDescriptor
+            desc.texture = texture
+            return desc
+            }.inObjectScope(.None) // .None ensure the function always creates a new object
+        
+        container.register(MTLRenderPassDepthAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture, resolveTexture: MTLTexture) in
+            // look up base color attachment by key, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: key)!
+            desc = desc.copy() as! MTLRenderPassDepthAttachmentDescriptor
+            desc.texture = texture
+            desc.resolveTexture = resolveTexture
+            return desc
+            }.inObjectScope(.None) // .None ensure the function always creates a new object
+        
+        // MTLRenderPassStencilAttachmentDescriptor
+        
+        container.register(MTLRenderPassStencilAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture) in
+            // look up base color attachment by key, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: key)!
+            desc = desc.copy() as! MTLRenderPassStencilAttachmentDescriptor
+            desc.texture = texture
+            return desc
+            }.inObjectScope(.None) // .None ensure the function always creates a new object
+        
+        container.register(MTLRenderPassStencilAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture, resolveTexture: MTLTexture) in
+            // look up base color attachment by key, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: key)!
+            desc = desc.copy() as! MTLRenderPassStencilAttachmentDescriptor
+            desc.texture = texture
+            desc.resolveTexture = resolveTexture
+            return desc
+            }.inObjectScope(.None) // .None ensure the function always creates a new object
+        
+        
+        
     }
 }
