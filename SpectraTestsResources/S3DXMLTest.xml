@@ -98,6 +98,12 @@
         <compute-function ref="test_compute_function" />
     </compute-pipeline-descriptor>
     
+    <clear-color key="clear_color_black"
+        clear-red="0.0"
+        clear-blue="0.0"
+        clear-green="0.0"
+        clear-alpha="1.0" />
+    
     <render-pass-color-attachment-descriptor key="rpass_color_attach_desc"
         level="1"
         slice="1"
@@ -106,7 +112,10 @@
         resolve-slice="1"
         resolve-depth-plane="1"
         load-action="Load"
-        store-action="Store" />
+        store-action="Store">
+        <clear-color ref="clear_color_black" />
+    </render-pass-color-attachment-descriptor>
+    
         <!-- clearColor -->
         <!-- texture? -->
         <!-- resolve-texture? -->
