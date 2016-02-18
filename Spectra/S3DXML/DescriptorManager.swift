@@ -200,6 +200,14 @@ public class SpectraDescriptorManager {
     
     private func assembleRenderPassFactories(container: Container) {
         
+        // TODO: evaluate whether these factories add value. or maybe there should be a separate container
+        // user should read in base objects with XML, 
+        // - then create resources for drawing (textures for render pass, etc)
+        // - then resolve one of these higher order factories to create the final render pass objects
+        // - then resolve a h/o RenderPassDescriptor factory to create the final render pass descriptor
+        // - and finally, retain references to those objects within the scope of their controller/whatever
+        
+        // TODO: change these to accept the descriptor as input, & leave it up to the user to maintain object
         // TODO: enable updating properties on each? or leave that up to user?
         
         // MTLRenderPassColorAttachmentDescriptor
