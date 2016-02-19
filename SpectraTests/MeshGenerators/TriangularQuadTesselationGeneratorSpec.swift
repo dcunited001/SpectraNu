@@ -22,7 +22,7 @@ class TriangularQuadLatticeGeneratorSpec: QuickSpec {
         let xml = S3DXML(data: xmlData)
         
         var descriptorManager = SpectraDescriptorManager(library: library!)
-        descriptorManager = xml.parse(descriptorManager)
+//        descriptorManager = xml.parse(descriptorManager)
         
         describe("TriangularQuadLatticeGenerator") {
 //            it("tesselates an existing quad") {

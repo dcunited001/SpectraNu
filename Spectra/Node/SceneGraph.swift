@@ -13,6 +13,7 @@
 // Xml3D basics: https://github.com/xml3d/xml3d.js/wiki/The-Basics-of-XML3D
 
 import Fuzi
+import Swinject
 
 public class MeshData {}
 public class MeshDataMap {}
@@ -22,6 +23,8 @@ public class SceneGraph {
     
     let nodeGenAttr = "spectra-node-gen"
     let nodeRefAttr = "spectra-node-ref"
+    
+//    public var nodes: Container = Container()
     
     public var perspectives: [String: Perspectable] = [:]
     public var views: [String: WorldView] = [:]
