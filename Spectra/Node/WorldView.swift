@@ -8,6 +8,7 @@
 
 public protocol WorldView: class {
     var uniforms: Uniformable { get set }
+    // TODO: add activeCamera?
 }
 
 public class BaseWorldView: WorldView {

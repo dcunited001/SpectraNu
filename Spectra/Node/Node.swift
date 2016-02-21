@@ -17,8 +17,8 @@ public typealias SceneNodeSelectorMap = [String:NodeSelector]
 // - but separate uniforms/perspective/etc can be applied
 // - this isn't necessary but would be awesome
 public class Node: Modelable {
-    public var data: [String:[float4]] = [:]
-    public var dataMaps: [String:[[Int]]] = [:]
+    public var childNodes: [String: Node] = [:]
+    public var mesh: Mesh?
     
     public var modelScale = float4(1.0, 1.0, 1.0, 1.0)
     public var modelPosition = float4(0.0, 0.0, 0.0, 1.0)
