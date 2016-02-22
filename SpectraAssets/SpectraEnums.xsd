@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="S3D"
+    xmlns="S3D"
+    elementFormDefault="qualified">
+    
+    <xs:simpleType name="mdlVertexFormat" mtl-enum="true">
+        <xs:restriction base="xs:string">
+            <xs:enumeration id="0"  value="Invalid"/>
+            <xs:enumeration id="1"  value="UChar2"/>
+            <xs:enumeration id="2"  value="UChar3"/>
+            <xs:enumeration id="3"  value="UChar4"/>
+            <xs:enumeration id="4"  value="Char2"/>
+            <xs:enumeration id="5"  value="Char3"/>
+            <xs:enumeration id="6"  value="Char4"/>
+            <xs:enumeration id="7"  value="UChar2Normalized"/>
+            <xs:enumeration id="8"  value="UChar3Normalized"/>
+            <xs:enumeration id="9"  value="UChar4Normalized"/>
+            <xs:enumeration id="10" value="Char2Normalized"/>
+            <xs:enumeration id="11" value="Char3Normalized"/>
+            <xs:enumeration id="12" value="Char4Normalized"/>
+            <xs:enumeration id="13" value="UShort2"/>
+            <xs:enumeration id="14" value="UShort3"/>
+            <xs:enumeration id="15" value="UShort4"/>
+            <xs:enumeration id="16" value="Short2"/>
+            <xs:enumeration id="17" value="Short3"/>
+            <xs:enumeration id="18" value="Short4"/>
+            <xs:enumeration id="19" value="UShort2Normalized"/>
+            <xs:enumeration id="20" value="UShort3Normalized"/>
+            <xs:enumeration id="21" value="UShort4Normalized"/>
+            <xs:enumeration id="22" value="Short2Normalized"/>
+            <xs:enumeration id="23" value="Short3Normalized"/>
+            <xs:enumeration id="24" value="Short4Normalized"/>
+            <xs:enumeration id="25" value="Half2"/>
+            <xs:enumeration id="26" value="Half3"/>
+            <xs:enumeration id="27" value="Half4"/>
+            <xs:enumeration id="28" value="Float"/>
+            <xs:enumeration id="29" value="Float2"/>
+            <xs:enumeration id="30" value="Float3"/>
+            <xs:enumeration id="31" value="Float4"/>
+            <xs:enumeration id="32" value="Int"/>
+            <xs:enumeration id="33" value="Int2"/>
+            <xs:enumeration id="34" value="Int3"/>
+            <xs:enumeration id="35" value="Int4"/>
+            <xs:enumeration id="36" value="UInt"/>
+            <xs:enumeration id="37" value="UInt2"/>
+            <xs:enumeration id="38" value="UInt3"/>
+            <xs:enumeration id="39" value="UInt4"/>
+            <xs:enumeration id="40" value="Int1010102Normalized"/>
+            <xs:enumeration id="41" value="UInt1010102Normalized"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>
+
