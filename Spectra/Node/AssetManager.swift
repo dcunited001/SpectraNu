@@ -10,21 +10,26 @@ import Foundation
 import Metal
 import ModelIO
 import Swinject
+import Fuzi
 
 // manages meshs, before they are pushed into a scene graph
 public class AssetManager {
-    public var container: Container
+    public var container: Container = Container()
     
     public init() {
-        container = Container()
         let spectraEnumData = SpectraXSD.readXSD("SpectraEnums")
-        xsd.parseEnumTypes(container)
+        let spectraEnumXSD = SpectraXSD(data: spectraEnumData)
+        spectraEnumXSD.parseEnumTypes(container)
+    }
+    
+    public func getEnum(name: String, key: String) -> UInt {
+        return container.resolve(SpectraEnum.self, name: name)!.getValue(key)
     }
 }
 
 class SpectraEnum {
     let name: String
-    let values: [String: UInt]
+    var values: [String: UInt]
     
     public init(elem: XMLElement) {
         values = [:]
@@ -43,9 +48,7 @@ class SpectraEnum {
 }
 
 public class SpectraXSD {
-    
     public var xsd: XMLDocument?
-    var enumTypes: [String: S3DMtlEnum] = [:]
     
     public init(data: NSData) {
         do {
@@ -72,8 +75,8 @@ public class SpectraXSD {
         let enumTypesSelector = "xs:simpleType[mtl-enum=true]"
         
         for enumChild in xsd!.css(enumTypesSelector) {
-            let enumType = S3DMtlEnum(elem: enumChild)
-            container.register(S3DMtlEnum.self, name: enumType.name) { _ in
+            let enumType = SpectraEnum(elem: enumChild)
+            container.register(SpectraEnum.self, name: enumType.name) { _ in
                 return enumType
             }
         }
