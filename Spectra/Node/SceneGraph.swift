@@ -50,6 +50,9 @@ public class SceneGraph {
         setDefaultMeshGeneratorMonads()
     }
     
+    public init(container: Container) {
+        //TODO: init with Container(parent: container) to share resources
+    }
 //    public func loadXML(data: NSData) {
 //        //TODO: scene graph data from xml into objects
 //    }
