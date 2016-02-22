@@ -73,6 +73,8 @@
 		4371E8CE1C191015001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43D4FDB81C7B393E004E2CF7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDB71C7B393E004E2CF7 /* main.swift */; };
 		43D4FDC61C7B511B004E2CF7 /* SpectraEnumDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDC51C7B511B004E2CF7 /* SpectraEnumDefs.swift */; };
+		43D4FDC81C7B6AAC004E2CF7 /* AssetManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDC71C7B6AAC004E2CF7 /* AssetManagerSpec.swift */; };
+		43D4FDCA1C7B6F77004E2CF7 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDC91C7B6F77004E2CF7 /* AssetManager.swift */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43F6BDBD1C6FBCB900866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; };
 		43F6BDBE1C6FBCC900866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; };
@@ -197,6 +199,8 @@
 		43D4FDB51C7B393E004E2CF7 /* SpectraTasks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpectraTasks; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D4FDB71C7B393E004E2CF7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		43D4FDC51C7B511B004E2CF7 /* SpectraEnumDefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectraEnumDefs.swift; sourceTree = "<group>"; };
+		43D4FDC71C7B6AAC004E2CF7 /* AssetManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManagerSpec.swift; sourceTree = "<group>"; };
+		43D4FDC91C7B6F77004E2CF7 /* AssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssetManager.swift; path = /Users/dc/dev/apple/Spectra/Spectra/Node/AssetManager.swift; sourceTree = "<absolute>"; };
 		43EAF8561C0A301300EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-OSX.h"; sourceTree = "<group>"; };
 		43EAF85B1C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -300,6 +304,7 @@
 			children = (
 				4334D6D51C1FACB200D2DCA6 /* MeshGenerators */,
 				4334D6D61C1FACB200D2DCA6 /* S3DXMLSpec.swift */,
+				43D4FDC71C7B6AAC004E2CF7 /* AssetManagerSpec.swift */,
 				4334D6D81C1FACB200D2DCA6 /* SceneGraphXMLSpec.swift */,
 			);
 			name = CommonSpecs;
@@ -349,6 +354,7 @@
 				4338B84D1C18B3AF007D3DF6 /* Uniformable.swift */,
 				4338B84E1C18B3AF007D3DF6 /* Vertexable.swift */,
 				4338B84F1C18B3AF007D3DF6 /* WorldView.swift */,
+				43D4FDC91C7B6F77004E2CF7 /* AssetManager.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -684,6 +690,7 @@
 				4371E8891C190928001D1C39 /* PlatonicSolids.swift in Sources */,
 				4371E8BC1C190991001D1C39 /* Spectra.swift in Sources */,
 				4371E8801C190921001D1C39 /* Renderer.swift in Sources */,
+				43D4FDCA1C7B6F77004E2CF7 /* AssetManager.swift in Sources */,
 				4371E8911C19092F001D1C39 /* Perspectable.swift in Sources */,
 				4371E87D1C190921001D1C39 /* EncodableData.swift in Sources */,
 				4371E8851C190921001D1C39 /* View.swift in Sources */,
@@ -702,11 +709,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43D4FDC81C7B6AAC004E2CF7 /* AssetManagerSpec.swift in Sources */,
 				4334D6DD1C1FACB200D2DCA6 /* SceneGraphXMLSpec.swift in Sources */,
 				4334D6DB1C1FACB200D2DCA6 /* S3DXMLSpec.swift in Sources */,
 				4334D6DA1C1FACB200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */,
-				4334D6BD1C1FAAE800D2DCA6 /* Spectra_OSXTests.swift in Sources */,
 				43151EF91C7AA8B4002305F6 /* ModelIOMeshUsageSpec.swift in Sources */,
+				4334D6BD1C1FAAE800D2DCA6 /* Spectra_OSXTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

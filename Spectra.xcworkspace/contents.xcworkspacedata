@@ -83,6 +83,9 @@
          <FileRef
             location = "group:WorldView.swift">
          </FileRef>
+         <FileRef
+            location = "group:/Users/dc/dev/apple/Spectra/Spectra/Node/AssetManager.swift">
+         </FileRef>
       </Group>
       <Group
          location = "group:MeshGenerators"
@@ -172,6 +175,9 @@
       </FileRef>
       <FileRef
          location = "group:SceneGraphXMLSpec.swift">
+      </FileRef>
+      <FileRef
+         location = "group:AssetManagerSpec.swift">
       </FileRef>
    </Group>
    <Group
