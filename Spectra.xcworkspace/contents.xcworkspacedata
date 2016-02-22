@@ -86,6 +86,9 @@
          <FileRef
             location = "group:/Users/dc/dev/apple/Spectra/Spectra/Node/AssetManager.swift">
          </FileRef>
+         <FileRef
+            location = "group:SpectraXML.swift">
+         </FileRef>
       </Group>
       <Group
          location = "group:MeshGenerators"
