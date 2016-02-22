@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43151EF01C7A9A60002305F6 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43151EEF1C7A9A60002305F6 /* ModelIO.framework */; };
+		43151EF31C7A9A90002305F6 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43151EEF1C7A9A60002305F6 /* ModelIO.framework */; };
 		4334D6881C1F6D2900D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */; };
 		4334D68D1C1F6EE300D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */; };
 		4334D6971C1F73B000D2DCA6 /* Cube.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6951C1F73B000D2DCA6 /* Cube.xml */; };
@@ -115,6 +117,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		43151EEF1C7A9A60002305F6 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
 		4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
 		4334D6951C1F73B000D2DCA6 /* Cube.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Cube.xml; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43151EF01C7A9A60002305F6 /* ModelIO.framework in Frameworks */,
 				43F6BDBD1C6FBCB900866FB1 /* Swinject.framework in Frameworks */,
 				4338B7C41C176745007D3DF6 /* Foundation.framework in Frameworks */,
 				4338B7C11C163C10007D3DF6 /* Metal.framework in Frameworks */,
@@ -205,6 +209,7 @@
 			files = (
 				436C7A811C728A1E005AE204 /* Metal.framework in Frameworks */,
 				436C7A821C728A1E005AE204 /* MetalKit.framework in Frameworks */,
+				43151EF31C7A9A90002305F6 /* ModelIO.framework in Frameworks */,
 				4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */,
 				4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */,
 				4371E8CD1C191011001D1C39 /* Fuzi.framework in Frameworks */,
@@ -375,6 +380,7 @@
 		43EAF84C1C0A301300EA2B30 = {
 			isa = PBXGroup;
 			children = (
+				43151EEF1C7A9A60002305F6 /* ModelIO.framework */,
 				43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */,
 				4338B7C31C176745007D3DF6 /* Foundation.framework */,
 				4338B7BF1C163C10007D3DF6 /* Metal.framework */,
