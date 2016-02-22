@@ -85,6 +85,19 @@ I didn't quite realize that MDLMesh/MDLSubmesh pretty much reimplements most of 
   - yet, not until i determine exactly what i want to do with it.  because the last thing i want to do right now is deal with more framework bullshit
   - i would really enjoy playing with shit that renders with lots of colors and lots of flexible vertices and whatnot
 
-
-
+i think one thing i lose with MDLMesh and MDLSubmesh is the ability to do MeshCategory/MeshType and define morphisms between them
+- admittedly, this is probably a bit too complex to do anyways.
+- however, i could still inspect the MDLVertexDescriptor (not the MTL one) that's attached to a MDLMesh
+  - and then infer a mesh's applicable 'categories' in order to apply new categories to it
+  - applying a new category would mean extending it's submeshes (in the simplest sense) 
+    - it could also mean adding new vertices to the mesh (and updating the corresponding submeshes in a way that makes sense)
+      - however, updating the submeshes would be more simply defined if there were functions attached to the MDLMesh that defined how to update these
+      - and given that it's bad practice to update the MDLMesh class, the only way to do this is by wrapping it
+      - and because by wrapping it, it changes the interface to the rest of the Spectra API, this makes this feature too complicated to implement
+        - yet, a subclass might work.  or perhaps a D/I function that accepts a mesh and modifies it, regenerating the submeshes
+  - see: MDLVertexAttribute Vertex Attributes: E.G. Anisotropy, Binormal, Bitangent, Color, EdgeCrease, Weights, etc..
+    - these are similar to the 'categories' that i was thinking about creating anyways
+      - yet, getting the generators to interoperate with these might be a bit difficult
+- how to interchange b/w MDLVertexAttribute structure of arrays (optimized for flexibility of writing and composability) and array of structures (optimized for reading)
+- how to best structure the dependency injection for mesh generators
 
