@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		43151EF21C7A9A78002305F6 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43151EF11C7A9A78002305F6 /* ModelIO.framework */; };
+		43151EF61C7A9BF9002305F6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */; };
 		4334D67E1C1F5E7700D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */; };
 		4334D68E1C1F6EF600D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */; };
 		4334D6901C1F739C00D2DCA6 /* DefaultPipeline.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68F1C1F739C00D2DCA6 /* DefaultPipeline.xml */; };
@@ -18,7 +19,6 @@
 		4334D6E81C1FAF4E00D2DCA6 /* S3DXSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E31C1FAF4E00D2DCA6 /* S3DXSDSpec.swift */; };
 		4334D6E91C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E41C1FAF4E00D2DCA6 /* SceneGraphXMLSpec.swift */; };
 		4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BB1C163BFC007D3DF6 /* Metal.framework */; };
-		4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */; };
 		4338B7C61C17674C007D3DF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C51C17674C007D3DF6 /* Foundation.framework */; };
 		4338B7CD1C18B126007D3DF6 /* S3DXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4338B7CB1C18B126007D3DF6 /* S3DXMLTest.xml */; };
 		4338B7CE1C18B126007D3DF6 /* SceneGraphXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4338B7CC1C18B126007D3DF6 /* SceneGraphXMLTest.xml */; };
@@ -210,8 +210,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4338B7C61C17674C007D3DF6 /* Foundation.framework in Frameworks */,
+				43151EF61C7A9BF9002305F6 /* MetalKit.framework in Frameworks */,
 				4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */,
-				4338B7BE1C163BFC007D3DF6 /* MetalKit.framework in Frameworks */,
 				43151EF21C7A9A78002305F6 /* ModelIO.framework in Frameworks */,
 				43F6BDC41C6FBD3200866FB1 /* Fuzi.framework in Frameworks */,
 				43F6BDBB1C6FBCA000866FB1 /* Swinject.framework in Frameworks */,
