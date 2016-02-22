@@ -30,8 +30,8 @@ func updateSpectraEnums(filepath: String, enums: [String: [String: UInt]]) {
 // - and my xml reader doesn't write.  and i don't feel like using NSXML ish
 // - wtf no multiline strings?
 func xsdSchema(xlmns: String, targetNamespace: String, content: String) -> String {
-    return "<?xml version=\"1.0\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"" +
-        "targetNamespace=\"\(targetNamespace)\"" +
+    return "<?xml version=\"1.0\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" " +
+        "targetNamespace=\"\(targetNamespace)\" " +
         "xmlns=\"\(xlmns)\" elementFormDefault=\"qualified\">\n\n" + content +
         "\n\n</xs:schema>"
 }
@@ -42,13 +42,13 @@ func xsSimpleType(name:String, content: String, mtlEnum: Bool = false) -> String
 }
 
 func xsMtlEnum(members: [String: UInt]) -> String {
-    let content = members.reduce("\n") { (memo, member) in return "\(memo)      <xs:enumeration id=\"\(member.0)\" value=\"\(member.1)\"/>\n" }
+    let content = members.reduce("\n") { (memo, member) in return "\(memo)      <xs:enumeration id=\"\(member.1)\" value=\"\(member.0)\"/>\n" }
     return "    <xs:restriction base=\"xs:string\">\(content)    </xs:restriction>\n"
 }
 
 func simpleTypeForEnum(name: String, members: [String: UInt]) -> String {
     let content = xsMtlEnum(members)
-    return xsSimpleType(name, content: content)
+    return xsSimpleType(name, content: content, mtlEnum: true)
 }
 
 let enumsForModelIO = [
