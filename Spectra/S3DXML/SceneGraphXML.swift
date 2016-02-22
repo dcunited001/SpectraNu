@@ -44,8 +44,8 @@ public class SceneGraphXML {
                 sceneGraph.perspectives[key!] = sceneGraph.perspectives[key!] ?? SGXMLPerspectiveNode().parse(sceneGraph, elem: child)
             case "camera":
                 sceneGraph.cameras[key!] = sceneGraph.cameras[key!] ?? SGXMLCameraNode().parse(sceneGraph, elem: child)
-            case "mesh-generator":
-                sceneGraph.meshGenerators[key!] = sceneGraph.meshGenerators[key!] ?? SGXMLMeshGeneratorNode().parse(sceneGraph, elem: child)
+//            case "mesh-generator":
+//                sceneGraph.meshGenerators[key!] = sceneGraph.meshGenerators[key!] ?? SGXMLMeshGeneratorNode().parse(sceneGraph, elem: child)
             case "mesh":
                 sceneGraph.meshes[key!] = sceneGraph.meshes[key!] ?? SGXMLMeshNode().parse(sceneGraph, elem: child)
             default:
@@ -207,33 +207,33 @@ public class SGXMLPerspectiveNode: SGXMLNodeParser {
         return node
     }
 }
-
-public class SGXMLMeshGeneratorNode: SGXMLNodeParser {
-    public typealias NodeType = MeshGenerator
-    
-    public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-        var node: NodeType
-        var meshGenArgs: [String: String] = [:]
-        let argsSelector = "mesh-generator-args > mesh-generator-arg"
-        for child in elem.css(argsSelector) {
-            let argName = child.attributes["name"]!
-            let argValue = child.attributes["value"]!
-            meshGenArgs[argName] = argValue
-        }
-        
-        if let nodeType = elem.attributes["type"] {
-            if let monad = sceneGraph.getMeshGeneratorMonad(nodeType) {
-                node = monad(meshGenArgs)
-            } else {
-                node = BasicTriangleGenerator(args: meshGenArgs)
-            }
-        } else {
-            node = BasicTriangleGenerator(args: meshGenArgs)
-        }
-        
-        return node
-    }
-}
+//
+//public class SGXMLMeshGeneratorNode: SGXMLNodeParser {
+//    public typealias NodeType = MeshGenerator
+//    
+//    public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
+//        var node: NodeType
+//        var meshGenArgs: [String: String] = [:]
+//        let argsSelector = "mesh-generator-args > mesh-generator-arg"
+//        for child in elem.css(argsSelector) {
+//            let argName = child.attributes["name"]!
+//            let argValue = child.attributes["value"]!
+//            meshGenArgs[argName] = argValue
+//        }
+//        
+//        if let nodeType = elem.attributes["type"] {
+//            if let monad = sceneGraph.getMeshGeneratorMonad(nodeType) {
+//                node = monad(meshGenArgs)
+//            } else {
+//                node = BasicTriangleGenerator(args: meshGenArgs)
+//            }
+//        } else {
+//            node = BasicTriangleGenerator(args: meshGenArgs)
+//        }
+//        
+//        return node
+//    }
+//}
 
 // two options for mesh node generate arg resolution
 // (1) mesh generators should have a hash of monads to transform each argument?
@@ -244,12 +244,13 @@ public class SGXMLMeshNode: SGXMLNodeParser {
     
     public func parse(sceneGraph: SceneGraph, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
         //TODO: mesh monads for each mesh type?
-        let meshGenRef = elem.attributes["mesh-generator"]!
-        let meshGen = sceneGraph.meshGenerators[meshGenRef]!
+//        let meshGenRef = elem.attributes["mesh-generator"]!
+//        let meshGen = sceneGraph.meshGenerators[meshGenRef]!
+//        
+//        let generateArgs:[String:AnyObject] = [:]
+//        let node = meshGen.generate(generateArgs)
         
-        let generateArgs:[String:AnyObject] = [:]
-        let node = meshGen.generate(generateArgs)
-        
-        return node
+        return BaseMesh()
+//        return node
     }
 }
