@@ -72,6 +72,7 @@
 		4371E8CD1C191011001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4371E8CE1C191015001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43D4FDB81C7B393E004E2CF7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDB71C7B393E004E2CF7 /* main.swift */; };
+		43D4FDC61C7B511B004E2CF7 /* SpectraEnumDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDC51C7B511B004E2CF7 /* SpectraEnumDefs.swift */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43F6BDBD1C6FBCB900866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; };
 		43F6BDBE1C6FBCC900866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; };
@@ -123,13 +124,14 @@
 			name = "Copy Quick/Nimble Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		43D4FDB31C7B393E004E2CF7 /* CopyFiles */ = {
+		43D4FDB31C7B393E004E2CF7 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -194,6 +196,7 @@
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		43D4FDB51C7B393E004E2CF7 /* SpectraTasks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpectraTasks; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D4FDB71C7B393E004E2CF7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		43D4FDC51C7B511B004E2CF7 /* SpectraEnumDefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectraEnumDefs.swift; sourceTree = "<group>"; };
 		43EAF8561C0A301300EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-OSX.h"; sourceTree = "<group>"; };
 		43EAF85B1C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -410,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				43D4FDB71C7B393E004E2CF7 /* main.swift */,
+				43D4FDC51C7B511B004E2CF7 /* SpectraEnumDefs.swift */,
 			);
 			path = SpectraTasks;
 			sourceTree = "<group>";
@@ -505,7 +509,7 @@
 			buildPhases = (
 				43D4FDB11C7B393E004E2CF7 /* Sources */,
 				43D4FDB21C7B393E004E2CF7 /* Frameworks */,
-				43D4FDB31C7B393E004E2CF7 /* CopyFiles */,
+				43D4FDB31C7B393E004E2CF7 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -649,6 +653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43D4FDC61C7B511B004E2CF7 /* SpectraEnumDefs.swift in Sources */,
 				43D4FDB81C7B393E004E2CF7 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

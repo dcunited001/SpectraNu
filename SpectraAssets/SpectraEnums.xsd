@@ -1,55 +1,75 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="S3D"
-    xmlns="S3D"
-    elementFormDefault="qualified">
-    
-    <xs:simpleType name="mdlVertexFormat" mtl-enum="true">
-        <xs:restriction base="xs:string">
-            <xs:enumeration id="0"  value="Invalid"/>
-            <xs:enumeration id="1"  value="UChar2"/>
-            <xs:enumeration id="2"  value="UChar3"/>
-            <xs:enumeration id="3"  value="UChar4"/>
-            <xs:enumeration id="4"  value="Char2"/>
-            <xs:enumeration id="5"  value="Char3"/>
-            <xs:enumeration id="6"  value="Char4"/>
-            <xs:enumeration id="7"  value="UChar2Normalized"/>
-            <xs:enumeration id="8"  value="UChar3Normalized"/>
-            <xs:enumeration id="9"  value="UChar4Normalized"/>
-            <xs:enumeration id="10" value="Char2Normalized"/>
-            <xs:enumeration id="11" value="Char3Normalized"/>
-            <xs:enumeration id="12" value="Char4Normalized"/>
-            <xs:enumeration id="13" value="UShort2"/>
-            <xs:enumeration id="14" value="UShort3"/>
-            <xs:enumeration id="15" value="UShort4"/>
-            <xs:enumeration id="16" value="Short2"/>
-            <xs:enumeration id="17" value="Short3"/>
-            <xs:enumeration id="18" value="Short4"/>
-            <xs:enumeration id="19" value="UShort2Normalized"/>
-            <xs:enumeration id="20" value="UShort3Normalized"/>
-            <xs:enumeration id="21" value="UShort4Normalized"/>
-            <xs:enumeration id="22" value="Short2Normalized"/>
-            <xs:enumeration id="23" value="Short3Normalized"/>
-            <xs:enumeration id="24" value="Short4Normalized"/>
-            <xs:enumeration id="25" value="Half2"/>
-            <xs:enumeration id="26" value="Half3"/>
-            <xs:enumeration id="27" value="Half4"/>
-            <xs:enumeration id="28" value="Float"/>
-            <xs:enumeration id="29" value="Float2"/>
-            <xs:enumeration id="30" value="Float3"/>
-            <xs:enumeration id="31" value="Float4"/>
-            <xs:enumeration id="32" value="Int"/>
-            <xs:enumeration id="33" value="Int2"/>
-            <xs:enumeration id="34" value="Int3"/>
-            <xs:enumeration id="35" value="Int4"/>
-            <xs:enumeration id="36" value="UInt"/>
-            <xs:enumeration id="37" value="UInt2"/>
-            <xs:enumeration id="38" value="UInt3"/>
-            <xs:enumeration id="39" value="UInt4"/>
-            <xs:enumeration id="40" value="Int1010102Normalized"/>
-            <xs:enumeration id="41" value="UInt1010102Normalized"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"targetNamespace="SpectraEnums"xmlns="SpectraEnums" elementFormDefault="qualified">
 
+  <xs:simpleType name="mdlVertexFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="UCharBits" value="65536"/>
+      <xs:enumeration id="ShortBits" value="393216"/>
+      <xs:enumeration id="UChar4" value="65540"/>
+      <xs:enumeration id="Float" value="786433"/>
+      <xs:enumeration id="Half2" value="720898"/>
+      <xs:enumeration id="Short3Normalized" value="524291"/>
+      <xs:enumeration id="Char4" value="131076"/>
+      <xs:enumeration id="PackedBit" value="4096"/>
+      <xs:enumeration id="UShortNormalized" value="458753"/>
+      <xs:enumeration id="UShort3Normalized" value="458755"/>
+      <xs:enumeration id="IntBits" value="655360"/>
+      <xs:enumeration id="Short4Normalized" value="524292"/>
+      <xs:enumeration id="Char" value="131073"/>
+      <xs:enumeration id="Half4" value="720900"/>
+      <xs:enumeration id="Char3Normalized" value="262147"/>
+      <xs:enumeration id="Char2Normalized" value="262146"/>
+      <xs:enumeration id="UInt2" value="589826"/>
+      <xs:enumeration id="CharBits" value="131072"/>
+      <xs:enumeration id="UShort" value="327681"/>
+      <xs:enumeration id="Short" value="393217"/>
+      <xs:enumeration id="UShortBits" value="327680"/>
+      <xs:enumeration id="Int" value="655361"/>
+      <xs:enumeration id="Half" value="720897"/>
+      <xs:enumeration id="UInt3" value="589827"/>
+      <xs:enumeration id="UIntBits" value="589824"/>
+      <xs:enumeration id="Float2" value="786434"/>
+      <xs:enumeration id="UInt1010102Normalized" value="593924"/>
+      <xs:enumeration id="CharNormalizedBits" value="262144"/>
+      <xs:enumeration id="UChar3Normalized" value="196611"/>
+      <xs:enumeration id="UCharNormalizedBits" value="196608"/>
+      <xs:enumeration id="Char4Normalized" value="262148"/>
+      <xs:enumeration id="UChar2" value="65538"/>
+      <xs:enumeration id="UShort3" value="327683"/>
+      <xs:enumeration id="UShort4Normalized" value="458756"/>
+      <xs:enumeration id="ShortNormalized" value="524289"/>
+      <xs:enumeration id="UShortNormalizedBits" value="458752"/>
+      <xs:enumeration id="Half3" value="720899"/>
+      <xs:enumeration id="Float4" value="786436"/>
+      <xs:enumeration id="HalfBits" value="720896"/>
+      <xs:enumeration id="Int1010102Normalized" value="659460"/>
+      <xs:enumeration id="Short4" value="393220"/>
+      <xs:enumeration id="UInt4" value="589828"/>
+      <xs:enumeration id="UShort2" value="327682"/>
+      <xs:enumeration id="UChar4Normalized" value="196612"/>
+      <xs:enumeration id="Float3" value="786435"/>
+      <xs:enumeration id="Short2" value="393218"/>
+      <xs:enumeration id="Invalid" value="0"/>
+      <xs:enumeration id="UShort2Normalized" value="458754"/>
+      <xs:enumeration id="UChar2Normalized" value="196610"/>
+      <xs:enumeration id="Int2" value="655362"/>
+      <xs:enumeration id="Short3" value="393219"/>
+      <xs:enumeration id="Int3" value="655363"/>
+      <xs:enumeration id="CharNormalized" value="262145"/>
+      <xs:enumeration id="Char3" value="131075"/>
+      <xs:enumeration id="UChar" value="65537"/>
+      <xs:enumeration id="FloatBits" value="786432"/>
+      <xs:enumeration id="UChar3" value="65539"/>
+      <xs:enumeration id="UInt" value="589825"/>
+      <xs:enumeration id="UCharNormalized" value="196609"/>
+      <xs:enumeration id="ShortNormalizedBits" value="524288"/>
+      <xs:enumeration id="Short2Normalized" value="524290"/>
+      <xs:enumeration id="Char2" value="131074"/>
+      <xs:enumeration id="Int4" value="655364"/>
+      <xs:enumeration id="UShort4" value="327684"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+</xs:schema>
