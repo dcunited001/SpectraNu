@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		43151EF01C7A9A60002305F6 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43151EEF1C7A9A60002305F6 /* ModelIO.framework */; };
 		43151EF31C7A9A90002305F6 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43151EEF1C7A9A60002305F6 /* ModelIO.framework */; };
+		43151EF91C7AA8B4002305F6 /* ModelIOMeshUsageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43151EF71C7AA564002305F6 /* ModelIOMeshUsageSpec.swift */; };
 		4334D6881C1F6D2900D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */; };
 		4334D68D1C1F6EE300D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */; };
 		4334D6971C1F73B000D2DCA6 /* Cube.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6951C1F73B000D2DCA6 /* Cube.xml */; };
@@ -118,6 +119,7 @@
 
 /* Begin PBXFileReference section */
 		43151EEF1C7A9A60002305F6 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
+		43151EF71C7AA564002305F6 /* ModelIOMeshUsageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelIOMeshUsageSpec.swift; sourceTree = "<group>"; };
 		4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
 		4334D6951C1F73B000D2DCA6 /* Cube.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Cube.xml; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		4334D6C91C1FAC3E00D2DCA6 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				43151EF71C7AA564002305F6 /* ModelIOMeshUsageSpec.swift */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				4334D6DB1C1FACB200D2DCA6 /* S3DXMLSpec.swift in Sources */,
 				4334D6DA1C1FACB200D2DCA6 /* TriangularQuadTesselationGeneratorSpec.swift in Sources */,
 				4334D6BD1C1FAAE800D2DCA6 /* Spectra_OSXTests.swift in Sources */,
+				43151EF91C7AA8B4002305F6 /* ModelIOMeshUsageSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
