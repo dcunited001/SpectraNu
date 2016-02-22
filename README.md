@@ -74,6 +74,16 @@ MeshCategory (kind/protocol for MeshTypes)
 
 Scene Graph designed with animation & rendering attributes attached to nodes: [here](https://3fstudios.files.wordpress.com/2008/02/graphics05.jpg)
 
+### Model I/O for scene graph nodes
+
+I didn't quite realize that MDLMesh/MDLSubmesh pretty much reimplements most of what I was thinking about
+- and I didn't understand how the data for Model I/O MDLAssets was formatted
+- i can get the submeshes to do most of what i wanted for geometry/mesh manipulation
+  - these are basically the dataMaps that i was creating with MeshGenerator's
+- it will be fairly easy to wrap MDLAssets in a basic SceneGraph and I don't think i lose any flexibility by using Model I/O
+- however, i may want to move the S3DXML stuff to a separate project eventually
+  - yet, not until i determine exactly what i want to do with it.  because the last thing i want to do right now is deal with more framework bullshit
+  - i would really enjoy playing with shit that renders with lots of colors and lots of flexible vertices and whatnot
 
 
 
