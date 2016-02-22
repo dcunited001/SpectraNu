@@ -14,10 +14,20 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>SpectraTasks.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>4338B8A71C18C278007D3DF6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43D4FDB41C7B393E004E2CF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

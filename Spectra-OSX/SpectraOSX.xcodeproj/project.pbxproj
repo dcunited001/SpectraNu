@@ -71,6 +71,7 @@
 		4371E8BC1C190991001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8641C18B3AF007D3DF6 /* Spectra.swift */; };
 		4371E8CD1C191011001D1C39 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4371E8CE1C191015001D1C39 /* Fuzi.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		43D4FDB81C7B393E004E2CF7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDB71C7B393E004E2CF7 /* main.swift */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43F6BDBD1C6FBCB900866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; };
 		43F6BDBE1C6FBCC900866FB1 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; };
@@ -85,6 +86,13 @@
 			remoteInfo = "Spectra-OSXExample";
 		};
 		4338B8E01C18F109007D3DF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43EAF8551C0A301300EA2B30;
+			remoteInfo = SpectraOSX;
+		};
+		43D4FDBC1C7B394E004E2CF7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43EAF84D1C0A301300EA2B30 /* Project object */;
 			proxyType = 1;
@@ -114,6 +122,15 @@
 			);
 			name = "Copy Quick/Nimble Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D4FDB31C7B393E004E2CF7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -175,6 +192,8 @@
 		4338B8B31C18C278007D3DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
+		43D4FDB51C7B393E004E2CF7 /* SpectraTasks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpectraTasks; sourceTree = BUILT_PRODUCTS_DIR; };
+		43D4FDB71C7B393E004E2CF7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		43EAF8561C0A301300EA2B30 /* Spectra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Spectra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Spectra-OSX.h"; sourceTree = "<group>"; };
 		43EAF85B1C0A301300EA2B30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -186,6 +205,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		4338B8A51C18C278007D3DF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D4FDB21C7B393E004E2CF7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -380,6 +406,14 @@
 			path = "Spectra-OSXExample";
 			sourceTree = "<group>";
 		};
+		43D4FDB61C7B393E004E2CF7 /* SpectraTasks */ = {
+			isa = PBXGroup;
+			children = (
+				43D4FDB71C7B393E004E2CF7 /* main.swift */,
+			);
+			path = SpectraTasks;
+			sourceTree = "<group>";
+		};
 		43EAF84C1C0A301300EA2B30 = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +428,7 @@
 				43EAF8581C0A301300EA2B30 /* Spectra-OSX */,
 				43EAF8641C0A301300EA2B30 /* Spectra-OSXTests */,
 				4338B8A91C18C278007D3DF6 /* Spectra-OSXExample */,
+				43D4FDB61C7B393E004E2CF7 /* SpectraTasks */,
 				43EAF8571C0A301300EA2B30 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -404,6 +439,7 @@
 				43EAF8561C0A301300EA2B30 /* Spectra.framework */,
 				43EAF8601C0A301300EA2B30 /* SpectraOSXSpec.xctest */,
 				4338B8A81C18C278007D3DF6 /* Spectra-OSXExample.app */,
+				43D4FDB51C7B393E004E2CF7 /* SpectraTasks */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -463,6 +499,24 @@
 			productReference = 4338B8A81C18C278007D3DF6 /* Spectra-OSXExample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		43D4FDB41C7B393E004E2CF7 /* SpectraTasks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43D4FDBB1C7B393E004E2CF7 /* Build configuration list for PBXNativeTarget "SpectraTasks" */;
+			buildPhases = (
+				43D4FDB11C7B393E004E2CF7 /* Sources */,
+				43D4FDB21C7B393E004E2CF7 /* Frameworks */,
+				43D4FDB31C7B393E004E2CF7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				43D4FDBD1C7B394E004E2CF7 /* PBXTargetDependency */,
+			);
+			name = SpectraTasks;
+			productName = SpectraTasks;
+			productReference = 43D4FDB51C7B393E004E2CF7 /* SpectraTasks */;
+			productType = "com.apple.product-type.tool";
+		};
 		43EAF8551C0A301300EA2B30 /* SpectraOSX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43EAF86A1C0A301300EA2B30 /* Build configuration list for PBXNativeTarget "SpectraOSX" */;
@@ -507,12 +561,15 @@
 		43EAF84D1C0A301300EA2B30 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Spectra;
 				TargetAttributes = {
 					4338B8A71C18C278007D3DF6 = {
 						CreatedOnToolsVersion = 7.1.1;
+					};
+					43D4FDB41C7B393E004E2CF7 = {
+						CreatedOnToolsVersion = 7.2.1;
 					};
 					43EAF8551C0A301300EA2B30 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -540,6 +597,7 @@
 				43EAF8551C0A301300EA2B30 /* SpectraOSX */,
 				43EAF85F1C0A301300EA2B30 /* SpectraOSXTests */,
 				4338B8A71C18C278007D3DF6 /* Spectra-OSXExample */,
+				43D4FDB41C7B393E004E2CF7 /* SpectraTasks */,
 			);
 		};
 /* End PBXProject section */
@@ -584,6 +642,14 @@
 				4338B8AD1C18C278007D3DF6 /* ViewController.swift in Sources */,
 				4338B8AB1C18C278007D3DF6 /* AppDelegate.swift in Sources */,
 				4334D6881C1F6D2900D2DCA6 /* BasicShaders.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D4FDB11C7B393E004E2CF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D4FDB81C7B393E004E2CF7 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +718,11 @@
 			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
 			targetProxy = 4338B8E01C18F109007D3DF6 /* PBXContainerItemProxy */;
 		};
+		43D4FDBD1C7B394E004E2CF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
+			targetProxy = 43D4FDBC1C7B394E004E2CF7 /* PBXContainerItemProxy */;
+		};
 		43EAF8631C0A301300EA2B30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43EAF8551C0A301300EA2B30 /* SpectraOSX */;
@@ -693,6 +764,22 @@
 				INFOPLIST_FILE = "Spectra-OSXExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spectra.Spectra-OSXExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		43D4FDB91C7B393E004E2CF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_SWIFT_FLAGS = "-DPROJECT_DIR=\"$(PROJECT_DIR)\"";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		43D4FDBA1C7B393E004E2CF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_SWIFT_FLAGS = "-DPROJECT_DIR=\"$(PROJECT_DIR)\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -867,6 +954,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		43D4FDBB1C7B393E004E2CF7 /* Build configuration list for PBXNativeTarget "SpectraTasks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43D4FDB91C7B393E004E2CF7 /* Debug */,
+				43D4FDBA1C7B393E004E2CF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		43EAF8501C0A301300EA2B30 /* Build configuration list for PBXProject "SpectraOSX" */ = {
 			isa = XCConfigurationList;
