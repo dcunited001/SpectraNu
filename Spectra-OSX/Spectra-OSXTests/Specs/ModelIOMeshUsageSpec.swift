@@ -24,11 +24,6 @@ class ModelIOMeshUsageSpec: QuickSpec {
     // important observation: the submeshes (formerly dataMaps) should never change because a vertexAttribute changed
     // - that is, in the simplest use case for submeshes
     
-    enum Foo: Int {
-        case Bar
-        case Baz
-    }
-    
     override func spec() {
         
         describe("MDLVertexDescriptor") {
@@ -39,35 +34,7 @@ class ModelIOMeshUsageSpec: QuickSpec {
             let attrAnisotropy = MDLVertexAttribute(name: MDLVertexAttributeAnisotropy, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 3)
             
             it("has a MDLVertexFormat enum type that can be reflected") {
-                let mirror = Mirror(reflecting: MDLVertexFormat.Float4)
-                print(String(reflecting: MDLVertexFormat.Float4))
-                print(MDLVertexFormat.Float4.rawValue)
-                print(MDLVertexFormat.Float3.rawValue)
-                print(MDLVertexFormat.Float.rawValue)
                 
-                print(MDLVertexFormat.Int4.rawValue)
-                print(MDLVertexFormat.Int4.hashValue)
-                print(MDLVertexFormat(rawValue: 53)!.rawValue)
-                print(MDLVertexFormat.Int2.rawValue)
-                print(MDLVertexFormat.Int2.hashValue)
-                print(MDLVertexFormat(rawValue: 51)!.rawValue)
-                print(MDLVertexFormat.Int.rawValue)
-                print(MDLVertexFormat.Int.hashValue)
-                print(MDLVertexFormat(rawValue: 50)!.rawValue)
-                print(MTLVertexFormat.Float4.rawValue)
-                print(MTLVertexFormat.Float3.rawValue)
-                print(MTLVertexFormat.Float2.rawValue)
-                print(MTLVertexFormat.Float.rawValue)
-                print(MTLVertexFormat(rawValue: 28)!.rawValue)
-                print(MTLVertexFormat(rawValue: 29)!.rawValue)
-                print(MTLVertexFormat(rawValue: 30)!.rawValue)
-                print(MTLVertexFormat.Invalid.rawValue)
-                print(MTLVertexFormat(rawValue: 0)!.rawValue)
-                print(MDLVertexFormat.Invalid.rawValue)
-                print(MDLVertexFormat(rawValue: 0)!.rawValue)
-                mirror
-                print(Foo.Bar)
-                print(Foo.Baz)
             }
 
         }
