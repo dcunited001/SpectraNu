@@ -47,6 +47,33 @@ class SpectraEnum {
     }
 }
 
+
+// TODO: is there struct value that makes sense here?
+// - so, like a single struct value that can be used in case statements
+// - but also carries a bit of info about the params of each type?
+public enum SpectraVertexAttrType: String {
+    // raw values for enums must be literals,
+    // - so i can't use the MDLVertexAttribute string values
+    case Anisotropy = "anisotropy"
+    case Binormal = "binormal"
+    case Bitangent = "bitangent"
+    case Color = "color"
+    case EdgeCrease = "edgeCrease"
+    case JointIndices = "jointIndices"
+    case JointWeights = "jointWeights"
+    case Normal = "normal"
+    case OcclusionValue = "occlusionValue"
+    case Position = "position"
+    case ShadingBasisU = "shadingBasisU"
+    case ShadingBasisV = "shadingBasisV"
+    case SubdivisionStencil = "subdivisionStencil"
+    case Tangent = "tangent"
+    case TextureCoordinate = "textureCoordinate"
+    
+    // can't add this to the SpectraEnums.xsd schema,
+    // - at least not directly, since it's not an enum
+}
+
 public class SpectraXSD {
     public var xsd: XMLDocument?
     
