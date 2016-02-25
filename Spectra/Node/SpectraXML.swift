@@ -12,7 +12,7 @@ import Swinject
 import ModelIO
 
 // should it be necessary to pass the key here?
-public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String?, options: [String: AnyObject]) -> Any)
+public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String?, options: [String: Any]) -> Any)
 
 public enum SpectraXMLNodeType: String {
     case World = "world"
@@ -25,7 +25,7 @@ public enum SpectraXMLNodeType: String {
     case Texture = "texture"
     case Mesh = "mesh"
     
-    public func nodeParser(node: XMLNode, key: String, options: [String:AnyObject] = [:]) -> SpectraXMLNodeParser? {
+    public func nodeParser(node: XMLNode, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
         
         switch self {
         case .World:
@@ -100,22 +100,22 @@ public class SpectraXML {
         //   - that closure will get the node anyways
         // - same thing with options: beware retaining a reference
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexAttribute.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexAttribute.rawValue) { (r, k: String, node: XMLNode, options: [String: Any]) in
             return SpectraXMLNodeType.VertexAttribute.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexDescriptor.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexDescriptor.rawValue) { (r, k: String, node: XMLNode, options: [String:Any]) in
             return SpectraXMLNodeType.VertexDescriptor.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLNode, options: [String: Any]) in
             return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
         return parser
     }
     
-    public func parse(container: Container, options: [String: AnyObject] = [:]) {
+    public func parse(container: Container, options: [String: Any] = [:]) {
         for child in xml!.root!.children {
             let (tag, key) = (child.tag!, child.attributes["key"])
 
@@ -133,6 +133,8 @@ public class SpectraXML {
             // - it can be resolved by returning either a tuple with metadata
             //   - or a hash of [String: Any], but the tuple is superior
             //   - tuple: (SpectraMonadType, [String: Any])
+            // - but i still would have to perform type resolution on the [String: Any]
+            //   - if the tupal is to be useful and dynamic
             
         }
     }
