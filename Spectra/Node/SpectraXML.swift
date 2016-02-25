@@ -11,6 +11,9 @@ import Fuzi
 import Swinject
 import ModelIO
 
+// should it be necessary to pass the key here?
+public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String?, options: [String: AnyObject]) -> Any)
+
 public enum SpectraXMLNodeType: String {
     case World = "world"
     case Camera = "camera"
@@ -43,23 +46,17 @@ public enum SpectraXMLNodeType: String {
             }
         default: return nil
         }
-
+    }
+    
+    public func nodeFinalType(parser: Container) -> AnyClass? {
+        switch self {
+        case .VertexAttribute: return MDLVertexAttribute.self
+        case .VertexDescriptor: return MDLVertexDescriptor.self
+        //what about custom defined ish?
+        default: return parser.resolve(AnyClass.self, name: self.rawValue)
+        }
     }
 }
-
-// TODO: how to specify monadic behavior with xml?
-
-public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String, options: [String: AnyObject]) -> Any)
-
-//public class SpectraXMLNodeParser {
-//    var parser: ((node: XMLNode, key: String, options: [String: AnyObject]) -> Any)?
-//    
-//    public init() {
-//        
-//    }
-//}
-//
-//typealias FooStringer = ((String) -> Any)
 
 public class SpectraXML {
     var xml: XMLDocument?
@@ -87,7 +84,7 @@ public class SpectraXML {
         //TODO: how to ensure that typing is consistent?
         // return [fnParse -> Any, fnCast -> MDLType] // this may work
         
-        // yes, the design's a bit convoluted, but allows great flexability!
+        // yes, the design's a bit convoluted, but allows great flexibility!
         // - note: with great flexibility, comes great responsibility!!
         //   - this is true, both from a performance aspect (reference retention) 
         // - as well as from a security aspect (arbitrary execution from remote XML)
@@ -104,13 +101,17 @@ public class SpectraXML {
         //   - that closure will get the node anyways
         // - same thing with options: beware retaining a reference
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
-            return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
-        }
-        
         parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexAttribute.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
             return SpectraXMLNodeType.VertexAttribute.nodeParser(node, key: k, options: options)!
-        }
+            }.inObjectScope(.None) // always return a new instance of the closure
+        
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexDescriptor.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
+            return SpectraXMLNodeType.VertexDescriptor.nodeParser(node, key: k, options: options)!
+            }.inObjectScope(.None) // always return a new instance of the closure
+        
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
+            return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
+            }.inObjectScope(.None) // always return a new instance of the closure
         
         return parser
     }
@@ -118,14 +119,9 @@ public class SpectraXML {
     public func parse(container: Container, options: [String: AnyObject] = [:]) {
         for child in xml!.root!.children {
             let (tag, key) = (child.tag!, child.attributes["key"])
-            
-            switch SpectraXMLNodeType(rawValue: tag)! {
-            case .World: break
-            case .Camera: break
-            case .VertexDescriptor: break
-            case .VertexAttribute: break
-            default: break
-            }
+
+            let nodeParser = self.parser.resolve(SpectraXMLNodeParser.self, arguments: (tag, key, child, options))!
+            nodeParser(container: container, node: child, key: key, options: options)
         }
     }
 }
