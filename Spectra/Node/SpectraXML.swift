@@ -25,25 +25,26 @@ public enum SpectraXMLNodeType: String {
     case Texture = "texture"
     case Mesh = "mesh"
     
-    public func nodeParser(node: XMLNode, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
+    public func nodeParser(node: XMLNode, key: String, options: [String:Any] = [:]) -> (SpectraXMLNodeParser, [String: Any])? {
         
         switch self {
         case .World:
-            return {(container, node, key, options) in
-                return "world"
-            }
+            return ({(container, node, key, options) in
+                return "a world.  or a (worldFn, meta) tuple"
+                }, [:])
         case .Camera:
-            return {(container, node, key, options) in
-                return "camera"
-            }
+            return ({(container, node, key, options) in
+                return "a camera.  or a (cameraFn, meta) tuple"
+            }, [:])
         case .VertexDescriptor:
-            return {(container, node, key, options) in
-                return "vertex-descriptor"
-            }
+            return ({(container, node, key, options) in
+                return "a vertex-descriptor.  or a (vertexDescriptorFn, meta) tuple"
+            }, [:])
         case .VertexAttribute:
-            return {(container, node, key, options) in
-                return "vertex-attribute"
-            }
+            return ({(container, node, key, options) in
+                return "a vertex-attribute.  or a (vertexAttributeFn, meta) tuple"
+            }, [:])
+        // resolve custom types?
         default: return nil
         }
     }
@@ -124,7 +125,7 @@ public class SpectraXML {
             // TODO: resolve custom types
             //            parser.resolve(AnyClass.self, name: self.rawValue)
             
-            nodeParser(container: container, node: child, key: key, options: options)
+            let construct, metadata = nodeParser(container: container, node: child, key: key, options: options)
             
             // TODO: resolve non-final types:
             // - i.e. if some monad returns instead of concrete value,
