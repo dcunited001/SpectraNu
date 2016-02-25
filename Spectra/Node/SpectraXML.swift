@@ -23,27 +23,10 @@ public enum SpectraXMLNodeType: String {
     case Mesh = "mesh"
 }
 
-// TODO: how to specify monadic behavior with xml?
-
-public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String, options: [String: AnyObject]) -> Any)
-
-//public class SpectraXMLNodeParser {
-//    var parser: ((node: XMLNode, key: String, options: [String: AnyObject]) -> Any)?
-//    
-//    public init() {
-//        
-//    }
-//}
-//
-//typealias FooStringer = ((String) -> Any)
-
 public class SpectraXML {
     var xml: XMLDocument?
-    var parser: Container
     
     public init(data: NSData) {
-        parser = SpectraXML.initParser()
-        
         do {
             xml = try XMLDocument(data: data)
         } catch let err as XMLError {
@@ -55,30 +38,6 @@ public class SpectraXML {
         } catch let err {
             print("error: \(err)")
         }
-    }
-    
-    public class func initParser() -> Container {
-        var parser = Container()
-        
-        // TODO: what's the type here? type could be:
-        // - a specific node type SpectraFooXMLNode (use same pattern as before (yuck))
-        // - a closure type: (foo: Bar) -> MDLBaz)
-        
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String) in
-//            let parser: SpectraXMLNodeParser =
-            return { (container, node, key, options) in
-                return "foo"
-            }
-        }
-        
-//            { (r: Container, key: String, options: [String: AnyObject]) in
-//            return "welllll fuck"
-//            return { (node: XMLNode, options: [String: AnyObject]) in
-//                // do node things, return shit
-//            }
-//        }
-        
-        return parser
     }
     
     public func parse(container: Container, options: [String: AnyObject] = [:]) {
