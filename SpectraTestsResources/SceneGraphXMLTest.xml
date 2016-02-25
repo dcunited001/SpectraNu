@@ -5,8 +5,30 @@
  -->
 
 <root>
-    
+
     <vertex-attribute key="pos_float_4" name="position" format="Float4"/>
+    <vertex-attribute key="tex_float_2" name="texture" format="Float2"/>
+    <vertex-attribute key="rgb_float_4" name="color" format="Float4"/>
+    
+    <!-- TODO: vertex-descriptor format for delayed assembly of vertex-attributes (and associated buffer indices)
+     -->
+    
+    <!-- can ref vertex-attributes -->
+    <vertex-descriptor key="vert_pos_tex_float">
+        <vertex-attribute ref="pos_float_4"/>
+        <vertex-attribute ref="tex_float_2"/>
+    </vertex-descriptor>
+    
+    <!-- can mix/match ref'd attributes with new ones -->
+    <vertex-descriptor key="vert_pos_rgb_float">
+        <vertex-attribute ref="pos_float_4"/>
+        <vertex-attribute key="rgb_int_4" name="color" format="Int4"/>
+    </vertex-descriptor>
+    
+    <!-- can create either array-of-struct or struct-of-arrays -->
+    <vertex-descriptor key="vert_pos_rgb">
+        
+    </vertex-descriptor>
     
     <view key="world">
         <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />
