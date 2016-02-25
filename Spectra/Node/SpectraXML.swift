@@ -52,8 +52,7 @@ public enum SpectraXMLNodeType: String {
         switch self {
         case .VertexAttribute: return MDLVertexAttribute.self
         case .VertexDescriptor: return MDLVertexDescriptor.self
-        //what about custom defined ish?
-        default: return parser.resolve(AnyClass.self, name: self.rawValue)
+        default: return nil // custom types must be resolved separately
         }
     }
 }
@@ -121,7 +120,20 @@ public class SpectraXML {
             let (tag, key) = (child.tag!, child.attributes["key"])
 
             let nodeParser = self.parser.resolve(SpectraXMLNodeParser.self, arguments: (tag, key, child, options))!
+            
+            // TODO: resolve custom types
+            //            parser.resolve(AnyClass.self, name: self.rawValue)
+            
             nodeParser(container: container, node: child, key: key, options: options)
+            
+            // TODO: resolve non-final types:
+            // - i.e. if some monad returns instead of concrete value,
+            //   - then try to resolve the monad (should metadata also be returned?)
+            //   - this may be a feature to implement down the road
+            // - it can be resolved by returning either a tuple with metadata
+            //   - or a hash of [String: Any], but the tuple is superior
+            //   - tuple: (SpectraMonadType, [String: Any])
+            
         }
     }
 }
