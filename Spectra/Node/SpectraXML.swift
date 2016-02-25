@@ -21,6 +21,30 @@ public enum SpectraXMLNodeType: String {
     case MaterialProperty = "material-property"
     case Texture = "texture"
     case Mesh = "mesh"
+    
+    public func nodeParser(node: XMLNode, key: String, options: [String:AnyObject] = [:]) -> SpectraXMLNodeParser? {
+        
+        switch self {
+        case .World:
+            return {(container, node, key, options) in
+                return "world"
+            }
+        case .Camera:
+            return {(container, node, key, options) in
+                return "camera"
+            }
+        case .VertexDescriptor:
+            return {(container, node, key, options) in
+                return "vertex-descriptor"
+            }
+        case .VertexAttribute:
+            return {(container, node, key, options) in
+                return "vertex-attribute"
+            }
+        default: return nil
+        }
+
+    }
 }
 
 // TODO: how to specify monadic behavior with xml?
@@ -60,23 +84,33 @@ public class SpectraXML {
     public class func initParser() -> Container {
         var parser = Container()
         
-        // TODO: what's the type here? type could be:
-        // - a specific node type SpectraFooXMLNode (use same pattern as before (yuck))
-        // - a closure type: (foo: Bar) -> MDLBaz)
+        //TODO: how to ensure that typing is consistent?
+        // return [fnParse -> Any, fnCast -> MDLType] // this may work
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String) in
-//            let parser: SpectraXMLNodeParser =
-            return { (container, node, key, options) in
-                return "foo"
-            }
+        // yes, the design's a bit convoluted, but allows great flexability!
+        // - note: with great flexibility, comes great responsibility!!
+        //   - this is true, both from a performance aspect (reference retention) 
+        // - as well as from a security aspect (arbitrary execution from remote XML)
+        //   - spectra is intended as a LEARNING TOOL ONLY at this point.
+        
+        // NOTE: you can override default behavior by returning an alternative closure
+        // - just do parser.register() and override.
+        // - you can also do newParser = Container(parent: parser) 
+        //   - and then create a tree of custom parsers (see Swinject docs)
+        
+        // NOTE: if you do override default behavior for nodes: beware scoping
+        // - if you pass node into the closure that's returned, it will stick around
+        //   - instead just use node to determine which closure to return
+        //   - that closure will get the node anyways
+        // - same thing with options: beware retaining a reference
+        
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
+            return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
         }
         
-//            { (r: Container, key: String, options: [String: AnyObject]) in
-//            return "welllll fuck"
-//            return { (node: XMLNode, options: [String: AnyObject]) in
-//                // do node things, return shit
-//            }
-//        }
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexAttribute.rawValue) { (r, k: String, node: XMLNode, options: [String:AnyObject]) in
+            return SpectraXMLNodeType.VertexAttribute.nodeParser(node, key: k, options: options)!
+        }
         
         return parser
     }

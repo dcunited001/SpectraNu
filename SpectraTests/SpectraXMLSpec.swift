@@ -22,16 +22,31 @@ class SpectraXMLSpec: QuickSpec {
         let spectraXML = SpectraXML(data: xmlData)
         
         describe("vertex-attribute") {
+            let attrPosition = MDLVertexAttribute(name: MDLVertexAttributePosition, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 0)
+            let attrColor = MDLVertexAttribute(name: MDLVertexAttributeColor, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 1)
+            let attrTexture = MDLVertexAttribute(name: MDLVertexAttributeTextureCoordinate, format: MDLVertexFormat.Float2, offset: 0, bufferIndex: 2)
+            let attrAnisotropy = MDLVertexAttribute(name: MDLVertexAttributeAnisotropy, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 3)
             it("can parse vertex attribute nodes") {
                 
             }
         }
         
         describe("vertex-descriptor") {
-            it("can parse vertex descriptor nodes") {
+            it("can parse vertex descriptor with references to vertex attributes") {
+                
+            }
+            
+            it("can parse vertex descriptor, mixing references with new attributes") {
+                
+            }
+            
+            it("can parse vertex descriptor to create either array-of-struct or struct-of-array indexing") {
                 
             }
         }
+        
+        // TODO: convert from VertexDescriptor with array-of-struct to struct-of-array indexing
+        // TODO: convert MDLVertexDescriptor <=> MTLVertexDescriptor
         
         describe("world-view") {
             it("can parse world view nodes") {
