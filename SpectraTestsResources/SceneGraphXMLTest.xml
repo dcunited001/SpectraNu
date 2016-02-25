@@ -5,6 +5,9 @@
  -->
 
 <root>
+    
+    <vertex-attribute key="pos_float_4" name="position" format="Float4"/>
+    
     <view key="world">
         <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />
     </view>
