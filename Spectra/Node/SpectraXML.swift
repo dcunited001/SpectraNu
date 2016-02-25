@@ -41,8 +41,8 @@ public class SpectraXML {
     var xml: XMLDocument?
     var parser: Container
     
-    public init(data: NSData) {
-        parser = SpectraXML.initParser()
+    public init(data: NSData, parser: Container? = SpectraXML.initParser()) {
+        self.parser = parser!
         
         do {
             xml = try XMLDocument(data: data)
