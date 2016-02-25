@@ -21,6 +21,18 @@ class SpectraXMLSpec: QuickSpec {
         let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SceneGraphXMLTest")
         let spectraXML = SpectraXML(data: xmlData)
         
+        // TODO: move this to a new file?
+        describe("parser can register new D/I handlers for XML tags") {
+            
+        }
+        
+        describe("parser can also register custom types to return") {
+            it("allows resolution of SpectraXMLNodeType with custom types") {
+                let notAnEnumCase = SpectraXMLNodeType(rawValue: "not-a-type")
+                expect(notAnEnumCase!.rawValue) == "not-a-type"
+            }
+        }
+        
         describe("vertex-attribute") {
             let attrPosition = MDLVertexAttribute(name: MDLVertexAttributePosition, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 0)
             let attrColor = MDLVertexAttribute(name: MDLVertexAttributeColor, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 1)
