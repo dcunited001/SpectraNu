@@ -12,15 +12,20 @@ import Swinject
 import ModelIO
 
 public enum SpectraXMLNodeType: String {
-    case WorldView = "world-view"
-    case Perspective = "perspective"
+    case World = "world"
     case Camera = "camera"
     case VertexDescriptor = "vertex-descriptor"
     case VertexAttribute = "vertex-attribute"
+    case Asset = "asset"
+    case Material = "material"
+    case MaterialProperty = "material-property"
+    case Texture = "texture"
     case Mesh = "mesh"
 }
 
-public typealias SpectraXMLNodeParser = ((node: XMLNode, key: String, options: [String: AnyObject]) -> Any)
+// TODO: how to specify monadic behavior with xml?
+
+public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String, options: [String: AnyObject]) -> Any)
 
 //public class SpectraXMLNodeParser {
 //    var parser: ((node: XMLNode, key: String, options: [String: AnyObject]) -> Any)?
@@ -59,9 +64,9 @@ public class SpectraXML {
         // - a specific node type SpectraFooXMLNode (use same pattern as before (yuck))
         // - a closure type: (foo: Bar) -> MDLBaz)
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.WorldView.rawValue) { (r, k: String) in
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String) in
 //            let parser: SpectraXMLNodeParser =
-            return { (node, key, options) in
+            return { (container, node, key, options) in
                 return "foo"
             }
         }
@@ -75,27 +80,20 @@ public class SpectraXML {
         
         return parser
     }
-
-    //TODO: enum for node types
     
     public func parse(container: Container, options: [String: AnyObject] = [:]) {
         for child in xml!.root!.children {
             let (tag, key) = (child.tag!, child.attributes["key"])
             
-            
-            
             switch SpectraXMLNodeType(rawValue: tag)! {
-            case .WorldView: break
-            case .Perspective: break
+            case .World: break
             case .Camera: break
             case .VertexDescriptor: break
             case .VertexAttribute: break
             default: break
             }
-            
         }
     }
-
 }
 
 class SpectraEnum {
@@ -117,7 +115,6 @@ class SpectraEnum {
         return values[key]!
     }
 }
-
 
 // TODO: is there struct value that makes sense here?
 // - so, like a single struct value that can be used in case statements
