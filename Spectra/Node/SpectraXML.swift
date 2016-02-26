@@ -11,9 +11,16 @@ import Fuzi
 import Swinject
 import ModelIO
 
-// meta keys could include:
+public typealias SpectraXMLNodeTuple = (construct: Any, meta: [String: Any]?)
+// meta is used when the construct returns a monad
+// meta should include a function at key: resolve
+// - the function should be expected to receive itself as args
+// - i.e. meta["resolve"](meta) should resolve to a function to which it can pass the construct function
+// - i.e. meta["resolve"](meta)(construct) should return a final object
+
+// meta keys could also include the following for casting:
 // - klass: AnyClass?, strukt: Any?, protokol: Any?
-public typealias SpectraXMLNodeTuple = (construct: Any, klass: AnyClass?, strukt: Any?, protokol: Any?, meta: [String: Any]?)
+
 // should it be necessary to pass the key here?
 public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String?, options: [String: Any]) -> SpectraXMLNodeTuple)
 
@@ -30,24 +37,28 @@ public enum SpectraXMLNodeType: String {
     
     public func nodeParser(node: XMLNode, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
         
+        // Achievement Unlocked: API allows for recursive resolution of variadically structured categories into a final object of any type.
+        
         switch self {
         case .World:
-            let foo: SpectraXMLNodeTuple = (construct: "a world.  or a (worldFn, meta) tuple", klass: nil, strukt: String.self, protokol: nil, meta: [:])
-            
             return {(container, node, key, options) in
-                return (construct: "a world.  or a (worldFn, meta) tuple", type: nil, meta: [:])
-                }
+                let nodeTuple: SpectraXMLNodeTuple = (construct: "a world.  or a (worldFn, meta) tuple", meta: [:])
+                return nodeTuple
+            }
         case .Camera:
             return {(container, node, key, options) in
-                return "a camera.  or a (cameraFn, meta) tuple"
+                let nodeTuple: SpectraXMLNodeTuple = (construct: "a camera.  or a (cameraFn, meta) tuple", meta: [:])
+                return nodeTuple
             }
         case .VertexDescriptor:
             return {(container, node, key, options) in
-                return "a vertex-descriptor.  or a (vertexDescriptorFn, meta) tuple"
+                let nodeTuple: SpectraXMLNodeTuple = (construct: "a vertex-descriptor.  or a (vertexDescriptorFn, meta) tuple", meta: [:])
+                return nodeTuple
             }
         case .VertexAttribute:
             return {(container, node, key, options) in
-                return "a vertex-attribute.  or a (vertexAttributeFn, meta) tuple"
+                let nodeTuple: SpectraXMLNodeTuple = (construct: "a vertex-attribute.  or a (vertexAttributeFn, meta) tuple", meta: [:])
+                return nodeTuple
             }
         // resolve custom types?
         default: return nil
@@ -130,9 +141,9 @@ public class SpectraXML {
             // TODO: resolve custom types
             //            parser.resolve(AnyClass.self, name: self.rawValue)
             
-            let construct, metadata = nodeParser(container: container, node: child, key: key, options: options)
+            let nodeTuple = nodeParser(container: container, node: child, key: key, options: options)
             
-            // TODO: resolve non-final types:
+            // TODO: recursively resolve non-final types in tuple:
             // - i.e. if some monad returns instead of concrete value,
             //   - then try to resolve the monad (should metadata also be returned?)
             //   - this may be a feature to implement down the road
