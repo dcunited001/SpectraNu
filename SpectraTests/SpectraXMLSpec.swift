@@ -25,7 +25,7 @@ class SpectraXMLSpec: QuickSpec {
         spectraEnumXSD.parseEnumTypes(parser)
         
         let testBundle = NSBundle(forClass: SpectraXMLSpec.self)
-        let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SceneGraphXMLTest")
+        let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SpectraXMLTest")
         let assetContainer = Container(parent: parser)
         
         let spectraXML = SpectraXML(parser: parser, data: xmlData)

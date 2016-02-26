@@ -20,7 +20,7 @@
 		4338B7BD1C163BFC007D3DF6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BB1C163BFC007D3DF6 /* Metal.framework */; };
 		4338B7C61C17674C007D3DF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C51C17674C007D3DF6 /* Foundation.framework */; };
 		4338B7CD1C18B126007D3DF6 /* S3DXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4338B7CB1C18B126007D3DF6 /* S3DXMLTest.xml */; };
-		4338B7CE1C18B126007D3DF6 /* SceneGraphXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4338B7CC1C18B126007D3DF6 /* SceneGraphXMLTest.xml */; };
+		4338B7CE1C18B126007D3DF6 /* SpectraXMLSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4338B7CC1C18B126007D3DF6 /* SpectraXMLSpec.xml */; };
 		4338B8D11C18DC92007D3DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8D01C18DC92007D3DF6 /* AppDelegate.swift */; };
 		4338B8D31C18DC92007D3DF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8D21C18DC92007D3DF6 /* ViewController.swift */; };
 		4338B8D61C18DC92007D3DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D41C18DC92007D3DF6 /* Main.storyboard */; };
@@ -144,7 +144,7 @@
 		4338B7BC1C163BFC007D3DF6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		4338B7C51C17674C007D3DF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4338B7CB1C18B126007D3DF6 /* S3DXMLTest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = S3DXMLTest.xml; path = ../../SpectraTestsResources/S3DXMLTest.xml; sourceTree = "<group>"; };
-		4338B7CC1C18B126007D3DF6 /* SceneGraphXMLTest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = SceneGraphXMLTest.xml; path = ../../SpectraTestsResources/SceneGraphXMLTest.xml; sourceTree = "<group>"; };
+		4338B7CC1C18B126007D3DF6 /* SpectraXMLSpec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = SpectraXMLSpec.xml; path = ../../SpectraTestsResources/SpectraXMLSpec.xml; sourceTree = "<group>"; };
 		4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptorManager.swift; sourceTree = "<group>"; };
 		4338B7FA1C18B39A007D3DF6 /* S3DXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXML.swift; sourceTree = "<group>"; };
 		4338B7FB1C18B39A007D3DF6 /* S3DXSD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXSD.swift; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				4338B7CB1C18B126007D3DF6 /* S3DXMLTest.xml */,
-				4338B7CC1C18B126007D3DF6 /* SceneGraphXMLTest.xml */,
+				4338B7CC1C18B126007D3DF6 /* SpectraXMLSpec.xml */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -590,7 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4338B7CD1C18B126007D3DF6 /* S3DXMLTest.xml in Resources */,
-				4338B7CE1C18B126007D3DF6 /* SceneGraphXMLTest.xml in Resources */,
+				4338B7CE1C18B126007D3DF6 /* SpectraXMLSpec.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

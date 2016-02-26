@@ -217,7 +217,7 @@
          location = "group:SpectraTestsResources/S3DXMLTest.xml">
       </FileRef>
       <FileRef
-         location = "group:SpectraTestsResources/SceneGraphXMLTest.xml">
+         location = "group:SpectraTestsResources/SpectraXMLSpec.xml">
       </FileRef>
    </Group>
    <FileRef

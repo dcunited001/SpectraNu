@@ -6,9 +6,22 @@
 
 <root>
 
-    <vertex-attribute key="pos_float_4" name="position" format="Float4"/>
-    <vertex-attribute key="tex_float_2" name="texture" format="Float2"/>
-    <vertex-attribute key="rgb_float_4" name="color" format="Float4"/>
+    <!-- 
+     must define any reusable vertex-attribute's ahead-of-time
+     - this is because these attributes are mutated when generating the vertex buffer layouts
+     
+     also, for now, layouts are either packed or not:
+     - either everything in one buffer, or everything in separate buffers
+     - and default towards everything in separate buffers
+     -->
+    <vertex-attribute key="pos_float4" name="position" format="Float4"/>
+    <vertex-attribute key="tex_float2" name="texture" format="Float2"/>
+    <vertex-attribute key="rgb_float4" name="color" format="Float4"/>
+    <vertex-attribute key="rgb_int4" name="color" format="int4"/>
+    <vertex-attribute key="aniso_float4" name="anisotropy" format="Float4"/>
+    
+    <vertex-attribute key="test_custom_label" name="custom" format="Int" />
+    <vertex-attribute key="test_immutable" name="custom" format="Int" buffer-index="0"/>
     
     <!-- TODO: vertex-descriptor format for delayed assembly of vertex-attributes (and associated buffer indices)
      -->
@@ -22,7 +35,14 @@
     <!-- can mix/match ref'd attributes with new ones -->
     <vertex-descriptor key="vert_pos_rgb_float">
         <vertex-attribute ref="pos_float_4"/>
-        <vertex-attribute key="rgb_int_4" name="color" format="Int4"/>
+        <vertex-attribute name="color" format="Int4"/>
+    </vertex-descriptor>
+    
+    <vertex-descriptor key="vertdesc_packed">
+        
+    </vertex-descriptor>
+    <vertex-descriptor key="vertdesc_unpacked">
+        
     </vertex-descriptor>
     
     <!-- can create either array-of-struct or struct-of-arrays -->
