@@ -11,8 +11,11 @@ import Fuzi
 import Swinject
 import ModelIO
 
+// meta keys could include:
+// - klass: AnyClass?, strukt: Any?, protokol: Any?
+public typealias SpectraXMLNodeTuple = (construct: Any, klass: AnyClass?, strukt: Any?, protokol: Any?, meta: [String: Any]?)
 // should it be necessary to pass the key here?
-public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String?, options: [String: Any]) -> Any)
+public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String?, options: [String: Any]) -> SpectraXMLNodeTuple)
 
 public enum SpectraXMLNodeType: String {
     case World = "world"
@@ -25,25 +28,27 @@ public enum SpectraXMLNodeType: String {
     case Texture = "texture"
     case Mesh = "mesh"
     
-    public func nodeParser(node: XMLNode, key: String, options: [String:Any] = [:]) -> (SpectraXMLNodeParser, [String: Any])? {
+    public func nodeParser(node: XMLNode, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
         
         switch self {
         case .World:
-            return ({(container, node, key, options) in
-                return "a world.  or a (worldFn, meta) tuple"
-                }, [:])
+            let foo: SpectraXMLNodeTuple = (construct: "a world.  or a (worldFn, meta) tuple", klass: nil, strukt: String.self, protokol: nil, meta: [:])
+            
+            return {(container, node, key, options) in
+                return (construct: "a world.  or a (worldFn, meta) tuple", type: nil, meta: [:])
+                }
         case .Camera:
-            return ({(container, node, key, options) in
+            return {(container, node, key, options) in
                 return "a camera.  or a (cameraFn, meta) tuple"
-            }, [:])
+            }
         case .VertexDescriptor:
-            return ({(container, node, key, options) in
+            return {(container, node, key, options) in
                 return "a vertex-descriptor.  or a (vertexDescriptorFn, meta) tuple"
-            }, [:])
+            }
         case .VertexAttribute:
-            return ({(container, node, key, options) in
+            return {(container, node, key, options) in
                 return "a vertex-attribute.  or a (vertexAttributeFn, meta) tuple"
-            }, [:])
+            }
         // resolve custom types?
         default: return nil
         }
