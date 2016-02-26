@@ -50,17 +50,18 @@ public enum SpectraXMLNodeType: String {
                 let nodeTuple: SpectraXMLNodeTuple = (construct: "a camera.  or a (cameraFn, meta) tuple", meta: [:])
                 return nodeTuple
             }
-        case .VertexDescriptor:
-            return {(container, node, key, options) in
-                let nodeTuple: SpectraXMLNodeTuple = (construct: "a vertex-descriptor.  or a (vertexDescriptorFn, meta) tuple", meta: [:])
-                return nodeTuple
-            }
         case .VertexAttribute:
             return {(container, node, key, options) in
-                let nodeTuple: SpectraXMLNodeTuple = (construct: "a vertex-attribute.  or a (vertexAttributeFn, meta) tuple", meta: [:])
+                let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: node, options: options)
+                let nodeTuple: SpectraXMLNodeTuple = (construct: vertexAttr, meta: [:])
                 return nodeTuple
             }
-        // resolve custom types?
+        case .VertexDescriptor:
+            return {(container, node, key, options) in
+                let vertexDesc = SpectraXMLVertexDescriptorNode().parse(container, elem: node, options: options)
+                let nodeTuple: SpectraXMLNodeTuple = (construct: vertexDesc, meta: [:])
+                return nodeTuple
+            }
         default: return nil
         }
     }
