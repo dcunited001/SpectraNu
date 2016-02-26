@@ -205,10 +205,33 @@ public protocol SpectraXMLNode {
     func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType
 }
 
-public class SpectraXMLVertexAttributeNode {
+public class SpectraXMLAssetNode: SpectraXMLNode {
+    public typealias NodeType = MDLAsset
+    
+    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+        let urlString = elem.attributes["url"]!
+        var vertexDesc: MDLVertexDescriptor?
+        
+        if let vertexDescKey = elem.attributes["vertex-descriptor-ref"] {
+            vertexDesc = container.resolve(MDLVertexDescriptor.self, name: vertexDescKey)
+        }
+        
+        if let bufferAllocKey = elem.attributes["mesh-buffer-allocator-ref"] {
+            // TODO: buffer allocation
+        }
+        
+        let asset = MDLAsset()
+        
+        // TODO: set asset properties
+        
+        return asset
+    }
+}
+
+public class SpectraXMLVertexAttributeNode: SpectraXMLNode {
     public typealias NodeType = MDLVertexAttribute
     
-    func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
         let vertexAttr = MDLVertexAttribute()
         
         // TODO: determine which of these are required
