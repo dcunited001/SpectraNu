@@ -22,22 +22,22 @@ public typealias SpectraXMLNodeTuple = (construct: Any, meta: [String: Any]?)
 // - klass: AnyClass?, strukt: Any?, protokol: Any?
 
 // should it be necessary to pass the key here?
-public typealias SpectraXMLNodeParser = ((container: Container, node: XMLNode, key: String?, options: [String: Any]) -> SpectraXMLNodeTuple)
+public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement, key: String?, options: [String: Any]) -> SpectraXMLNodeTuple)
 
 public enum SpectraXMLNodeType: String {
     case World = "world"
     case Camera = "camera"
-    case VertexDescriptor = "vertex-descriptor"
     case VertexAttribute = "vertex-attribute"
+    case VertexDescriptor = "vertex-descriptor"
     case Asset = "asset"
     case Material = "material"
     case MaterialProperty = "material-property"
     case Texture = "texture"
     case Mesh = "mesh"
     
-    public func nodeParser(node: XMLNode, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
+    public func nodeParser(node: XMLElement, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
         
-        // Achievement Unlocked: API allows for recursive resolution of variadically structured categories into a final object of any type.
+        // Achievement Unlocked: API allows for recursive resolution of variadically structured categories into a final object of any type ... ok well maybe it doesn't quite do this yet
         
         switch self {
         case .World:
@@ -117,17 +117,17 @@ public class SpectraXML {
         //   - that closure will get the node anyways
         // - same thing with options: beware retaining a reference
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexAttribute.rawValue) { (r, k: String, node: XMLNode, options: [String: Any]) in
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexAttribute.rawValue) { (r, k: String, node: XMLElement, options: [String: Any]) in
             return SpectraXMLNodeType.VertexAttribute.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexDescriptor.rawValue) { (r, k: String, node: XMLNode, options: [String:Any]) in
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.VertexDescriptor.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
             return SpectraXMLNodeType.VertexDescriptor.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLNode, options: [String: Any]) in
-            return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
-            }.inObjectScope(.None) // always return a new instance of the closure
+//        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLElement, options: [String: Any]) in
+//            return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
+//            }.inObjectScope(.None) // always return a new instance of the closure
         
         return parser
     }
