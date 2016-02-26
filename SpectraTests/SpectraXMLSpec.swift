@@ -12,14 +12,30 @@ import Nimble
 import ModelIO
 import Fuzi
 import Spectra
+import Swinject
 import simd
 
 class SpectraXMLSpec: QuickSpec {
     
     override func spec() {
+        let parser = Container()
+        
+        let spectraEnumData = SpectraXSD.readXSD("SpectraEnums")
+        let spectraEnumXSD = SpectraXSD(data: spectraEnumData)
+        spectraEnumXSD.parseEnumTypes(parser)
+        
         let testBundle = NSBundle(forClass: SpectraXMLSpec.self)
         let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SceneGraphXMLTest")
-        let spectraXML = SpectraXML(data: xmlData)
+        let assetContainer = Container(parent: parser)
+        
+        let spectraXML = SpectraXML(parser: parser, data: xmlData)
+        
+        let attrPos = MDLVertexAttribute(name: MDLVertexAttributePosition, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 0)
+        let attrRgb = MDLVertexAttribute(name: MDLVertexAttributeColor, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 1)
+        let attrTex = MDLVertexAttribute(name: MDLVertexAttributeTextureCoordinate, format: MDLVertexFormat.Float2, offset: 0, bufferIndex: 2)
+        let attrAniso = MDLVertexAttribute(name: MDLVertexAttributeAnisotropy, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 3)
+
+        // let vertexDescriptor: MTLDescriptor
         
         // TODO: move this to a new file?
         describe("parser can register new D/I handlers for XML tags") {
@@ -33,11 +49,13 @@ class SpectraXMLSpec: QuickSpec {
             }
         }
         
+        describe("SpectraXMLNodeTuple") {
+            it("can recursively resolve dependencies using (construct, meta)") {
+                
+            }
+        }
+        
         describe("vertex-attribute") {
-            let attrPosition = MDLVertexAttribute(name: MDLVertexAttributePosition, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 0)
-            let attrColor = MDLVertexAttribute(name: MDLVertexAttributeColor, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 1)
-            let attrTexture = MDLVertexAttribute(name: MDLVertexAttributeTextureCoordinate, format: MDLVertexFormat.Float2, offset: 0, bufferIndex: 2)
-            let attrAnisotropy = MDLVertexAttribute(name: MDLVertexAttributeAnisotropy, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 3)
             it("can parse vertex attribute nodes") {
                 
             }
@@ -45,7 +63,10 @@ class SpectraXMLSpec: QuickSpec {
         
         describe("vertex-descriptor") {
             it("can parse vertex descriptor with references to vertex attributes") {
-                
+                let vertDesc = MDLVertexDescriptor()
+                // TODO: fetch from D/I
+                expect(vertDesc.attributes[0] as! MDLVertexAttribute) == attrPos
+                expect(vertDesc.attributes[1] as! MDLVertexAttribute) == attrTex
             }
             
             it("can parse vertex descriptor, mixing references with new attributes") {
