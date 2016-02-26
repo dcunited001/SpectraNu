@@ -17,6 +17,10 @@ import simd
 
 class SpectraXMLSpec: QuickSpec {
     
+    func containerGet<T>(container: Container, key: String) -> T? {
+        return container.resolve(T.self, name: key)
+    }
+    
     override func spec() {
         let parser = Container()
         
@@ -30,22 +34,16 @@ class SpectraXMLSpec: QuickSpec {
         
         let spectraXML = SpectraXML(parser: parser, data: xmlData)
         
-        let attrPos = MDLVertexAttribute(name: MDLVertexAttributePosition, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 0)
-        let attrRgb = MDLVertexAttribute(name: MDLVertexAttributeColor, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 1)
-        let attrTex = MDLVertexAttribute(name: MDLVertexAttributeTextureCoordinate, format: MDLVertexFormat.Float2, offset: 0, bufferIndex: 2)
-        let attrAniso = MDLVertexAttribute(name: MDLVertexAttributeAnisotropy, format: MDLVertexFormat.Float4, offset: 0, bufferIndex: 3)
-
-        // let vertexDescriptor: MTLDescriptor
-        
         // TODO: move this to a new file?
-        describe("parser can register new D/I handlers for XML tags") {
+        describe("SpectraXML: main parser") {
+            describe("parser can register new D/I handlers for XML tags") {
+                
+            }
             
-        }
-        
-        describe("parser can also register custom types to return") {
-            it("allows resolution of SpectraXMLNodeType with custom types") {
-//                let notAnEnumCase = SpectraXMLNodeType(rawValue: "not-a-type")
-//                expect(notAnEnumCase!.rawValue) == "not-a-type"
+            describe("parser can also register custom types to return") {
+                it("allows resolution of SpectraXMLNodeType with custom types") {
+                    
+                }
             }
         }
         
@@ -56,8 +54,49 @@ class SpectraXMLSpec: QuickSpec {
         }
         
         describe("vertex-attribute") {
+            let attrPos: MDLVertexAttribute = self.containerGet(assetContainer, key: "pos_float4")!
+            let attrTex: MDLVertexAttribute = self.containerGet(assetContainer, key: "tex_float2")!
+            let attrRgb: MDLVertexAttribute = self.containerGet(assetContainer, key: "rgb_float4")!
+            let attrRgbInt: MDLVertexAttribute = self.containerGet(assetContainer, key: "rgb_int4")!
+            let attrAniso: MDLVertexAttribute = self.containerGet(assetContainer, key: "aniso_float4")!
+            let attrCustomLabel: MDLVertexAttribute = self.containerGet(assetContainer, key: "test_custom_label")!
+            let attrImmutable: MDLVertexAttribute = self.containerGet(assetContainer, key: "test_immutable")!
+            
             it("can parse vertex attribute nodes") {
+                // for now, deferring assignment of bufferIndex and offset to MDLVertexDescriptor
+                expect(attrPos.name) == MDLVertexAttributePosition
+                expect(attrTex.name) == MDLVertexAttributeTextureCoordinate
+                expect(attrRgb.name) == MDLVertexAttributeColor
+                expect(attrAniso.name) == MDLVertexAttributeAnisotropy
+            }
+            
+            it("can create attributes with custom labels") {
+                expect(attrCustomLabel.name) == "custom"
+            }
+            
+            it("reads the correct MDLVertexFormat") {
+                expect(attrPos.format) == MDLVertexFormat.Float4
+                expect(attrTex.format) == MDLVertexFormat.Float2
+                expect(attrRgb.format) == MDLVertexFormat.Float4
+                expect(attrRgbInt.format) == MDLVertexFormat.Int4
+                expect(attrAniso.format) == MDLVertexFormat.Float4
+                expect(attrImmutable.format) == MDLVertexFormat.Int
+            }
+            
+            it("retains immutable copies which are not changed") {
+                let origIndex = attrImmutable.bufferIndex
+                attrImmutable.bufferIndex = origIndex + 1
+                let attrImmutable2: MDLVertexAttribute = self.containerGet(assetContainer, key: "test_immutable")!
+                expect(attrImmutable.bufferIndex) != attrImmutable2.bufferIndex
+                expect(attrImmutable2.bufferIndex) == origIndex
                 
+                // just want to see how default values are initialized
+                let origAttrPosIndex = attrPos.bufferIndex
+                attrPos.bufferIndex = origAttrPosIndex + 1
+                
+                let attrPos2: MDLVertexAttribute = self.containerGet(assetContainer, key: "pos_float_4")!
+                expect(attrPos.bufferIndex) != attrPos2.bufferIndex
+                expect(attrPos2.bufferIndex) == origAttrPosIndex
             }
         }
         
@@ -65,15 +104,13 @@ class SpectraXMLSpec: QuickSpec {
             it("can parse vertex descriptor with references to vertex attributes") {
                 let vertDesc = MDLVertexDescriptor()
                 // TODO: fetch from D/I
-                expect(vertDesc.attributes[0] as! MDLVertexAttribute) == attrPos
-                expect(vertDesc.attributes[1] as! MDLVertexAttribute) == attrTex
             }
             
-            it("can parse vertex descriptor, mixing references with new attributes") {
+            it("can parse with packed-layout to create array-of-struct indexing") {
                 
             }
             
-            it("can parse vertex descriptor to create either array-of-struct or struct-of-array indexing") {
+            it("can parse without packed-layout to create struct-of-array indexing") {
                 
             }
         }
