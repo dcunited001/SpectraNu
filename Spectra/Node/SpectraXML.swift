@@ -157,7 +157,113 @@ public class SpectraXML {
     }
 }
 
-class SpectraEnum {
+public class SpectraXMLSimd {
+    
+    // TODO: resolve parsing issues (but for now, can only use 1 & 4 value types)
+    
+    public static func parseDoubles(str: String) -> [Double] {
+        let valStrs = str.characters.split { $0 == " " }.map(String.init)
+        return valStrs.map() { Double($0)! }
+    }
+    
+    public static func parseInts(str: String) -> [Int] {
+        let valStrs = str.characters.split { $0 == " " }.map(String.init)
+        return valStrs.map() { Int($0)! }
+    }
+    
+    public static func parseInt32s(str: String) -> [Int32] {
+        let valStrs = str.characters.split { $0 == " " }.map(String.init)
+        return valStrs.map() { Int32($0)! }
+    }
+    
+    public static func parseFloats(str: String) -> [Float] {
+        let valStrs = str.characters.split { $0 == " " }.map(String.init)
+        return valStrs.map() { Float($0)! }
+    }
+    
+    public static func parseFloat4(str: String) -> float4 {
+        return float4(parseFloats(str))
+    }
+    
+    public static func parseInt4(str: String) -> int4 {
+        return int4(parseInt32s(str))
+    }
+}
+
+public protocol SpectraXMLNode {
+    typealias NodeType
+    
+    // TODO: why not attach elem, etc. as attributes? scoping?
+    
+    func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType
+}
+
+public class SpectraXMLVertexAttributeNode {
+    public typealias NodeType = MDLVertexAttribute
+    
+    func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+        let vertexAttr = MDLVertexAttribute()
+        
+        // TODO: determine which of these are required
+        // TODO: abstract this logic, so if user overrides the closure,
+        // - they don't need to reimplement basics
+        
+        if let name = elem.attributes["name"] {
+            vertexAttr.name = name
+        }
+        if let format = elem.attributes["format"] {
+            let enumVal = container.resolve(SpectraEnum.self, name: "mdlVertexFormat")!.getValue(format)
+            vertexAttr.format = MDLVertexFormat(rawValue: enumVal)!
+        }
+        if let offset = elem.attributes["offset"] {
+            vertexAttr.offset = Int(offset)!
+        }
+        if let bufferIndex = elem.attributes["bufferIndex"] {
+            vertexAttr.bufferIndex = Int(bufferIndex)!
+        }
+        if let initializationValue = elem.attributes["initialization-value"] {
+            vertexAttr.initializationValue = SpectraXMLSimd.parseFloat4(initializationValue)
+        }
+        
+        return vertexAttr
+    }
+}
+
+public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
+    public typealias NodeType = MDLVertexDescriptor
+    
+    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+        var vertexDesc = MDLVertexDescriptor()
+        
+        // if user specified a parent descriptor, find it and copy it
+        // - any named property will be overwritten
+        if let parentDescriptor = elem.attributes["parent-descriptor"] {
+            let parentDesc = container.resolve(MDLVertexDescriptor.self, name: parentDescriptor)!
+            vertexDesc = MDLVertexDescriptor(vertexDescriptor: parentDesc)
+        }
+        
+        let attributeSelector = "vertex-attributes > vertex-attribute"
+        for (idx, el) in elem.css(attributeSelector).enumerate() {
+            if let ref = el.attributes["ref"] {
+                let vertexAttr = container.resolve(MDLVertexAttribute.self, name: ref)!
+                vertexDesc.addOrReplaceAttribute(vertexAttr)
+            } else {
+                let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: el, options: options)
+                vertexDesc.addOrReplaceAttribute(vertexAttr)
+                
+                if let key = el.attributes["key"] {
+                    container.register(MDLVertexAttribute.self, name: key) { _ in
+                        return vertexAttr
+                    }
+                }
+            }
+        }
+        
+        return vertexDesc
+    }
+}
+
+public class SpectraEnum {
     let name: String
     var values: [String: UInt]
     
