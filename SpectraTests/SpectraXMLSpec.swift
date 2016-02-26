@@ -33,7 +33,7 @@ class SpectraXMLSpec: QuickSpec {
         let assetContainer = Container(parent: parser)
         
         let spectraXML = SpectraXML(parser: parser, data: xmlData)
-        
+
         // TODO: move this to a new file?
         describe("SpectraXML: main parser") {
             describe("parser can register new D/I handlers for XML tags") {
@@ -120,22 +120,123 @@ class SpectraXMLSpec: QuickSpec {
         
         describe("world-view") {
             it("can parse world view nodes") {
-                
+                // should it create a separate 'world-object' with it's own transform hierarchy?
+            }
+        }
+        
+        describe("object") {
+            it("can create root objects that can be used to contain other objects") {
+                // i think this is the best place for this?
+                // - or object container?
             }
         }
         
         describe("camera") {
-            it("can parse camera nodes") {
+            it("manages the inherited MDLObject properties") {
+                // transform
+                // parent
+            }
+            
+            it("is created with near-visibility-distance, far-visibility-distance and field-of-view") {
+                // these are required and produce a corresponding projection matrix (formerly perspective)
+            }
+            
+            it("can be set to look at a position and look from a position") {
+                // look-at (and optionally look-from)
+            }
+            
+            it("can specify Physical Lens parameters") {
+                // the renderer must support the math (visual distortion, etc)
+                // - barrelDistorion: Float
+                // - fisheyeDistorion: Float
+                // - opticalVignetting: Float
+                // - chromaticAberration: Float
+                // - focalLength: Float
+                // - fStop: Float
+                // - apertureBladeCount: Int
+                // - bokehKernelWithSize: vector_int2 -> MDLTexture
+                // - maximumCircleOfConfusion: Float
+                // - focusDistance: Float
+                // - shutterOpenInterval: NSTimeInterval
+            }
+            
+            it("can specify Physical Imaging Surface parameters ") {
+                // the renderer must support the math
+                // - sensorVerticalAperture: Float
+                // - sensorAspect: Float
+                // - sensorEnlargement: vector_float2
+                // - sensorShift: vector_float2
+                // - flash: vector_float3
+                // - exposure: vector_float3
+                // - exposureCompression: vector_float2
+            }
+        }
+        
+        describe("stereoscopic-camera") {
+            it("is created by additionally specifying interPupillaryDistance, overlap & left/right vergence") {
                 
             }
         }
         
-        describe("perspective") {
-            it("can parse perspective nodes") {
+        describe("asset") {
+            it("can load a MDLAsset, but only from a file url") {
+                
+            }
+            
+            it("can load a MDLAsset with a URL & vertex descriptor") {
+                
+            }
+            
+            it("can load a MDLAsset with a URL, vertex descriptor & buffer allocator") {
+                
+            }
+            
+            it("can load a MDLAsset while preserving the topology") {
                 
             }
         }
+        
+        describe("texture") {
+            it("can init a texture with nil data to be written to later") {
+                // TODO: figure out how to best splat pixel data into a NSData? array
+                // - NSData generation can be deferred - `pixelData: nil` is allowed
+                //   - in this case, can i write to the NSData? object from texelDataWithTopLeftOrigin() ???
+                //   - if so, this is useful.  if not, it's not and i have no idea how to write to it.
+            }
+            
+            it("can init a texture, specifying a spectra texture data generator for deferred execution") {
+                
+            }
+            
+            it("can create the various types of MDLTexture subclasses") {
+                // MDLCheckerboardTexture
+                // MDLColorSwatchTexture
+                // MDLNoiseTexture
+                // MDLNormalMapTexture
+                // MDLSkyCubeTexture
+                // MDLURLTexture
+            }
+            
+            it("can load a texture from a bundle resource") {
+                
+            }
+            
+            it("can load a texture from a named bundle resource") {
+                
+            }
+            
+            it("can load a texture cube from a bundle resource") {
+                
+            }
+            
+            it("can load a texture cube from a named bundle resource") {
+                
+            }
+            
+            it("can load a texture from a url") {
+                
+            }
+        }
+        
     }
 }
-
-
