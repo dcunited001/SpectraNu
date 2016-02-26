@@ -79,8 +79,14 @@ public class SpectraXML {
     var xml: XMLDocument?
     var parser: Container
     
-    public init(data: NSData, parser: Container? = SpectraXML.initParser()) {
-        self.parser = parser!
+    public init(parser: Container, data: NSData) {
+        // NOTE: both this parser and the container injected into the SpectraXMLNodeParser functions
+        // - should be able to reference the enum types read from the XSD file
+        // - the simplest way to do this is create a container, load the XSD enums onto it, 
+        //   - then use this parser container as a parent: nodeParserContainer = Container(parent: parser)
+        //   - refer to SpectraXMLSpec for an example
+        // - or, if scoping is an issue, apply the enums to both the parser & nodeParser containers
+        self.parser = parser
         
         do {
             xml = try XMLDocument(data: data)
@@ -95,9 +101,7 @@ public class SpectraXML {
         }
     }
     
-    public class func initParser() -> Container {
-        var parser = Container()
-        
+    public class func initParser(parser: Container) -> Container {
         //TODO: how to ensure that typing is consistent?
         // return [fnParse -> Any, fnCast -> MDLType] // this may work
         
@@ -143,6 +147,8 @@ public class SpectraXML {
             //            parser.resolve(AnyClass.self, name: self.rawValue)
             
             let nodeTuple = nodeParser(container: container, node: child, key: key, options: options)
+            
+            // TODO: use options to set ObjectScope (default to .Container?)
             
             // TODO: recursively resolve non-final types in tuple:
             // - i.e. if some monad returns instead of concrete value,
@@ -254,6 +260,7 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
             }
         }
         
+        // TODO: possibly split this into "packed-stride" and "packed-offset"
         // TODO: decide whether more complicated, nested layouts should be allowed
         if let packedLayout = elem.attributes["packed-layout"] where NSString(string: packedLayout).boolValue {
             vertexDesc.setPackedOffsets()
