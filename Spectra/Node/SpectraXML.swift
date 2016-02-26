@@ -250,13 +250,17 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
             } else {
                 let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: el, options: options)
                 vertexDesc.addOrReplaceAttribute(vertexAttr)
-                
-                if let key = el.attributes["key"] {
-                    container.register(MDLVertexAttribute.self, name: key) { _ in
-                        return vertexAttr
-                    }
-                }
             }
+        }
+        
+        // TODO: decide whether more complicated, nested layouts should be allowed
+        if let packedLayout = elem.attributes["packed-layout"] where NSString(string: packedLayout).boolValue {
+            vertexDesc.setPackedOffsets()
+            vertexDesc.setPackedStrides()
+        } else {
+            // ensure that buffer indices are set
+            // - and all buffer offsets are zero'd
+            // -
         }
         
         return vertexDesc
