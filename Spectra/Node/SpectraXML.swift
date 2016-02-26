@@ -27,13 +27,17 @@ public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement
 public enum SpectraXMLNodeType: String {
     case World = "world"
     case Camera = "camera"
+    case StereoscopicCamera = "stereoscopic-camera"
     case VertexAttribute = "vertex-attribute"
     case VertexDescriptor = "vertex-descriptor"
     case Asset = "asset"
     case Material = "material"
     case MaterialProperty = "material-property"
+    case ScatteringFunction = "scattering-function"
     case Texture = "texture"
-    case Mesh = "mesh"
+    case TextureFilter = "texture-filter"
+    case TextureSampler = "texture-sampler"
+    case Light = "light"
     
     public func nodeParser(node: XMLElement, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
         
@@ -297,6 +301,97 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
         return vertexDesc
     }
 }
+
+//TODO: public class SpectraXMLWorldNode: SpectraXMLNode
+//TODO: public class SpectraXMLMeshNode: SpectraXMLNode
+//TODO: public class SpectraXMLMeshGeneratorNode: SpectraXMLNode
+//TODO: public class SpectraXMLObjectNode: SpectraXMLNode
+
+//============================================================
+// TODO: decide how to handle inheritance
+// - use separate node classes for each instance 
+//   - this would be appropriate for some, like MDLCamera & Stereoscopic (except phys lens & phys imaging)
+//   - but gets cumbersome for other classes, like MDLTexture, etc.
+//   - and isn't extensible
+// - there's also the mesh-generator pattern from the original SceneGraphXML
+//   - this draws from a map of monads passed in and executes the one for a specific type, if found
+
+public struct SpectraPhysicalLensParams {
+    // TODO: determine which are required and which are not
+    public var key: String?
+    public var barrelDistorion: Float?
+    public var fisheyeDistorion: Float?
+    public var opticalVignetting: Float?
+    public var chromaticAberration: Float?
+    public var focalLength: Float?
+    public var fStop: Float?
+    public var apertureBladeCount: Int?
+//    public var bokehKernelWithSize: vector_int2 -> MDLTexture
+    public var maximumCircleOfConfusion: Float?
+    public var focusDistance: Float?
+    public var shutterOpenInterval: NSTimeInterval?
+}
+
+public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
+    public typealias NodeType = SpectraPhysicalLensParams
+    
+    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+        return SpectraPhysicalLensParams()
+    }
+}
+
+public struct SpectraPhysicalImagingSurfaceParams {
+    // TODO: determine which are required and which are not
+    public var key: String?
+    public var sensorVerticalAperture: Float?
+    public var sensorAspect: Float?
+    public var sensorEnlargement: vector_float2?
+    public var sensorShift: vector_float2?
+    public var flash: vector_float3?
+    public var exposure: vector_float3?
+    public var exposureCompression: vector_float2?
+}
+
+public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
+    public typealias NodeType = SpectraPhysicalImagingSurfaceParams
+    
+    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+        return SpectraPhysicalImagingSurfaceParams()
+    }
+}
+
+public class SpectraXMLCameraNode: SpectraXMLNode {
+    public typealias NodeType = MDLCamera
+    
+    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+        let cam = MDLCamera()
+        
+        // TODO: the following are required.  make them optional with defaults?
+        let nearVisibility = elem.attributes["near-visibility-distance"]!
+        let farVisibility = elem.attributes["far-visibility-distance"]!
+        let fieldOfView = elem.attributes["field-of-view"]!
+        
+        if let lookAt = elem.attributes["look-at"] {
+            //TODO: fix the float3()
+//            cam.lookAt(Float(lookAt)!, from: Float(elem.attributes["look-from"]))
+        }
+        
+        return cam
+    }
+}
+
+// TODO: public class SpectraXMLTextureNode: SpectraXMLNode {
+// TODO: public class SpectraXMLTextureFilterNode: SpectraXMLNode {
+// TODO: public class SpectraXMLTextureSamplerNode: SpectraXMLNode {
+// TODO: public class SpectraXMLLightNode: SpectraXMLNode {
+// TODO: public class SpectraXML ... etc
+// TODO: public class SpectraXMLMaterialNode: SpectraXMLNode {
+// TODO: public class SpectraXMLMaterialPropertyNode: SpectraXMLNode {
+// TODO: public class SpectraXMLScatteringFunctionNode: SpectraXMLNode {
+// TODO: public class .. voxel array?  maybe a generator
+// TODO: public class .. voxel morphism (morphology in 3D)
+
+
 
 public class SpectraEnum {
     let name: String

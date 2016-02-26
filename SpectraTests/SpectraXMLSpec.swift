@@ -102,8 +102,7 @@ class SpectraXMLSpec: QuickSpec {
         
         describe("vertex-descriptor") {
             it("can parse vertex descriptor with references to vertex attributes") {
-                let vertDesc = MDLVertexDescriptor()
-                // TODO: fetch from D/I
+
             }
             
             it("can parse with packed-layout to create array-of-struct indexing") {
@@ -124,10 +123,48 @@ class SpectraXMLSpec: QuickSpec {
             }
         }
         
+        describe("mesh") {
+            //TODO: doc mesh attributes
+        }
+        
+        describe("mesh-generator") {
+            //TODO: doc mesh-generator attributes
+        }
+        
         describe("object") {
             it("can create root objects that can be used to contain other objects") {
                 // i think this is the best place for this?
                 // - or object container?
+            }
+        }
+        
+        describe("physical-lens") {
+            it("can specify Physical Lens parameters") {
+                // the renderer must support the math (visual distortion, etc)
+                // - barrelDistorion: Float
+                // - fisheyeDistorion: Float
+                // - opticalVignetting: Float
+                // - chromaticAberration: Float
+                // - focalLength: Float
+                // - fStop: Float
+                // - apertureBladeCount: Int
+                // - bokehKernelWithSize: vector_int2 -> MDLTexture
+                // - maximumCircleOfConfusion: Float
+                // - focusDistance: Float
+                // - shutterOpenInterval: NSTimeInterval
+            }
+        }
+        
+        describe("physical-imaging-surface") {
+            it("can specify Physical Imaging Surface parameters ") {
+                // the renderer must support the math
+                // - sensorVerticalAperture: Float
+                // - sensorAspect: Float
+                // - sensorEnlargement: vector_float2
+                // - sensorShift: vector_float2
+                // - flash: vector_float3
+                // - exposure: vector_float3
+                // - exposureCompression: vector_float2
             }
         }
         
@@ -144,38 +181,15 @@ class SpectraXMLSpec: QuickSpec {
             it("can be set to look at a position and look from a position") {
                 // look-at (and optionally look-from)
             }
-            
-            it("can specify Physical Lens parameters") {
-                // the renderer must support the math (visual distortion, etc)
-                // - barrelDistorion: Float
-                // - fisheyeDistorion: Float
-                // - opticalVignetting: Float
-                // - chromaticAberration: Float
-                // - focalLength: Float
-                // - fStop: Float
-                // - apertureBladeCount: Int
-                // - bokehKernelWithSize: vector_int2 -> MDLTexture
-                // - maximumCircleOfConfusion: Float
-                // - focusDistance: Float
-                // - shutterOpenInterval: NSTimeInterval
-            }
-            
-            it("can specify Physical Imaging Surface parameters ") {
-                // the renderer must support the math
-                // - sensorVerticalAperture: Float
-                // - sensorAspect: Float
-                // - sensorEnlargement: vector_float2
-                // - sensorShift: vector_float2
-                // - flash: vector_float3
-                // - exposure: vector_float3
-                // - exposureCompression: vector_float2
-            }
         }
         
         describe("stereoscopic-camera") {
             it("is created by additionally specifying interPupillaryDistance, overlap & left/right vergence") {
                 
             }
+            
+            // it can attach a physical-lens
+            // it can attach a physical-imaging-surface
         }
         
         describe("asset") {
