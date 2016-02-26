@@ -238,5 +238,109 @@ class SpectraXMLSpec: QuickSpec {
             }
         }
         
+        describe("texture-filter") {
+            // describes wrapping texture to objects (clamping/etc)
+            
+            // Managing Texture Coordinate Wrap Modes (for values outside 0 to 1)
+            // sWrapMode: wrap 1st texture coord
+            // tWrapMode: wrap 2nd texture coord
+            // rWrapMode: wrap 3rd texture coord
+            
+            // Managing Texture Filter Modes
+            // minFilter: rendering textures at sizes smaller than that of the original image.
+            // magFilter: rendering textures at sizes larger than that of the original image.
+            // mipFilter: rendering textures with mip maps
+
+            // enum: MDLMaterialTextureWrapMode
+            // enum: MDLMaterialTextureFilterMode
+            // enum: MDLMaterialMipMapFilterMode
+            
+            // TODO: MDLTextureFilter => MTLTextureFilter
+        }
+        
+        describe("texture-sampler") {
+            // texture: MDLTexture
+            // hardwareFilter: MDLTextureFilter
+            // transform: MDLTransform (translate/scale/rotate textures relative to their surfaces)
+            
+            // TODO: MDLTextureSampler => MTLTextureSampler
+        }
+        
+        describe("light") {
+            // TODO: finish filling out attributes
+            // - MDLLightProbe
+            // - MDLPhysicallyPlausibleLight
+            // - MDLPhotometricLight
+        }
+        
+        describe("material") {
+            // initWithName:scatteringFunction:
+            // - name: String
+            // - scatteringFunction: MDLScatteringFunction (required)
+            // - baseMaterial: MDLMaterial? (parent material which can material properties)
+        }
+        
+        describe("material-property") {
+            
+            // - initWithName:semantic:URL:
+            // - initWithName:semantic:textureSampler:
+            // - initWithName:semantic:color:
+            // - initWithName:semantic:float:
+            // - initWithName:semantic:float2:
+            // - initWithName:semantic:float3:
+            // - initWithName:semantic:float4:
+            // - initWithName:semantic:matrix4x4:
+            
+            // name: String
+            // semantic: MDLMaterialSemantic
+            // type: MDLMaterialPropertyType
+            // stringValue: String?
+            // URLValue: NSUrl?
+            // textureSamplerValue: MDLTextureSampler
+            // color: CGColor?
+            // floatValue: Float
+            // float2Value: vector_float2
+            // float3Value: vector_float3
+            // float4Value: vector_float4
+            // matrix4x4: matrix_float4x4
+            
+            // copy with setProperties:MDLMaterialProperty
+            
+            // enum: MDLMaterialSemantic
+            // enum: MDLMaterialPropertyType
+        }
+        
+        describe("scattering-function") {
+            // defines response to lighting for a MDLMaterial object
+            // - i'll need to be knee deep in shaders before messing with this
+            //   - and depthStencils with blitting, i think
+            
+            // name: String
+            // baseColor: MDLMaterialProperty
+            // emission: MDLMaterialProperty
+            // specular: MDLMaterialProperty
+            // materialIndexOfRefraction: MDLMaterialProperty
+            // interfaceIndexOfRefraction: MDLMaterialProperty
+            // normal: MDLMaterialProperty
+            // ambientOcclusion: MDLMaterialProperty
+            // ambientOcclusionScale: MDLMaterialProperty
+
+            // also includes MDLPhysicallyPlausibleScatteringFunction:
+            //
+            // subsurface: MDLMaterialProperty
+            // metallic: MDLMaterialProperty
+            // specularAmount: MDLMaterialProperty
+            // specularTint: MDLMaterialProperty
+            // roughness: MDLMaterialProperty
+            // anisotropic: MDLMaterialProperty
+            // anisotropicRotation: MDLMaterialProperty
+            // sheen: MDLMaterialProperty
+            // sheenTint: MDLMaterialProperty
+            // clearcoat: MDLMaterialProperty
+        }
+        
+        describe("voxel-array") {
+            // transformations to voxels from meshes that are already loaded
+        }
     }
 }
