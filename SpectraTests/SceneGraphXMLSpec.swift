@@ -35,7 +35,7 @@ class SceneGraphXMLSpec: QuickSpec {
     
     override func spec() {
         let testBundle = NSBundle(forClass: S3DXMLSpec.self)
-        let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SpectraXMLTest")
+        let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SpectraXMLSpec")
         let sceneGraphXML = SceneGraphXML(data: xmlData)
         
         var sceneGraph = SceneGraph()
