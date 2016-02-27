@@ -454,13 +454,13 @@ public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
 
 public struct SpectraPhysicalImagingSurfaceParams {
     // TODO: determine which are required and which are not
-    public var sensorVerticalAperture: Float?
-    public var sensorAspect: Float?
-    public var sensorEnlargement: vector_float2?
-    public var sensorShift: vector_float2?
-    public var flash: vector_float3?
-    public var exposure: vector_float3?
-    public var exposureCompression: vector_float2?
+    public var sensorVerticalAperture: Float = 24
+    public var sensorAspect: Float = 1.5
+    public var sensorEnlargement: vector_float2 = float2(1.0, 1.0)
+    public var sensorShift: vector_float2 = float2(0.0, 0.0)
+    public var flash: vector_float3 = float3(0.0, 0.0, 0.0)
+    public var exposure: vector_float3 = float3(1.0, 1.0, 1.0)
+    public var exposureCompression: vector_float2 = float2(1.0, 0.0)
 }
 
 public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
@@ -469,6 +469,8 @@ public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
     public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
         return SpectraPhysicalImagingSurfaceParams()
     }
+    
+//    public func applyToCamera(camera: MDLCamera) {}
 }
 
 public class SpectraXMLCameraNode: SpectraXMLNode {
@@ -501,6 +503,8 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
         
         return cam
     }
+    
+    //    public func applyToCamera(camera: MDLCamera) {}
 }
 
 // TODO: public class SpectraXMLTextureNode: SpectraXMLNode {
