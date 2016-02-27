@@ -11,7 +11,7 @@ import Fuzi
 import Swinject
 import ModelIO
 
-public typealias SpectraXMLNodeTuple = (construct: Any, meta: [String: Any]?)
+public typealias SpectraXMLNodeTuple = (construct: Any, meta: [String: Any])
 // meta is used when the construct returns a monad
 // meta should include a function at key: resolve
 // - the function should be expected to receive itself as args
@@ -41,8 +41,6 @@ public enum SpectraXMLNodeType: String {
     
     public func nodeParser(node: XMLElement, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
         
-        // Achievement Unlocked: API allows for recursive resolution of variadically structured categories into a final object of any type ... ok well maybe it doesn't quite do this yet
-        
         switch self {
         case .World:
             return {(container, node, key, options) in
@@ -57,13 +55,13 @@ public enum SpectraXMLNodeType: String {
         case .VertexAttribute:
             return {(container, node, key, options) in
                 let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: node, options: options)
-                let nodeTuple: SpectraXMLNodeTuple = (construct: vertexAttr, meta: [:])
+                let nodeTuple: SpectraXMLNodeTuple = (construct: vertexAttr, meta: ["klass": MDLVertexAttribute.self])
                 return nodeTuple
             }
         case .VertexDescriptor:
             return {(container, node, key, options) in
                 let vertexDesc = SpectraXMLVertexDescriptorNode().parse(container, elem: node, options: options)
-                let nodeTuple: SpectraXMLNodeTuple = (construct: vertexDesc, meta: [:])
+                let nodeTuple: SpectraXMLNodeTuple = (construct: vertexDesc, meta: ["klass": MDLVertexDescriptor.self])
                 return nodeTuple
             }
         default: return nil
@@ -150,7 +148,10 @@ public class SpectraXML {
             // TODO: resolve custom types
             //            parser.resolve(AnyClass.self, name: self.rawValue)
             
-            let nodeTuple = nodeParser(container: container, node: child, key: key, options: options)
+            let (nodeResult, klass, meta) = nodeParser(container: container, node: child, key: key, options: options)
+//            let klass: AnyClass = meta["klass"]!
+            let finalResult = nodeResult as klass
+            
             
             // TODO: use options to set ObjectScope (default to .Container?)
             
