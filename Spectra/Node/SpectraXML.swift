@@ -1,6 +1,6 @@
 //
 //  SpectraXML.swift
-//  
+//
 //
 //  Created by David Conner on 2/22/16.
 //
@@ -34,7 +34,7 @@ public enum SpectraXMLNodeType: String {
     // - until then, I really can't resolve the type
     public func nodeParser(node: XMLElement, key: String, options: [String: Any] = [:]) -> SpectraXMLNodeParser? {
         
-        //NOTE: nodeParser can't be used until either 
+        //NOTE: nodeParser can't be used until either
         // - (1) Swinject supports auto-injection
         // - (2) I can resolve the reflection issues with resolving a swinject container of arbitrary type
         //    - can i do this with func generics: func nodeParser<NodeType>(...) -> SpectraXMLNodeParser<NodeType>?
@@ -86,7 +86,7 @@ public class SpectraXML {
     public init(parser: Container, data: NSData) {
         // NOTE: both this parser and the container injected into the SpectraXMLNodeParser functions
         // - should be able to reference the enum types read from the XSD file
-        // - the simplest way to do this is create a container, load the XSD enums onto it, 
+        // - the simplest way to do this is create a container, load the XSD enums onto it,
         //   - then use this parser container as a parent: nodeParserContainer = Container(parent: parser)
         //   - refer to SpectraXMLSpec for an example
         // - or, if scoping is an issue, apply the enums to both the parser & nodeParser containers
@@ -111,13 +111,13 @@ public class SpectraXML {
         
         // yes, the design's a bit convoluted, but allows great flexibility!
         // - note: with great flexibility, comes great responsibility!!
-        //   - this is true, both from a performance aspect (reference retention) 
+        //   - this is true, both from a performance aspect (reference retention)
         // - as well as from a security aspect (arbitrary execution from remote XML)
         //   - spectra is intended as a LEARNING TOOL ONLY at this point.
         
         // NOTE: you can override default behavior by returning an alternative closure
         // - just do parser.register() and override.
-        // - you can also do newParser = Container(parent: parser) 
+        // - you can also do newParser = Container(parent: parser)
         //   - and then create a tree of custom parsers (see Swinject docs)
         
         // NOTE: if you do override default behavior for nodes: beware scoping
@@ -146,9 +146,9 @@ public class SpectraXML {
             return SpectraXMLNodeType.PhysicalImagingSurfaceParams.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
-//        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLElement, options: [String: Any]) in
-//            return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
-//            }.inObjectScope(.None) // always return a new instance of the closure
+        //        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLElement, options: [String: Any]) in
+        //            return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
+        //            }.inObjectScope(.None) // always return a new instance of the closure
         
         return parser
     }
@@ -156,68 +156,69 @@ public class SpectraXML {
     public func parse(container: Container, options: [String: Any] = [:]) {
         for child in xml!.root!.children {
             let (tag, key) = (child.tag!, child.attributes["key"])
-
-            let nodeType = SpectraXMLNodeType(rawValue: tag)!
-            // let nodeParser = self.parser.resolve(SpectraXMLNodeParser.self, arguments: (tag, key, child, options))!
-            // let nodeKlass = nodeType.nodeFinalType(parser)!.dynamicType
-            // let result = nodeParser(container: container, node: child, key: key, options: options)
             
-            // let resultKlass = SpectraXMLNodeType(rawValue: tag)!.nodeFinalType(parser)!
-            // container.register(result.dynamicType, name: tag) { _ in
-            //      return result
-            //  }
-            
-            // TODO: move this out of parse() - it was in SpectraXMLNodeType, 
-            // - but i can't return an AnyClass and then parse it later
-            switch nodeType {
-            case .VertexAttribute:
-                let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: child, options: options)
-                container.register(MDLVertexAttribute.self, name: key!) { _ in
-                    return vertexAttr
-                    }.inObjectScope(.None)
-            case .VertexDescriptor:
-                let vertexDesc = SpectraXMLVertexDescriptorNode().parse(container, elem: child, options: options)
-                container.register(MDLVertexDescriptor.self, name: key!)  { _ in
-                    return vertexDesc
-                    }.inObjectScope(.None)
-            case .Camera:
-                let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
-                container.register(MDLCamera.self, name: key!) { _ in
-                    return camera
-                    }.inObjectScope(.None)
-            case .Camera:
-                let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
-                container.register(MDLCamera.self, name: key!) { _ in
-                    return camera
-                    }.inObjectScope(.None)
-            case .PhysicalLensParams:
-                let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
-                container.register(SpectraPhysicalLensParams.self, name: key!) { _ in
-                    return lens
-                    }.inObjectScope(.None)
-            case .PhysicalImagingSurfaceParams:
-                let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: child, options: options)
-                container.register(SpectraPhysicalImagingSurfaceParams.self, name: key!) { _ in
-                    return imagingSurface
-                    }.inObjectScope(.None)
-            default: break
+            if let nodeType = SpectraXMLNodeType(rawValue: tag)! {
+                // let nodeParser = self.parser.resolve(SpectraXMLNodeParser.self, arguments: (tag, key, child, options))!
+                // let nodeKlass = nodeType.nodeFinalType(parser)!.dynamicType
+                // let result = nodeParser(container: container, node: child, key: key, options: options)
+                
+                // let resultKlass = SpectraXMLNodeType(rawValue: tag)!.nodeFinalType(parser)!
+                // container.register(result.dynamicType, name: tag) { _ in
+                //      return result
+                //  }
+                
+                // TODO: move this out of parse() - it was in SpectraXMLNodeType,
+                // - but i can't return an AnyClass and then parse it later
+                switch nodeType {
+                case .VertexAttribute:
+                    let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: child, options: options)
+                    container.register(MDLVertexAttribute.self, name: key!) { _ in
+                        return vertexAttr
+                        }.inObjectScope(.None)
+                case .VertexDescriptor:
+                    let vertexDesc = SpectraXMLVertexDescriptorNode().parse(container, elem: child, options: options)
+                    container.register(MDLVertexDescriptor.self, name: key!)  { _ in
+                        return vertexDesc
+                        }.inObjectScope(.None)
+                case .Camera:
+                    let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
+                    container.register(MDLCamera.self, name: key!) { _ in
+                        return camera
+                        }.inObjectScope(.None)
+                case .Camera:
+                    let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
+                    container.register(MDLCamera.self, name: key!) { _ in
+                        return camera
+                        }.inObjectScope(.None)
+                case .PhysicalLensParams:
+                    let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
+                    container.register(SpectraPhysicalLensParams.self, name: key!) { _ in
+                        return lens
+                        }.inObjectScope(.None)
+                case .PhysicalImagingSurfaceParams:
+                    let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: child, options: options)
+                    container.register(SpectraPhysicalImagingSurfaceParams.self, name: key!) { _ in
+                        return imagingSurface
+                        }.inObjectScope(.None)
+                default: break
+                }
+                
+                //TODO: use .dynamicType for meta type at run time
+                // - nvm, "auto-injection" feature won't be in swinject until 2.0.0
+                
+                // TODO: use options to set ObjectScope (default to .Container?)
+                
+                // TODO: recursively resolve non-final types in tuple:
+                // - i.e. if some monad returns instead of concrete value,
+                //   - then try to resolve the monad (should metadata also be returned?)
+                //   - this may be a feature to implement down the road
+                // - it can be resolved by returning either a tuple with metadata
+                //   - or a hash of [String: Any], but the tuple is superior
+                //   - tuple: (SpectraMonadType, [String: Any])
+                // - but i still would have to perform type resolution on the [String: Any]
+                //   - if the tupal is to be useful and dynamic
+                
             }
-
-            //TODO: use .dynamicType for meta type at run time
-            // - nvm, "auto-injection" feature won't be in swinject until 2.0.0
-            
-            // TODO: use options to set ObjectScope (default to .Container?)
-            
-            // TODO: recursively resolve non-final types in tuple:
-            // - i.e. if some monad returns instead of concrete value,
-            //   - then try to resolve the monad (should metadata also be returned?)
-            //   - this may be a feature to implement down the road
-            // - it can be resolved by returning either a tuple with metadata
-            //   - or a hash of [String: Any], but the tuple is superior
-            //   - tuple: (SpectraMonadType, [String: Any])
-            // - but i still would have to perform type resolution on the [String: Any]
-            //   - if the tupal is to be useful and dynamic
-            
         }
     }
 }
@@ -377,7 +378,7 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
 
 //============================================================
 // TODO: decide how to handle inheritance
-// - use separate node classes for each instance 
+// - use separate node classes for each instance
 //   - this would be appropriate for some, like MDLCamera & Stereoscopic (except phys lens & phys imaging)
 //   - but gets cumbersome for other classes, like MDLTexture, etc.
 //   - and isn't extensible
@@ -470,7 +471,7 @@ public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
         return SpectraPhysicalImagingSurfaceParams()
     }
     
-//    public func applyToCamera(camera: MDLCamera) {}
+    //    public func applyToCamera(camera: MDLCamera) {}
 }
 
 public class SpectraXMLCameraNode: SpectraXMLNode {
