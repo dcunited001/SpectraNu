@@ -34,15 +34,17 @@ Here's some video of [OSX audio visualization](https://www.youtube.com/watch?v=L
 ### Spectra Features
 
 - Read Metal graphics pipeline objects into a DescriptorManager with the S3DXML format.
+- Some classes set up to manage rendering (Renderer, RenderStage) but these will change soon.
 
 ### Spectra Roadmap
 
 - Finish the SpectraXML format for defining Model I/O objects.
 - Rename S3DXML and possibly split it into a separate framework.
 - Set up some basic resource management classes.
+- Rewrite Renderer, RenderStage, etc.
 - Configure auto-injection for Swinject containers, so users can dynamically define higher order factories as they
   read in XML data (requires Swinject 2.0.0)
-
+- Integrate with MPS Metal Performance Shaders for convolutions, etc.
 
 ### Misc Notes
 
