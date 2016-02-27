@@ -170,8 +170,6 @@ public class SpectraXML {
 
 public class SpectraXMLSimd {
     
-    // TODO: resolve parsing issues (but for now, can only use 1 & 4 value types)
-    
     public static func parseDoubles(str: String) -> [Double] {
         let valStrs = str.characters.split { $0 == " " }.map(String.init)
         return valStrs.map() { Double($0)! }
@@ -190,6 +188,22 @@ public class SpectraXMLSimd {
     public static func parseFloats(str: String) -> [Float] {
         let valStrs = str.characters.split { $0 == " " }.map(String.init)
         return valStrs.map() { Float($0)! }
+    }
+    
+    public static func parseFloat2(str: String) -> float2 {
+        return float2(parseFloats(str))
+    }
+    
+    public static func parseInt2(str: String) -> int2 {
+        return int2(parseInt32s(str))
+    }
+    
+    public static func parseFloat3(str: String) -> float3 {
+        return float3(parseFloats(str))
+    }
+    
+    public static func parseInt3(str: String) -> int3 {
+        return int3(parseInt32s(str))
     }
     
     public static func parseFloat4(str: String) -> float4 {
