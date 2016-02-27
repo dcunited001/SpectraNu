@@ -11,18 +11,7 @@ import Fuzi
 import Swinject
 import ModelIO
 
-public typealias SpectraXMLNodeTuple = (construct: Any, meta: [String: Any])
-// meta is used when the construct returns a monad
-// meta should include a function at key: resolve
-// - the function should be expected to receive itself as args
-// - i.e. meta["resolve"](meta) should resolve to a function to which it can pass the construct function
-// - i.e. meta["resolve"](meta)(construct) should return a final object
-
-// meta keys could also include the following for casting:
-// - klass: AnyClass?, strukt: Any?, protokol: Any?
-
-// should it be necessary to pass the key here?
-public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement, key: String?, options: [String: Any]) -> SpectraXMLNodeTuple)
+public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement, key: String?, options: [String: Any]) -> AnyObject)
 
 public enum SpectraXMLNodeType: String {
     case World = "world"
@@ -39,30 +28,26 @@ public enum SpectraXMLNodeType: String {
     case TextureSampler = "texture-sampler"
     case Light = "light"
     
-    public func nodeParser(node: XMLElement, key: String, options: [String:Any] = [:]) -> SpectraXMLNodeParser? {
+    public func nodeParser(node: XMLElement, key: String, options: [String: Any] = [:]) -> SpectraXMLNodeParser? {
         
         switch self {
         case .World:
             return {(container, node, key, options) in
-                let nodeTuple: SpectraXMLNodeTuple = (construct: "a world.  or a (worldFn, meta) tuple", meta: [:])
-                return nodeTuple
+                return "a world"
             }
         case .Camera:
             return {(container, node, key, options) in
-                let nodeTuple: SpectraXMLNodeTuple = (construct: "a camera.  or a (cameraFn, meta) tuple", meta: [:])
-                return nodeTuple
+                return "a camera"
             }
         case .VertexAttribute:
             return {(container, node, key, options) in
                 let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: node, options: options)
-                let nodeTuple: SpectraXMLNodeTuple = (construct: vertexAttr, meta: ["klass": MDLVertexAttribute.self])
-                return nodeTuple
+                return vertexAttr
             }
         case .VertexDescriptor:
             return {(container, node, key, options) in
                 let vertexDesc = SpectraXMLVertexDescriptorNode().parse(container, elem: node, options: options)
-                let nodeTuple: SpectraXMLNodeTuple = (construct: vertexDesc, meta: ["klass": MDLVertexDescriptor.self])
-                return nodeTuple
+                return vertexDesc
             }
         default: return nil
         }
@@ -145,13 +130,17 @@ public class SpectraXML {
 
             let nodeParser = self.parser.resolve(SpectraXMLNodeParser.self, arguments: (tag, key, child, options))!
             
-            // TODO: resolve custom types
-            //            parser.resolve(AnyClass.self, name: self.rawValue)
+            let result = nodeParser(container: container, node: child, key: key, options: options)
+//            let mirror = Mirror(result)
+
+            //TODO: use .dynamicType for meta type at run time
+            // - nvm, "auto-injection" feature won't be in swinject until 2.0.0
             
-            let (nodeResult, klass, meta) = nodeParser(container: container, node: child, key: key, options: options)
-//            let klass: AnyClass = meta["klass"]!
-            let finalResult = nodeResult as klass
             
+            let resultKlass = SpectraXMLNodeType(rawValue: tag)!.nodeFinalType(parser)!
+//            container.register(result.dynamicType, name: tag) { _ in
+//                return result
+//            }
             
             // TODO: use options to set ObjectScope (default to .Container?)
             
