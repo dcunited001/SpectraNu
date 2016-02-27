@@ -330,33 +330,76 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
 // - there's also the mesh-generator pattern from the original SceneGraphXML
 //   - this draws from a map of monads passed in and executes the one for a specific type, if found
 
-public struct SpectraPhysicalLensParams {
-    // TODO: determine which are required and which are not
-    public var key: String?
-    public var barrelDistorion: Float?
-    public var fisheyeDistorion: Float?
-    public var opticalVignetting: Float?
-    public var chromaticAberration: Float?
-    public var focalLength: Float?
-    public var fStop: Float?
-    public var apertureBladeCount: Int?
-//    public var bokehKernelWithSize: vector_int2 -> MDLTexture
-    public var maximumCircleOfConfusion: Float?
-    public var focusDistance: Float?
-    public var shutterOpenInterval: NSTimeInterval?
+public class SpectraPhysicalLensParams {
+    //TODO: set these to optional and leave values nil, so these tags can be applied as templates?
+    public var worldToMetersConversionScale: Float = 1.0
+    public var barrelDistortion: Float = 0
+    public var fisheyeDistortion: Float = 0
+    public var opticalVignetting: Float = 0
+    public var chromaticAberration: Float = 0
+    public var focalLength: Float = 50
+    public var fStop: Float = 5.6
+    public var apertureBladeCount: Int = 0
+    public var maximumCircleOfConfusion: Float = 0.05
+    public var focusDistance: Float = 2.5
+    
+    // doc's don't list default shutterOpenInterval value,
+    // - but (1/60) * 0.50 = 1/120 for 60fps and 50% shutter
+    public var shutterOpenInterval: NSTimeInterval = (0.5 * (1.0/60.0))
 }
 
 public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
     public typealias NodeType = SpectraPhysicalLensParams
     
     public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
-        return SpectraPhysicalLensParams()
+        let lensParams = SpectraPhysicalLensParams()
+        
+        if let worldToMetersConversionScale = elem.attributes["world-to-meters-conversion-scale"] {
+            lensParams.worldToMetersConversionScale = Float(worldToMetersConversionScale)!
+        }
+        
+        if let barrelDistortion = elem.attributes["barrel-distortion"] {
+            lensParams.barrelDistortion = Float(barrelDistortion)!
+        }
+        
+        if let fisheyeDistortion = elem.attributes["fisheye-distortion"] {
+            lensParams.fisheyeDistortion = Float(fisheyeDistortion)!
+        }
+        
+        if let opticalVignetting = elem.attributes["optical-vignetting"] {
+            lensParams.opticalVignetting = Float(opticalVignetting)!
+        }
+        
+        if let chromaticAberration = elem.attributes["chromatic-aberration"] {
+            lensParams.chromaticAberration = Float(chromaticAberration)!
+        }
+        
+        if let focalLength = elem.attributes["focus-length"] {
+            lensParams.focalLength = Float(focalLength)!
+        }
+        
+        if let fStop = elem.attributes["f-stop"] {
+            lensParams.fStop = Float(fStop)!
+        }
+        
+        if let apertureBladeCount = elem.attributes["aperture-blade-count"] {
+            lensParams.apertureBladeCount = Int(apertureBladeCount)!
+        }
+        
+        if let maximumCircleOfConfusion = elem.attributes["maximum-circle-of-confusion"] {
+            lensParams.maximumCircleOfConfusion = Float(maximumCircleOfConfusion)!
+        }
+        
+        if let focusDistance = elem.attributes["focus-distance"] {
+            lensParams.focusDistance = Float(focusDistance)!
+        }
+        
+        return lensParams
     }
 }
 
 public struct SpectraPhysicalImagingSurfaceParams {
     // TODO: determine which are required and which are not
-    public var key: String?
     public var sensorVerticalAperture: Float?
     public var sensorAspect: Float?
     public var sensorEnlargement: vector_float2?
@@ -381,13 +424,25 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
         let cam = MDLCamera()
         
         // TODO: the following are required.  make them optional with defaults?
-        let nearVisibility = elem.attributes["near-visibility-distance"]!
-        let farVisibility = elem.attributes["far-visibility-distance"]!
-        let fieldOfView = elem.attributes["field-of-view"]!
+        if let nearVisibility = elem.attributes["near-visibility-distance"] {
+            cam.nearVisibilityDistance = Float(nearVisibility)!
+        }
+        if let farVisibility = elem.attributes["far-visibility-distance"] {
+            cam.farVisibilityDistance = Float(farVisibility)!
+        }
+        if let fieldOfView = elem.attributes["field-of-view"] {
+            cam.fieldOfView = Float(fieldOfView)!
+        }
+        
+        // TODO: apply SpectraXML lens
+        // TODO: apply SpectraXML imaging surface
         
         if let lookAt = elem.attributes["look-at"] {
-            //TODO: fix the float3()
-//            cam.lookAt(Float(lookAt)!, from: Float(elem.attributes["look-from"]))
+            if let lookFrom = elem.attributes["look-from"] {
+                cam.lookAt(SpectraXMLSimd.parseFloat3(lookAt), from: SpectraXMLSimd.parseFloat3(lookFrom))
+            } else {
+                cam.lookAt(SpectraXMLSimd.parseFloat3(lookAt))
+            }
         }
         
         return cam
@@ -404,8 +459,6 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
 // TODO: public class SpectraXMLScatteringFunctionNode: SpectraXMLNode {
 // TODO: public class .. voxel array?  maybe a generator
 // TODO: public class .. voxel morphism (morphology in 3D)
-
-
 
 public class SpectraEnum {
     let name: String
