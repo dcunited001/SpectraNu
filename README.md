@@ -1,20 +1,53 @@
-Spectra
-=======
+## Spectra => Metal Graphics Engine (Swift - iOS - OSX)
 
-[Trello Board](https://trello.com/b/FYL0pBuF/spectra) if you want to
-contribute or see what i'm working on
+I'm back to building my 3D Graphics engine.  Spectra is really designed for learning low-level graphics 
+techniques.  I'm building it primarily to learn these techniques myself and to explore mathematic concepts.  
+But I've designed it in such a way that it is easy for users to pick up the basics of low-level 3D graphics.  
 
-**N.B.** -> this library will be moved to replace dcunited001/Spectra at
-some point. Soooo, actually using it is not recommended yet
+[Trello Board](https://trello.com/b/FYL0pBuF/spectra) if you want to contribute or see what i'm building next.
 
-rewriting this library for like the fifth time, since cocoapods is broken.
-- and now i'm rewriting it again to have proper dependency injection'
+> **N.B.** -> this library will be moved to replace [dcunited001/Spectra](http://github.com/dcunited001/Spectra) at
+> some point. Soooo, actually using it is not recommended yet. I'm rewriting this library for like the fifth 
+> time (using Carthage) since cocoapods is broken.  And now i'm rewriting it again to have proper 
+> dependency injection'
+
+## Declarative | Composable | Functional
+
+### 3D Graphics with a first-party, strongly typed functional language. 
+
+### Everything is declarative - from render pipelines to assets and meshes. 
+
+### Everything you need is accessible through dependency injection.  
+
+### Everything is composable, with a focus on combinating monadic mesh/submesh generation for dynamic and flexible geometry manipulation (hopefully in real time)
+
+### Composable, dynamically swappable, parallelizable graphics.
+
+### Stream Data to Metal Inputs & Buffers, for audio visualization or vertex streaming.
+
+Here's some video of [OSX audio visualization](https://www.youtube.com/watch?v=LKVYEnu8sLk) using a very early version of the library
+
+> Note: almost none of this is functional right now.  I'm writing this for myself, primarily so I can explore [3D & Advanced Geometry](http://www.geometry.caltech.edu/)
+
+> Also Note: performance is absolutely not a focus at this point.  I'm not sure it'd be a good idea to use this design in production.
+
+### Spectra Features
+
+- Read Metal graphics pipeline objects into a DescriptorManager with the S3DXML format.
+
+### Spectra Roadmap
+
+- Finish the SpectraXML format for defining Model I/O objects.
+- Rename S3DXML and possibly split it into a separate framework.
+- Set up some basic resource management classes.
+- Configure auto-injection for Swinject containers, so users can dynamically define higher order factories as they
+  read in XML data (requires Swinject 2.0.0)
 
 
-- [Creating a multi-platform workspace](http://www.swift-studies.com/blog/2014/6/30/creating-a-pure-swift-framework-for-both-ios-and-mac) actually not a great article.  not too bad, but i made a lot of mistakes.
+### Misc Notes
+
 - [http://www.uraimo.com/2015/09/29/Swift2.1-Function-Types-Conversion-Covariance-Contravariance/](covariance & contravariance in swift)
 - [http://www.russbishop.net/swift-2-1](changes in swift 2.1)
-
 
 todo for dependency injection:
 - rewrite metal framework XML parsers to construct a swinject container
