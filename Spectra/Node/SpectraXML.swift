@@ -16,6 +16,8 @@ public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement
 public enum SpectraXMLNodeType: String {
     case World = "world"
     case Camera = "camera"
+    case PhysicalLensParams = "physical-lens"
+    case PhysicalImagingSurfaceParams = "physical-imaging-surface"
     case StereoscopicCamera = "stereoscopic-camera"
     case VertexAttribute = "vertex-attribute"
     case VertexDescriptor = "vertex-descriptor"
@@ -28,17 +30,16 @@ public enum SpectraXMLNodeType: String {
     case TextureSampler = "texture-sampler"
     case Light = "light"
     
+    // TODO: reimplement nodeParser() once auto-injection is available in Swinject
+    // - until then, I really can't resolve the type
     public func nodeParser(node: XMLElement, key: String, options: [String: Any] = [:]) -> SpectraXMLNodeParser? {
         
+        //NOTE: nodeParser can't be used until either 
+        // - (1) Swinject supports auto-injection
+        // - (2) I can resolve the reflection issues with resolving a swinject container of arbitrary type
+        //    - can i do this with func generics: func nodeParser<NodeType>(...) -> SpectraXMLNodeParser<NodeType>?
+        
         switch self {
-        case .World:
-            return {(container, node, key, options) in
-                return "a world"
-            }
-        case .Camera:
-            return {(container, node, key, options) in
-                return "a camera"
-            }
         case .VertexAttribute:
             return {(container, node, key, options) in
                 let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: node, options: options)
@@ -48,6 +49,22 @@ public enum SpectraXMLNodeType: String {
             return {(container, node, key, options) in
                 let vertexDesc = SpectraXMLVertexDescriptorNode().parse(container, elem: node, options: options)
                 return vertexDesc
+            }
+        case .World:
+            return {(container, node, key, options) in
+                return "a world"
+            }
+        case .Camera:
+            return {(container, node, key, options) in
+                return "a camera"
+            }
+        case .PhysicalLensParams:
+            return {(container, node, key, options) in
+                return "a physical lens"
+            }
+        case .PhysicalImagingSurfaceParams:
+            return {(container, node, key, options) in
+                return "a physical imaging surface"
             }
         default: return nil
         }
@@ -117,6 +134,18 @@ public class SpectraXML {
             return SpectraXMLNodeType.VertexDescriptor.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.Camera.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
+            return SpectraXMLNodeType.Camera.nodeParser(node, key: k, options: options)!
+            }.inObjectScope(.None) // always return a new instance of the closure
+        
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.PhysicalLensParams.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
+            return SpectraXMLNodeType.PhysicalLensParams.nodeParser(node, key: k, options: options)!
+            }.inObjectScope(.None) // always return a new instance of the closure
+        
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.PhysicalImagingSurfaceParams.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
+            return SpectraXMLNodeType.PhysicalImagingSurfaceParams.nodeParser(node, key: k, options: options)!
+            }.inObjectScope(.None) // always return a new instance of the closure
+        
 //        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLElement, options: [String: Any]) in
 //            return SpectraXMLNodeType.World.nodeParser(node, key: k, options: options)!
 //            }.inObjectScope(.None) // always return a new instance of the closure
@@ -128,19 +157,54 @@ public class SpectraXML {
         for child in xml!.root!.children {
             let (tag, key) = (child.tag!, child.attributes["key"])
 
-            let nodeParser = self.parser.resolve(SpectraXMLNodeParser.self, arguments: (tag, key, child, options))!
+            let nodeType = SpectraXMLNodeType(rawValue: tag)!
+            // let nodeParser = self.parser.resolve(SpectraXMLNodeParser.self, arguments: (tag, key, child, options))!
+            // let nodeKlass = nodeType.nodeFinalType(parser)!.dynamicType
+            // let result = nodeParser(container: container, node: child, key: key, options: options)
             
-            let result = nodeParser(container: container, node: child, key: key, options: options)
-//            let mirror = Mirror(result)
+            // let resultKlass = SpectraXMLNodeType(rawValue: tag)!.nodeFinalType(parser)!
+            // container.register(result.dynamicType, name: tag) { _ in
+            //      return result
+            //  }
+            
+            // TODO: move this out of parse() - it was in SpectraXMLNodeType, 
+            // - but i can't return an AnyClass and then parse it later
+            switch nodeType {
+            case .VertexAttribute:
+                let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: child, options: options)
+                container.register(MDLVertexAttribute.self, name: key!) { _ in
+                    return vertexAttr
+                    }.inObjectScope(.None)
+            case .VertexDescriptor:
+                let vertexDesc = SpectraXMLVertexDescriptorNode().parse(container, elem: child, options: options)
+                container.register(MDLVertexDescriptor.self, name: key!)  { _ in
+                    return vertexDesc
+                    }.inObjectScope(.None)
+            case .Camera:
+                let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
+                container.register(MDLCamera.self, name: key!) { _ in
+                    return camera
+                    }.inObjectScope(.None)
+            case .Camera:
+                let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
+                container.register(MDLCamera.self, name: key!) { _ in
+                    return camera
+                    }.inObjectScope(.None)
+            case .PhysicalLensParams:
+                let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
+                container.register(SpectraPhysicalLensParams.self, name: key!) { _ in
+                    return lens
+                    }.inObjectScope(.None)
+            case .PhysicalImagingSurfaceParams:
+                let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: child, options: options)
+                container.register(SpectraPhysicalImagingSurfaceParams.self, name: key!) { _ in
+                    return imagingSurface
+                    }.inObjectScope(.None)
+            default: break
+            }
 
             //TODO: use .dynamicType for meta type at run time
             // - nvm, "auto-injection" feature won't be in swinject until 2.0.0
-            
-            
-            let resultKlass = SpectraXMLNodeType(rawValue: tag)!.nodeFinalType(parser)!
-//            container.register(result.dynamicType, name: tag) { _ in
-//                return result
-//            }
             
             // TODO: use options to set ObjectScope (default to .Container?)
             
