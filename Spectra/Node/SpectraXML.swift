@@ -157,7 +157,7 @@ public class SpectraXML {
         for child in xml!.root!.children {
             let (tag, key) = (child.tag!, child.attributes["key"])
             
-            if let nodeType = SpectraXMLNodeType(rawValue: tag)! {
+            if let nodeType = SpectraXMLNodeType(rawValue: tag) {
                 // let nodeParser = self.parser.resolve(SpectraXMLNodeParser.self, arguments: (tag, key, child, options))!
                 // let nodeKlass = nodeType.nodeFinalType(parser)!.dynamicType
                 // let result = nodeParser(container: container, node: child, key: key, options: options)

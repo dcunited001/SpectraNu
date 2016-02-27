@@ -31,8 +31,10 @@ class SpectraXMLSpec: QuickSpec {
         let testBundle = NSBundle(forClass: SpectraXMLSpec.self)
         let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SpectraXMLSpec")
         let assetContainer = Container(parent: parser)
-        
+
+        SpectraXML.initParser(parser)
         let spectraXML = SpectraXML(parser: parser, data: xmlData)
+        spectraXML.parse(assetContainer, options: [:])
 
         // TODO: move this to a new file?
         describe("SpectraXML: main parser") {
@@ -94,7 +96,7 @@ class SpectraXMLSpec: QuickSpec {
                 let origAttrPosIndex = attrPos.bufferIndex
                 attrPos.bufferIndex = origAttrPosIndex + 1
                 
-                let attrPos2: MDLVertexAttribute = self.containerGet(assetContainer, key: "pos_float_4")!
+                let attrPos2: MDLVertexAttribute = self.containerGet(assetContainer, key: "pos_float4")!
                 expect(attrPos.bufferIndex) != attrPos2.bufferIndex
                 expect(attrPos2.bufferIndex) == origAttrPosIndex
             }
@@ -169,9 +171,18 @@ class SpectraXMLSpec: QuickSpec {
         }
         
         describe("camera") {
+            let defaultCam: MDLCamera = self.containerGet(assetContainer, key: "default")!
+            let cam1: MDLCamera = self.containerGet(assetContainer, key: "cam1")!
+            
             it("manages the inherited MDLObject properties") {
                 // transform
                 // parent
+            }
+            
+            it("loads default values") {
+                expect(defaultCam.nearVisibilityDistance) == 0.1
+                expect(defaultCam.farVisibilityDistance) == 1000.0
+                expect(defaultCam.fieldOfView) == Float(53.999996185302734375)
             }
             
             it("is created with near-visibility-distance, far-visibility-distance and field-of-view") {
