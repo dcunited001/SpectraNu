@@ -17,7 +17,7 @@
     <vertex-attribute key="pos_float4" name="position" format="Float4"/>
     <vertex-attribute key="tex_float2" name="texture" format="Float2"/>
     <vertex-attribute key="rgb_float4" name="color" format="Float4"/>
-    <vertex-attribute key="rgb_int4" name="color" format="int4"/>
+    <vertex-attribute key="rgb_int4" name="color" format="Int4"/>
     <vertex-attribute key="aniso_float4" name="anisotropy" format="Float4"/>
     
     <vertex-attribute key="test_custom_label" name="custom" format="Int" />
