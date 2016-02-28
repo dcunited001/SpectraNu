@@ -386,17 +386,30 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
 //   - this draws from a map of monads passed in and executes the one for a specific type, if found
 
 public class SpectraPhysicalLensParams {
-    //TODO: set these to optional and leave values nil, so these tags can be applied as templates?
-    public var worldToMetersConversionScale: Float = 1.0
-    public var barrelDistortion: Float = 0
-    public var fisheyeDistortion: Float = 0
-    public var opticalVignetting: Float = 0
-    public var chromaticAberration: Float = 0
-    public var focalLength: Float = 50
-    public var fStop: Float = 5.6
-    public var apertureBladeCount: Int = 0
-    public var maximumCircleOfConfusion: Float = 0.05
-    public var focusDistance: Float = 2.5
+    // for any of this to do anything, renderer must support the math (visual distortion, etc)
+    
+    public var worldToMetersConversionScale: Float?
+    public var barrelDistortion: Float?
+    public var fisheyeDistortion: Float?
+    public var opticalVignetting: Float?
+    public var chromaticAberration: Float?
+    public var focalLength: Float?
+    public var fStop: Float?
+    public var apertureBladeCount: Int?
+    public var maximumCircleOfConfusion: Float?
+    public var focusDistance: Float?
+    
+    // defaults
+    public static let worldToMetersConversionScale: Float = 1.0
+    public static let barrelDistortion: Float = 0
+    public static let fisheyeDistortion: Float = 0
+    public static let opticalVignetting: Float = 0
+    public static let chromaticAberration: Float = 0
+    public static let focalLength: Float = 50
+    public static let fStop: Float = 5.6
+    public static let apertureBladeCount: Int = 0
+    public static let maximumCircleOfConfusion: Float = 0.05
+    public static let focusDistance: Float = 2.5
     
     // doc's don't list default shutterOpenInterval value,
     // - but (1/60) * 0.50 = 1/120 for 60fps and 50% shutter
@@ -453,22 +466,62 @@ public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
     }
 }
 
-public struct SpectraPhysicalImagingSurfaceParams {
-    // TODO: determine which are required and which are not
-    public var sensorVerticalAperture: Float = 24
-    public var sensorAspect: Float = 1.5
-    public var sensorEnlargement: vector_float2 = float2(1.0, 1.0)
-    public var sensorShift: vector_float2 = float2(0.0, 0.0)
-    public var flash: vector_float3 = float3(0.0, 0.0, 0.0)
-    public var exposure: vector_float3 = float3(1.0, 1.0, 1.0)
-    public var exposureCompression: vector_float2 = float2(1.0, 0.0)
+public class SpectraPhysicalImagingSurfaceParams {
+    // for any of this to do anything, renderer must support the math (visual distortion, etc)
+    
+    public var sensorVerticalAperture: Float?
+    public var sensorAspect: Float?
+    public var sensorEnlargement: vector_float2?
+    public var sensorShift: vector_float2?
+    public var flash: vector_float3?
+    public var exposure: vector_float3?
+    public var exposureCompression: vector_float2?
+    
+    // defaults
+    public static let sensorVerticalAperture: Float = 24
+    public static let sensorAspect: Float = 1.5
+    public static let sensorEnlargement: vector_float2 = float2(1.0, 1.0)
+    public static let sensorShift: vector_float2 = float2(0.0, 0.0)
+    public static let flash: vector_float3 = float3(0.0, 0.0, 0.0)
+    public static let exposure: vector_float3 = float3(1.0, 1.0, 1.0)
+    public static let exposureCompression: vector_float2 = float2(1.0, 0.0)
 }
 
 public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
     public typealias NodeType = SpectraPhysicalImagingSurfaceParams
     
     public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
-        return SpectraPhysicalImagingSurfaceParams()
+        let imagingSurface = SpectraPhysicalImagingSurfaceParams()
+        
+        if let sensorVerticalAperture = elem.attributes["sensor-vertical-aperture"] {
+            imagingSurface.sensorVerticalAperture = Float(sensorVerticalAperture)
+        }
+        
+        if let sensorAspect = elem.attributes["sensor-aspect"] {
+            imagingSurface.sensorAspect = Float(sensorAspect)
+        }
+        
+        if let sensorEnlargement = elem.attributes["sensor-enlargement"] {
+            imagingSurface.sensorEnlargement = SpectraXMLSimd.parseFloat2(sensorEnlargement)
+        }
+        
+        if let sensorShift = elem.attributes["sensor-shift"] {
+            imagingSurface.sensorShift = SpectraXMLSimd.parseFloat2(sensorShift)
+        }
+        
+        if let flash = elem.attributes["flash"] {
+            imagingSurface.flash = SpectraXMLSimd.parseFloat3(flash)
+        }
+        
+        if let exposure = elem.attributes["exposure"] {
+            imagingSurface.exposure = SpectraXMLSimd.parseFloat3(exposure)
+        }
+        
+        if let exposureCompression = elem.attributes["exposure-compression"] {
+            imagingSurface.exposureCompression = SpectraXMLSimd.parseFloat2(exposureCompression)
+        }
+        
+        return imagingSurface
     }
     
     //    public func applyToCamera(camera: MDLCamera) {}
