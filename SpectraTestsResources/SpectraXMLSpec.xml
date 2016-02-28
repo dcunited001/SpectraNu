@@ -15,7 +15,7 @@
      - and default towards everything in separate buffers
      -->
     <vertex-attribute key="pos_float4" name="position" format="Float4"/>
-    <vertex-attribute key="tex_float2" name="texture" format="Float2"/>
+    <vertex-attribute key="tex_float2" name="textureCoordinate" format="Float2"/>
     <vertex-attribute key="rgb_float4" name="color" format="Float4"/>
     <vertex-attribute key="rgb_int4" name="color" format="Int4"/>
     <vertex-attribute key="aniso_float4" name="anisotropy" format="Float4"/>
@@ -49,17 +49,54 @@
     <vertex-descriptor key="vert_pos_rgb">
         
     </vertex-descriptor>
+
+<!--    <view key="world">-->
+<!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
+<!--    </view>-->
+<!--    <view key="customWorld" type="custom">-->
+<!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
+<!--    </view>-->
+
+<physical-lens key="lens1"
+    barrel-distortion="0.1"
+    fisheye-distortion="0.5" />
+<physical-lens key="lens2"
+    focal-length="77"
+    fstop="7.0"
+    maximum-circle-of-confusion="0.10" />
+<physical-lens key="lens3"
+    aperture-blade-count="7" />
+
+<physical-imaging-surface key="phys_img1"
+    sensor-vertical-aperture="24"
+    sensor-aspect="2.0" />
+<physical-imaging-surface key="phys_img2"
+    flash="0.1 0.1 0.1"
+    exposure="1.5 1.5 1.5" />
+
+<!--    <camera key="default" eye="0 0 1 1" center="0 0 0 1" up="0 1 0 0" />-->
+<!--    <camera key="customCamera" type="custom" eye="0 0 1 1" center="0 0 0 1" up="0 1 0 0" />-->
+
+<camera key="default" />
+<camera key="cam1"
     
-    <view key="world">
-        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />
-    </view>
-    <view key="customWorld" type="custom">
-        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />
-    </view>
-    
-    <camera key="default" eye="0 0 1 1" center="0 0 0 1" up="0 1 0 0" />
-    <camera key="customCamera" type="custom" eye="0 0 1 1" center="0 0 0 1" up="0 1 0 0" />
-    
+    >
+    <physical-lens ref="default"/>
+</camera>
+
+<camera key="cam2">
+    <physical-lens ref="lens1"/>
+</camera>
+
+    <stereoscopic-camera key="default"
+        field-of-view=""
+        />
+        
+        <stereoscopic-camera key="stereo_cam1">
+            <physical-lens ref="default"/>
+        
+    </stereoscopic-camera>
+
     <perspective key="landscape" perspective-type="fov">
         <perspective-arg name="fov" value="65.0" />
         <perspective-arg name="angle" value="35.0" />
