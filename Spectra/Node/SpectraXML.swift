@@ -185,11 +185,6 @@ public class SpectraXML {
                     container.register(MDLCamera.self, name: key!) { _ in
                         return camera
                         }.inObjectScope(.None)
-                case .Camera:
-                    let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
-                    container.register(MDLCamera.self, name: key!) { _ in
-                        return camera
-                        }.inObjectScope(.None)
                 case .PhysicalLensParams:
                     let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
                     container.register(SpectraPhysicalLensParams.self, name: key!) { _ in
@@ -200,6 +195,11 @@ public class SpectraXML {
                     container.register(SpectraPhysicalImagingSurfaceParams.self, name: key!) { _ in
                         return imagingSurface
                         }.inObjectScope(.None)
+//                case .Camera:
+//                    let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
+//                    container.register(MDLCamera.self, name: key!) { _ in
+//                        return camera
+//                        }.inObjectScope(.None)
                 default: break
                 }
                 
