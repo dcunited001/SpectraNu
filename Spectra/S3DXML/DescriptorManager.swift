@@ -11,7 +11,7 @@ import Metal
 import Fuzi
 import Swinject
 
-public class SpectraDescriptorManager {
+public class DescriptorManager {
     public var library: MTLLibrary // TODO: support multiple libraries?
     
     public var xsd: S3DXSD

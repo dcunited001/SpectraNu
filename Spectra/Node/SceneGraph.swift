@@ -50,6 +50,9 @@ public class SceneGraph {
         setDefaultMeshGeneratorMonads()
     }
     
+    public init(container: Container) {
+        //TODO: init with Container(parent: container) to share resources
+    }
 //    public func loadXML(data: NSData) {
 //        //TODO: scene graph data from xml into objects
 //    }
@@ -102,20 +105,20 @@ public class SceneGraph {
     }
     
     private func setDefaultMeshGeneratorMonads() {
-        registerMeshGeneratorMonad("basic_triangle") { (args) in
-            return BasicTriangleGenerator(args: args)
-        }
-        registerMeshGeneratorMonad("quad") { (args) in
-            return QuadGenerator(args: args)
-        }
-        registerMeshGeneratorMonad("cube") { (args) in
-            return CubeGenerator(args: args)
-        }
-        registerMeshGeneratorMonad("tetrahedron") { (args) in
-            return TetrahedronGenerator(args: args)
-        }
-        registerMeshGeneratorMonad("octahedron") { (args) in
-            return OctahedronGenerator(args: args)
-        }
+//        registerMeshGeneratorMonad("basic_triangle") { (args) in
+//            return BasicTriangleGenerator(args: args)
+//        }
+//        registerMeshGeneratorMonad("quad") { (args) in
+//            return QuadGenerator(args: args)
+//        }
+//        registerMeshGeneratorMonad("cube") { (args) in
+//            return CubeGenerator(args: args)
+//        }
+//        registerMeshGeneratorMonad("tetrahedron") { (args) in
+//            return TetrahedronGenerator(args: args)
+//        }
+//        registerMeshGeneratorMonad("octahedron") { (args) in
+//            return OctahedronGenerator(args: args)
+//        }
     }
 }

@@ -65,7 +65,7 @@ extension BufferPool {
     public func createBuffer(device: MTLDevice, bytecount: Int, options: MTLResourceOptions, createWith: (Self) -> EncodableBuffer) -> EncodableBuffer {
         return createWith(self)
     }
-    
+
     // TODO: remove getBuffer()
     // - this should only be accessed with index provided by semaphore
     public func getBuffer() -> EncodableBuffer {

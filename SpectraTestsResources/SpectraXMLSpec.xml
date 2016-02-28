@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ TODO: xmlns and schema
+ -->
+
+<root>
+
+    <!-- 
+     must define any reusable vertex-attribute's ahead-of-time
+     - this is because these attributes are mutated when generating the vertex buffer layouts
+     
+     also, for now, layouts are either packed or not:
+     - either everything in one buffer, or everything in separate buffers
+     - and default towards everything in separate buffers
+     -->
+    <vertex-attribute key="pos_float4" name="position" format="Float4"/>
+    <vertex-attribute key="tex_float2" name="textureCoordinate" format="Float2"/>
+    <vertex-attribute key="rgb_float4" name="color" format="Float4"/>
+    <vertex-attribute key="rgb_int4" name="color" format="Int4"/>
+    <vertex-attribute key="aniso_float4" name="anisotropy" format="Float4"/>
+    
+    <vertex-attribute key="test_custom_label" name="custom" format="Int" />
+    <vertex-attribute key="test_immutable" name="custom" format="Int" buffer-index="0"/>
+    
+    <!-- TODO: vertex-descriptor format for delayed assembly of vertex-attributes (and associated buffer indices)
+     -->
+    
+    <!-- can ref vertex-attributes -->
+    <vertex-descriptor key="vert_pos_tex_float">
+        <vertex-attribute ref="pos_float_4"/>
+        <vertex-attribute ref="tex_float_2"/>
+    </vertex-descriptor>
+    
+    <!-- can mix/match ref'd attributes with new ones -->
+    <vertex-descriptor key="vert_pos_rgb_float">
+        <vertex-attribute ref="pos_float_4"/>
+        <vertex-attribute name="color" format="Int4"/>
+    </vertex-descriptor>
+    
+    <vertex-descriptor key="vertdesc_packed">
+        
+    </vertex-descriptor>
+    <vertex-descriptor key="vertdesc_unpacked">
+        
+    </vertex-descriptor>
+    
+    <!-- can create either array-of-struct or struct-of-arrays -->
+    <vertex-descriptor key="vert_pos_rgb">
+        
+    </vertex-descriptor>
+
+<!--    <view key="world">-->
+<!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
+<!--    </view>-->
+<!--    <view key="customWorld" type="custom">-->
+<!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
+<!--    </view>-->
+
+<physical-lens key="lens1"
+    barrel-distortion="0.1"
+    fisheye-distortion="0.5" />
+<physical-lens key="lens2"
+    focal-length="77"
+    fstop="7.0"
+    maximum-circle-of-confusion="0.10" />
+<physical-lens key="lens3"
+    aperture-blade-count="7" />
+
+<physical-imaging-surface key="phys_img1"
+    sensor-vertical-aperture="24"
+    sensor-aspect="2.0" />
+<physical-imaging-surface key="phys_img2"
+    flash="0.1 0.1 0.1"
+    exposure="1.5 1.5 1.5" />
+
+<!--    <camera key="default" eye="0 0 1 1" center="0 0 0 1" up="0 1 0 0" />-->
+<!--    <camera key="customCamera" type="custom" eye="0 0 1 1" center="0 0 0 1" up="0 1 0 0" />-->
+
+<camera key="default" />
+<camera key="cam1"
+    
+    >
+    <physical-lens ref="default"/>
+</camera>
+
+<camera key="cam2">
+    <physical-lens ref="lens1"/>
+</camera>
+
+    <stereoscopic-camera key="default"
+        field-of-view=""
+        />
+        
+        <stereoscopic-camera key="stereo_cam1">
+            <physical-lens ref="default"/>
+        
+    </stereoscopic-camera>
+
+    <perspective key="landscape" perspective-type="fov">
+        <perspective-arg name="fov" value="65.0" />
+        <perspective-arg name="angle" value="35.0" />
+        <perspective-arg name="aspect" value="1.0" />
+        <perspective-arg name="near" value="0.01" />
+        <perspective-arg name="far" value="100.0" />
+    </perspective>
+    
+    <perspective key="portrait" perspective-type="fov">
+        <perspective-arg name="fov" value="65.0" />
+        <perspective-arg name="angle" value="50.0" />
+        <perspective-arg name="aspect" value="1.0" />
+        <perspective-arg name="near" value="0.01" />
+        <perspective-arg name="far" value="100.0" />
+    </perspective>
+    
+    <!-- register mesh generators -->
+    <mesh-generator key="cubeGen" type="cube" />
+    <mesh-generator key="quadGen" type="quad" />
+    <mesh-generator key="tesselationGen" type="triangular_quad_tesselation_gen">
+        <mesh-generator-args>
+            <mesh-generator-arg type="string" name="rowCount" value="100" />
+            <mesh-generator-arg type="string" name="colCount" value="100" />
+        </mesh-generator-args>
+    </mesh-generator>
+    
+    <!-- create mesh using generator -->
+    <mesh key="cubeMesh" mesh-generator="cubeGen" />
+    <mesh key="quadMesh" mesh-generator="quadGen" />
+    
+    <!-- create mesh using generator requiring mesh-generator-args -->
+    <mesh key="tesselatedQuad" mesh-generator="tesselationGen" />
+    
+    <!-- create mesh using generator requiring generate-args -->
+    <mesh key="tesselatedQuadRef" mesh-generator="tesselationGen">
+        <generate-args>
+            <generate-arg type="string" name="meshRef" value="quadMesh" />
+        </generate-args>
+    </mesh>
+
+    <!-- create mesh by specifying points -->
+    
+    <!-- don't... just dont... don't even use this
+     - write a generator or use model i/o or something
+     - map to the appropriate scene graph keys -->
+
+<!--    <mesh key="quadMesh" primitive-type="triangle">-->
+<!--        <mesh-data-sequence>-->
+<!--            <mesh-data key="pos">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
+<!--            <mesh-data key="rgba">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
+<!--            <mesh-data key="tex">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
+<!--        </mesh-data-sequence>-->
+<!--        <mesh-data-map-sequence>-->
+<!--            <mesh-data-map key="triangle_vertex_map">0 1 3;3 2 0</mesh-data-map>-->
+<!--            <mesh-data-map key="face_vertex_map">0 1 2 3</mesh-data-map>-->
+<!--            <mesh-data-map key="face_triangle_map"></mesh-data-map>-->
+<!--        </mesh-data-map-sequence>-->
+<!--    </mesh>-->
+
+    <!-- node -->
+    <!-- nodes can have subnodes -->
+    <!-- nodes can be loaded from model i/o -->
+    
+    <!-- node-group -->
+    <!-- groups nodes logically based on keys, etc -->
+</root>

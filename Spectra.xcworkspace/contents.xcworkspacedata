@@ -83,6 +83,12 @@
          <FileRef
             location = "group:WorldView.swift">
          </FileRef>
+         <FileRef
+            location = "group:/Users/dc/dev/apple/Spectra/Spectra/Node/AssetManager.swift">
+         </FileRef>
+         <FileRef
+            location = "group:SpectraXML.swift">
+         </FileRef>
       </Group>
       <Group
          location = "group:MeshGenerators"
@@ -153,6 +159,9 @@
       <FileRef
          location = "group:Spectra3D.xsd">
       </FileRef>
+      <FileRef
+         location = "group:/Users/dc/dev/apple/Spectra/SpectraAssets/SpectraEnums.xsd">
+      </FileRef>
    </Group>
    <Group
       location = "container:SpectraTests"
@@ -169,6 +178,12 @@
       </FileRef>
       <FileRef
          location = "group:SceneGraphXMLSpec.swift">
+      </FileRef>
+      <FileRef
+         location = "group:AssetManagerSpec.swift">
+      </FileRef>
+      <FileRef
+         location = "group:SpectraXMLSpec.swift">
       </FileRef>
    </Group>
    <Group
@@ -202,7 +217,7 @@
          location = "group:SpectraTestsResources/S3DXMLTest.xml">
       </FileRef>
       <FileRef
-         location = "group:SpectraTestsResources/SceneGraphXMLTest.xml">
+         location = "group:SpectraTestsResources/SpectraXMLSpec.xml">
       </FileRef>
    </Group>
    <FileRef

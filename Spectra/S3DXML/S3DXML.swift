@@ -50,7 +50,6 @@ public protocol S3DXMLNodeParser {
 
 //TODO: update valueForAttribute calls with guard statements and better error handling
 //TODO: update so that ref's can be specified as attributes
-//TODO: make some array attributes refable, especially vertex descriptor arrays
 
 public class S3DXMLMTLFunctionNode: S3DXMLNodeParser {
     public typealias NodeType = MTLFunction

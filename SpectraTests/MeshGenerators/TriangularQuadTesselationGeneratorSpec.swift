@@ -21,7 +21,7 @@ class TriangularQuadLatticeGeneratorSpec: QuickSpec {
         let xmlData: NSData = S3DXML.readXML(testBundle, filename: "S3DXMLTest")
         let xml = S3DXML(data: xmlData)
         
-        var descriptorManager = SpectraDescriptorManager(library: library!)
+        var descriptorManager = DescriptorManager(library: library!)
 //        descriptorManager = xml.parse(descriptorManager)
         
         describe("TriangularQuadLatticeGenerator") {

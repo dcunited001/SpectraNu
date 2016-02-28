@@ -23,10 +23,10 @@ class S3DXMLSpec: QuickSpec {
         let xmlData: NSData = S3DXML.readXML(testBundle, filename: "S3DXMLTest")
         let s3d = S3DXML(data: xmlData)
         
-        var descMan = SpectraDescriptorManager(library: library!)
+        var descMan = DescriptorManager(library: library!)
         descMan.parseS3DXML(s3d)
         
-        describe("SpectraDescriptorManager") {
+        describe("DescriptorManager") {
             it("parses enumGroups from XSD") {
                 expect(descMan.getMtlEnum("mtlSamplerAddressMode", key: "ClampToEdge") == 0)
             }
