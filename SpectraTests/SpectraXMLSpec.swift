@@ -140,67 +140,75 @@ class SpectraXMLSpec: QuickSpec {
             }
         }
         
-        describe("physical-lens") {
-            it("can specify Physical Lens parameters") {
-                // the renderer must support the math (visual distortion, etc)
-                // - barrelDistorion: Float
-                // - fisheyeDistorion: Float
-                // - opticalVignetting: Float
-                // - chromaticAberration: Float
-                // - focalLength: Float
-                // - fStop: Float
-                // - apertureBladeCount: Int
-                // - bokehKernelWithSize: vector_int2 -> MDLTexture
-                // - maximumCircleOfConfusion: Float
-                // - focusDistance: Float
-                // - shutterOpenInterval: NSTimeInterval
-            }
-        }
-        
-        describe("physical-imaging-surface") {
-            it("can specify Physical Imaging Surface parameters ") {
-                // the renderer must support the math
-                // - sensorVerticalAperture: Float
-                // - sensorAspect: Float
-                // - sensorEnlargement: vector_float2
-                // - sensorShift: vector_float2
-                // - flash: vector_float3
-                // - exposure: vector_float3
-                // - exposureCompression: vector_float2
-            }
-        }
-        
-        describe("camera") {
-            let defaultCam: MDLCamera = self.containerGet(assetContainer, key: "default")!
-            let cam1: MDLCamera = self.containerGet(assetContainer, key: "cam1")!
+        describe("MDLCamera") {
+            let lens1: SpectraPhysicalLensParams = self.containerGet(assetContainer, key: "lens1")!
+            let lens2: SpectraPhysicalLensParams = self.containerGet(assetContainer, key: "lens2")!
+            let lens3: SpectraPhysicalLensParams = self.containerGet(assetContainer, key: "lens3")!
             
-            it("manages the inherited MDLObject properties") {
-                // transform
-                // parent
+            describe("physical-lens") {
+                it("can specify Physical Lens parameters") {
+                    expect(lens1.barrelDistortion) == 0.1
+                    expect(lens1.fisheyeDistortion) == 0.1
+                    
+                    // - barrelDistorion: Float
+                    // - fisheyeDistorion: Float
+                    // - opticalVignetting: Float
+                    // - chromaticAberration: Float
+                    // - focalLength: Float
+                    // - fStop: Float
+                    // - apertureBladeCount: Int
+                    // - bokehKernelWithSize: vector_int2 -> MDLTexture
+                    // - maximumCircleOfConfusion: Float
+                    // - focusDistance: Float
+                    // - shutterOpenInterval: NSTimeInterval
+                }
             }
             
-            it("loads default values") {
-                expect(defaultCam.nearVisibilityDistance) == 0.1
-                expect(defaultCam.farVisibilityDistance) == 1000.0
-                expect(defaultCam.fieldOfView) == Float(53.999996185302734375)
+            describe("physical-imaging-surface") {
+                it("can specify Physical Imaging Surface parameters ") {
+                    // the renderer must support the math
+                    // - sensorVerticalAperture: Float
+                    // - sensorAspect: Float
+                    // - sensorEnlargement: vector_float2
+                    // - sensorShift: vector_float2
+                    // - flash: vector_float3
+                    // - exposure: vector_float3
+                    // - exposureCompression: vector_float2
+                }
             }
             
-            it("is created with near-visibility-distance, far-visibility-distance and field-of-view") {
-                // these are required and produce a corresponding projection matrix (formerly perspective)
-            }
-            
-            it("can be set to look at a position and look from a position") {
-                // look-at (and optionally look-from)
-            }
-        }
-        
-        describe("stereoscopic-camera") {
-            it("is created by additionally specifying interPupillaryDistance, overlap & left/right vergence") {
+            describe("camera") {
+                let defaultCam: MDLCamera = self.containerGet(assetContainer, key: "default")!
+                let cam1: MDLCamera = self.containerGet(assetContainer, key: "cam1")!
                 
+                it("manages the inherited MDLObject properties") {
+                    // transform
+                    // parent
+                }
+                
+                it("loads default values") {
+                    expect(defaultCam.nearVisibilityDistance) == 0.1
+                    expect(defaultCam.farVisibilityDistance) == 1000.0
+                    expect(defaultCam.fieldOfView) == Float(53.999996185302734375)
+                }
+                
+                it("is created with near-visibility-distance, far-visibility-distance and field-of-view") {
+                    // these are required and produce a corresponding projection matrix (formerly perspective)
+                }
+                
+                it("can be set to look at a position and look from a position") {
+                    // look-at (and optionally look-from)
+                }
             }
             
-            // it can attach a physical-lens
-            // it can attach a physical-imaging-surface
+            describe("stereoscopic-camera") {
+                it("is created by additionally specifying interPupillaryDistance, overlap & left/right vergence") {
+                    
+                }
+                
+                // it can attach a physical-lens
+                // it can attach a physical-imaging-surface
+            }
         }
         
         describe("asset") {
