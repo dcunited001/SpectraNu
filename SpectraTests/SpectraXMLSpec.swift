@@ -215,8 +215,26 @@ class SpectraXMLSpec: QuickSpec {
                 expect(SpectraSimd.compareFloat3(xformShear.shear, with: float3(10.0, 10.0, 1.0))).to(beTrue())
             }
             
-            it("correctly composes multiple operations") {
-                // check that translate/rotate/scale/shear is calculated correctly when composed
+//            it("correctly composes multiple operations") {
+//                // check that translate/rotate/scale/shear is calculated correctly when composed
+//            }
+        }
+        
+        describe("object") {
+            let scene1: MDLObject = self.containerGet(assetContainer, key: "scene1")!
+            
+            it("can create basic objects") {
+                let objDefault: MDLObject = self.containerGet(assetContainer, key: "default")!
+                expect(objDefault.transform).to(beNil())
+                expect(objDefault.name) == "default"
+            }
+            
+            it("can create nested objects") {
+                let xform: MDLTransform = self.containerGet(assetContainer, key: "xform_translate")!
+                let cam: MDLCamera = self.containerGet(assetContainer, key: "default")!
+                let stereoCam: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "default")
+                
+                expect(scene1.children)
             }
         }
         
