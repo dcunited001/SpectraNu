@@ -186,32 +186,32 @@ public class SpectraXML {
                 case .VertexAttribute:
                     let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: child, options: options)
                     container.register(MDLVertexAttribute.self, name: key!) { _ in
-                        return vertexAttr
+                        return (vertexAttr.copy() as! MDLVertexAttribute)
                         }.inObjectScope(.None)
                 case .VertexDescriptor:
                     let vertexDesc = SpectraXMLVertexDescriptorNode().parse(container, elem: child, options: options)
                     container.register(MDLVertexDescriptor.self, name: key!)  { _ in
-                        return vertexDesc
+                        return MDLVertexDescriptor(vertexDescriptor: vertexDesc)
                         }.inObjectScope(.None)
                 case .Camera:
                     let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLCamera.self, name: key!) { _ in
-                        return camera
+                        return (camera.copy() as! MDLCamera)
                         }.inObjectScope(.None)
                 case .StereoscopicCamera:
                     let stereoCam = SpectraXMLStereoscopicCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLStereoscopicCamera.self, name: key!) { _ in
-                        return stereoCam
+                        return (stereoCam.copy() as! MDLStereoscopicCamera)
                         }.inObjectScope(.None)
                 case .PhysicalLensParams:
                     let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
                     container.register(SpectraPhysicalLensParams.self, name: key!) { _ in
-                        return lens
+                        return (lens.copy() as! SpectraPhysicalLensParams)
                         }.inObjectScope(.None)
                 case .PhysicalImagingSurfaceParams:
                     let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: child, options: options)
                     container.register(SpectraPhysicalImagingSurfaceParams.self, name: key!) { _ in
-                        return imagingSurface
+                        return (imagingSurface.copy() as! SpectraPhysicalImagingSurfaceParams)
                         }.inObjectScope(.None)
                     //                case .Camera:
                     //                    let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
@@ -443,7 +443,7 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
 // - there's also the mesh-generator pattern from the original SceneGraphXML
 //   - this draws from a map of monads passed in and executes the one for a specific type, if found
 
-public class SpectraPhysicalLensParams {
+public class SpectraPhysicalLensParams: NSObject {
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
     
     public var worldToMetersConversionScale: Float?
@@ -544,7 +544,7 @@ public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
             lensParams.chromaticAberration = Float(chromaticAberration)!
         }
         
-        if let focalLength = elem.attributes["focus-length"] {
+        if let focalLength = elem.attributes["focal-length"] {
             lensParams.focalLength = Float(focalLength)!
         }
         
@@ -568,7 +568,7 @@ public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
     }
 }
 
-public class SpectraPhysicalImagingSurfaceParams {
+public class SpectraPhysicalImagingSurfaceParams: NSObject {
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
     
     public var sensorVerticalAperture: Float?

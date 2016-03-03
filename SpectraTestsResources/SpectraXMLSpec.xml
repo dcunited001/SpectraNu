@@ -64,7 +64,7 @@
     
     <physical-lens key="lens2"
     focal-length="77"
-    fstop="7.0"
+    f-stop="7.0"
     maximum-circle-of-confusion="0.10" />
     
     <physical-lens key="lens3"
@@ -101,7 +101,7 @@
     </stereoscopic-camera>
     
     <stereoscopic-camera key="stereo_cam2">
-        <physical-lens ref="lens1"/>
+        <physical-lens ref="lens1" />
     </stereoscopic-camera>
     
     <transform key="xform_translate" translation="10.0 20.0 30.0" />

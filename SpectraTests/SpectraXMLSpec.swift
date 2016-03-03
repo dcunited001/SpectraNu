@@ -191,7 +191,7 @@ class SpectraXMLSpec: QuickSpec {
                     expect(lens1.barrelDistortion) == 0.1
                     expect(lens1.fisheyeDistortion) == 0.5
                     
-                    expect(lens2.focalLength) == 77
+                    expect(lens2.focalLength) == 77.0
                     expect(lens2.fStop) == 7.0
                     expect(lens2.maximumCircleOfConfusion) == 0.10
                     
