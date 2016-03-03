@@ -9,9 +9,5 @@
 import Foundation
 
 public class Spectra {
-
-    public class func foo() -> Bool {
-        return true
-    }
     
 }
