@@ -779,8 +779,92 @@ public class SpectraXMLStereoscopicCameraNode: SpectraXMLNode {
 // TODO: public class SpectraXMLTextureSamplerNode: SpectraXMLNode {
 // TODO: public class SpectraXMLLightNode: SpectraXMLNode {
 // TODO: public class SpectraXML ... etc
-// TODO: public class SpectraXMLMaterialNode: SpectraXMLNode {
-// TODO: public class SpectraXMLMaterialPropertyNode: SpectraXMLNode {
+
+
+
+public class SpectraXMLMaterialNode: SpectraXMLNode {
+    public typealias NodeType = MDLMaterial
+    
+    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+        
+        let material = MDLMaterial()
+        
+        // TODO: material
+        
+        return material
+    }
+}
+
+public class SpectraXMLMaterialPropertyNode: SpectraXMLNode {
+    public typealias NodeType = MDLMaterialProperty
+    
+    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+        
+        let name = elem.attributes["name"]!
+        let matTypeName = elem.attributes["type"]!
+        let matType = container.resolve(MDLMaterialPropertyType.self, name: matTypeName)!
+        
+        let matSemanticName = elem.attributes["semantic"]!
+        let matSemantic = container.resolve(MDLMaterialSemantic.self, name: matSemanticName)!
+        
+        var matprop: MDLMaterialProperty?
+        switch matType {
+        case .None:
+            matprop = MDLMaterialProperty(name: name, semantic: matSemantic)
+//        case .String:
+        default: return matprop!; break;
+        }
+        
+        return matprop!
+    }
+}
+
+
+//public class SpectraXMLScatteringFunctionNode: SpectraXMLNode {
+//    public typealias NodeType = MDLScatteringFunction
+//    
+//    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+//        let scatter = MDLScatteringFunction()
+//        
+//        // baseColor
+//        if let baseColor = elem.attributes["baseColor"] {
+////            scatter.baseColor = baseColor
+//        }
+//        
+//        if let emission = elem.attributes["emission"] {
+////            scatter.emission = emission
+//        }
+//        
+//        if let specular = elem.attributes["specular"] {
+////            scatter.specular = specular
+//        }
+//        
+//        // materialIndexOfRefraction
+//        if let materialIndex = elem.attributes["material-index-of-refraction"] {
+////            materialIndex = materialIndex
+//        }
+//        
+//        // interfaceIndexOfRefraction
+//        if let interfaceIndex = elem.attributes["interface-index-of-refraction"] {
+//            
+//        }
+//        // normal
+//        if let normal = elem.attributes["normal"] {
+//            
+//        }
+//        // ambientOcclusion
+//        if let ambientOcclusion = elem.attributes["ambient-occlusion"] {
+//            
+//        }
+//        // ambientOcclusionScale
+//        if let ambientOcclusionScale = elem.attributes["ambient-occlusion-scale"] {
+//            
+//        }
+//        
+//        return scatter
+//    }
+//}
+
 // TODO: public class SpectraXMLScatteringFunctionNode: SpectraXMLNode {
 // TODO: public class .. voxel array?  maybe a generator
 // TODO: public class .. voxel morphism (morphology in 3D)

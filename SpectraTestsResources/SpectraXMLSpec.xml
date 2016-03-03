@@ -104,6 +104,25 @@
         <physical-lens ref="lens1" />
     </stereoscopic-camera>
     
+    <material-property key="matprop_float"
+    name="base_color"
+    type="Float4"
+    semantic="BaseColor" />
+    
+    <material-property key="matprop_testvalues"
+    name="testvalues"
+    type="Float4"
+    semantic="BaseColor"
+    string-value="testvalues_string"
+    url-value="file:///testvalue.file"
+    texture-sampler-value="texture_sampler1"
+    color="127 127 127 127"
+    float-value="127"
+    float2-value="127 127"
+    float3-value="127 127 127"
+    float4-value="127 127 127 127"
+    matrix-value="127 127 127 127 127 127 127 127 127 127 127 127 127 127 127 127" />
+    
     <transform key="xform_translate" translation="10.0 20.0 30.0" />
     <transform key="xform_rotate" rotation="0.25 0.50 1.0" />
     <transform key="xform_scale" scale="2.0 2.0 2.0" />
