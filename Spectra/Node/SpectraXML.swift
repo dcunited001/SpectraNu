@@ -211,8 +211,8 @@ public class SpectraXML {
                         }.inObjectScope(.None)
                 case .PhysicalImagingSurfaceParams:
                     let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: child, options: options)
-                    container.register(SpectraPhysicalImagingSurfaceParams.self, name: key!) { _ in
-                        return (imagingSurface.copy() as! SpectraPhysicalImagingSurfaceParams)
+                    container.register(PhysicalImagingSurface.self, name: key!) { _ in
+                        return (imagingSurface.copy() as! PhysicalImagingSurface)
                         }.inObjectScope(.None)
                 case .Transform:
                     let transform = SpectraXMLTransformNode().parse(container, elem: child, options: options)
@@ -546,7 +546,7 @@ public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
     }
 }
 
-public class SpectraPhysicalImagingSurfaceParams: NSObject, NSCopying {
+public class PhysicalImagingSurface: NSObject, NSCopying {
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
     
     public var sensorVerticalAperture: Float?
@@ -599,7 +599,7 @@ public class SpectraPhysicalImagingSurfaceParams: NSObject, NSCopying {
     }
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        let cp = SpectraPhysicalImagingSurfaceParams()
+        let cp = PhysicalImagingSurface()
         cp.sensorVerticalAperture = self.sensorVerticalAperture
         cp.sensorAspect = self.sensorAspect
         cp.sensorEnlargement = self.sensorEnlargement
@@ -613,10 +613,10 @@ public class SpectraPhysicalImagingSurfaceParams: NSObject, NSCopying {
 }
 
 public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
-    public typealias NodeType = SpectraPhysicalImagingSurfaceParams
+    public typealias NodeType = PhysicalImagingSurface
     
     public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
-        let imagingSurface = SpectraPhysicalImagingSurfaceParams()
+        let imagingSurface = PhysicalImagingSurface()
         
         if let sensorVerticalAperture = elem.attributes["sensor-vertical-aperture"] {
             imagingSurface.sensorVerticalAperture = Float(sensorVerticalAperture)
@@ -682,11 +682,11 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
         let imagingSelector = SpectraXMLNodeType.PhysicalImagingSurfaceParams.rawValue
         if let imagingTag = elem.firstChild(tag: imagingSelector) {
             if let ref = imagingTag.attributes["ref"] {
-                let imagingSurface = container.resolve(SpectraPhysicalImagingSurfaceParams.self, name: ref)!
+                let imagingSurface = container.resolve(PhysicalImagingSurface.self, name: ref)!
                 imagingSurface.applyToCamera(cam)
             } else {
                 let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: imagingTag, options: options)
-                container.register(SpectraPhysicalImagingSurfaceParams.self, name: imagingTag["key"]!) { _ in return imagingSurface }
+                container.register(PhysicalImagingSurface.self, name: imagingTag["key"]!) { _ in return imagingSurface }
                 imagingSurface.applyToCamera(cam)
             }
         }
