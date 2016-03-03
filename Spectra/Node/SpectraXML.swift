@@ -12,17 +12,19 @@ import Swinject
 import ModelIO
 
 // PLZ NOTE: i promise I'm not pursuing this terrible XML parsing design for
-//   lack of an alternative design.  I'm trying to do two things: 
-// (1) avoid extending ModelIO & Metal base class (to add copy(), parseXML() and whatnot)
-// (2) and avoid mirroring the ModelIO & Metal object's api's - which already mirror each other to some degree!
-//   - simply mirroring the ModelIO & Metal api's by introducing new classes 
-//     where everything is mostly named the same just adds confusion 
+//   lack of an alternative design.  Here's at least 3 issues I'm balancing:
+// (1) minimize stored references to unnecessary data
+//   - e.g. don't store XMLElement objects or accidentally retain stuff with closure definitions
+// (2) avoid extending ModelIO & Metal base class (to add copy(), parseXML() and whatnot)
+// (3) and avoid mirroring the ModelIO & Metal object's api's - which already mirror each other to some degree!
+//   - simply mirroring the ModelIO & Metal api's by introducing new classes
+//     where everything is mostly named the same just adds confusion
 //   - although it makes it easier to add parseJSON(), parsePlist() & copy()
 //
 // that said, i'm sticking to this shit design because it's all probably going to change completely anyways,
 //   so why fret over minor changes when a major change would make them all irrelevant?
 //
-// I do wish I knew of a meta way to do this: 
+// I do wish I knew of a meta way to do this:
 // - something like Ruby's obj.responds_to(:"foo=") && obj.send(":foo", "bar")
 
 public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement, key: String?, options: [String: Any]) -> AnyObject)
@@ -213,7 +215,7 @@ public class SpectraXML {
                     let obj = SpectraXMLObjectNode().parse(container, elem: child, options: options)
                     container.register(MDLObject.self, name: key!) { _ in
                         return SpectraXMLObjectNode.copy(obj)
-                    }
+                        }.inObjectScope(.None)
                 case .Camera:
                     let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLCamera.self, name: key!) { _ in
@@ -513,9 +515,6 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
         return cp
     }
 }
-
-
-
 
 //============================================================
 // TODO: decide how to handle inheritance
