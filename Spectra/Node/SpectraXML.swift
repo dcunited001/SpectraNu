@@ -328,8 +328,8 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
                 vertexDesc.addOrReplaceAttribute(vertexAttr)
             }
         }
-
-        // this automatically sets the offset correctly, 
+        
+        // this automatically sets the offset correctly,
         // - but attributes must be assigned and configured by this point
         vertexDesc.setPackedOffsets()
         vertexDesc.setPackedStrides()
@@ -347,7 +347,7 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
     public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
         var transform = MDLTransform()
         
-        // N.B. scale first, then rotate, finally translate 
+        // N.B. scale first, then rotate, finally translate
         // - but how can a shear operation be composed into this?
         
         if let scale = elem.attributes["scale"] {
@@ -376,12 +376,12 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
     
     public static func copy(object: NodeType) -> NodeType {
         let newTransform = MDLTransform()
-    
+        
         newTransform.scale = object.scale
         newTransform.shear = object.shear
         newTransform.rotation = object.rotation
         newTransform.translation = object.translation
-
+        
         return newTransform
     }
 }
@@ -456,7 +456,7 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
                 case .Mesh: break
                 default: break
                 }
-
+                
             } else {
                 // parse other nodes (custom nodes, etc)
             }
@@ -863,7 +863,7 @@ public class SpectraXMLStereoscopicCameraNode: SpectraXMLNode {
         stereoCam.apertureBladeCount = cam.apertureBladeCount
         stereoCam.maximumCircleOfConfusion = cam.maximumCircleOfConfusion
         stereoCam.focusDistance = cam.focusDistance
-
+        
         // physical imaging surface
         stereoCam.sensorVerticalAperture = cam.sensorVerticalAperture
         stereoCam.sensorAspect = cam.sensorAspect
