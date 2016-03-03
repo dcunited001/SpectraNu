@@ -504,17 +504,25 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
             }
         }
         
-        for obj in object.children.objects {
-            switch obj {
-            case is MDLObject:
-                cp.addChild(SpectraXMLObjectNode.copy(obj))
-            case is MDLCamera:
-                cp.addChild(SpectraXMLCameraNode.copy(obj as! MDLCamera))
-            case is MDLStereoscopicCamera:
-                cp.addChild(SpectraXMLStereoscopicCameraNode.copy(obj as! MDLStereoscopicCamera))
-            case is MDLLight: break
-            case is MDLMesh: break
-            default: break
+        if let objContainer = object.componentConformingToProtocol(MDLObjectContainerComponent.self) {
+            // strange that an object with no children returns nil,
+            // - yet the compiler thinks this is impossible
+            
+            if object.children.objects.count > 0 {
+                for obj in object.children.objects {
+                    switch obj {
+                    case is MDLCamera:
+                        cp.addChild(SpectraXMLCameraNode.copy(obj as! MDLCamera))
+                    case is MDLStereoscopicCamera:
+                        cp.addChild(SpectraXMLStereoscopicCameraNode.copy(obj as! MDLStereoscopicCamera))
+                    case is MDLLight: break
+                    case is MDLMesh: break
+                    default:
+                        //TODO: account for case when obj is subclass of MDLObject, but not MDLObject
+                        // - can't use (obj is MDLObject) or !(obj is MDLObject) bc that's always true/false
+                        cp.addChild(SpectraXMLObjectNode.copy(obj))
+                    }
+                }
             }
         }
         
