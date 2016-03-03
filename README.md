@@ -136,3 +136,8 @@ i think one thing i lose with MDLMesh and MDLSubmesh is the ability to do MeshCa
 - how to interchange b/w MDLVertexAttribute structure of arrays (optimized for flexibility of writing and composability) and array of structures (optimized for reading)
 - how to best structure the dependency injection for mesh generators
 
+
+### Parsing XSD/XML
+
+[Finite State Automata (FSA) Algorithm](http://www.ltg.ed.ac.uk/~ht/XML_Europe_2003.html)
+
