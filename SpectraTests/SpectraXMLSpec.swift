@@ -166,9 +166,9 @@ class SpectraXMLSpec: QuickSpec {
         }
         
         describe("MDLCamera") {
-            let lens1: SpectraPhysicalLensParams = self.containerGet(assetContainer, key: "lens1")!
-            let lens2: SpectraPhysicalLensParams = self.containerGet(assetContainer, key: "lens2")!
-            let lens3: SpectraPhysicalLensParams = self.containerGet(assetContainer, key: "lens3")!
+            let lens1: PhysicalLens = self.containerGet(assetContainer, key: "lens1")!
+            let lens2: PhysicalLens = self.containerGet(assetContainer, key: "lens2")!
+            let lens3: PhysicalLens = self.containerGet(assetContainer, key: "lens3")!
             
             let physImg1: SpectraPhysicalImagingSurfaceParams = self.containerGet(assetContainer, key: "phys_img1")!
             let physImg2: SpectraPhysicalImagingSurfaceParams = self.containerGet(assetContainer, key: "phys_img2")!

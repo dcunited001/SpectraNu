@@ -206,8 +206,8 @@ public class SpectraXML {
                         }.inObjectScope(.None)
                 case .PhysicalLensParams:
                     let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
-                    container.register(SpectraPhysicalLensParams.self, name: key!) { _ in
-                        return (lens.copy() as! SpectraPhysicalLensParams)
+                    container.register(PhysicalLens.self, name: key!) { _ in
+                        return (lens.copy() as! PhysicalLens)
                         }.inObjectScope(.None)
                 case .PhysicalImagingSurfaceParams:
                     let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: child, options: options)
@@ -406,7 +406,7 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
 // - there's also the mesh-generator pattern from the original SceneGraphXML
 //   - this draws from a map of monads passed in and executes the one for a specific type, if found
 
-public class SpectraPhysicalLensParams: NSObject, NSCopying {
+public class PhysicalLens: NSObject, NSCopying {
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
     
     public var worldToMetersConversionScale: Float?
@@ -481,7 +481,7 @@ public class SpectraPhysicalLensParams: NSObject, NSCopying {
     }
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        let cp = SpectraPhysicalLensParams()
+        let cp = PhysicalLens()
         cp.worldToMetersConversionScale = self.worldToMetersConversionScale
         cp.barrelDistortion = self.barrelDistortion
         cp.fisheyeDistortion = self.fisheyeDistortion
@@ -497,10 +497,10 @@ public class SpectraPhysicalLensParams: NSObject, NSCopying {
 }
 
 public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
-    public typealias NodeType = SpectraPhysicalLensParams
+    public typealias NodeType = PhysicalLens
     
     public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
-        let lensParams = SpectraPhysicalLensParams()
+        let lensParams = PhysicalLens()
         
         if let worldToMetersConversionScale = elem.attributes["world-to-meters-conversion-scale"] {
             lensParams.worldToMetersConversionScale = Float(worldToMetersConversionScale)!
@@ -670,11 +670,11 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
         let lensSelector = SpectraXMLNodeType.PhysicalLensParams.rawValue
         if let lensTag = elem.firstChild(tag: lensSelector) {
             if let ref = lensTag.attributes["ref"] {
-                let lens = container.resolve(SpectraPhysicalLensParams.self, name: ref)!
+                let lens = container.resolve(PhysicalLens.self, name: ref)!
                 lens.applyToCamera(cam)
             } else {
                 let lens = SpectraXMLPhysicalLensNode().parse(container, elem: lensTag, options: options)
-                container.register(SpectraPhysicalLensParams.self, name: lensTag["key"]!) { _ in return lens }
+                container.register(PhysicalLens.self, name: lensTag["key"]!) { _ in return lens }
                 lens.applyToCamera(cam)
             }
         }
