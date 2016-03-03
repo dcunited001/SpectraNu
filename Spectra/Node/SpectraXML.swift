@@ -275,7 +275,7 @@ public protocol SpectraXMLNode {
 public class SpectraXMLAssetNode: SpectraXMLNode {
     public typealias NodeType = MDLAsset
     
-    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
         let urlString = elem.attributes["url"]!
         var vertexDesc: MDLVertexDescriptor?
         
@@ -298,7 +298,7 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
 public class SpectraXMLVertexAttributeNode: SpectraXMLNode {
     public typealias NodeType = MDLVertexAttribute
     
-    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
         let vertexAttr = MDLVertexAttribute()
         
         // TODO: determine which of these are required
@@ -329,7 +329,7 @@ public class SpectraXMLVertexAttributeNode: SpectraXMLNode {
 public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
     public typealias NodeType = MDLVertexDescriptor
     
-    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String : Any] = [:]) -> NodeType {
         var vertexDesc = MDLVertexDescriptor()
         
         // if user specified a parent descriptor, find it and copy it
@@ -339,7 +339,7 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
             vertexDesc = MDLVertexDescriptor(vertexDescriptor: parentDesc)
         }
         
-        let attributeSelector = SpectraXMLNodeType.VertexAttribute.rawValue
+        let attributeSelector = "vertex-attributes > vertex-attribute"
         for (idx, el) in elem.css(attributeSelector).enumerate() {
             if let ref = el.attributes["ref"] {
                 let vertexAttr = container.resolve(MDLVertexAttribute.self, name: ref)!
@@ -365,7 +365,7 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
     // TODO: time based translations?
     // TODO: reference other MDLTransforms & Compose (via declaration in XML)
     
-    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String : Any] = [:]) -> NodeType {
         var transform = MDLTransform()
         
         // N.B. scale first, then rotate, finally translate
@@ -414,8 +414,12 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
 public class SpectraXMLObjectNode: SpectraXMLNode {
     public typealias NodeType = MDLObject
     
-    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String : Any] = [:]) -> NodeType {
         var object = MDLObject()
+        
+        if let name = elem.attributes["name"] {
+            object.name = name
+        }
         
         let transformSelector = SpectraXMLNodeType.Transform.rawValue
         if let transformTag = elem.firstChild(tag: transformSelector) {
@@ -450,7 +454,7 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
                         object.addChild(obj)
                     }
                     
-                    // set parent??
+                // set parent??
                 case .Camera:
                     if let ref = objRef {
                         let cam = container.resolve(MDLCamera.self, name: ref)!
@@ -488,6 +492,8 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
     
     public static func copy(object: NodeType) -> NodeType {
         let cp = MDLObject()
+
+        cp.name = object.name.copy() as! String
         
         if let transform = object.transform {
             if transform is MDLTransform {
