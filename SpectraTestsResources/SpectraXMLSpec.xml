@@ -7,12 +7,8 @@
 <root>
     
     <!--
-     must define any reusable vertex-attribute's ahead-of-time
-     - this is because these attributes are mutated when generating the vertex buffer layouts
-     
-     also, for now, layouts are either packed or not:
-     - either everything in one buffer, or everything in separate buffers
-     - and default towards everything in separate buffers
+     must define any reusable vertex-attribute's ahead-of-time, 
+     - unless you are going to use a packed data format
      -->
     
     <vertex-attribute key="pos_float4" name="position" format="Float4"/>
@@ -24,45 +20,47 @@
     <vertex-attribute key="test_custom_label" name="custom" format="Int" />
     <vertex-attribute key="test_immutable" name="custom" format="Int" buffer-index="0"/>
     
-    <!-- TODO: vertex-descriptor format for delayed assembly of vertex-attributes (and associated buffer indices)
-     -->
-    
     <!-- can ref vertex-attributes -->
     <vertex-descriptor key="vert_pos_tex_float">
-        <vertex-attribute ref="pos_float4"/>
-        <vertex-attribute ref="tex_float2"/>
+        <vertex-attributes>
+            <vertex-attribute ref="pos_float4"/>
+            <vertex-attribute ref="tex_float2"/>
+        </vertex-attributes>
     </vertex-descriptor>
     
     <!-- TODO: test parent-descriptor for vertex-descriptor or remove -->
 
     <!-- can mix/match ref'd attributes with new ones -->
     <vertex-descriptor key="vert_pos_rgb_float">
-        <vertex-attribute ref="pos_float4"/>
-        <vertex-attribute name="color" format="Int4"/>
+        <vertex-attributes>
+            <vertex-attribute ref="pos_float4"/>
+            <vertex-attribute name="color" format="Int4"/>
+        </vertex-attributes>
     </vertex-descriptor>
     
     <vertex-descriptor key="vertdesc_packed" packed-layout="true">
-        <vertex-attribute ref="pos_float4"/>
-        <vertex-attribute ref="tex_float2"/>
-        <vertex-attribute ref="aniso_float4"/>
+        <vertex-attributes>
+            <vertex-attribute ref="pos_float4"/>
+            <vertex-attribute ref="tex_float2"/>
+            <vertex-attribute ref="aniso_float4"/>
+        </vertex-attributes>
     </vertex-descriptor>
     
     <vertex-descriptor key="vertdesc_unpacked">
-        <vertex-attribute name="position" format="Float4" buffer-index="0" />
-        <vertex-attribute name="textureCoordinate" format="Float2" buffer-index="1" />
-        <vertex-attribute name="anisotropy" format="Float4"  buffer-index="2" />
+        <vertex-attributes>
+            <vertex-attribute name="position" format="Float4" buffer-index="0" />
+            <vertex-attribute name="textureCoordinate" format="Float2" buffer-index="1" />
+            <vertex-attribute name="anisotropy" format="Float4"  buffer-index="2" />
+        </vertex-attributes>
     </vertex-descriptor>
     
     <vertex-descriptor key="vertdesc_complex">
-        <vertex-attribute name="position" format="Float4" buffer-index="0" />
-        <vertex-attribute name="textureCoordinate" format="Float2" buffer-index="1" />
-        <vertex-attribute name="anisotropy" format="Float4" buffer-index="1" />
-        <vertex-attribute name="color" format="Float4" buffer-index="2" />
-    </vertex-descriptor>
-    
-    <!-- can create either array-of-struct or struct-of-arrays -->
-    <vertex-descriptor key="vert_pos_rgb">
-        
+        <vertex-attributes>
+            <vertex-attribute name="position" format="Float4" buffer-index="0" />
+            <vertex-attribute name="textureCoordinate" format="Float2" buffer-index="1" />
+            <vertex-attribute name="anisotropy" format="Float4" buffer-index="1" />
+            <vertex-attribute name="color" format="Float4" buffer-index="2" />
+        </vertex-attributes>
     </vertex-descriptor>
     
     <!--    <view key="world">-->
@@ -72,24 +70,12 @@
     <!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
     <!--    </view>-->
     
-    <physical-lens key="lens1"
-    barrel-distortion="0.1"
-    fisheye-distortion="0.5" />
+    <physical-lens key="lens1" barrel-distortion="0.1" fisheye-distortion="0.5" />
+    <physical-lens key="lens2" focal-length="77" f-stop="7.0" maximum-circle-of-confusion="0.10" />
+    <physical-lens key="lens3" aperture-blade-count="7" />
     
-    <physical-lens key="lens2"
-    focal-length="77"
-    f-stop="7.0"
-    maximum-circle-of-confusion="0.10" />
-    
-    <physical-lens key="lens3"
-    aperture-blade-count="7" />
-    
-    <physical-imaging-surface key="phys_img1"
-    sensor-vertical-aperture="24"
-    sensor-aspect="2.0" />
-    <physical-imaging-surface key="phys_img2"
-    flash="0.1 0.1 0.1"
-    exposure="1.5 1.5 1.5" />
+    <physical-imaging-surface key="phys_img1" sensor-vertical-aperture="24" sensor-aspect="2.0" />
+    <physical-imaging-surface key="phys_img2" flash="0.1 0.1 0.1" exposure="1.5 1.5 1.5" />
     
     <camera key="default" />
     <camera key="cam1">
@@ -149,14 +135,16 @@
         </generate-args>
     </mesh>
     
+    
+    
     <!-- create mesh by specifying points -->
     
     <!-- don't... just dont... don't even use this
      - write a generator or use model i/o or something
      - map to the appropriate scene graph keys -->
     
-    <object key="default" />
-    <object key="scene1">
+    <object key="default" name="default" />
+    <object key="scene1" name="scene1" >
         <transform ref="xform_translate" />
         <camera ref="default" />
         <stereoscopic-camera ref="default" />
