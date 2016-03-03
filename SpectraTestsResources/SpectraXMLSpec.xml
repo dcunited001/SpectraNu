@@ -29,13 +29,15 @@
     
     <!-- can ref vertex-attributes -->
     <vertex-descriptor key="vert_pos_tex_float">
-        <vertex-attribute ref="pos_float_4"/>
-        <vertex-attribute ref="tex_float_2"/>
+        <vertex-attribute ref="pos_float4"/>
+        <vertex-attribute ref="tex_float2"/>
     </vertex-descriptor>
     
+    <!-- TODO: test parent-descriptor for vertex-descriptor or remove -->
+
     <!-- can mix/match ref'd attributes with new ones -->
     <vertex-descriptor key="vert_pos_rgb_float">
-        <vertex-attribute ref="pos_float_4"/>
+        <vertex-attribute ref="pos_float4"/>
         <vertex-attribute name="color" format="Int4"/>
     </vertex-descriptor>
     

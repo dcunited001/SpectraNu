@@ -318,7 +318,7 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
             vertexDesc = MDLVertexDescriptor(vertexDescriptor: parentDesc)
         }
         
-        let attributeSelector = "vertex-attributes > vertex-attribute"
+        let attributeSelector = SpectraXMLNodeType.VertexAttribute.rawValue
         for (idx, el) in elem.css(attributeSelector).enumerate() {
             if let ref = el.attributes["ref"] {
                 let vertexAttr = container.resolve(MDLVertexAttribute.self, name: ref)!

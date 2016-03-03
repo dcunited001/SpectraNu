@@ -105,8 +105,27 @@ class SpectraXMLSpec: QuickSpec {
         }
         
         describe("vertex-descriptor") {
+            let attrPos: MDLVertexAttribute = self.containerGet(assetContainer, key: "pos_float4")!
+            let attrTex: MDLVertexAttribute = self.containerGet(assetContainer, key: "tex_float2")!
+            let vertDescPosTex: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vert_pos_tex_float")!
+            let vertDescPosRgb: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vert_pos_rgb_float")!
+            
             it("can parse vertex descriptor with references to vertex attributes") {
-
+                let pos1 = vertDescPosTex.attributeNamed("position")!
+                let tex1 = vertDescPosTex.attributeNamed("textureCoordinate")!
+                let pos2 = vertDescPosRgb.attributeNamed("position")!
+                let rgb2 = vertDescPosRgb.attributeNamed("color")!
+                
+                expect(pos1.format) == MDLVertexFormat.Float4
+                expect(tex1.format) == MDLVertexFormat.Float2
+                expect(pos2.format) == MDLVertexFormat.Float4
+                expect(rgb2.format) == MDLVertexFormat.Int4
+                
+                expect(vertDescPosTex.attributes[0].name) == "position"
+                expect(vertDescPosTex.attributes[1].name) == "textureCoordinate"
+                
+                expect(vertDescPosRgb.attributes[0].name) == "position"
+                expect(vertDescPosRgb.attributes[1].name) == "color"
             }
             
             it("can parse with packed-layout to create array-of-struct indexing") {
