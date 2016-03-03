@@ -195,6 +195,11 @@ public class SpectraXML {
                     container.register(MDLVertexDescriptor.self, name: key!)  { _ in
                         return MDLVertexDescriptor(vertexDescriptor: vertexDesc)
                         }.inObjectScope(.None)
+                case .Object:
+                    let obj = SpectraXMLObjectNode().parse(container, elem: child, options: options)
+                    container.register(MDLObject.self, name: key!) { _ in
+                        return SpectraXMLObjectNode.copy(obj)
+                    }
                 case .Camera:
                     let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLCamera.self, name: key!) { _ in
@@ -468,7 +473,29 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
     public static func copy(object: NodeType) -> NodeType {
         let cp = MDLObject()
         
-        //TODO: implement copy
+        if let transform = object.transform {
+            if transform is MDLTransform {
+                cp.transform = SpectraXMLTransformNode.copy(object.transform! as! MDLTransform)
+            } else {
+                // TODO: fix the copy by reference
+                cp.transform = object.transform
+            }
+        }
+        
+        for obj in object.children.objects {
+            switch obj {
+            case is MDLObject:
+                cp.addChild(SpectraXMLObjectNode.copy(obj))
+            case is MDLCamera:
+                cp.addChild(SpectraXMLCameraNode.copy(obj as! MDLCamera))
+            case is MDLStereoscopicCamera:
+                cp.addChild(SpectraXMLStereoscopicCameraNode.copy(obj as! MDLStereoscopicCamera))
+            case is MDLLight: break
+            case is MDLMesh: break
+            default: break
+            }
+        }
+        
         return cp
     }
 }
