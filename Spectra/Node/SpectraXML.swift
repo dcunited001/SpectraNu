@@ -242,7 +242,7 @@ public class SpectraXML {
     }
 }
 
-public class SpectraXMLSimd {
+public class SpectraSimd {
     
     public static func parseDoubles(str: String) -> [Double] {
         let valStrs = str.characters.split { $0 == " " }.map(String.init)
@@ -344,7 +344,7 @@ public class SpectraXMLVertexAttributeNode: SpectraXMLNode {
             vertexAttr.bufferIndex = Int(bufferIndex)!
         }
         if let initializationValue = elem.attributes["initialization-value"] {
-            vertexAttr.initializationValue = SpectraXMLSimd.parseFloat4(initializationValue)
+            vertexAttr.initializationValue = SpectraSimd.parseFloat4(initializationValue)
         }
         
         return vertexAttr
@@ -408,22 +408,22 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
         // - but how can a shear operation be composed into this?
         
         if let translation = elem.attributes["translation"] {
-            transform.translation = SpectraXMLSimd.parseFloat3(translation)
+            transform.translation = SpectraSimd.parseFloat3(translation)
         }
         
         if let rotation = elem.attributes["rotation"] {
-            transform.rotation = SpectraXMLSimd.parseFloat3(rotation)
+            transform.rotation = SpectraSimd.parseFloat3(rotation)
         } else if let rotationDeg = elem.attributes["rotation-deg"] {
-            let rotationDegrees = SpectraXMLSimd.parseFloat3(rotationDeg)
-            transform.rotation = Float(M_PI / 180.0) * SpectraXMLSimd.parseFloat3(rotationDeg)
+            let rotationDegrees = SpectraSimd.parseFloat3(rotationDeg)
+            transform.rotation = Float(M_PI / 180.0) * SpectraSimd.parseFloat3(rotationDeg)
         }
         
         if let scale = elem.attributes["scale"] {
-            transform.scale = SpectraXMLSimd.parseFloat3(scale)
+            transform.scale = SpectraSimd.parseFloat3(scale)
         }
         
         if let shear = elem.attributes["shear"] {
-            transform.shear = SpectraXMLSimd.parseFloat3(shear)
+            transform.shear = SpectraSimd.parseFloat3(shear)
         }
         
         // TODO: does the MDLTransform calculate the transformation matrix?
@@ -678,23 +678,23 @@ public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
         }
         
         if let sensorEnlargement = elem.attributes["sensor-enlargement"] {
-            imagingSurface.sensorEnlargement = SpectraXMLSimd.parseFloat2(sensorEnlargement)
+            imagingSurface.sensorEnlargement = SpectraSimd.parseFloat2(sensorEnlargement)
         }
         
         if let sensorShift = elem.attributes["sensor-shift"] {
-            imagingSurface.sensorShift = SpectraXMLSimd.parseFloat2(sensorShift)
+            imagingSurface.sensorShift = SpectraSimd.parseFloat2(sensorShift)
         }
         
         if let flash = elem.attributes["flash"] {
-            imagingSurface.flash = SpectraXMLSimd.parseFloat3(flash)
+            imagingSurface.flash = SpectraSimd.parseFloat3(flash)
         }
         
         if let exposure = elem.attributes["exposure"] {
-            imagingSurface.exposure = SpectraXMLSimd.parseFloat3(exposure)
+            imagingSurface.exposure = SpectraSimd.parseFloat3(exposure)
         }
         
         if let exposureCompression = elem.attributes["exposure-compression"] {
-            imagingSurface.exposureCompression = SpectraXMLSimd.parseFloat2(exposureCompression)
+            imagingSurface.exposureCompression = SpectraSimd.parseFloat2(exposureCompression)
         }
         
         return imagingSurface
@@ -743,9 +743,9 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
         }
         
         if let lookAtAttr = elem.attributes["look-at"] {
-            let lookAt = SpectraXMLSimd.parseFloat3(lookAtAttr)
+            let lookAt = SpectraSimd.parseFloat3(lookAtAttr)
             if let lookFromAttr = elem.attributes["look-from"] {
-                let lookFrom = SpectraXMLSimd.parseFloat3(lookFromAttr)
+                let lookFrom = SpectraSimd.parseFloat3(lookFromAttr)
                 cam.lookAt(lookAt, from: lookFrom)
             } else {
                 cam.lookAt(lookAt)
