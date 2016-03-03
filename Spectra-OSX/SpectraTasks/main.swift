@@ -52,7 +52,12 @@ func simpleTypeForEnum(name: String, members: [String: UInt]) -> String {
 }
 
 let enumsForModelIO = [
-    "mdlVertexFormat": SpectraEnumDefs.mdlVertexFormat
+    "mdlVertexFormat": SpectraEnumDefs.mdlVertexFormat,
+    "mdlMaterialSemantic": SpectraEnumDefs.mdlMaterialSemantic,
+    "mdlMaterialPropertyType": SpectraEnumDefs.mdlMaterialPropertyType,
+    "mdlMaterialTextureWrapMode": SpectraEnumDefs.mdlMaterialTextureWrapMode,
+    "mdlMaterialTextureFilterMode": SpectraEnumDefs.mdlMaterialTextureFilterMode,
+    "mdlMaterialMipMapFilterMode": SpectraEnumDefs.mdlMaterialMipMapFilterMode
 ]
 
 updateSpectraEnums(projectPath + "/../SpectraAssets/SpectraEnums.xsd", enums: enumsForModelIO)

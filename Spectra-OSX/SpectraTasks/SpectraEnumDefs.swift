@@ -76,4 +76,63 @@ class SpectraEnumDefs {
         "Float4": MDLVertexFormat.Float4.rawValue,
         "Int1010102Normalized": MDLVertexFormat.Int1010102Normalized.rawValue,
         "UInt1010102Normalized": MDLVertexFormat.UInt1010102Normalized.rawValue]
+    
+    static let mdlMaterialSemantic = [
+        "BaseColor": MDLMaterialSemantic.BaseColor.rawValue,
+        "Subsurface": MDLMaterialSemantic.Subsurface.rawValue,
+        "Metallic": MDLMaterialSemantic.Metallic.rawValue,
+        "Specular": MDLMaterialSemantic.Specular.rawValue,
+        "SpecularExponent": MDLMaterialSemantic.SpecularExponent.rawValue,
+        "SpecularTint": MDLMaterialSemantic.SpecularTint.rawValue,
+        "Roughness": MDLMaterialSemantic.Roughness.rawValue,
+        "Anisotropic": MDLMaterialSemantic.Anisotropic.rawValue,
+        "AnisotropicRotation": MDLMaterialSemantic.AnisotropicRotation.rawValue,
+        "Sheen": MDLMaterialSemantic.Sheen.rawValue,
+        "SheenTint": MDLMaterialSemantic.SheenTint.rawValue,
+        "Clearcoat": MDLMaterialSemantic.Clearcoat.rawValue,
+        "ClearcoatGloss": MDLMaterialSemantic.ClearcoatGloss.rawValue,
+        "Emission": MDLMaterialSemantic.Emission.rawValue,
+        "Bump": MDLMaterialSemantic.Bump.rawValue,
+        "Opacity": MDLMaterialSemantic.Opacity.rawValue,
+        "InterfaceIndexOfRefraction": MDLMaterialSemantic.InterfaceIndexOfRefraction.rawValue,
+        "MaterialIndexOfRefraction": MDLMaterialSemantic.MaterialIndexOfRefraction.rawValue,
+        "ObjectSpaceNormal": MDLMaterialSemantic.ObjectSpaceNormal.rawValue,
+        "TangentSpaceNormal": MDLMaterialSemantic.TangentSpaceNormal.rawValue,
+        "Displacement": MDLMaterialSemantic.Displacement.rawValue,
+        "DisplacementScale": MDLMaterialSemantic.DisplacementScale.rawValue,
+        "AmbientOcclusion": MDLMaterialSemantic.AmbientOcclusion.rawValue,
+        "AmbientOcclusionScale": MDLMaterialSemantic.AmbientOcclusionScale.rawValue,
+        "None": MDLMaterialSemantic.None.rawValue,
+        "UserDefined": MDLMaterialSemantic.UserDefined.rawValue
+    ]
+    
+    static let mdlMaterialPropertyType = [
+        "None": MDLMaterialPropertyType.None.rawValue,
+        "String": MDLMaterialPropertyType.String.rawValue,
+        "URL": MDLMaterialPropertyType.URL.rawValue,
+        "Texture": MDLMaterialPropertyType.Texture.rawValue,
+        "Color": MDLMaterialPropertyType.Color.rawValue,
+        "Float": MDLMaterialPropertyType.Float.rawValue,
+        "Float2": MDLMaterialPropertyType.Float2.rawValue,
+        "Float3": MDLMaterialPropertyType.Float3.rawValue,
+        "Float4": MDLMaterialPropertyType.Float4.rawValue,
+        "Matrix44": MDLMaterialPropertyType.Matrix44.rawValue
+    ]
+    
+    static let mdlMaterialTextureWrapMode = [
+        "Clamp": MDLMaterialTextureWrapMode.Clamp.rawValue,
+        "Repeat": MDLMaterialTextureWrapMode.Repeat.rawValue,
+        "Mirror": MDLMaterialTextureWrapMode.Mirror.rawValue
+    ]
+    
+    static let mdlMaterialTextureFilterMode = [
+        "Nearest": MDLMaterialTextureFilterMode.Nearest.rawValue,
+        "Linear": MDLMaterialTextureFilterMode.Linear.rawValue
+    ]
+    
+    static let mdlMaterialMipMapFilterMode = [
+        "Nearest": MDLMaterialMipMapFilterMode.Nearest.rawValue,
+        "Linear": MDLMaterialMipMapFilterMode.Linear.rawValue
+    ]
+    
 }

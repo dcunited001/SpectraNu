@@ -1,6 +1,74 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="SpectraEnums" xmlns="SpectraEnums" elementFormDefault="qualified">
 
+  <xs:simpleType name="mdlMaterialSemantic" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="4" value="SpecularExponent"/>
+      <xs:enumeration id="15" value="Opacity"/>
+      <xs:enumeration id="23" value="AmbientOcclusionScale"/>
+      <xs:enumeration id="17" value="MaterialIndexOfRefraction"/>
+      <xs:enumeration id="5" value="SpecularTint"/>
+      <xs:enumeration id="7" value="Anisotropic"/>
+      <xs:enumeration id="14" value="Bump"/>
+      <xs:enumeration id="11" value="Clearcoat"/>
+      <xs:enumeration id="21" value="DisplacementScale"/>
+      <xs:enumeration id="13" value="Emission"/>
+      <xs:enumeration id="12" value="ClearcoatGloss"/>
+      <xs:enumeration id="3" value="Specular"/>
+      <xs:enumeration id="22" value="AmbientOcclusion"/>
+      <xs:enumeration id="20" value="Displacement"/>
+      <xs:enumeration id="18" value="ObjectSpaceNormal"/>
+      <xs:enumeration id="19" value="TangentSpaceNormal"/>
+      <xs:enumeration id="32768" value="None"/>
+      <xs:enumeration id="8" value="AnisotropicRotation"/>
+      <xs:enumeration id="10" value="SheenTint"/>
+      <xs:enumeration id="9" value="Sheen"/>
+      <xs:enumeration id="1" value="Subsurface"/>
+      <xs:enumeration id="6" value="Roughness"/>
+      <xs:enumeration id="0" value="BaseColor"/>
+      <xs:enumeration id="2" value="Metallic"/>
+      <xs:enumeration id="16" value="InterfaceIndexOfRefraction"/>
+      <xs:enumeration id="32769" value="UserDefined"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mdlMaterialMipMapFilterMode" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="Linear"/>
+      <xs:enumeration id="0" value="Nearest"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mdlMaterialPropertyType" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="String"/>
+      <xs:enumeration id="2" value="URL"/>
+      <xs:enumeration id="3" value="Texture"/>
+      <xs:enumeration id="5" value="Float"/>
+      <xs:enumeration id="8" value="Float4"/>
+      <xs:enumeration id="7" value="Float3"/>
+      <xs:enumeration id="0" value="None"/>
+      <xs:enumeration id="9" value="Matrix44"/>
+      <xs:enumeration id="6" value="Float2"/>
+      <xs:enumeration id="4" value="Color"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mdlMaterialTextureWrapMode" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="2" value="Mirror"/>
+      <xs:enumeration id="0" value="Clamp"/>
+      <xs:enumeration id="1" value="Repeat"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mdlMaterialTextureFilterMode" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="Linear"/>
+      <xs:enumeration id="0" value="Nearest"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="mdlVertexFormat" mtl-enum="true">
     <xs:restriction base="xs:string">
       <xs:enumeration id="65536" value="UCharBits"/>

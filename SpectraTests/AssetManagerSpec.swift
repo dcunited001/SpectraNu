@@ -25,6 +25,21 @@ class AssetManagerSpec: QuickSpec {
             it("loads the enums for ModelIO and/or Metal") {
                 let f4 = assetMan.getEnum("mdlVertexFormat", key: "Float4")
                 expect(f4) == MDLVertexFormat.Float4.rawValue
+                
+                let materialSemantic = assetMan.getEnum("mdlMaterialSemantic", key: "SpecularExponent")
+                expect(materialSemantic) == MDLMaterialSemantic.SpecularExponent.rawValue
+                
+                let materialPropertyType = assetMan.getEnum("mdlMaterialPropertyType", key: "Texture")
+                expect(materialPropertyType) == MDLMaterialPropertyType.Texture.rawValue
+                
+                let textureWrapMode = assetMan.getEnum("mdlMaterialTextureWrapMode", key: "Clamp")
+                expect(textureWrapMode) == MDLMaterialTextureWrapMode.Clamp.rawValue
+                
+                let textureFilterMode = assetMan.getEnum("mdlMaterialTextureFilterMode", key: "Linear")
+                expect(textureFilterMode) == MDLMaterialTextureFilterMode.Linear.rawValue
+                
+                let mipMapFilterMode = assetMan.getEnum("mdlMaterialMipMapFilterMode", key: "Linear")
+                expect(mipMapFilterMode) == MDLMaterialMipMapFilterMode.Linear.rawValue
             }
         }
         
