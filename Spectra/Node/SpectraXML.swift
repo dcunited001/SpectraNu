@@ -360,8 +360,12 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
         // N.B. scale first, then rotate, finally translate 
         // - but how can a shear operation be composed into this?
         
-        if let translation = elem.attributes["translation"] {
-            transform.translation = SpectraSimd.parseFloat3(translation)
+        if let scale = elem.attributes["scale"] {
+            transform.scale = SpectraSimd.parseFloat3(scale)
+        }
+        
+        if let shear = elem.attributes["shear"] {
+            transform.shear = SpectraSimd.parseFloat3(shear)
         }
         
         if let rotation = elem.attributes["rotation"] {
@@ -371,14 +375,9 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
             transform.rotation = Float(M_PI / 180.0) * SpectraSimd.parseFloat3(rotationDeg)
         }
         
-        if let scale = elem.attributes["scale"] {
-            transform.scale = SpectraSimd.parseFloat3(scale)
+        if let translation = elem.attributes["translation"] {
+            transform.translation = SpectraSimd.parseFloat3(translation)
         }
-        
-        if let shear = elem.attributes["shear"] {
-            transform.shear = SpectraSimd.parseFloat3(shear)
-        }
-        
         // TODO: does the MDLTransform calculate the transformation matrix?
         // - or do i need to compose these values together
         
@@ -388,11 +387,11 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
     public static func copy(object: NodeType) -> NodeType {
         let newTransform = MDLTransform()
     
-        newTransform.translation = object.translation
-        newTransform.rotation = object.rotation
         newTransform.scale = object.scale
         newTransform.shear = object.shear
-    
+        newTransform.rotation = object.rotation
+        newTransform.translation = object.translation
+
         return newTransform
     }
 }
