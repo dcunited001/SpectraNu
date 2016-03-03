@@ -5,8 +5,8 @@
  -->
 
 <root>
-
-    <!-- 
+    
+    <!--
      must define any reusable vertex-attribute's ahead-of-time
      - this is because these attributes are mutated when generating the vertex buffer layouts
      
@@ -14,6 +14,7 @@
      - either everything in one buffer, or everything in separate buffers
      - and default towards everything in separate buffers
      -->
+    
     <vertex-attribute key="pos_float4" name="position" format="Float4"/>
     <vertex-attribute key="tex_float2" name="textureCoordinate" format="Float2"/>
     <vertex-attribute key="rgb_float4" name="color" format="Float4"/>
@@ -49,53 +50,58 @@
     <vertex-descriptor key="vert_pos_rgb">
         
     </vertex-descriptor>
-
-<!--    <view key="world">-->
-<!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
-<!--    </view>-->
-<!--    <view key="customWorld" type="custom">-->
-<!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
-<!--    </view>-->
-
-<physical-lens key="lens1"
+    
+    <!--    <view key="world">-->
+    <!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
+    <!--    </view>-->
+    <!--    <view key="customWorld" type="custom">-->
+    <!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
+    <!--    </view>-->
+    
+    <physical-lens key="lens1"
     barrel-distortion="0.1"
     fisheye-distortion="0.5" />
-<physical-lens key="lens2"
+    
+    <physical-lens key="lens2"
     focal-length="77"
     fstop="7.0"
     maximum-circle-of-confusion="0.10" />
-<physical-lens key="lens3"
+    
+    <physical-lens key="lens3"
     aperture-blade-count="7" />
-
-<physical-imaging-surface key="phys_img1"
+    
+    <physical-imaging-surface key="phys_img1"
     sensor-vertical-aperture="24"
     sensor-aspect="2.0" />
-<physical-imaging-surface key="phys_img2"
+    <physical-imaging-surface key="phys_img2"
     flash="0.1 0.1 0.1"
     exposure="1.5 1.5 1.5" />
-
-<camera key="default" />
-<camera key="cam1">
     
-</camera>
-
-<camera key="cam2">
-    <physical-lens ref="lens1"/>
-</camera>
-
-<camera key="cam3">
-    <physical-imaging-surface ref="phys_img1"/>
-</camera>
-
-<camera key="cam4" lookAt="10.0 10.0 100.0">
-
-</camera>
-
-    <stereoscopic-camera key="default" field-of-view="">
+    <camera key="default" />
+    <camera key="cam1">
+        
+    </camera>
+    
+    <camera key="cam2">
+        <physical-lens ref="lens1"/>
+    </camera>
+    
+    <camera key="cam3">
+        <physical-imaging-surface ref="phys_img1"/>
+    </camera>
+    
+    <camera key="cam4" lookAt="10.0 10.0 100.0">
+        
+    </camera>
+    
+    <stereoscopic-camera key="default">
     </stereoscopic-camera>
-
-    <stereoscopic-camera key="stereo_cam1">
-        <physical-lens ref="default"/>
+    
+    <stereoscopic-camera key="stereo_cam1" field-of-view="60">
+    </stereoscopic-camera>
+    
+    <stereoscopic-camera key="stereo_cam2">
+        <physical-lens ref="lens1"/>
     </stereoscopic-camera>
     
     <transform key="xform_translate" translation="10.0 20.0 30.0" />
@@ -128,26 +134,26 @@
             <generate-arg type="string" name="meshRef" value="quadMesh" />
         </generate-args>
     </mesh>
-
+    
     <!-- create mesh by specifying points -->
     
     <!-- don't... just dont... don't even use this
      - write a generator or use model i/o or something
      - map to the appropriate scene graph keys -->
-
-<!--    <mesh key="quadMesh" primitive-type="triangle">-->
-<!--        <mesh-data-sequence>-->
-<!--            <mesh-data key="pos">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
-<!--            <mesh-data key="rgba">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
-<!--            <mesh-data key="tex">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
-<!--        </mesh-data-sequence>-->
-<!--        <mesh-data-map-sequence>-->
-<!--            <mesh-data-map key="triangle_vertex_map">0 1 3;3 2 0</mesh-data-map>-->
-<!--            <mesh-data-map key="face_vertex_map">0 1 2 3</mesh-data-map>-->
-<!--            <mesh-data-map key="face_triangle_map"></mesh-data-map>-->
-<!--        </mesh-data-map-sequence>-->
-<!--    </mesh>-->
-
+    
+    <!--    <mesh key="quadMesh" primitive-type="triangle">-->
+    <!--        <mesh-data-sequence>-->
+    <!--            <mesh-data key="pos">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
+    <!--            <mesh-data key="rgba">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
+    <!--            <mesh-data key="tex">-1 -1 0 1 -1 1 0 1 1 -1 0 1 1 1 0 1</mesh-data>-->
+    <!--        </mesh-data-sequence>-->
+    <!--        <mesh-data-map-sequence>-->
+    <!--            <mesh-data-map key="triangle_vertex_map">0 1 3;3 2 0</mesh-data-map>-->
+    <!--            <mesh-data-map key="face_vertex_map">0 1 2 3</mesh-data-map>-->
+    <!--            <mesh-data-map key="face_triangle_map"></mesh-data-map>-->
+    <!--        </mesh-data-map-sequence>-->
+    <!--    </mesh>-->
+    
     <!-- node -->
     <!-- nodes can have subnodes -->
     <!-- nodes can be loaded from model i/o -->
