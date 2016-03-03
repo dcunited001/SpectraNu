@@ -16,6 +16,8 @@ public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement
 public enum SpectraXMLNodeType: String {
     case World = "world"
     case Camera = "camera"
+    case Mesh = "mesh"
+    case MeshGenerator = "mesh-generator"
     case PhysicalLensParams = "physical-lens"
     case PhysicalImagingSurfaceParams = "physical-imaging-surface"
     case StereoscopicCamera = "stereoscopic-camera"
@@ -40,10 +42,9 @@ public enum SpectraXMLNodeType: String {
         //    - can i do this with func generics: func nodeParser<NodeType>(...) -> SpectraXMLNodeParser<NodeType>?
         
         switch self {
-        case .VertexAttribute:
-            return {(container, node, key, options) in
-                let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: node, options: options)
-                return vertexAttr
+        case .VertexAttribute: return {(container, node, key, options) in
+            let vertexAttr = SpectraXMLVertexAttributeNode().parse(container, elem: node, options: options)
+            return vertexAttr
             }
         case .VertexDescriptor:
             return {(container, node, key, options) in
@@ -56,16 +57,24 @@ public enum SpectraXMLNodeType: String {
             }
         case .Camera:
             return {(container, node, key, options) in
-                return "a camera"
+                let cam = SpectraXMLCameraNode().parse(container, elem: node, options: options)
+                return cam
             }
         case .PhysicalLensParams:
             return {(container, node, key, options) in
-                return "a physical lens"
+                let lens = SpectraXMLPhysicalLensNode().parse(container, elem: node, options: options)
+                return lens
             }
         case .PhysicalImagingSurfaceParams:
             return {(container, node, key, options) in
-                return "a physical imaging surface"
+                let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: node, options: options)
+                return imagingSurface
             }
+        case .MeshGenerator:
+            return {(container, node, key, options) in
+                return "a mesh generator"
+            }
+            
         default: return nil
         }
     }
@@ -195,11 +204,11 @@ public class SpectraXML {
                     container.register(SpectraPhysicalImagingSurfaceParams.self, name: key!) { _ in
                         return imagingSurface
                         }.inObjectScope(.None)
-//                case .Camera:
-//                    let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
-//                    container.register(MDLCamera.self, name: key!) { _ in
-//                        return camera
-//                        }.inObjectScope(.None)
+                    //                case .Camera:
+                    //                    let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
+                    //                    container.register(MDLCamera.self, name: key!) { _ in
+                    //                        return camera
+                    //                        }.inObjectScope(.None)
                 default: break
                 }
                 
@@ -371,10 +380,10 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
     }
 }
 
-//TODO: public class SpectraXMLWorldNode: SpectraXMLNode
-//TODO: public class SpectraXMLMeshNode: SpectraXMLNode
-//TODO: public class SpectraXMLMeshGeneratorNode: SpectraXMLNode
-//TODO: public class SpectraXMLObjectNode: SpectraXMLNode
+// TODO: public class SpectraXMLWorldNode: SpectraXMLNode
+// TODO: public class SpectraXMLMeshNode: SpectraXMLNode
+// TODO: public class SpectraXMLMeshGeneratorNode: SpectraXMLNode
+// TODO: public class SpectraXMLObjectNode: SpectraXMLNode
 
 //============================================================
 // TODO: decide how to handle inheritance
@@ -414,6 +423,50 @@ public class SpectraPhysicalLensParams {
     // doc's don't list default shutterOpenInterval value,
     // - but (1/60) * 0.50 = 1/120 for 60fps and 50% shutter
     public var shutterOpenInterval: NSTimeInterval = (0.5 * (1.0/60.0))
+    
+    public func applyToCamera(camera: MDLCamera) {
+        
+        if let val = self.worldToMetersConversionScale {
+            camera.worldToMetersConversionScale = val
+        }
+        
+        if let val = self.barrelDistortion {
+            camera.barrelDistortion = val
+        }
+        
+        if let val = self.fisheyeDistortion {
+            camera.fisheyeDistortion = val
+        }
+        
+        if let val = self.opticalVignetting {
+            camera.opticalVignetting = val
+        }
+        
+        if let val = self.chromaticAberration {
+            camera.chromaticAberration = val
+        }
+        
+        if let val = self.focalLength {
+            camera.focalLength = val
+        }
+        
+        if let val = self.fStop {
+            camera.fStop = val
+        }
+        
+        if let val = self.apertureBladeCount {
+            camera.apertureBladeCount = val
+        }
+        
+        if let val = self.maximumCircleOfConfusion {
+            camera.maximumCircleOfConfusion = val
+        }
+        
+        if let val = self.focusDistance {
+            camera.focusDistance = val
+        }
+        
+    }
 }
 
 public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
@@ -485,6 +538,38 @@ public class SpectraPhysicalImagingSurfaceParams {
     public static let flash: vector_float3 = float3(0.0, 0.0, 0.0)
     public static let exposure: vector_float3 = float3(1.0, 1.0, 1.0)
     public static let exposureCompression: vector_float2 = float2(1.0, 0.0)
+    
+    public func applyToCamera(camera: MDLCamera) {
+        
+        if let val = self.sensorVerticalAperture {
+            camera.sensorVerticalAperture = val
+        }
+        
+        if let val = self.sensorAspect {
+            camera.sensorAspect = val
+        }
+        
+        if let val = self.sensorEnlargement {
+            camera.sensorEnlargement = val
+        }
+        
+        if let val = self.sensorShift {
+            camera.sensorShift = val
+        }
+        
+        if let val = self.flash {
+            camera.flash = val
+        }
+        
+        if let val = self.exposure {
+            camera.exposure = val
+        }
+        
+        if let val = self.exposureCompression {
+            camera.exposureCompression = val
+        }
+        
+    }
 }
 
 public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
@@ -523,8 +608,6 @@ public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
         
         return imagingSurface
     }
-    
-    //    public func applyToCamera(camera: MDLCamera) {}
 }
 
 public class SpectraXMLCameraNode: SpectraXMLNode {
@@ -544,21 +627,42 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
             cam.fieldOfView = Float(fieldOfView)!
         }
         
-        // TODO: apply SpectraXML lens
-        // TODO: apply SpectraXML imaging surface
-        
-        if let lookAt = elem.attributes["look-at"] {
-            if let lookFrom = elem.attributes["look-from"] {
-                cam.lookAt(SpectraXMLSimd.parseFloat3(lookAt), from: SpectraXMLSimd.parseFloat3(lookFrom))
+        let lensSelector = SpectraXMLNodeType.PhysicalLensParams.rawValue
+        if let lensTag = elem.firstChild(tag: lensSelector) {
+            if let ref = lensTag.attributes["ref"] {
+                let lens = container.resolve(SpectraPhysicalLensParams.self, name: ref)!
+                lens.applyToCamera(cam)
             } else {
-                cam.lookAt(SpectraXMLSimd.parseFloat3(lookAt))
+                let lens = SpectraXMLPhysicalLensNode().parse(container, elem: lensTag, options: options)
+                container.register(SpectraPhysicalLensParams.self, name: lensTag["key"]!) { _ in return lens }
+                lens.applyToCamera(cam)
+            }
+        }
+        
+        let imagingSelector = SpectraXMLNodeType.PhysicalImagingSurfaceParams.rawValue
+        if let imagingTag = elem.firstChild(tag: imagingSelector) {
+            if let ref = imagingTag.attributes["ref"] {
+                let imagingSurface = container.resolve(SpectraPhysicalImagingSurfaceParams.self, name: ref)!
+                imagingSurface.applyToCamera(cam)
+            } else {
+                let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: imagingTag, options: options)
+                container.register(SpectraPhysicalImagingSurfaceParams.self, name: imagingTag["key"]!) { _ in return imagingSurface }
+                imagingSurface.applyToCamera(cam)
+            }
+        }
+        
+        if let lookAtAttr = elem.attributes["look-at"] {
+            let lookAt = SpectraXMLSimd.parseFloat3(lookAtAttr)
+            if let lookFromAttr = elem.attributes["look-from"] {
+                let lookFrom = SpectraXMLSimd.parseFloat3(lookFromAttr)
+                cam.lookAt(lookAt, from: lookFrom)
+            } else {
+                cam.lookAt(lookAt)
             }
         }
         
         return cam
     }
-    
-    //    public func applyToCamera(camera: MDLCamera) {}
 }
 
 // TODO: public class SpectraXMLTextureNode: SpectraXMLNode {

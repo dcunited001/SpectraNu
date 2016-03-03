@@ -166,41 +166,51 @@ class SpectraXMLSpec: QuickSpec {
             let lens2: SpectraPhysicalLensParams = self.containerGet(assetContainer, key: "lens2")!
             let lens3: SpectraPhysicalLensParams = self.containerGet(assetContainer, key: "lens3")!
             
+            let physImg1: SpectraPhysicalImagingSurfaceParams = self.containerGet(assetContainer, key: "phys_img1")!
+            let physImg2: SpectraPhysicalImagingSurfaceParams = self.containerGet(assetContainer, key: "phys_img2")!
+            
+            // camera with defaults
+            // camera with lens applied
+            // camera with physImg applied
+            // camera with lookAt applied
+            
+            let defaultCam: MDLCamera = self.containerGet(assetContainer, key: "default")!
+            let cam1: MDLCamera = self.containerGet(assetContainer, key: "cam1")!
+            let cam2: MDLCamera = self.containerGet(assetContainer, key: "cam2")!
+            let cam3: MDLCamera = self.containerGet(assetContainer, key: "cam3")!
+            let cam4: MDLCamera = self.containerGet(assetContainer, key: "cam4")!
+            
+            let defaultStereoCam: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "default")!
+            
+            let stereoCam1: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "stereo_cam1")!
+            
+            //stereo cam with lens
+            let stereoCam2: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "stereo_cam2")!
+            
             describe("physical-lens") {
                 it("can specify Physical Lens parameters") {
                     expect(lens1.barrelDistortion) == 0.1
-                    expect(lens1.fisheyeDistortion) == 0.1
+                    expect(lens1.fisheyeDistortion) == 0.5
                     
-                    // - barrelDistorion: Float
-                    // - fisheyeDistorion: Float
-                    // - opticalVignetting: Float
-                    // - chromaticAberration: Float
-                    // - focalLength: Float
-                    // - fStop: Float
-                    // - apertureBladeCount: Int
-                    // - bokehKernelWithSize: vector_int2 -> MDLTexture
-                    // - maximumCircleOfConfusion: Float
-                    // - focusDistance: Float
-                    // - shutterOpenInterval: NSTimeInterval
-                }
+                    expect(lens2.focalLength) == 77
+                    expect(lens2.fStop) == 7.0
+                    expect(lens2.maximumCircleOfConfusion) == 0.10
+                    
+                    expect(lens3.apertureBladeCount) == 7                }
             }
             
             describe("physical-imaging-surface") {
-                it("can specify Physical Imaging Surface parameters ") {
-                    // the renderer must support the math
-                    // - sensorVerticalAperture: Float
-                    // - sensorAspect: Float
-                    // - sensorEnlargement: vector_float2
-                    // - sensorShift: vector_float2
-                    // - flash: vector_float3
-                    // - exposure: vector_float3
-                    // - exposureCompression: vector_float2
-                }
+                it("can specify Physical Imaging Surface parameters") {
+                    expect(physImg1.sensorVerticalAperture) == 24
+                    expect(physImg1.sensorAspect) == 2.0
+                    
+                    let expectedFlash = float3([0.1, 0.1, 0.1])
+                    let expectedExposure = float3([1.5, 1.5, 1.5])
+                    expect(self.compareFloat3(physImg2.flash!, with: float3([0.1, 0.1, 0.1]))).to(beTrue())
+                    expect(self.compareFloat3(physImg2.exposure!, with: float3([1.5, 1.5, 1.5]))).to(beTrue())                }
             }
             
             describe("camera") {
-                let defaultCam: MDLCamera = self.containerGet(assetContainer, key: "default")!
-                let cam1: MDLCamera = self.containerGet(assetContainer, key: "cam1")!
                 
                 it("manages the inherited MDLObject properties") {
                     // transform
