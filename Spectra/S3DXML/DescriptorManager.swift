@@ -130,67 +130,67 @@ public class DescriptorManager {
             case "vertex-descriptor":
                 let vertexDesc = S3DXMLMTLVertexDescriptorNode().parse(container, elem: child)
                 container.register(MTLVertexDescriptor.self, name: key!) { _ in
-                    return vertexDesc
+                    return vertexDesc.copy() as! MTLVertexDescriptor
                     }.inObjectScope(.Container)
             case "texture-descriptor":
                 let textureDesc = S3DXMLMTLTextureDescriptorNode().parse(container, elem: child)
                 container.register(MTLTextureDescriptor.self, name: key!) { _ in
-                    return textureDesc
+                    return textureDesc.copy() as! MTLTextureDescriptor
                     }.inObjectScope(.Container)
             case "sampler-descriptor":
                 let samplerDesc = S3DXMLMTLSamplerDescriptorNode().parse(container, elem: child)
                 container.register(MTLSamplerDescriptor.self, name: key!) { _ in
-                    return samplerDesc
+                    return samplerDesc.copy() as! MTLSamplerDescriptor
                     }.inObjectScope(.Container)
             case "stencil-descriptor":
                 let stencilDesc = S3DXMLMTLStencilDescriptorNode().parse(container, elem: child)
                 container.register(MTLStencilDescriptor.self, name: key!) { _ in
-                    return stencilDesc
+                    return stencilDesc.copy() as! MTLStencilDescriptor
                     }.inObjectScope(.Container)
             case "depth-stencil-descriptor":
                 let depthStencilDesc = S3DXMLMTLDepthStencilDescriptorNode().parse(container, elem: child)
                 container.register(MTLDepthStencilDescriptor.self, name: key!) { _ in
-                    return depthStencilDesc
+                    return depthStencilDesc.copy() as! MTLDepthStencilDescriptor
                     }.inObjectScope(.Container)
             case "render-pipeline-color-attachment-descriptor":
                 let colorAttachmentDesc = S3DXMLMTLColorAttachmentDescriptorNode().parse(container, elem: child)
                 container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: key!) { _ in
-                    return colorAttachmentDesc
+                    return colorAttachmentDesc.copy() as! MTLRenderPipelineColorAttachmentDescriptor
                     }.inObjectScope(.Container)
             case "render-pipeline-descriptor":
                 let renderPipelineDesc = S3DXMLMTLRenderPipelineDescriptorNode().parse(container, elem: child)
                 container.register(MTLRenderPipelineDescriptor.self, name: key!) { _ in
-                    return renderPipelineDesc
+                    return renderPipelineDesc.copy() as! MTLRenderPipelineDescriptor
                     }.inObjectScope(.Container)
             case "compute-pipeline-descriptor":
                 let computePipelineDesc = S3DXMLMTLComputePipelineDescriptorNode().parse(container, elem: child)
                 container.register(MTLComputePipelineDescriptor.self, name: key!) { _ in
-                    return computePipelineDesc
+                    return computePipelineDesc.copy() as! MTLComputePipelineDescriptor
                     }.inObjectScope(.Container)
             case "clear-color":
                 let clearColor = S3DXMLMTLClearColorNode().parse(container, elem: child)
                 container.register(MTLClearColor.self, name: key!) { _ in
-                    return clearColor
+                    return clearColor // struct (no need for copy)
                 }.inObjectScope(.Container)
             case "render-pass-color-attachment-descriptor":
                 let renderPassColorAttachDesc = S3DXMLMTLRenderPassColorAttachmentDescriptorNode().parse(container, elem: child)
                 container.register(MTLRenderPassColorAttachmentDescriptor.self, name: key!) { _ in
-                    return renderPassColorAttachDesc
+                    return renderPassColorAttachDesc.copy() as! MTLRenderPassColorAttachmentDescriptor
                 }.inObjectScope(.Container)
             case "render-pass-depth-attachment-descriptor":
                 let renderPassDepthAttachDesc = S3DXMLMTLRenderPassDepthAttachmentDescriptorNode().parse(container, elem: child)
                 container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: key!) { _ in
-                    return renderPassDepthAttachDesc
+                    return renderPassDepthAttachDesc.copy() as! MTLRenderPassDepthAttachmentDescriptor
                 }.inObjectScope(.Container)
             case "render-pass-stencil-attachment-descriptor":
                 let renderPassStencilAttachDesc = S3DXMLMTLRenderPassStencilAttachmentDescriptorNode().parse(container, elem: child)
                 container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: key!) { _ in
-                    return renderPassStencilAttachDesc
+                    return renderPassStencilAttachDesc.copy() as! MTLRenderPassStencilAttachmentDescriptor
                 }.inObjectScope(.Container)
             case "render-pass-descriptor":
                 let renderPassDescriptor = S3DXMLMTLRenderPassDescriptorNode().parse(container, elem: child)
                 container.register(MTLRenderPassDescriptor.self, name: key!) { _ in
-                    return renderPassDescriptor
+                    return renderPassDescriptor.copy() as! MTLRenderPassDescriptor
                 }.inObjectScope(.Container)
             default:
                 break
