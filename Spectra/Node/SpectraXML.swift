@@ -556,6 +556,48 @@ public class PhysicalLens: NSObject, NSCopying {
     // - but (1/60) * 0.50 = 1/120 for 60fps and 50% shutter
     public var shutterOpenInterval: NSTimeInterval = (0.5 * (1.0/60.0))
     
+    public func parseXML(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
+        if let worldToMetersConversionScale = elem.attributes["world-to-meters-conversion-scale"] {
+            self.worldToMetersConversionScale = Float(worldToMetersConversionScale)!
+        }
+        
+        if let barrelDistortion = elem.attributes["barrel-distortion"] {
+            self.barrelDistortion = Float(barrelDistortion)!
+        }
+        
+        if let fisheyeDistortion = elem.attributes["fisheye-distortion"] {
+            self.fisheyeDistortion = Float(fisheyeDistortion)!
+        }
+        
+        if let opticalVignetting = elem.attributes["optical-vignetting"] {
+            self.opticalVignetting = Float(opticalVignetting)!
+        }
+        
+        if let chromaticAberration = elem.attributes["chromatic-aberration"] {
+            self.chromaticAberration = Float(chromaticAberration)!
+        }
+        
+        if let focalLength = elem.attributes["focal-length"] {
+            self.focalLength = Float(focalLength)!
+        }
+        
+        if let fStop = elem.attributes["f-stop"] {
+            self.fStop = Float(fStop)!
+        }
+        
+        if let apertureBladeCount = elem.attributes["aperture-blade-count"] {
+            self.apertureBladeCount = Int(apertureBladeCount)!
+        }
+        
+        if let maximumCircleOfConfusion = elem.attributes["maximum-circle-of-confusion"] {
+            self.maximumCircleOfConfusion = Float(maximumCircleOfConfusion)!
+        }
+        
+        if let focusDistance = elem.attributes["focus-distance"] {
+            self.focusDistance = Float(focusDistance)!
+        }
+    }
+    
     public func applyToCamera(camera: MDLCamera) {
         
         if let val = self.worldToMetersConversionScale {
@@ -621,46 +663,7 @@ public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
     
     public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
         let lensParams = PhysicalLens()
-        
-        if let worldToMetersConversionScale = elem.attributes["world-to-meters-conversion-scale"] {
-            lensParams.worldToMetersConversionScale = Float(worldToMetersConversionScale)!
-        }
-        
-        if let barrelDistortion = elem.attributes["barrel-distortion"] {
-            lensParams.barrelDistortion = Float(barrelDistortion)!
-        }
-        
-        if let fisheyeDistortion = elem.attributes["fisheye-distortion"] {
-            lensParams.fisheyeDistortion = Float(fisheyeDistortion)!
-        }
-        
-        if let opticalVignetting = elem.attributes["optical-vignetting"] {
-            lensParams.opticalVignetting = Float(opticalVignetting)!
-        }
-        
-        if let chromaticAberration = elem.attributes["chromatic-aberration"] {
-            lensParams.chromaticAberration = Float(chromaticAberration)!
-        }
-        
-        if let focalLength = elem.attributes["focal-length"] {
-            lensParams.focalLength = Float(focalLength)!
-        }
-        
-        if let fStop = elem.attributes["f-stop"] {
-            lensParams.fStop = Float(fStop)!
-        }
-        
-        if let apertureBladeCount = elem.attributes["aperture-blade-count"] {
-            lensParams.apertureBladeCount = Int(apertureBladeCount)!
-        }
-        
-        if let maximumCircleOfConfusion = elem.attributes["maximum-circle-of-confusion"] {
-            lensParams.maximumCircleOfConfusion = Float(maximumCircleOfConfusion)!
-        }
-        
-        if let focusDistance = elem.attributes["focus-distance"] {
-            lensParams.focusDistance = Float(focusDistance)!
-        }
+        lensParams.parseXML(container, elem: elem, options: options)
         
         return lensParams
     }
@@ -685,6 +688,36 @@ public class PhysicalImagingSurface: NSObject, NSCopying {
     public static let flash: vector_float3 = float3(0.0, 0.0, 0.0)
     public static let exposure: vector_float3 = float3(1.0, 1.0, 1.0)
     public static let exposureCompression: vector_float2 = float2(1.0, 0.0)
+    
+    public func parseXML(container: Container, elem: XMLElement, options: [String: Any]) {
+        if let sensorVerticalAperture = elem.attributes["sensor-vertical-aperture"] {
+            self.sensorVerticalAperture = Float(sensorVerticalAperture)
+        }
+        
+        if let sensorAspect = elem.attributes["sensor-aspect"] {
+            self.sensorAspect = Float(sensorAspect)
+        }
+        
+        if let sensorEnlargement = elem.attributes["sensor-enlargement"] {
+            self.sensorEnlargement = SpectraSimd.parseFloat2(sensorEnlargement)
+        }
+        
+        if let sensorShift = elem.attributes["sensor-shift"] {
+            self.sensorShift = SpectraSimd.parseFloat2(sensorShift)
+        }
+        
+        if let flash = elem.attributes["flash"] {
+            self.flash = SpectraSimd.parseFloat3(flash)
+        }
+        
+        if let exposure = elem.attributes["exposure"] {
+            self.exposure = SpectraSimd.parseFloat3(exposure)
+        }
+        
+        if let exposureCompression = elem.attributes["exposure-compression"] {
+            self.exposureCompression = SpectraSimd.parseFloat2(exposureCompression)
+        }
+    }
     
     public func applyToCamera(camera: MDLCamera) {
         
@@ -737,34 +770,7 @@ public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
     
     public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
         let imagingSurface = PhysicalImagingSurface()
-        
-        if let sensorVerticalAperture = elem.attributes["sensor-vertical-aperture"] {
-            imagingSurface.sensorVerticalAperture = Float(sensorVerticalAperture)
-        }
-        
-        if let sensorAspect = elem.attributes["sensor-aspect"] {
-            imagingSurface.sensorAspect = Float(sensorAspect)
-        }
-        
-        if let sensorEnlargement = elem.attributes["sensor-enlargement"] {
-            imagingSurface.sensorEnlargement = SpectraSimd.parseFloat2(sensorEnlargement)
-        }
-        
-        if let sensorShift = elem.attributes["sensor-shift"] {
-            imagingSurface.sensorShift = SpectraSimd.parseFloat2(sensorShift)
-        }
-        
-        if let flash = elem.attributes["flash"] {
-            imagingSurface.flash = SpectraSimd.parseFloat3(flash)
-        }
-        
-        if let exposure = elem.attributes["exposure"] {
-            imagingSurface.exposure = SpectraSimd.parseFloat3(exposure)
-        }
-        
-        if let exposureCompression = elem.attributes["exposure-compression"] {
-            imagingSurface.exposureCompression = SpectraSimd.parseFloat2(exposureCompression)
-        }
+        imagingSurface.parseXML(container, elem: elem, options: options)
         
         return imagingSurface
     }
