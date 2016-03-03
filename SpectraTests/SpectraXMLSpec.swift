@@ -13,6 +13,8 @@ import ModelIO
 import Fuzi
 import Spectra
 import Swinject
+import Metal
+import MetalKit
 import simd
 
 class SpectraXMLSpec: QuickSpec {
@@ -181,10 +183,7 @@ class SpectraXMLSpec: QuickSpec {
             let cam4: MDLCamera = self.containerGet(assetContainer, key: "cam4")!
             
             let defaultStereoCam: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "default")!
-            
             let stereoCam1: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "stereo_cam1")!
-            
-            //stereo cam with lens
             let stereoCam2: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "stereo_cam2")!
             
             describe("physical-lens") {
@@ -230,9 +229,24 @@ class SpectraXMLSpec: QuickSpec {
                 it("can be set to look at a position and look from a position") {
                     // look-at (and optionally look-from)
                 }
+                
             }
             
             describe("stereoscopic-camera") {
+                it("loads default values") {
+                    expect(defaultStereoCam.nearVisibilityDistance) == 0.1
+                    expect(defaultStereoCam.farVisibilityDistance) == 1000.0
+                    expect(defaultStereoCam.fieldOfView) == Float(53.999996185302734375)
+                    
+                    // TODO: default stereo values
+                    expect(defaultStereoCam.interPupillaryDistance) == 63.0
+                    print(defaultStereoCam.leftVergence)
+                    print(defaultStereoCam.rightVergence)
+                    print(defaultStereoCam.overlap)
+
+//                    expect(defaultStereoCam.leftVergence) 
+                }
+                
                 it("is created by additionally specifying interPupillaryDistance, overlap & left/right vergence") {
                     
                 }

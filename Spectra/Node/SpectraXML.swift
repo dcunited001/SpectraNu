@@ -147,6 +147,10 @@ public class SpectraXML {
             return SpectraXMLNodeType.Camera.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.StereoscopicCamera.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
+            return SpectraXMLNodeType.StereoscopicCamera.nodeParser(node, key: k, options: options)!
+            }.inObjectScope(.None) // always return a new instance of the closure
+        
         parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.PhysicalLensParams.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
             return SpectraXMLNodeType.PhysicalLensParams.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
@@ -193,6 +197,11 @@ public class SpectraXML {
                     let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLCamera.self, name: key!) { _ in
                         return camera
+                        }.inObjectScope(.None)
+                case .StereoscopicCamera:
+                    let stereoCam = SpectraXMLStereoscopicCameraNode().parse(container, elem: child, options: options)
+                    container.register(MDLStereoscopicCamera.self, name: key!) { _ in
+                        return stereoCam
                         }.inObjectScope(.None)
                 case .PhysicalLensParams:
                     let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
@@ -654,7 +663,7 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
     public typealias NodeType = MDLCamera
     
     public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
-        let cam = MDLCamera()
+        let cam = NodeType()
         
         // TODO: the following are required.  make them optional with defaults?
         if let nearVisibility = elem.attributes["near-visibility-distance"] {
@@ -703,6 +712,66 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
         
         return cam
     }
+}
+
+public class SpectraXMLStereoscopicCameraNode: SpectraXMLNode {
+    public typealias NodeType = MDLStereoscopicCamera
+    
+    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+        let cam = SpectraXMLCameraNode().parse(container, elem: elem, options: options)
+        let stereoCam = convertCameraToStereoscopic(cam)
+        
+        if let interPupillaryDistance = elem.attributes["inter-pupillary-distance"] {
+            stereoCam.interPupillaryDistance = Float(interPupillaryDistance)!
+        }
+        
+        if let leftVergence = elem.attributes["left-vergence"] {
+            stereoCam.leftVergence = Float(leftVergence)!
+        }
+        
+        if let rightVergence = elem.attributes["right-vergence"] {
+            stereoCam.rightVergence = Float(rightVergence)!
+        }
+        
+        if let overlap = elem.attributes["overlap"] {
+            stereoCam.overlap = Float(overlap)!
+        }
+        
+        return stereoCam
+    }
+    
+    public func convertCameraToStereoscopic(cam: MDLCamera) -> MDLStereoscopicCamera {
+        // There has to be a better way to do this!
+        // (downcasting cam as! stereocam failed)
+        let stereoCam = MDLStereoscopicCamera()
+        stereoCam.nearVisibilityDistance = cam.nearVisibilityDistance
+        stereoCam.farVisibilityDistance = cam.farVisibilityDistance
+        stereoCam.fieldOfView = cam.fieldOfView
+        
+        // physical lens
+        stereoCam.worldToMetersConversionScale = cam.worldToMetersConversionScale
+        stereoCam.barrelDistortion = cam.barrelDistortion
+        stereoCam.fisheyeDistortion = cam.fisheyeDistortion
+        stereoCam.opticalVignetting = cam.opticalVignetting
+        stereoCam.chromaticAberration = cam.chromaticAberration
+        stereoCam.focalLength = cam.focalLength
+        stereoCam.fStop = cam.fStop
+        stereoCam.apertureBladeCount = cam.apertureBladeCount
+        stereoCam.maximumCircleOfConfusion = cam.maximumCircleOfConfusion
+        stereoCam.focusDistance = cam.focusDistance
+
+        // physical imaging surface
+        stereoCam.sensorVerticalAperture = cam.sensorVerticalAperture
+        stereoCam.sensorAspect = cam.sensorAspect
+        stereoCam.sensorEnlargement = cam.sensorEnlargement
+        stereoCam.sensorShift = cam.sensorShift
+        stereoCam.flash = cam.flash
+        stereoCam.exposure = cam.exposure
+        stereoCam.exposureCompression = cam.exposureCompression
+        
+        return stereoCam
+    }
+    
 }
 
 // TODO: public class SpectraXMLTextureNode: SpectraXMLNode {
