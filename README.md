@@ -31,6 +31,8 @@ Here's some video of [OSX audio visualization](https://www.youtube.com/watch?v=L
 
 > Also Note: performance is absolutely not a focus at this point.  I'm not sure it'd be a good idea to use this design in production.
 
+> And also note: building and integrating Spectra into your project is a bit difficult at the moment.  The iOS build fails for Carthage!  This is because Spectra integrates with MetalKit, which requires hardware for iOS builds, so the `carthage build` fails with Spectra.  I was able to integrate this lib into a project by manually building it, then copying the framework files to the new project.  However, I ran into some XML problems after that, so there's much to resolve. If you want to try using spectra, your best bet is to clone the repo, then branch and build onto the provided iOS and OSX examples.
+
 ### Spectra Features
 
 - Read Metal graphics pipeline objects into a DescriptorManager with the S3DXML format.
