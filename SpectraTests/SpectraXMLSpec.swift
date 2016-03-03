@@ -21,6 +21,27 @@ class SpectraXMLSpec: QuickSpec {
         return container.resolve(T.self, name: key)
     }
     
+    // i know there's some way to do this with generic functions
+    //TODO: add to spec helper file?
+    func compareFloat2(a: float2, with b: float2) -> Bool {
+        return (a.x == b.x) && (a.y == b.y)
+    }
+    func compareFloat3(a: float3, with b: float3) -> Bool {
+        return ((a.x == b.x) && (a.y == b.y) && (a.z == b.z))
+    }
+    func compareFloat4(a: float4, with b: float4) -> Bool {
+        return (a.x == b.x) && (a.y == b.y) && (a.z == b.z) && (a.w == b.w)
+    }
+    func compareInt2(a: int2, with b: int2) -> Bool {
+        return (a.x == b.x) && (a.y == b.y)
+    }
+    func compareInt3(a: int3, with b: int3) -> Bool {
+        return ((a.x == b.x) && (a.y == b.y) && (a.z == b.z))
+    }
+    func compareInt4(a: int4, with b: int4) -> Bool {
+        return (a.x == b.x) && (a.y == b.y) && (a.z == b.z) && (a.w == b.w)
+    }
+    
     override func spec() {
         let parser = Container()
         
@@ -39,7 +60,7 @@ class SpectraXMLSpec: QuickSpec {
         // TODO: move this to a new file?
         describe("SpectraXML: main parser") {
             describe("parser can register new D/I handlers for XML tags") {
-                
+                // this kinda requires auto-injection, which isn't available for swinject
             }
             
             describe("parser can also register custom types to return") {
