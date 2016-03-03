@@ -263,11 +263,9 @@ class SpectraXMLSpec: QuickSpec {
                     
                     // TODO: default stereo values
                     expect(defaultStereoCam.interPupillaryDistance) == 63.0
-                    print(defaultStereoCam.leftVergence)
-                    print(defaultStereoCam.rightVergence)
-                    print(defaultStereoCam.overlap)
-
-//                    expect(defaultStereoCam.leftVergence) 
+                    expect(defaultStereoCam.leftVergence) == 0.0
+                    expect(defaultStereoCam.rightVergence) == 0.0
+                    expect(defaultStereoCam.overlap) == 0.0
                 }
                 
                 it("is created by additionally specifying interPupillaryDistance, overlap & left/right vergence") {

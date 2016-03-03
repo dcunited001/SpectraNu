@@ -197,12 +197,12 @@ public class SpectraXML {
                 case .Camera:
                     let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLCamera.self, name: key!) { _ in
-                        return (camera.copy() as! MDLCamera)
+                        return SpectraXMLCameraNode.copy(camera)
                         }.inObjectScope(.None)
                 case .StereoscopicCamera:
                     let stereoCam = SpectraXMLStereoscopicCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLStereoscopicCamera.self, name: key!) { _ in
-                        return (stereoCam.copy() as! MDLStereoscopicCamera)
+                        return SpectraXMLStereoscopicCameraNode.copy(stereoCam)
                         }.inObjectScope(.None)
                 case .PhysicalLensParams:
                     let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
@@ -453,7 +453,7 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
 // - there's also the mesh-generator pattern from the original SceneGraphXML
 //   - this draws from a map of monads passed in and executes the one for a specific type, if found
 
-public class SpectraPhysicalLensParams: NSObject {
+public class SpectraPhysicalLensParams: NSObject, NSCopying {
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
     
     public var worldToMetersConversionScale: Float?
@@ -526,6 +526,23 @@ public class SpectraPhysicalLensParams: NSObject {
         }
         
     }
+    
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let newLens = SpectraPhysicalLensParams()
+        
+        newLens.worldToMetersConversionScale = self.worldToMetersConversionScale
+        newLens.barrelDistortion = self.barrelDistortion
+        newLens.fisheyeDistortion = self.fisheyeDistortion
+        newLens.opticalVignetting = self.opticalVignetting
+        newLens.chromaticAberration = self.chromaticAberration
+        newLens.focalLength = self.focalLength
+        newLens.fStop = self.fStop
+        newLens.apertureBladeCount = self.apertureBladeCount
+        newLens.maximumCircleOfConfusion = self.maximumCircleOfConfusion
+        newLens.focusDistance = self.focusDistance
+        
+        return newLens
+    }
 }
 
 public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
@@ -578,7 +595,7 @@ public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
     }
 }
 
-public class SpectraPhysicalImagingSurfaceParams: NSObject {
+public class SpectraPhysicalImagingSurfaceParams: NSObject, NSCopying {
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
     
     public var sensorVerticalAperture: Float?
@@ -628,6 +645,21 @@ public class SpectraPhysicalImagingSurfaceParams: NSObject {
             camera.exposureCompression = val
         }
         
+    }
+    
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let newSurface = SpectraPhysicalImagingSurfaceParams()
+        
+        // physical imaging surface
+        newSurface.sensorVerticalAperture = self.sensorVerticalAperture
+        newSurface.sensorAspect = self.sensorAspect
+        newSurface.sensorEnlargement = self.sensorEnlargement
+        newSurface.sensorShift = self.sensorShift
+        newSurface.flash = self.flash
+        newSurface.exposure = self.exposure
+        newSurface.exposureCompression = self.exposureCompression
+        
+        return newSurface
     }
 }
 
@@ -722,6 +754,36 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
         
         return cam
     }
+    
+    public static func copy(object: NodeType) -> NodeType {
+        let newCam = MDLCamera()
+        newCam.nearVisibilityDistance = object.nearVisibilityDistance
+        newCam.farVisibilityDistance = object.farVisibilityDistance
+        newCam.fieldOfView = object.fieldOfView
+        
+        // physical lens
+        newCam.worldToMetersConversionScale = object.worldToMetersConversionScale
+        newCam.barrelDistortion = object.barrelDistortion
+        newCam.fisheyeDistortion = object.fisheyeDistortion
+        newCam.opticalVignetting = object.opticalVignetting
+        newCam.chromaticAberration = object.chromaticAberration
+        newCam.focalLength = object.focalLength
+        newCam.fStop = object.fStop
+        newCam.apertureBladeCount = object.apertureBladeCount
+        newCam.maximumCircleOfConfusion = object.maximumCircleOfConfusion
+        newCam.focusDistance = object.focusDistance
+        
+        // physical imaging surface
+        newCam.sensorVerticalAperture = object.sensorVerticalAperture
+        newCam.sensorAspect = object.sensorAspect
+        newCam.sensorEnlargement = object.sensorEnlargement
+        newCam.sensorShift = object.sensorShift
+        newCam.flash = object.flash
+        newCam.exposure = object.exposure
+        newCam.exposureCompression = object.exposureCompression
+        
+        return newCam
+    }
 }
 
 public class SpectraXMLStereoscopicCameraNode: SpectraXMLNode {
@@ -782,6 +844,41 @@ public class SpectraXMLStereoscopicCameraNode: SpectraXMLNode {
         return stereoCam
     }
     
+    public static func copy(object: NodeType) -> NodeType {
+        let newCam = MDLStereoscopicCamera()
+        newCam.nearVisibilityDistance = object.nearVisibilityDistance
+        newCam.farVisibilityDistance = object.farVisibilityDistance
+        newCam.fieldOfView = object.fieldOfView
+        
+        // stereoscopic
+        newCam.interPupillaryDistance = object.interPupillaryDistance
+        newCam.leftVergence = object.leftVergence
+        newCam.rightVergence = object.rightVergence
+        newCam.overlap = object.overlap
+        
+        // physical lens
+        newCam.worldToMetersConversionScale = object.worldToMetersConversionScale
+        newCam.barrelDistortion = object.barrelDistortion
+        newCam.fisheyeDistortion = object.fisheyeDistortion
+        newCam.opticalVignetting = object.opticalVignetting
+        newCam.chromaticAberration = object.chromaticAberration
+        newCam.focalLength = object.focalLength
+        newCam.fStop = object.fStop
+        newCam.apertureBladeCount = object.apertureBladeCount
+        newCam.maximumCircleOfConfusion = object.maximumCircleOfConfusion
+        newCam.focusDistance = object.focusDistance
+        
+        // physical imaging surface
+        newCam.sensorVerticalAperture = object.sensorVerticalAperture
+        newCam.sensorAspect = object.sensorAspect
+        newCam.sensorEnlargement = object.sensorEnlargement
+        newCam.sensorShift = object.sensorShift
+        newCam.flash = object.flash
+        newCam.exposure = object.exposure
+        newCam.exposureCompression = object.exposureCompression
+        
+        return newCam
+    }
 }
 
 // TODO: public class SpectraXMLTextureNode: SpectraXMLNode {
