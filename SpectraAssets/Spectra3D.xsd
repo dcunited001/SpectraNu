@@ -419,14 +419,6 @@
     
     <xs:simpleType name="mtlSamplerAddressMode" mtl-enum="true">
         <xs:restriction base="xs:string">
-            <xs:enumeration id="0"  value="NotMipmapped"/>
-            <xs:enumeration id="1"  value="Nearest"/>
-            <xs:enumeration id="2"  value="Linear"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="mtlSamplerAddressMode" mtl-enum="true">
-        <xs:restriction base="xs:string">
             <xs:enumeration id="0"  value="ClampToEdge"/>
             <xs:enumeration id="1"  value="MirrorClampToEdge"/>
             <xs:enumeration id="2"  value="Repeat"/>
