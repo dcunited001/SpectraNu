@@ -9,6 +9,7 @@
 import Foundation
 import Fuzi
 import Swinject
+import Metal
 import ModelIO
 
 public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement, key: String?, options: [String: Any]) -> AnyObject)
@@ -273,30 +274,120 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
     }
 }
 
-public struct VertexAttributeNode {
+public class VertexAttribute: NSObject, NSCopying {
     var name: String?
     var format: String?
     var offset: Int?
     var bufferIndex: Int?
+    var initializationValue: float4?
     
+//    var formatMDL: MDLVertexFormat?
     
-    public init() { }
+    override public init() {
+        
+    }
+    
+    public init(vertexAttribute: MDLVertexAttribute) {
+        self.name = vertexAttribute.name
+//        self.format = vertexAttribute.format
+        self.offset = vertexAttribute.offset
+        self.bufferIndex = vertexAttribute.bufferIndex
+        self.initializationValue = vertexAttribute.initializationValue
+    }
+    
+//    public init(vertexAttributeDescriptor: MTLVertexAttributeDescriptor) {
+//        
+//    }
+    
+    public func parseXML(container: Container, elem: XMLElement, options: [String: Any]) {
+
+        if let name = elem.attributes["name"] {
+            self.name = name
+        }
+        if let format = elem.attributes["format"] {
+            self.format = format
+        }
+        if let offset = elem.attributes["offset"] {
+            self.offset = Int(offset)!
+        }
+        if let bufferIndex = elem.attributes["bufferIndex"] {
+            self.bufferIndex = Int(bufferIndex)!
+        }
+        if let initializationValue = elem.attributes["initialization-value"] {
+            self.initializationValue = SpectraSimd.parseFloat4(initializationValue)
+        }
+    }
+    
+//    public func parseJSON(container: Container, elem: JSON, options: [String: Any]) { }
+//    public func parsePlist(container: Container, elem: JSON, options: [String: Any]) { }
+    
+    public func toModelIO(container: Container) -> MDLVertexAttribute {
+        let mdl = MDLVertexAttribute()
+        mdl.name = self.name!
+        
+        let enumVal = container.resolve(SpectraEnum.self, name: "mdlVertexFormat")!.getValue(self.format!)
+        mdl.format = MDLVertexFormat(rawValue: enumVal)!
+        
+        mdl.bufferIndex = self.bufferIndex!
+        mdl.offset = self.offset!
+        mdl.initializationValue = self.initializationValue ?? mdl.initializationValue
+        return mdl
+    }
+    
+    public func toMetal(container: Container) -> MTLVertexAttributeDescriptor {
+        let mtl = MTLVertexAttributeDescriptor()
+        
+        //TODO: resolve format mapping issues (there are more MDLVertexFormat's than MTLVertexFormat's
+        let enumVal = container.resolve(SpectraEnum.self, name: "mtlVertexFormat")!.getValue(self.format!)
+        
+        mtl.format = MTLVertexFormat(rawValue: enumVal)!
+        mtl.bufferIndex = self.bufferIndex!
+        mtl.offset = self.offset!
+        
+        return MTLVertexAttributeDescriptor()
+    }
+    
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let cp = VertexAttribute()
+        cp.name = self.name
+        cp.format = self.format
+        cp.offset = self.offset
+        cp.bufferIndex = self.bufferIndex
+        cp.initializationValue = self.initializationValue
+        return cp
+    }
+    
+}
+
+public class VertexDescriptor: NSObject, NSCopying {
+    let vertexAttributes: [VertexAttribute] = []
+    // layout?
     
     public func parseXML(container: Container, elem: XMLElement, options: [String: Any]) {
         
     }
     
-//    public func parseJSON(container: Container, elem: JSON, options: [String: Any]) { }
-//    public func parsePList(container: Container, elem: JSON, options: [String: Any]) { }
-    
-    public func toModelIO() -> MDLVertexAttribute {
-        return MDLVertexAttribute()
+    public func toModelIO() -> MDLVertexDescriptor {
+        let mdl = MDLVertexDescriptor()
+        
+        return mdl
     }
     
-    public func toMetal() -> MTLVertexAttributeDescriptor {
-        return MTLVertexAttributeDescriptor()
+    public func toMetal() -> MTLVertexDescriptor {
+        let mtl = MTLVertexDescriptor()
+        // attributes
+        // layout
+        
+        return mtl
     }
     
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let cp = VertexDescriptor()
+        
+        
+        
+        return cp
+    }
 }
 
 public class SpectraXMLVertexAttributeNode: SpectraXMLNode {
