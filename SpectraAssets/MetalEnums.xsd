@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="SpectraEnums" xmlns="SpectraEnums" elementFormDefault="qualified">
+
+  <xs:simpleType name="mtlVertexStepFunction" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="PerVertex"/>
+      <xs:enumeration id="2" value="PerInstance"/>
+      <xs:enumeration id="0" value="Constant"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlPixelFormat" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="70" value="RGBA8Unorm"/>
+      <xs:enumeration id="81" value="BGRA8Unorm_sRGB"/>
+      <xs:enumeration id="32" value="RG8Snorm"/>
+      <xs:enumeration id="90" value="RGB10A2Unorm"/>
+      <xs:enumeration id="91" value="RGB10A2Uint"/>
+      <xs:enumeration id="103" value="RG32Uint"/>
+      <xs:enumeration id="114" value="RGBA16Sint"/>
+      <xs:enumeration id="143" value="BC5_RGSnorm"/>
+      <xs:enumeration id="150" value="BC6H_RGBFloat"/>
+      <xs:enumeration id="152" value="BC7_RGBAUnorm"/>
+      <xs:enumeration id="93" value="RGB9E5Float"/>
+      <xs:enumeration id="25" value="R16Float"/>
+      <xs:enumeration id="65" value="RG16Float"/>
+      <xs:enumeration id="72" value="RGBA8Snorm"/>
+      <xs:enumeration id="255" value="Depth24Unorm_Stencil8"/>
+      <xs:enumeration id="112" value="RGBA16Snorm"/>
+      <xs:enumeration id="104" value="RG32Sint"/>
+      <xs:enumeration id="240" value="GBGR422"/>
+      <xs:enumeration id="132" value="BC2_RGBA"/>
+      <xs:enumeration id="71" value="RGBA8Unorm_sRGB"/>
+      <xs:enumeration id="64" value="RG16Sint"/>
+      <xs:enumeration id="151" value="BC6H_RGBUfloat"/>
+      <xs:enumeration id="55" value="R32Float"/>
+      <xs:enumeration id="105" value="RG32Float"/>
+      <xs:enumeration id="60" value="RG16Unorm"/>
+      <xs:enumeration id="30" value="RG8Unorm"/>
+      <xs:enumeration id="23" value="R16Uint"/>
+      <xs:enumeration id="22" value="R16Snorm"/>
+      <xs:enumeration id="140" value="BC4_RUnorm"/>
+      <xs:enumeration id="54" value="R32Sint"/>
+      <xs:enumeration id="113" value="RGBA16Uint"/>
+      <xs:enumeration id="14" value="R8Sint"/>
+      <xs:enumeration id="141" value="BC4_RSnorm"/>
+      <xs:enumeration id="153" value="BC7_RGBAUnorm_sRGB"/>
+      <xs:enumeration id="253" value="Stencil8"/>
+      <xs:enumeration id="73" value="RGBA8Uint"/>
+      <xs:enumeration id="123" value="RGBA32Uint"/>
+      <xs:enumeration id="10" value="R8Unorm"/>
+      <xs:enumeration id="53" value="R32Uint"/>
+      <xs:enumeration id="131" value="BC1_RGBA_sRGB"/>
+      <xs:enumeration id="130" value="BC1_RGBA"/>
+      <xs:enumeration id="0" value="Invalid"/>
+      <xs:enumeration id="62" value="RG16Snorm"/>
+      <xs:enumeration id="134" value="BC3_RGBA"/>
+      <xs:enumeration id="142" value="BC5_RGUnorm"/>
+      <xs:enumeration id="124" value="RGBA32Sint"/>
+      <xs:enumeration id="115" value="RGBA16Float"/>
+      <xs:enumeration id="34" value="RG8Sint"/>
+      <xs:enumeration id="260" value="Depth32Float_Stencil8"/>
+      <xs:enumeration id="92" value="RG11B10Float"/>
+      <xs:enumeration id="110" value="RGBA16Unorm"/>
+      <xs:enumeration id="133" value="BC2_RGBA_sRGB"/>
+      <xs:enumeration id="1" value="A8Unorm"/>
+      <xs:enumeration id="80" value="BGRA8Unorm"/>
+      <xs:enumeration id="125" value="RGBA32Float"/>
+      <xs:enumeration id="252" value="Depth32Float"/>
+      <xs:enumeration id="12" value="R8Snorm"/>
+      <xs:enumeration id="74" value="RGBA8Sint"/>
+      <xs:enumeration id="33" value="RG8Uint"/>
+      <xs:enumeration id="13" value="R8Uint"/>
+      <xs:enumeration id="135" value="BC3_RGBA_sRGB"/>
+      <xs:enumeration id="20" value="R16Unorm"/>
+      <xs:enumeration id="241" value="BGRG422"/>
+      <xs:enumeration id="63" value="RG16Uint"/>
+      <xs:enumeration id="24" value="R16Sint"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlResourceOptions" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="0" value="OptionCPUCacheModeDefault"/>
+      <xs:enumeration id="1" value="OptionCPUCacheModeWriteCombined"/>
+      <xs:enumeration id="0" value="CPUModeDefaultCache"/>
+      <xs:enumeration id="1" value="CPUCacheModeWriteCombined"/>
+      <xs:enumeration id="32" value="StorageModePrivate"/>
+      <xs:enumeration id="0" value="StorageModeShared"/>
+      <xs:enumeration id="16" value="StorageModeManaged"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlBlendFactor" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="4" value="SourceAlpha"/>
+      <xs:enumeration id="2" value="SourceColor"/>
+      <xs:enumeration id="12" value="OneMinusBlendColor"/>
+      <xs:enumeration id="13" value="BlendAlpha"/>
+      <xs:enumeration id="0" value="Zero"/>
+      <xs:enumeration id="10" value="SourceAlphaSaturated"/>
+      <xs:enumeration id="3" value="OneMinusSourceColor"/>
+      <xs:enumeration id="11" value="BlendColor"/>
+      <xs:enumeration id="5" value="OneMinusSourceAlpha"/>
+      <xs:enumeration id="6" value="DestinationColor"/>
+      <xs:enumeration id="7" value="OneMinusDestinationColor"/>
+      <xs:enumeration id="8" value="DestinationAlpha"/>
+      <xs:enumeration id="14" value="OneMinusBlendAlpha"/>
+      <xs:enumeration id="1" value="One"/>
+      <xs:enumeration id="9" value="OneMinusDestinationAlpha"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlLoadAction" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="Load"/>
+      <xs:enumeration id="2" value="Clear"/>
+      <xs:enumeration id="0" value="DontCare"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlPurgeableState" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="2" value="NonVolatile"/>
+      <xs:enumeration id="4" value="Empty"/>
+      <xs:enumeration id="3" value="Volatile"/>
+      <xs:enumeration id="1" value="KeepCurrent"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlStoreAction" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="Store"/>
+      <xs:enumeration id="2" value="MultisampleResolve"/>
+      <xs:enumeration id="0" value="DontCare"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlBlendOperation" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="Subtract"/>
+      <xs:enumeration id="0" value="Add"/>
+      <xs:enumeration id="2" value="ReverseSubtract"/>
+      <xs:enumeration id="4" value="Max"/>
+      <xs:enumeration id="3" value="Min"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlCompareFunction" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="2" value="Equal"/>
+      <xs:enumeration id="1" value="Less"/>
+      <xs:enumeration id="0" value="Never"/>
+      <xs:enumeration id="4" value="Greater"/>
+      <xs:enumeration id="5" value="NotEqual"/>
+      <xs:enumeration id="6" value="GreaterEqual"/>
+      <xs:enumeration id="7" value="Always"/>
+      <xs:enumeration id="3" value="LessEqual"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlSamplerAddressMode" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="0" value="ClampToEdge"/>
+      <xs:enumeration id="2" value="Repeat"/>
+      <xs:enumeration id="1" value="MirrorClampToEdge"/>
+      <xs:enumeration id="3" value="MirrorRepeat"/>
+      <xs:enumeration id="4" value="ClampToZero"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlTextureUsage" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="ShaderRead"/>
+      <xs:enumeration id="2" value="ShaderWrite"/>
+      <xs:enumeration id="4" value="RenderTarget"/>
+      <xs:enumeration id="0" value="Unknown"/>
+      <xs:enumeration id="16" value="PixelFormatView"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlMultisampleDepthResolveFilter" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="2" value="Max"/>
+      <xs:enumeration id="0" value="Sample0"/>
+      <xs:enumeration id="1" value="Min"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlTextureType" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="Type1DArray"/>
+      <xs:enumeration id="2" value="Type2D"/>
+      <xs:enumeration id="3" value="Type2DArray"/>
+      <xs:enumeration id="5" value="TypeCube"/>
+      <xs:enumeration id="6" value="TypeCubeArray"/>
+      <xs:enumeration id="7" value="Type3D"/>
+      <xs:enumeration id="0" value="Type1D"/>
+      <xs:enumeration id="4" value="Type2DMultisample"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlStorageMode" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="2" value="Private"/>
+      <xs:enumeration id="1" value="Managed"/>
+      <xs:enumeration id="0" value="Shared"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlVertexFormat" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="3" value="UChar4"/>
+      <xs:enumeration id="26" value="Half3"/>
+      <xs:enumeration id="28" value="Float"/>
+      <xs:enumeration id="25" value="Half2"/>
+      <xs:enumeration id="31" value="Float4"/>
+      <xs:enumeration id="40" value="Int1010102Normalized"/>
+      <xs:enumeration id="18" value="Short4"/>
+      <xs:enumeration id="39" value="UInt4"/>
+      <xs:enumeration id="23" value="Short3Normalized"/>
+      <xs:enumeration id="6" value="Char4"/>
+      <xs:enumeration id="13" value="UShort2"/>
+      <xs:enumeration id="20" value="UShort3Normalized"/>
+      <xs:enumeration id="9" value="UChar4Normalized"/>
+      <xs:enumeration id="30" value="Float3"/>
+      <xs:enumeration id="16" value="Short2"/>
+      <xs:enumeration id="0" value="Invalid"/>
+      <xs:enumeration id="24" value="Short4Normalized"/>
+      <xs:enumeration id="19" value="UShort2Normalized"/>
+      <xs:enumeration id="7" value="UChar2Normalized"/>
+      <xs:enumeration id="11" value="Char3Normalized"/>
+      <xs:enumeration id="17" value="Short3"/>
+      <xs:enumeration id="27" value="Half4"/>
+      <xs:enumeration id="33" value="Int2"/>
+      <xs:enumeration id="10" value="Char2Normalized"/>
+      <xs:enumeration id="34" value="Int3"/>
+      <xs:enumeration id="37" value="UInt2"/>
+      <xs:enumeration id="5" value="Char3"/>
+      <xs:enumeration id="2" value="UChar3"/>
+      <xs:enumeration id="29" value="Float2"/>
+      <xs:enumeration id="32" value="Int"/>
+      <xs:enumeration id="36" value="UInt"/>
+      <xs:enumeration id="38" value="UInt3"/>
+      <xs:enumeration id="41" value="UInt1010102Normalized"/>
+      <xs:enumeration id="8" value="UChar3Normalized"/>
+      <xs:enumeration id="14" value="UShort3"/>
+      <xs:enumeration id="12" value="Char4Normalized"/>
+      <xs:enumeration id="22" value="Short2Normalized"/>
+      <xs:enumeration id="1" value="UChar2"/>
+      <xs:enumeration id="4" value="Char2"/>
+      <xs:enumeration id="35" value="Int4"/>
+      <xs:enumeration id="21" value="UShort4Normalized"/>
+      <xs:enumeration id="15" value="UShort4"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlSamplerMipFilter" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="2" value="Linear"/>
+      <xs:enumeration id="0" value="NotMipmapped"/>
+      <xs:enumeration id="1" value="Nearest"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlStencilOperation" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="7" value="DecrementWrap"/>
+      <xs:enumeration id="4" value="DecrementClamp"/>
+      <xs:enumeration id="0" value="Keep"/>
+      <xs:enumeration id="1" value="Zero"/>
+      <xs:enumeration id="3" value="IncrementClamp"/>
+      <xs:enumeration id="5" value="Invert"/>
+      <xs:enumeration id="2" value="Replace"/>
+      <xs:enumeration id="6" value="IncrementWrap"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlSamplerMinMagFilter" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="Linear"/>
+      <xs:enumeration id="0" value="Nearest"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mtlCpuCacheMode" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="0" value="DefaultCache"/>
+      <xs:enumeration id="1" value="WriteCombined"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

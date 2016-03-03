@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Metal
 import ModelIO
 
 class SpectraEnumDefs {
@@ -133,6 +134,268 @@ class SpectraEnumDefs {
     static let mdlMaterialMipMapFilterMode = [
         "Nearest": MDLMaterialMipMapFilterMode.Nearest.rawValue,
         "Linear": MDLMaterialMipMapFilterMode.Linear.rawValue
+    ]
+    
+}
+
+class MetalEnumDefs {
+    static let mtlVertexStepFunction = [
+        "Constant": MTLVertexStepFunction.Constant.rawValue,
+        "PerVertex": MTLVertexStepFunction.PerVertex.rawValue,
+        "PerInstance": MTLVertexStepFunction.PerInstance.rawValue
+    ]
+    
+    static let mtlCompareFunction = [
+        "Never": MTLCompareFunction.Never.rawValue,
+        "Less": MTLCompareFunction.Less.rawValue,
+        "Equal": MTLCompareFunction.Equal.rawValue,
+        "LessEqual": MTLCompareFunction.LessEqual.rawValue,
+        "Greater": MTLCompareFunction.Greater.rawValue,
+        "NotEqual": MTLCompareFunction.NotEqual.rawValue,
+        "GreaterEqual": MTLCompareFunction.GreaterEqual.rawValue,
+        "Always": MTLCompareFunction.Always.rawValue
+    ]
+    
+    static let mtlStencilOperation = [
+        "Keep": MTLStencilOperation.Keep.rawValue,
+        "Zero": MTLStencilOperation.Zero.rawValue,
+        "Replace": MTLStencilOperation.Replace.rawValue,
+        "IncrementClamp": MTLStencilOperation.IncrementClamp.rawValue,
+        "DecrementClamp": MTLStencilOperation.DecrementClamp.rawValue,
+        "Invert": MTLStencilOperation.Invert.rawValue,
+        "IncrementWrap": MTLStencilOperation.IncrementWrap.rawValue,
+        "DecrementWrap": MTLStencilOperation.DecrementWrap.rawValue
+    ]
+    
+    static let mtlVertexFormat = [
+        "Invalid": MTLVertexFormat.Invalid.rawValue,
+        "UChar2": MTLVertexFormat.UChar2.rawValue,
+        "UChar3": MTLVertexFormat.UChar3.rawValue,
+        "UChar4": MTLVertexFormat.UChar4.rawValue,
+        "Char2": MTLVertexFormat.Char2.rawValue,
+        "Char3": MTLVertexFormat.Char3.rawValue,
+        "Char4": MTLVertexFormat.Char4.rawValue,
+        "UChar2Normalized": MTLVertexFormat.UChar2Normalized.rawValue,
+        "UChar3Normalized": MTLVertexFormat.UChar3Normalized.rawValue,
+        "UChar4Normalized": MTLVertexFormat.UChar4Normalized.rawValue,
+        "Char2Normalized": MTLVertexFormat.Char2Normalized.rawValue,
+        "Char3Normalized": MTLVertexFormat.Char3Normalized.rawValue,
+        "Char4Normalized": MTLVertexFormat.Char4Normalized.rawValue,
+        "UShort2": MTLVertexFormat.UShort2.rawValue,
+        "UShort3": MTLVertexFormat.UShort3.rawValue,
+        "UShort4": MTLVertexFormat.UShort4.rawValue,
+        "Short2": MTLVertexFormat.Short2.rawValue,
+        "Short3": MTLVertexFormat.Short3.rawValue,
+        "Short4": MTLVertexFormat.Short4.rawValue,
+        "UShort2Normalized": MTLVertexFormat.UShort2Normalized.rawValue,
+        "UShort3Normalized": MTLVertexFormat.UShort3Normalized.rawValue,
+        "UShort4Normalized": MTLVertexFormat.UShort4Normalized.rawValue,
+        "Short2Normalized": MTLVertexFormat.Short2Normalized.rawValue,
+        "Short3Normalized": MTLVertexFormat.Short3Normalized.rawValue,
+        "Short4Normalized": MTLVertexFormat.Short4Normalized.rawValue,
+        "Half2": MTLVertexFormat.Half2.rawValue,
+        "Half3": MTLVertexFormat.Half3.rawValue,
+        "Half4": MTLVertexFormat.Half4.rawValue,
+        "Float": MTLVertexFormat.Float.rawValue,
+        "Float2": MTLVertexFormat.Float2.rawValue,
+        "Float3": MTLVertexFormat.Float3.rawValue,
+        "Float4": MTLVertexFormat.Float4.rawValue,
+        "Int": MTLVertexFormat.Int.rawValue,
+        "Int2": MTLVertexFormat.Int2.rawValue,
+        "Int3": MTLVertexFormat.Int3.rawValue,
+        "Int4": MTLVertexFormat.Int4.rawValue,
+        "UInt": MTLVertexFormat.UInt.rawValue,
+        "UInt2": MTLVertexFormat.UInt2.rawValue,
+        "UInt3": MTLVertexFormat.UInt3.rawValue,
+        "UInt4": MTLVertexFormat.UInt4.rawValue,
+        "Int1010102Normalized": MTLVertexFormat.Int1010102Normalized.rawValue,
+        "UInt1010102Normalized": MTLVertexFormat.UInt1010102Normalized.rawValue
+    ]
+    
+    static let mtlBlendFactor = [
+        "Zero": MTLBlendFactor.Zero.rawValue,
+        "One": MTLBlendFactor.One.rawValue,
+        "SourceColor": MTLBlendFactor.SourceColor.rawValue,
+        "OneMinusSourceColor": MTLBlendFactor.OneMinusSourceColor.rawValue,
+        "SourceAlpha": MTLBlendFactor.SourceAlpha.rawValue,
+        "OneMinusSourceAlpha": MTLBlendFactor.OneMinusSourceAlpha.rawValue,
+        "DestinationColor": MTLBlendFactor.DestinationColor.rawValue,
+        "OneMinusDestinationColor": MTLBlendFactor.OneMinusDestinationColor.rawValue,
+        "DestinationAlpha": MTLBlendFactor.DestinationAlpha.rawValue,
+        "OneMinusDestinationAlpha": MTLBlendFactor.OneMinusDestinationAlpha.rawValue,
+        "SourceAlphaSaturated": MTLBlendFactor.SourceAlphaSaturated.rawValue,
+        "BlendColor": MTLBlendFactor.BlendColor.rawValue,
+        "OneMinusBlendColor": MTLBlendFactor.OneMinusBlendColor.rawValue,
+        "BlendAlpha": MTLBlendFactor.BlendAlpha.rawValue,
+        "OneMinusBlendAlpha": MTLBlendFactor.OneMinusBlendAlpha.rawValue
+    ]
+    
+    static let mtlBlendOperation = [
+        "Add": MTLBlendOperation.Add.rawValue,
+        "Subtract": MTLBlendOperation.Subtract.rawValue,
+        "ReverseSubtract": MTLBlendOperation.ReverseSubtract.rawValue,
+        "Min": MTLBlendOperation.Min.rawValue,
+        "Max": MTLBlendOperation.Max.rawValue
+    ]
+    
+    static let mtlLoadAction = [
+        "DontCare": MTLLoadAction.DontCare.rawValue,
+        "Load": MTLLoadAction.Load.rawValue,
+        "Clear": MTLLoadAction.Clear.rawValue
+    ]
+    
+    static let mtlStoreAction = [
+        "DontCare": MTLStoreAction.DontCare.rawValue,
+        "Store": MTLStoreAction.Store.rawValue,
+        "MultisampleResolve": MTLStoreAction.MultisampleResolve.rawValue
+    ]
+    
+    // Only available on specific versions of iOS
+    static let mtlMultisampleDepthResolveFilter: [String: UInt] = [
+        // TODO: how to access this enum's values?
+        "Sample0": 0,
+        "Min": 1,
+        "Max": 2
+    ]
+    
+    static let mtlSamplerMinMagFilter = [
+        "Nearest": MTLSamplerMinMagFilter.Nearest.rawValue,
+        "Linear": MTLSamplerMinMagFilter.Linear.rawValue
+    ]
+    
+    static let mtlSamplerMipFilter = [
+        "NotMipmapped": MTLSamplerMipFilter.NotMipmapped.rawValue,
+        "Nearest": MTLSamplerMipFilter.Nearest.rawValue,
+        "Linear": MTLSamplerMipFilter.Linear.rawValue
+    ]
+    
+    static let mtlSamplerAddressMode = [
+        "ClampToEdge": MTLSamplerAddressMode.ClampToEdge.rawValue,
+        "MirrorClampToEdge": MTLSamplerAddressMode.MirrorClampToEdge.rawValue,
+        "Repeat": MTLSamplerAddressMode.Repeat.rawValue,
+        "MirrorRepeat": MTLSamplerAddressMode.MirrorRepeat.rawValue,
+        "ClampToZero": MTLSamplerAddressMode.ClampToZero.rawValue
+    ]
+    
+    static let mtlTextureType = [
+        "Type1D": MTLTextureType.Type1D.rawValue,
+        "Type1DArray": MTLTextureType.Type1DArray.rawValue,
+        "Type2D": MTLTextureType.Type2D.rawValue,
+        "Type2DArray": MTLTextureType.Type2DArray.rawValue,
+        "Type2DMultisample": MTLTextureType.Type2DMultisample.rawValue,
+        "TypeCube": MTLTextureType.TypeCube.rawValue,
+        "TypeCubeArray": MTLTextureType.TypeCubeArray.rawValue,
+        "Type3D": MTLTextureType.Type3D.rawValue
+    ]
+    
+    static let mtlCpuCacheMode = [
+        "DefaultCache": MTLCPUCacheMode.DefaultCache.rawValue,
+        "WriteCombined": MTLCPUCacheMode.WriteCombined.rawValue
+    ]
+    
+    static let mtlStorageMode = [
+        
+        "Shared": MTLStorageMode.Shared.rawValue,
+        "Managed": MTLStorageMode.Managed.rawValue,
+        "Private": MTLStorageMode.Private.rawValue
+    ]
+    
+    static let mtlPurgeableState = [
+        "KeepCurrent": MTLPurgeableState.KeepCurrent.rawValue,
+        "NonVolatile": MTLPurgeableState.NonVolatile.rawValue,
+        "Volatile": MTLPurgeableState.Volatile.rawValue,
+        "Empty": MTLPurgeableState.Empty.rawValue
+    ]
+    
+    static let mtlPixelFormat = [
+        "Invalid": MTLPixelFormat.Invalid.rawValue,
+        "A8Unorm": MTLPixelFormat.A8Unorm.rawValue,
+        "R8Unorm": MTLPixelFormat.R8Unorm.rawValue,
+        "R8Snorm": MTLPixelFormat.R8Snorm.rawValue,
+        "R8Uint": MTLPixelFormat.R8Uint.rawValue,
+        "R8Sint": MTLPixelFormat.R8Sint.rawValue,
+        "R16Unorm": MTLPixelFormat.R16Unorm.rawValue,
+        "R16Snorm": MTLPixelFormat.R16Snorm.rawValue,
+        "R16Uint": MTLPixelFormat.R16Uint.rawValue,
+        "R16Sint": MTLPixelFormat.R16Sint.rawValue,
+        "R16Float": MTLPixelFormat.R16Float.rawValue,
+        "RG8Unorm": MTLPixelFormat.RG8Unorm.rawValue,
+        "RG8Snorm": MTLPixelFormat.RG8Snorm.rawValue,
+        "RG8Uint": MTLPixelFormat.RG8Uint.rawValue,
+        "RG8Sint": MTLPixelFormat.RG8Sint.rawValue,
+        "R32Uint": MTLPixelFormat.R32Uint.rawValue,
+        "R32Sint": MTLPixelFormat.R32Sint.rawValue,
+        "R32Float": MTLPixelFormat.R32Float.rawValue,
+        "RG16Unorm": MTLPixelFormat.RG16Unorm.rawValue,
+        "RG16Snorm": MTLPixelFormat.RG16Snorm.rawValue,
+        "RG16Uint": MTLPixelFormat.RG16Uint.rawValue,
+        "RG16Sint": MTLPixelFormat.RG16Sint.rawValue,
+        "RG16Float": MTLPixelFormat.RG16Float.rawValue,
+        "RGBA8Unorm": MTLPixelFormat.RGBA8Unorm.rawValue,
+        "RGBA8Unorm_sRGB": MTLPixelFormat.RGBA8Unorm_sRGB.rawValue,
+        "RGBA8Snorm": MTLPixelFormat.RGBA8Snorm.rawValue,
+        "RGBA8Uint": MTLPixelFormat.RGBA8Uint.rawValue,
+        "RGBA8Sint": MTLPixelFormat.RGBA8Sint.rawValue,
+        "BGRA8Unorm": MTLPixelFormat.BGRA8Unorm.rawValue,
+        "BGRA8Unorm_sRGB": MTLPixelFormat.BGRA8Unorm_sRGB.rawValue,
+        "RGB10A2Unorm": MTLPixelFormat.RGB10A2Unorm.rawValue,
+        "RGB10A2Uint": MTLPixelFormat.RGB10A2Uint.rawValue,
+        "RG11B10Float": MTLPixelFormat.RG11B10Float.rawValue,
+        "RGB9E5Float": MTLPixelFormat.RGB9E5Float.rawValue,
+        "RG32Uint": MTLPixelFormat.RG32Uint.rawValue,
+        "RG32Sint": MTLPixelFormat.RG32Sint.rawValue,
+        "RG32Float": MTLPixelFormat.RG32Float.rawValue,
+        "RGBA16Unorm": MTLPixelFormat.RGBA16Unorm.rawValue,
+        "RGBA16Snorm": MTLPixelFormat.RGBA16Snorm.rawValue,
+        "RGBA16Uint": MTLPixelFormat.RGBA16Uint.rawValue,
+        "RGBA16Sint": MTLPixelFormat.RGBA16Sint.rawValue,
+        "RGBA16Float": MTLPixelFormat.RGBA16Float.rawValue,
+        "RGBA32Uint": MTLPixelFormat.RGBA32Uint.rawValue,
+        "RGBA32Sint": MTLPixelFormat.RGBA32Sint.rawValue,
+        "RGBA32Float": MTLPixelFormat.RGBA32Float.rawValue,
+        "BC1_RGBA": MTLPixelFormat.BC1_RGBA.rawValue,
+        "BC1_RGBA_sRGB": MTLPixelFormat.BC1_RGBA_sRGB.rawValue,
+        "BC2_RGBA": MTLPixelFormat.BC2_RGBA.rawValue,
+        "BC2_RGBA_sRGB": MTLPixelFormat.BC2_RGBA_sRGB.rawValue,
+        "BC3_RGBA": MTLPixelFormat.BC3_RGBA.rawValue,
+        "BC3_RGBA_sRGB": MTLPixelFormat.BC3_RGBA_sRGB.rawValue,
+        "BC4_RUnorm": MTLPixelFormat.BC4_RUnorm.rawValue,
+        "BC4_RSnorm": MTLPixelFormat.BC4_RSnorm.rawValue,
+        "BC5_RGUnorm": MTLPixelFormat.BC5_RGUnorm.rawValue,
+        "BC5_RGSnorm": MTLPixelFormat.BC5_RGSnorm.rawValue,
+        "BC6H_RGBFloat": MTLPixelFormat.BC6H_RGBFloat.rawValue,
+        "BC6H_RGBUfloat": MTLPixelFormat.BC6H_RGBUfloat.rawValue,
+        "BC7_RGBAUnorm": MTLPixelFormat.BC7_RGBAUnorm.rawValue,
+        "BC7_RGBAUnorm_sRGB": MTLPixelFormat.BC7_RGBAUnorm_sRGB.rawValue,
+        "GBGR422": MTLPixelFormat.GBGR422.rawValue,
+        "BGRG422": MTLPixelFormat.BGRG422.rawValue,
+        "Depth32Float": MTLPixelFormat.Depth32Float.rawValue,
+        "Stencil8": MTLPixelFormat.Stencil8.rawValue,
+        "Depth24Unorm_Stencil8": MTLPixelFormat.Depth24Unorm_Stencil8.rawValue,
+        "Depth32Float_Stencil8": MTLPixelFormat.Depth32Float_Stencil8.rawValue
+    ]
+    
+    // NOTE: values for an OptionSetType
+    static let mtlResourceOptions = [
+        "CPUModeDefaultCache": MTLResourceOptions.CPUCacheModeDefaultCache.rawValue,
+        "CPUCacheModeWriteCombined": MTLResourceOptions.CPUCacheModeWriteCombined.rawValue,
+        
+        "StorageModeShared": MTLResourceOptions.StorageModeShared.rawValue,
+        "StorageModeManaged": MTLResourceOptions.StorageModeManaged.rawValue,
+        "StorageModePrivate": MTLResourceOptions.StorageModePrivate.rawValue,
+        
+        // NOTE: Deprecated spellings
+        "OptionCPUCacheModeDefault": MTLResourceOptions.OptionCPUCacheModeDefault.rawValue,
+        "OptionCPUCacheModeWriteCombined": MTLResourceOptions.OptionCPUCacheModeWriteCombined.rawValue
+    ]
+    
+    // NOTE: values for an OptionSetType
+    static let mtlTextureUsage = [
+        "Unknown": MTLTextureUsage.Unknown.rawValue,
+        "ShaderRead": MTLTextureUsage.ShaderRead.rawValue,
+        "ShaderWrite": MTLTextureUsage.ShaderWrite.rawValue,
+        "RenderTarget": MTLTextureUsage.RenderTarget.rawValue,
+        "PixelFormatView": MTLTextureUsage.PixelFormatView.rawValue
     ]
     
 }

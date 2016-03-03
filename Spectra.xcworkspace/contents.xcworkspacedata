@@ -162,6 +162,9 @@
       <FileRef
          location = "group:/Users/dc/dev/apple/Spectra/SpectraAssets/SpectraEnums.xsd">
       </FileRef>
+      <FileRef
+         location = "group:MetalEnums.xsd">
+      </FileRef>
    </Group>
    <Group
       location = "container:SpectraTests"

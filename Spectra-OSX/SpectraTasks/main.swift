@@ -51,7 +51,7 @@ func simpleTypeForEnum(name: String, members: [String: UInt]) -> String {
     return xsSimpleType(name, content: content, mtlEnum: true)
 }
 
-let enumsForModelIO = [
+let enumsForModelIO: [String: [String: UInt]] = [
     "mdlVertexFormat": SpectraEnumDefs.mdlVertexFormat,
     "mdlMaterialSemantic": SpectraEnumDefs.mdlMaterialSemantic,
     "mdlMaterialPropertyType": SpectraEnumDefs.mdlMaterialPropertyType,
@@ -60,4 +60,31 @@ let enumsForModelIO = [
     "mdlMaterialMipMapFilterMode": SpectraEnumDefs.mdlMaterialMipMapFilterMode
 ]
 
+let enumsForMetal: [String: [String: UInt]] = [
+    "mtlVertexStepFunction": MetalEnumDefs.mtlVertexStepFunction,
+    "mtlCompareFunction": MetalEnumDefs.mtlCompareFunction,
+    "mtlStencilOperation": MetalEnumDefs.mtlStencilOperation,
+    "mtlVertexFormat": MetalEnumDefs.mtlVertexFormat,
+    "mtlBlendFactor": MetalEnumDefs.mtlBlendFactor,
+    "mtlBlendOperation": MetalEnumDefs.mtlBlendOperation,
+    "mtlLoadAction": MetalEnumDefs.mtlLoadAction,
+    "mtlStoreAction": MetalEnumDefs.mtlStoreAction,
+    "mtlMultisampleDepthResolveFilter": MetalEnumDefs.mtlMultisampleDepthResolveFilter,
+    "mtlSamplerMinMagFilter": MetalEnumDefs.mtlSamplerMinMagFilter,
+    "mtlSamplerMipFilter": MetalEnumDefs.mtlSamplerMipFilter,
+    "mtlSamplerAddressMode": MetalEnumDefs.mtlSamplerAddressMode,
+    "mtlTextureType": MetalEnumDefs.mtlTextureType,
+    "mtlCpuCacheMode": MetalEnumDefs.mtlCpuCacheMode,
+    "mtlStorageMode": MetalEnumDefs.mtlStorageMode,
+    "mtlPurgeableState": MetalEnumDefs.mtlPurgeableState,
+    "mtlPixelFormat": MetalEnumDefs.mtlPixelFormat,
+    "mtlResourceOptions": MetalEnumDefs.mtlResourceOptions,
+    "mtlTextureUsage": MetalEnumDefs.mtlTextureUsage
+]
+
 updateSpectraEnums(projectPath + "/../SpectraAssets/SpectraEnums.xsd", enums: enumsForModelIO)
+
+updateSpectraEnums(projectPath + "/../SpectraAssets/MetalEnums.xsd", enums: enumsForMetal)
+
+
+
