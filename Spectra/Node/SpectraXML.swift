@@ -11,6 +11,20 @@ import Fuzi
 import Swinject
 import ModelIO
 
+// PLZ NOTE: i promise I'm not pursuing this terrible XML parsing design for
+//   lack of an alternative design.  I'm trying to do two things: 
+// (1) avoid extending ModelIO & Metal base class (to add copy(), parseXML() and whatnot)
+// (2) and avoid mirroring the ModelIO & Metal object's api's - which already mirror each other to some degree!
+//   - simply mirroring the ModelIO & Metal api's by introducing new classes 
+//     where everything is mostly named the same just adds confusion 
+//   - although it makes it easier to add parseJSON(), parsePlist() & copy()
+//
+// that said, i'm sticking to this shit design because it's all probably going to change completely anyways,
+//   so why fret over minor changes when a major change would make them all irrelevant?
+//
+// I do wish I knew of a meta way to do this: 
+// - something like Ruby's obj.responds_to(:"foo=") && obj.send(":foo", "bar")
+
 public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement, key: String?, options: [String: Any]) -> AnyObject)
 
 public enum SpectraXMLNodeType: String {
