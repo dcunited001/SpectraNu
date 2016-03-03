@@ -673,7 +673,9 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
                 lens.applyToCamera(cam)
             } else {
                 let lens = SpectraXMLPhysicalLensNode().parse(container, elem: lensTag, options: options)
-                container.register(PhysicalLens.self, name: lensTag["key"]!) { _ in return lens }
+                if let lensKey = lensTag["key"] {
+                    container.register(PhysicalLens.self, name: lensKey) { _ in return lens }
+                }
                 lens.applyToCamera(cam)
             }
         }
@@ -685,7 +687,9 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
                 imagingSurface.applyToCamera(cam)
             } else {
                 let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: imagingTag, options: options)
-                container.register(PhysicalImagingSurface.self, name: imagingTag["key"]!) { _ in return imagingSurface }
+                if let imagingSurfaceKey = imagingTag["key"] {
+                    container.register(PhysicalImagingSurface.self, name: imagingTag["key"]!) { _ in return imagingSurface }
+                }
                 imagingSurface.applyToCamera(cam)
             }
         }
