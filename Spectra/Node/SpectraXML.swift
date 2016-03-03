@@ -666,7 +666,7 @@ public class PhysicalLens: NSObject, NSCopying {
 public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
     public typealias NodeType = PhysicalLens
     
-    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
         let lensParams = PhysicalLens()
         lensParams.parseXML(container, elem: elem, options: options)
         
@@ -694,7 +694,7 @@ public class PhysicalImagingSurface: NSObject, NSCopying {
     public static let exposure: vector_float3 = float3(1.0, 1.0, 1.0)
     public static let exposureCompression: vector_float2 = float2(1.0, 0.0)
     
-    public func parseXML(container: Container, elem: XMLElement, options: [String: Any]) {
+    public func parseXML(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
         if let sensorVerticalAperture = elem.attributes["sensor-vertical-aperture"] {
             self.sensorVerticalAperture = Float(sensorVerticalAperture)
         }
@@ -773,7 +773,7 @@ public class PhysicalImagingSurface: NSObject, NSCopying {
 public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
     public typealias NodeType = PhysicalImagingSurface
     
-    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
         let imagingSurface = PhysicalImagingSurface()
         imagingSurface.parseXML(container, elem: elem, options: options)
         
@@ -784,7 +784,7 @@ public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
 public class SpectraXMLCameraNode: SpectraXMLNode {
     public typealias NodeType = MDLCamera
     
-    public func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
         let cam = NodeType()
         
         // TODO: the following are required.  make them optional with defaults?
@@ -873,7 +873,7 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
 public class SpectraXMLStereoscopicCameraNode: SpectraXMLNode {
     public typealias NodeType = MDLStereoscopicCamera
     
-    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+    public func parse(container: Container, elem: XMLElement, options: [String : Any] = [:]) -> NodeType {
         let cam = SpectraXMLCameraNode().parse(container, elem: elem, options: options)
         let stereoCam = convertCameraToStereoscopic(cam)
         
