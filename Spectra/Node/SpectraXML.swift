@@ -17,6 +17,7 @@ public enum SpectraXMLNodeType: String {
     case World = "world"
     case Camera = "camera"
     case Transform = "transform"
+    case Object = "object"
     case Mesh = "mesh"
     case MeshGenerator = "mesh-generator"
     case PhysicalLensParams = "physical-lens"
@@ -343,11 +344,6 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
     }
 }
 
-// TODO: public class SpectraXMLWorldNode: SpectraXMLNode
-// TODO: public class SpectraXMLMeshNode: SpectraXMLNode
-// TODO: public class SpectraXMLMeshGeneratorNode: SpectraXMLNode
-// TODO: public class SpectraXMLObjectNode: SpectraXMLNode
-
 public class SpectraXMLTransformNode: SpectraXMLNode {
     public typealias NodeType = MDLTransform
     
@@ -395,6 +391,96 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
         return newTransform
     }
 }
+
+// TODO: public class SpectraXMLWorldNode: SpectraXMLNode
+// TODO: public class SpectraXMLMeshNode: SpectraXMLNode
+// TODO: public class SpectraXMLMeshGeneratorNode: SpectraXMLNode
+
+public class SpectraXMLObjectNode: SpectraXMLNode {
+    public typealias NodeType = MDLObject
+    
+    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+        var object = MDLObject()
+        
+        let transformSelector = SpectraXMLNodeType.Transform.rawValue
+        if let transformTag = elem.firstChild(tag: transformSelector) {
+            if let ref = transformTag.attributes["ref"] {
+                let transform = container.resolve(MDLTransform.self, name: ref)!
+                object.transform = transform
+            } else {
+                let transform = SpectraXMLTransformNode().parse(container, elem: transformTag, options: options)
+                if let transformKey = transformTag.attributes["key"] {
+                    container.register(MDLTransform.self, name: transformKey) { _ in return transform }
+                }
+                object.transform = transform
+            }
+        }
+        
+        // NOTE: nodes should be parsed in order (searching for each type won't work)
+        for (idx, el) in elem.children.enumerate() {
+            let objKey = el.attributes["key"]
+            let objRef = el.attributes["ref"]
+            
+            if let nodeType = SpectraXMLNodeType(rawValue: el.tag!) {
+                switch nodeType {
+                case .Object:
+                    if let ref = objRef {
+                        let obj = container.resolve(MDLObject.self, name: ref)!
+                        object.addChild(obj)
+                    } else {
+                        let obj = SpectraXMLObjectNode().parse(container, elem: el, options: options)
+                        if let key = objKey {
+                            container.register(MDLObject.self, name: key) { _ in return obj }
+                        }
+                        object.addChild(obj)
+                    }
+                    
+                    // set parent??
+                case .Camera:
+                    if let ref = objRef {
+                        let cam = container.resolve(MDLCamera.self, name: ref)!
+                        object.addChild(cam)
+                    } else {
+                        let cam = SpectraXMLCameraNode().parse(container, elem: el, options: options)
+                        if let key = objKey {
+                            container.register(MDLCamera.self, name: key) { _ in return cam }
+                        }
+                    }
+                    
+                case .StereoscopicCamera:
+                    if let ref = objRef {
+                        let cam = container.resolve(MDLStereoscopicCamera.self, name: ref)!
+                        object.addChild(cam)
+                    } else {
+                        let cam = SpectraXMLStereoscopicCameraNode().parse(container, elem: el, options: options)
+                        if let key = objKey {
+                            container.register(MDLStereoscopicCamera.self, name: key) { _ in return cam }
+                        }
+                    }
+                    
+                case .Light: break
+                case .Mesh: break
+                default: break
+                }
+
+            } else {
+                // parse other nodes (custom nodes, etc)
+            }
+        }
+        
+        return object
+    }
+    
+    public static func copy(object: NodeType) -> NodeType {
+        let cp = MDLObject()
+        
+        //TODO: implement copy
+        return cp
+    }
+}
+
+
+
 
 //============================================================
 // TODO: decide how to handle inheritance
