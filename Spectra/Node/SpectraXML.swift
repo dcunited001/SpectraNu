@@ -385,6 +385,46 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
 // TODO: public class SpectraXMLMeshGeneratorNode: SpectraXMLNode
 // TODO: public class SpectraXMLObjectNode: SpectraXMLNode
 
+public class SpectraXMLTransformNode: SpectraXMLNode {
+    public typealias NodeType = MDLTransform
+    
+    // TODO: time based translations?
+    // TODO: reference other MDLTransforms & Compose (via declaration in XML)
+    
+    public func parse(container: Container, elem: XMLElement, options: [String : Any]) -> NodeType {
+        var transform = MDLTransform()
+        
+        // N.B. scale first, then rotate, finally translate 
+        // - but how can a shear operation be composed into this?
+        
+        if let translation = elem.attributes["translation"] {
+            transform.translation = SpectraXMLSimd.parseFloat3(translation)
+        }
+        
+        if let rotation = elem.attributes["rotation"] {
+            transform.rotation = SpectraXMLSimd.parseFloat3(rotation)
+        } else if let rotationDeg = elem.attributes["rotation-deg"] {
+            let rotationDegrees = SpectraXMLSimd.parseFloat3(rotationDeg)
+            transform.rotation = Float(M_PI / 180.0) * SpectraXMLSimd.parseFloat3(rotationDeg)
+        }
+        
+        if let scale = elem.attributes["scale"] {
+            transform.scale = SpectraXMLSimd.parseFloat3(scale)
+        }
+        
+        if let shear = elem.attributes["shear"] {
+            transform.shear = SpectraXMLSimd.parseFloat3(shear)
+        }
+        
+        // TODO: does the MDLTransform calculate the transformation matrix?
+        // - or do i need to compose these values together
+        
+        print(transform.matrix)
+        
+        return transform
+    }
+}
+
 //============================================================
 // TODO: decide how to handle inheritance
 // - use separate node classes for each instance

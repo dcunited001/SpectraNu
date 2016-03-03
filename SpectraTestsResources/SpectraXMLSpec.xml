@@ -97,22 +97,13 @@
     <stereoscopic-camera key="stereo_cam1">
         <physical-lens ref="default"/>
     </stereoscopic-camera>
-
-    <perspective key="landscape" perspective-type="fov">
-        <perspective-arg name="fov" value="65.0" />
-        <perspective-arg name="angle" value="35.0" />
-        <perspective-arg name="aspect" value="1.0" />
-        <perspective-arg name="near" value="0.01" />
-        <perspective-arg name="far" value="100.0" />
-    </perspective>
     
-    <perspective key="portrait" perspective-type="fov">
-        <perspective-arg name="fov" value="65.0" />
-        <perspective-arg name="angle" value="50.0" />
-        <perspective-arg name="aspect" value="1.0" />
-        <perspective-arg name="near" value="0.01" />
-        <perspective-arg name="far" value="100.0" />
-    </perspective>
+    <transform key="xform_translate" translation="10.0 20.0 30.0" />
+    <transform key="xform_rotate" rotation="0.25 0.50 1.0" />
+    <transform key="xform_scale" scale="2.0 2.0 2.0" />
+    <transform key="xform_shear" shear="10.0 10.0 1.0" />
+    <transform key="xform_compose1" translation="5.0 5.0 100.0" rotation="0.5 0.5 1.0" scale="10.0 10.0 10.0" />
+    <transform key="xform_compose2" scale="10.0 10.0 10.0" shear="10.0 20.0 30.0" />
     
     <!-- register mesh generators -->
     <mesh-generator key="cubeGen" type="cube" />
