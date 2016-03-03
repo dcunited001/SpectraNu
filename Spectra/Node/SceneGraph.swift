@@ -35,20 +35,20 @@ public class SceneGraph {
     public var meshes: [String: Mesh] = [:]
     public var meshData: [String: MeshData] = [:]
     public var meshDataMap: [String: MeshDataMap] = [:]
-    public var meshGenerators: [String: MeshGenerator] = [:]
+//    public var meshGenerators: [String: MeshGenerator] = [:]
     
     private var viewMonads: [String: (() -> WorldView)] = [:] //final?
     private var cameraMonads: [String: (() -> Camable)] = [:] //final?
-    private var meshGeneratorMonads: [String: (([String: String]) -> MeshGenerator)] = [:]
+//    private var meshGeneratorMonads: [String: (([String: String]) -> MeshGenerator)] = [:]
     
     // resources
     // - buffers? (encodable data or buffer pools)
     // - inputs?
     // - textures?
     
-    public init() {
-        setDefaultMeshGeneratorMonads()
-    }
+//    public init() {
+//        setDefaultMeshGeneratorMonads()
+//    }
     
     public init(container: Container) {
         //TODO: init with Container(parent: container) to share resources
@@ -96,15 +96,15 @@ public class SceneGraph {
         return cameraMonads[key]
     }
     
-    public func registerMeshGeneratorMonad(key: String, monad: (([String: String]) -> MeshGenerator)) {
-        meshGeneratorMonads[key] = monad
-    }
+//    public func registerMeshGeneratorMonad(key: String, monad: (([String: String]) -> MeshGenerator)) {
+//        meshGeneratorMonads[key] = monad
+//    }
     
-    public func getMeshGeneratorMonad(key: String) -> (([String: String]) -> MeshGenerator)? {
-        return meshGeneratorMonads[key]
-    }
+//    public func getMeshGeneratorMonad(key: String) -> (([String: String]) -> MeshGenerator)? {
+//        return meshGeneratorMonads[key]
+//    }
     
-    private func setDefaultMeshGeneratorMonads() {
+//    private func setDefaultMeshGeneratorMonads() {
 //        registerMeshGeneratorMonad("basic_triangle") { (args) in
 //            return BasicTriangleGenerator(args: args)
 //        }
@@ -120,5 +120,5 @@ public class SceneGraph {
 //        registerMeshGeneratorMonad("octahedron") { (args) in
 //            return OctahedronGenerator(args: args)
 //        }
-    }
+//    }
 }

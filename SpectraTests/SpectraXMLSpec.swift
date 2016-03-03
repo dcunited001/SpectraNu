@@ -232,7 +232,7 @@ class SpectraXMLSpec: QuickSpec {
             it("can create nested objects") {
                 let xform: MDLTransform = self.containerGet(assetContainer, key: "xform_translate")!
                 let cam: MDLCamera = self.containerGet(assetContainer, key: "default")!
-                let stereoCam: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "default")
+                let stereoCam: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "default")!
                 
                 expect(scene1.children)
             }
