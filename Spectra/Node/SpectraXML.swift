@@ -273,6 +273,32 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
     }
 }
 
+public struct VertexAttributeNode {
+    var name: String?
+    var format: String?
+    var offset: Int?
+    var bufferIndex: Int?
+    
+    
+    public init() { }
+    
+    public func parseXML(container: Container, elem: XMLElement, options: [String: Any]) {
+        
+    }
+    
+//    public func parseJSON(container: Container, elem: JSON, options: [String: Any]) { }
+//    public func parsePList(container: Container, elem: JSON, options: [String: Any]) { }
+    
+    public func toModelIO() -> MDLVertexAttribute {
+        return MDLVertexAttribute()
+    }
+    
+    public func toMetal() -> MTLVertexAttributeDescriptor {
+        return MTLVertexAttributeDescriptor()
+    }
+    
+}
+
 public class SpectraXMLVertexAttributeNode: SpectraXMLNode {
     public typealias NodeType = MDLVertexAttribute
     
