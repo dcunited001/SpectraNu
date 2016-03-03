@@ -481,20 +481,18 @@ public class SpectraPhysicalLensParams: NSObject, NSCopying {
     }
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        let newLens = SpectraPhysicalLensParams()
-        
-        newLens.worldToMetersConversionScale = self.worldToMetersConversionScale
-        newLens.barrelDistortion = self.barrelDistortion
-        newLens.fisheyeDistortion = self.fisheyeDistortion
-        newLens.opticalVignetting = self.opticalVignetting
-        newLens.chromaticAberration = self.chromaticAberration
-        newLens.focalLength = self.focalLength
-        newLens.fStop = self.fStop
-        newLens.apertureBladeCount = self.apertureBladeCount
-        newLens.maximumCircleOfConfusion = self.maximumCircleOfConfusion
-        newLens.focusDistance = self.focusDistance
-        
-        return newLens
+        let cp = SpectraPhysicalLensParams()
+        cp.worldToMetersConversionScale = self.worldToMetersConversionScale
+        cp.barrelDistortion = self.barrelDistortion
+        cp.fisheyeDistortion = self.fisheyeDistortion
+        cp.opticalVignetting = self.opticalVignetting
+        cp.chromaticAberration = self.chromaticAberration
+        cp.focalLength = self.focalLength
+        cp.fStop = self.fStop
+        cp.apertureBladeCount = self.apertureBladeCount
+        cp.maximumCircleOfConfusion = self.maximumCircleOfConfusion
+        cp.focusDistance = self.focusDistance
+        return cp
     }
 }
 
@@ -601,18 +599,16 @@ public class SpectraPhysicalImagingSurfaceParams: NSObject, NSCopying {
     }
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        let newSurface = SpectraPhysicalImagingSurfaceParams()
+        let cp = SpectraPhysicalImagingSurfaceParams()
+        cp.sensorVerticalAperture = self.sensorVerticalAperture
+        cp.sensorAspect = self.sensorAspect
+        cp.sensorEnlargement = self.sensorEnlargement
+        cp.sensorShift = self.sensorShift
+        cp.flash = self.flash
+        cp.exposure = self.exposure
+        cp.exposureCompression = self.exposureCompression
         
-        // physical imaging surface
-        newSurface.sensorVerticalAperture = self.sensorVerticalAperture
-        newSurface.sensorAspect = self.sensorAspect
-        newSurface.sensorEnlargement = self.sensorEnlargement
-        newSurface.sensorShift = self.sensorShift
-        newSurface.flash = self.flash
-        newSurface.exposure = self.exposure
-        newSurface.exposureCompression = self.exposureCompression
-        
-        return newSurface
+        return cp
     }
 }
 
