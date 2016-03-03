@@ -23,27 +23,6 @@ class SpectraXMLSpec: QuickSpec {
         return container.resolve(T.self, name: key)
     }
     
-    // i know there's some way to do this with generic functions
-    //TODO: add to spec helper file?
-    func compareFloat2(a: float2, with b: float2) -> Bool {
-        return (a.x == b.x) && (a.y == b.y)
-    }
-    func compareFloat3(a: float3, with b: float3) -> Bool {
-        return ((a.x == b.x) && (a.y == b.y) && (a.z == b.z))
-    }
-    func compareFloat4(a: float4, with b: float4) -> Bool {
-        return (a.x == b.x) && (a.y == b.y) && (a.z == b.z) && (a.w == b.w)
-    }
-    func compareInt2(a: int2, with b: int2) -> Bool {
-        return (a.x == b.x) && (a.y == b.y)
-    }
-    func compareInt3(a: int3, with b: int3) -> Bool {
-        return ((a.x == b.x) && (a.y == b.y) && (a.z == b.z))
-    }
-    func compareInt4(a: int4, with b: int4) -> Bool {
-        return (a.x == b.x) && (a.y == b.y) && (a.z == b.z) && (a.w == b.w)
-    }
-    
     override func spec() {
         let parser = Container()
         
@@ -159,10 +138,10 @@ class SpectraXMLSpec: QuickSpec {
             it("parses translation/rotation/scale/shear") {
                 //TODO: rotation with degrees
                 
-                expect(self.compareFloat3(xformTranslate.translation, with: float3(10.0, 20.0, 30.0))).to(beTrue())
-                expect(self.compareFloat3(xformRotate.rotation, with: float3(0.25, 0.50, 1.0))).to(beTrue())
-                expect(self.compareFloat3(xformScale.scale, with: float3(2.0, 2.0, 2.0))).to(beTrue())
-                expect(self.compareFloat3(xformShear.shear, with: float3(10.0, 10.0, 1.0))).to(beTrue())
+                expect(SpectraSimd.compareFloat3(xformTranslate.translation, with: float3(10.0, 20.0, 30.0))).to(beTrue())
+                expect(SpectraSimd.compareFloat3(xformRotate.rotation, with: float3(0.25, 0.50, 1.0))).to(beTrue())
+                expect(SpectraSimd.compareFloat3(xformScale.scale, with: float3(2.0, 2.0, 2.0))).to(beTrue())
+                expect(SpectraSimd.compareFloat3(xformShear.shear, with: float3(10.0, 10.0, 1.0))).to(beTrue())
                 
             }
             
@@ -228,8 +207,8 @@ class SpectraXMLSpec: QuickSpec {
                     
                     let expectedFlash = float3([0.1, 0.1, 0.1])
                     let expectedExposure = float3([1.5, 1.5, 1.5])
-                    expect(self.compareFloat3(physImg2.flash!, with: float3([0.1, 0.1, 0.1]))).to(beTrue())
-                    expect(self.compareFloat3(physImg2.exposure!, with: float3([1.5, 1.5, 1.5]))).to(beTrue())                }
+                    expect(SpectraSimd.compareFloat3(physImg2.flash!, with: float3([0.1, 0.1, 0.1]))).to(beTrue())
+                    expect(SpectraSimd.compareFloat3(physImg2.exposure!, with: float3([1.5, 1.5, 1.5]))).to(beTrue())                }
             }
             
             describe("camera") {

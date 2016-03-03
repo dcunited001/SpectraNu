@@ -287,6 +287,30 @@ public class SpectraSimd {
     public static func parseInt4(str: String) -> int4 {
         return int4(parseInt32s(str))
     }
+    
+    public static func compareFloat2(a: float2, with b: float2) -> Bool {
+        return (a.x == b.x) && (a.y == b.y)
+    }
+    
+    public static func compareFloat3(a: float3, with b: float3) -> Bool {
+        return ((a.x == b.x) && (a.y == b.y) && (a.z == b.z))
+    }
+    
+    public static func compareFloat4(a: float4, with b: float4) -> Bool {
+        return (a.x == b.x) && (a.y == b.y) && (a.z == b.z) && (a.w == b.w)
+    }
+    
+    public static func compareInt2(a: int2, with b: int2) -> Bool {
+        return (a.x == b.x) && (a.y == b.y)
+    }
+    
+    public static func compareInt3(a: int3, with b: int3) -> Bool {
+        return ((a.x == b.x) && (a.y == b.y) && (a.z == b.z))
+    }
+    
+    public static func compareInt4(a: int4, with b: int4) -> Bool {
+        return (a.x == b.x) && (a.y == b.y) && (a.z == b.z) && (a.w == b.w)
+    }
 }
 
 public protocol SpectraXMLNode {
