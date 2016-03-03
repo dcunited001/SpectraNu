@@ -294,7 +294,7 @@ public class SpectraXMLVertexAttributeNode: SpectraXMLNode {
         if let offset = elem.attributes["offset"] {
             vertexAttr.offset = Int(offset)!
         }
-        if let bufferIndex = elem.attributes["bufferIndex"] {
+        if let bufferIndex = elem.attributes["buffer-index"] {
             vertexAttr.bufferIndex = Int(bufferIndex)!
         }
         if let initializationValue = elem.attributes["initialization-value"] {
@@ -328,17 +328,11 @@ public class SpectraXMLVertexDescriptorNode: SpectraXMLNode {
                 vertexDesc.addOrReplaceAttribute(vertexAttr)
             }
         }
-        
-        // TODO: possibly split this into "packed-stride" and "packed-offset"
-        // TODO: decide whether more complicated, nested layouts should be allowed
-        if let packedLayout = elem.attributes["packed-layout"] where NSString(string: packedLayout).boolValue {
-            vertexDesc.setPackedOffsets()
-            vertexDesc.setPackedStrides()
-        } else {
-            // ensure that buffer indices are set
-            // - and all buffer offsets are zero'd
-            // -
-        }
+
+        // this automatically sets the offset correctly, 
+        // - but attributes must be assigned and configured by this point
+        vertexDesc.setPackedOffsets()
+        vertexDesc.setPackedStrides()
         
         return vertexDesc
     }

@@ -128,12 +128,65 @@ class SpectraXMLSpec: QuickSpec {
                 expect(vertDescPosRgb.attributes[1].name) == "color"
             }
             
-            it("can parse with packed-layout to create array-of-struct indexing") {
+            it("can parse a descriptor with a packed array-of-struct indexing") {
+                let packedDesc: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vertdesc_packed")!
+                let pos = packedDesc.attributeNamed("position")!
+                let tex = packedDesc.attributeNamed("textureCoordinate")!
+                let aniso = packedDesc.attributeNamed("anisotropy")!
                 
+                expect(pos.format) == MDLVertexFormat.Float4
+                expect(tex.format) == MDLVertexFormat.Float2
+                expect(aniso.format) == MDLVertexFormat.Float4
+                
+                expect(pos.offset) == 0
+                expect(tex.offset) == 16
+                expect(aniso.offset) == 24
+                
+                expect(pos.bufferIndex) == 0
+                expect(tex.bufferIndex) == 0
+                expect(aniso.bufferIndex) == 0
             }
             
-            it("can parse without packed-layout to create struct-of-array indexing") {
+            it("can parse a descriptor with an unpacked struct-of-array indexing (each attribute has a buffer)") {
+                let packedDesc: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vertdesc_unpacked")!
+                let pos = packedDesc.attributeNamed("position")!
+                let tex = packedDesc.attributeNamed("textureCoordinate")!
+                let aniso = packedDesc.attributeNamed("anisotropy")!
                 
+                expect(pos.format) == MDLVertexFormat.Float4
+                expect(tex.format) == MDLVertexFormat.Float2
+                expect(aniso.format) == MDLVertexFormat.Float4
+                
+                expect(pos.offset) == 0
+                expect(tex.offset) == 0
+                expect(aniso.offset) == 0
+                
+                expect(pos.bufferIndex) == 0
+                expect(tex.bufferIndex) == 1
+                expect(aniso.bufferIndex) == 2
+            }
+            
+            it("can parse a more complex layout") {
+                let packedDesc: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vertdesc_complex")!
+                let pos = packedDesc.attributeNamed("position")!
+                let tex = packedDesc.attributeNamed("textureCoordinate")!
+                let aniso = packedDesc.attributeNamed("anisotropy")!
+                let rgb = packedDesc.attributeNamed("color")!
+                
+                expect(pos.format) == MDLVertexFormat.Float4
+                expect(tex.format) == MDLVertexFormat.Float2
+                expect(aniso.format) == MDLVertexFormat.Float4
+                expect(rgb.format) == MDLVertexFormat.Float4
+                
+                expect(pos.offset) == 0
+                expect(tex.offset) == 0
+                expect(aniso.offset) == 8
+                expect(rgb.offset) == 0
+                
+                expect(pos.bufferIndex) == 0
+                expect(tex.bufferIndex) == 1
+                expect(aniso.bufferIndex) == 1
+                expect(rgb.bufferIndex) == 2
             }
         }
         
@@ -156,12 +209,10 @@ class SpectraXMLSpec: QuickSpec {
             
             it("parses translation/rotation/scale/shear") {
                 //TODO: rotation with degrees
-                
                 expect(SpectraSimd.compareFloat3(xformTranslate.translation, with: float3(10.0, 20.0, 30.0))).to(beTrue())
                 expect(SpectraSimd.compareFloat3(xformRotate.rotation, with: float3(0.25, 0.50, 1.0))).to(beTrue())
                 expect(SpectraSimd.compareFloat3(xformScale.scale, with: float3(2.0, 2.0, 2.0))).to(beTrue())
                 expect(SpectraSimd.compareFloat3(xformShear.shear, with: float3(10.0, 10.0, 1.0))).to(beTrue())
-                
             }
             
             it("correctly composes multiple operations") {

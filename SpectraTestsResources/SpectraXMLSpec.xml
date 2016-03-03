@@ -41,11 +41,23 @@
         <vertex-attribute name="color" format="Int4"/>
     </vertex-descriptor>
     
-    <vertex-descriptor key="vertdesc_packed">
-        
+    <vertex-descriptor key="vertdesc_packed" packed-layout="true">
+        <vertex-attribute ref="pos_float4"/>
+        <vertex-attribute ref="tex_float2"/>
+        <vertex-attribute ref="aniso_float4"/>
     </vertex-descriptor>
+    
     <vertex-descriptor key="vertdesc_unpacked">
-        
+        <vertex-attribute name="position" format="Float4" buffer-index="0" />
+        <vertex-attribute name="textureCoordinate" format="Float2" buffer-index="1" />
+        <vertex-attribute name="anisotropy" format="Float4"  buffer-index="2" />
+    </vertex-descriptor>
+    
+    <vertex-descriptor key="vertdesc_complex">
+        <vertex-attribute name="position" format="Float4" buffer-index="0" />
+        <vertex-attribute name="textureCoordinate" format="Float2" buffer-index="1" />
+        <vertex-attribute name="anisotropy" format="Float4" buffer-index="1" />
+        <vertex-attribute name="color" format="Float4" buffer-index="2" />
     </vertex-descriptor>
     
     <!-- can create either array-of-struct or struct-of-arrays -->
