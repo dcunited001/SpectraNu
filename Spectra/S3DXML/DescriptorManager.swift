@@ -87,7 +87,7 @@ public class DescriptorManager {
         self.container.register(MTLLibrary.self, name: "default") { _ in return library }.inObjectScope(.Container)
         
         // just parsing enum types from XSD for now
-        let xmlData = S3DXSD.readXSD("Spectra3D")
+        let xmlData = S3DXSD.readXSD("MetalEnums")
         xsd = S3DXSD(data: xmlData)
         xsd.parseEnumTypes(container)
     }

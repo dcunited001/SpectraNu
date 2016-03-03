@@ -30,6 +30,7 @@
 		4338B8FE1C18FBB5007D3DF6 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4353A2A61C0A3E1200E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A41C0A3E1200E5FC52 /* Nimble.framework */; };
 		4353A2A71C0A3E1200E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A51C0A3E1200E5FC52 /* Quick.framework */; };
+		43719B331C8808F900C14D56 /* MetalEnums.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 43719B321C8808F900C14D56 /* MetalEnums.xsd */; };
 		4371E8731C190543001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A41C0A3E1200E5FC52 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E8741C190543001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A51C0A3E1200E5FC52 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E89B1C190952001D1C39 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */; };
@@ -187,6 +188,7 @@
 		4338B8DC1C18DC92007D3DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4353A2A41C0A3E1200E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A51C0A3E1200E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		43719B321C8808F900C14D56 /* MetalEnums.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MetalEnums.xsd; path = ../../SpectraAssets/MetalEnums.xsd; sourceTree = "<group>"; };
 		43D4FDCB1C7B745F004E2CF7 /* SpectraEnums.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = SpectraEnums.xsd; path = /Users/dc/dev/apple/Spectra/SpectraAssets/SpectraEnums.xsd; sourceTree = "<absolute>"; };
 		43D4FDD11C7C3E9D004E2CF7 /* SpectraXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectraXMLSpec.swift; sourceTree = "<group>"; };
 		43D4FDD51C7C5044004E2CF7 /* SpectraXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectraXML.swift; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 			children = (
 				4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */,
 				43D4FDCB1C7B745F004E2CF7 /* SpectraEnums.xsd */,
+				43719B321C8808F900C14D56 /* MetalEnums.xsd */,
 				431735C01C0CD9FF00681C8E /* Spectra */,
 				43EAF8351C0A2FF500EA2B30 /* Spectra-iOS.h */,
 				43EAF8371C0A2FF500EA2B30 /* Info.plist */,
@@ -581,6 +584,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4334D68E1C1F6EF600D2DCA6 /* Spectra3D.xsd in Resources */,
+				43719B331C8808F900C14D56 /* MetalEnums.xsd in Resources */,
 				43D4FDCC1C7B745F004E2CF7 /* SpectraEnums.xsd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
