@@ -148,6 +148,29 @@ class SpectraXMLSpec: QuickSpec {
             }
         }
         
+        describe("transform") {
+            let xformTranslate: MDLTransform = self.containerGet(assetContainer, key: "xform_translate")!
+            let xformRotate: MDLTransform = self.containerGet(assetContainer, key: "xform_rotate")!
+            let xformScale: MDLTransform = self.containerGet(assetContainer, key: "xform_scale")!
+            let xformShear: MDLTransform = self.containerGet(assetContainer, key: "xform_shear")!
+            let xformCompose1: MDLTransform = self.containerGet(assetContainer, key: "xform_compose1")!
+            let xformCompose2: MDLTransform = self.containerGet(assetContainer, key: "xform_compose2")!
+            
+            it("parses translation/rotation/scale/shear") {
+                //TODO: rotation with degrees
+                
+                expect(self.compareFloat3(xformTranslate.translation, with: float3(10.0, 20.0, 30.0))).to(beTrue())
+                expect(self.compareFloat3(xformRotate.rotation, with: float3(0.25, 0.50, 1.0))).to(beTrue())
+                expect(self.compareFloat3(xformScale.scale, with: float3(2.0, 2.0, 2.0))).to(beTrue())
+                expect(self.compareFloat3(xformShear.shear, with: float3(10.0, 10.0, 1.0))).to(beTrue())
+                
+            }
+            
+            it("correctly composes multiple operations") {
+                // check that translate/rotate/scale/shear is calculated correctly when composed
+            }
+        }
+        
         describe("mesh") {
             //TODO: doc mesh attributes
         }

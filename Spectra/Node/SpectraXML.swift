@@ -16,6 +16,7 @@ public typealias SpectraXMLNodeParser = ((container: Container, node: XMLElement
 public enum SpectraXMLNodeType: String {
     case World = "world"
     case Camera = "camera"
+    case Transform = "transform"
     case Mesh = "mesh"
     case MeshGenerator = "mesh-generator"
     case PhysicalLensParams = "physical-lens"
@@ -213,11 +214,11 @@ public class SpectraXML {
                     container.register(SpectraPhysicalImagingSurfaceParams.self, name: key!) { _ in
                         return (imagingSurface.copy() as! SpectraPhysicalImagingSurfaceParams)
                         }.inObjectScope(.None)
-                    //                case .Camera:
-                    //                    let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
-                    //                    container.register(MDLCamera.self, name: key!) { _ in
-                    //                        return camera
-                    //                        }.inObjectScope(.None)
+                case .Transform:
+                    let transform = SpectraXMLTransformNode().parse(container, elem: child, options: options)
+                    container.register(MDLTransform.self, name: key!) { _ in
+                        return SpectraXMLTransformNode.copy(transform)
+                    }
                 default: break
                 }
                 
@@ -428,9 +429,18 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
         // TODO: does the MDLTransform calculate the transformation matrix?
         // - or do i need to compose these values together
         
-        print(transform.matrix)
-        
         return transform
+    }
+    
+    public static func copy(object: NodeType) -> NodeType {
+        let newTransform = MDLTransform()
+    
+        newTransform.translation = object.translation
+        newTransform.rotation = object.rotation
+        newTransform.scale = object.scale
+        newTransform.shear = object.shear
+    
+        return newTransform
     }
 }
 
