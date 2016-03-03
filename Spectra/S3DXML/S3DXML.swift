@@ -319,7 +319,7 @@ public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
                 // also, register the descriptor, if named (not thread friendly)
                 if (frontFaceTag.attributes["key"] != nil) {
                     container.register(MTLStencilDescriptor.self, name: frontFaceTag.attributes["key"]!) { _ in
-                        return frontFaceStencil
+                        return frontFaceStencil.copy() as! MTLStencilDescriptor
                         }.inObjectScope(.Container)
                 }
             }
@@ -335,7 +335,7 @@ public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
                 // also, register the descriptor, if named (not thread friendly)
                 if (backFaceTag.attributes["key"] != nil) {
                     container.register(MTLStencilDescriptor.self, name: backFaceTag.attributes["key"]!) { _ in
-                        return backFaceStencil
+                        return backFaceStencil.copy() as! MTLStencilDescriptor
                     }.inObjectScope(.Container)
                 }
             }
@@ -444,7 +444,7 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
                 
                 if (vertexDescTag.attributes["key"] != nil) {
                     container.register(MTLVertexDescriptor.self, name: vertexDescTag.attributes["key"]!) { _ in
-                        return vertexDesc
+                        return vertexDesc.copy() as! MTLVertexDescriptor
                         }.inObjectScope(.Container)
                 }
             }
@@ -460,7 +460,7 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
                 
                 if (el.attributes["key"] != nil) {
                     container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: el.attributes["key"]!) { _ in
-                        return colorAttachDesc
+                        return colorAttachDesc.copy() as! MTLRenderPipelineColorAttachmentDescriptor
                         }.inObjectScope(.Container)
                 }
             }
@@ -727,7 +727,7 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
                 
                 if (el.attributes["key"] != nil) {
                     container.register(MTLRenderPassColorAttachmentDescriptor.self, name: el.attributes["key"]!) { _ in
-                        return colorAttach
+                        return colorAttach.copy() as! MTLRenderPassColorAttachmentDescriptor
                         }.inObjectScope(.Container)
                 }
             }
@@ -742,7 +742,7 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
                 
                 if (depthAttachTag.attributes["key"] != nil) {
                     container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: depthAttachTag.attributes["key"]!) { _ in
-                        return depthAttach
+                        return depthAttach.copy() as! MTLRenderPassDepthAttachmentDescriptor
                         }.inObjectScope(.Container)
                 }
             }
@@ -757,7 +757,7 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
                 
                 if (stencilAttachTag.attributes["key"] != nil) {
                     container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: stencilAttachTag.attributes["key"]!) { _ in
-                        return stencilAttach
+                        return stencilAttach.copy() as! MTLRenderPassStencilAttachmentDescriptor
                         }.inObjectScope(.Container)
                 }
             }
