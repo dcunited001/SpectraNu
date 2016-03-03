@@ -143,3 +143,6 @@ i think one thing i lose with MDLMesh and MDLSubmesh is the ability to do MeshCa
 
 [Finite State Automata (FSA) Algorithm](http://www.ltg.ed.ac.uk/~ht/XML_Europe_2003.html)
 
+### Other Metal & Model I/O Resources
+
+[Birdbrain](https://github.com/jordenhill/birdbrain)
