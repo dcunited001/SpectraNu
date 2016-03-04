@@ -90,6 +90,7 @@
         <physical-imaging-surface ref="phys_img1"/>
     </camera>
     
+    <transform key="xform_camera" translation="10.0 100.0 -10.0" />
     <camera key="cam4" lookAt="10.0 10.0 100.0">
         
     </camera>
@@ -116,8 +117,8 @@
     <mesh-generator key="quadGen" type="quad" />
     <mesh-generator key="tesselationGen" type="triangular_quad_tesselation_gen">
         <mesh-generator-args>
-            <mesh-generator-arg type="string" name="rowCount" value="100" />
-            <mesh-generator-arg type="string" name="colCount" value="100" />
+            <mesh-generator-arg type="String" name="rowCount" value="100" />
+            <mesh-generator-arg type="String" name="colCount" value="100" />
         </mesh-generator-args>
     </mesh-generator>
     
@@ -131,7 +132,7 @@
     <!-- create mesh using generator requiring generate-args -->
     <mesh key="tesselatedQuadRef" mesh-generator="tesselationGen">
         <generate-args>
-            <generate-arg type="string" name="meshRef" value="quadMesh" />
+            <generate-arg type="String" name="meshRef" value="quadMesh" />
         </generate-args>
     </mesh>
     
