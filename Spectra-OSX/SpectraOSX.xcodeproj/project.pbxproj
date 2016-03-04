@@ -31,10 +31,12 @@
 		4338B8C81C18CE48007D3DF6 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7B91C16348A007D3DF6 /* Fuzi.framework */; };
 		4353A2AE1C0A44BE00E5FC52 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; };
 		4353A2AF1C0A44BE00E5FC52 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; };
+		4359545C1C895544000B3811 /* pencil.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4359545B1C895544000B3811 /* pencil.obj */; };
 		436C7A801C728A0F005AE204 /* Swinject.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 43F6BDBC1C6FBCB900866FB1 /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		436C7A811C728A1E005AE204 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7BF1C163C10007D3DF6 /* Metal.framework */; };
 		436C7A821C728A1E005AE204 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4338B7C01C163C10007D3DF6 /* MetalKit.framework */; };
 		43719B351C88090700C14D56 /* MetalEnums.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 43719B341C88090700C14D56 /* MetalEnums.xsd */; };
+		43719B391C88FEF700C14D56 /* ArchimedeanSolids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43719B381C88FEF700C14D56 /* ArchimedeanSolids.swift */; };
 		4371E8761C190570001D1C39 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E8771C190570001D1C39 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4353A2A11C0A3DFF00E5FC52 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4371E87B1C190921001D1C39 /* BufferPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8581C18B3AF007D3DF6 /* BufferPool.swift */; };
@@ -49,7 +51,6 @@
 		4371E8841C190921001D1C39 /* Transform3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8611C18B3AF007D3DF6 /* Transform3D.swift */; };
 		4371E8851C190921001D1C39 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8621C18B3AF007D3DF6 /* View.swift */; };
 		4371E8861C190928001D1C39 /* BasicTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8511C18B3AF007D3DF6 /* BasicTriangle.swift */; };
-		4371E8871C190928001D1C39 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8521C18B3AF007D3DF6 /* Cube.swift */; };
 		4371E8881C190928001D1C39 /* MeshGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8531C18B3AF007D3DF6 /* MeshGenerator.swift */; };
 		4371E8891C190928001D1C39 /* PlatonicSolids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8541C18B3AF007D3DF6 /* PlatonicSolids.swift */; };
 		4371E88A1C190928001D1C39 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8551C18B3AF007D3DF6 /* Quad.swift */; };
@@ -175,7 +176,6 @@
 		4338B84E1C18B3AF007D3DF6 /* Vertexable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertexable.swift; sourceTree = "<group>"; };
 		4338B84F1C18B3AF007D3DF6 /* WorldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldView.swift; sourceTree = "<group>"; };
 		4338B8511C18B3AF007D3DF6 /* BasicTriangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTriangle.swift; sourceTree = "<group>"; };
-		4338B8521C18B3AF007D3DF6 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 		4338B8531C18B3AF007D3DF6 /* MeshGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeshGenerator.swift; sourceTree = "<group>"; };
 		4338B8541C18B3AF007D3DF6 /* PlatonicSolids.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatonicSolids.swift; sourceTree = "<group>"; };
 		4338B8551C18B3AF007D3DF6 /* Quad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
@@ -200,7 +200,9 @@
 		4338B8B31C18C278007D3DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4353A2A01C0A3DFF00E5FC52 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
 		4353A2A11C0A3DFF00E5FC52 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
+		4359545B1C895544000B3811 /* pencil.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pencil.obj; path = ../../SpectraTestsResources/pencil.obj; sourceTree = "<group>"; };
 		43719B341C88090700C14D56 /* MetalEnums.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MetalEnums.xsd; path = ../../SpectraAssets/MetalEnums.xsd; sourceTree = "<group>"; };
+		43719B381C88FEF700C14D56 /* ArchimedeanSolids.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchimedeanSolids.swift; sourceTree = "<group>"; };
 		43D4FDB51C7B393E004E2CF7 /* SpectraTasks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpectraTasks; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D4FDB71C7B393E004E2CF7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		43D4FDC51C7B511B004E2CF7 /* SpectraEnumDefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectraEnumDefs.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 		4338B7CF1C18B130007D3DF6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4359545B1C895544000B3811 /* pencil.obj */,
 				4338B7D01C18B140007D3DF6 /* S3DXMLTest.xml */,
 				4338B7D11C18B140007D3DF6 /* SpectraXMLSpec.xml */,
 			);
@@ -372,8 +375,8 @@
 		4338B8571C18B3AF007D3DF6 /* MeshGenerators */ = {
 			isa = PBXGroup;
 			children = (
+				43719B381C88FEF700C14D56 /* ArchimedeanSolids.swift */,
 				4338B8511C18B3AF007D3DF6 /* BasicTriangle.swift */,
-				4338B8521C18B3AF007D3DF6 /* Cube.swift */,
 				4338B8531C18B3AF007D3DF6 /* MeshGenerator.swift */,
 				4338B8541C18B3AF007D3DF6 /* PlatonicSolids.swift */,
 				4338B8551C18B3AF007D3DF6 /* Quad.swift */,
@@ -643,6 +646,7 @@
 			files = (
 				4334D68D1C1F6EE300D2DCA6 /* Spectra3D.xsd in Resources */,
 				43719B351C88090700C14D56 /* MetalEnums.xsd in Resources */,
+				4359545C1C895544000B3811 /* pencil.obj in Resources */,
 				43D4FDCE1C7B7475004E2CF7 /* SpectraEnums.xsd in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,6 +699,7 @@
 				4371E8951C19092F001D1C39 /* WorldView.swift in Sources */,
 				4371E88A1C190928001D1C39 /* Quad.swift in Sources */,
 				4371E8971C190934001D1C39 /* S3DXML.swift in Sources */,
+				43719B391C88FEF700C14D56 /* ArchimedeanSolids.swift in Sources */,
 				4371E8831C190921001D1C39 /* Scene.swift in Sources */,
 				4371E87F1C190921001D1C39 /* PipelineGenerator.swift in Sources */,
 				4371E89A1C190934001D1C39 /* StateManager.swift in Sources */,
@@ -711,7 +716,6 @@
 				4371E88D1C19092F001D1C39 /* Mesh.swift in Sources */,
 				4371E87E1C190921001D1C39 /* InflightResourceManager.swift in Sources */,
 				4371E8981C190934001D1C39 /* S3DXSD.swift in Sources */,
-				4371E8871C190928001D1C39 /* Cube.swift in Sources */,
 				4371E8881C190928001D1C39 /* MeshGenerator.swift in Sources */,
 				4371E8931C19092F001D1C39 /* Uniformable.swift in Sources */,
 				4371E87B1C190921001D1C39 /* BufferPool.swift in Sources */,

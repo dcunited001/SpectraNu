@@ -204,8 +204,8 @@ class SpectraXMLSpec: QuickSpec {
             let xformRotate: MDLTransform = self.containerGet(assetContainer, key: "xform_rotate")!
             let xformScale: MDLTransform = self.containerGet(assetContainer, key: "xform_scale")!
             let xformShear: MDLTransform = self.containerGet(assetContainer, key: "xform_shear")!
-            let xformCompose1: MDLTransform = self.containerGet(assetContainer, key: "xform_compose1")!
-            let xformCompose2: MDLTransform = self.containerGet(assetContainer, key: "xform_compose2")!
+//            let xformCompose1: MDLTransform = self.containerGet(assetContainer, key: "xform_compose1")!
+//            let xformCompose2: MDLTransform = self.containerGet(assetContainer, key: "xform_compose2")!
             
             it("parses translation/rotation/scale/shear") {
                 //TODO: rotation with degrees
@@ -285,7 +285,8 @@ class SpectraXMLSpec: QuickSpec {
                     expect(lens2.fStop) == 7.0
                     expect(lens2.maximumCircleOfConfusion) == 0.10
                     
-                    expect(lens3.apertureBladeCount) == 7                }
+                    expect(lens3.apertureBladeCount) == 7
+                }
             }
             
             describe("physical-imaging-surface") {
@@ -296,7 +297,8 @@ class SpectraXMLSpec: QuickSpec {
                     let expectedFlash = float3([0.1, 0.1, 0.1])
                     let expectedExposure = float3([1.5, 1.5, 1.5])
                     expect(SpectraSimd.compareFloat3(physImg2.flash!, with: float3([0.1, 0.1, 0.1]))).to(beTrue())
-                    expect(SpectraSimd.compareFloat3(physImg2.exposure!, with: float3([1.5, 1.5, 1.5]))).to(beTrue())                }
+                    expect(SpectraSimd.compareFloat3(physImg2.exposure!, with: float3([1.5, 1.5, 1.5]))).to(beTrue())
+                }
             }
             
             describe("camera") {
@@ -318,6 +320,10 @@ class SpectraXMLSpec: QuickSpec {
                 
                 it("can be set to look at a position and look from a position") {
                     // look-at (and optionally look-from)
+                }
+                
+                it("can have a transform attached to it") {
+                    
                 }
                 
             }

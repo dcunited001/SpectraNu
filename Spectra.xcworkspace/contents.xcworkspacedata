@@ -97,9 +97,6 @@
             location = "group:BasicTriangle.swift">
          </FileRef>
          <FileRef
-            location = "group:Cube.swift">
-         </FileRef>
-         <FileRef
             location = "group:MeshGenerator.swift">
          </FileRef>
          <FileRef
@@ -110,6 +107,9 @@
          </FileRef>
          <FileRef
             location = "group:TriangularQuadTesselationGenerator.swift">
+         </FileRef>
+         <FileRef
+            location = "group:ArchimedeanSolids.swift">
          </FileRef>
       </Group>
       <Group
@@ -216,6 +216,9 @@
    <Group
       location = "container:"
       name = "SpectraTestsResources">
+      <FileRef
+         location = "group:SpectraTestsResources/pencil.obj">
+      </FileRef>
       <FileRef
          location = "group:SpectraTestsResources/S3DXMLTest.xml">
       </FileRef>
