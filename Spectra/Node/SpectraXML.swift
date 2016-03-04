@@ -216,6 +216,24 @@ public class SpectraXML {
                     container.register(MDLObject.self, name: key!) { _ in
                         return SpectraXMLObjectNode.copy(obj)
                         }.inObjectScope(.None)
+                case .Mesh:
+                    let mesh = SpectraXMLMeshNode().parse(container, elem: child, options: options)
+                    container.register(MDLMesh.self, name: key!) { _ in
+                        //TODO: decide whether all of these should always copy()?
+                        // - and always deepCopy()?
+                        return mesh
+//                        return SpectraXMLMeshNode.copy(mesh)
+                    }.inObjectScope(.None)
+                case .MeshGenerator:
+                    let meshGenNode = MeshGeneratorNode()
+                    meshGenNode.parseXML(container, elem: child, options: options)
+                    let meshGen = meshGenNode.createGenerator(container, options: options)
+                    
+//                    let meshGen = SpectraXMLMeshGeneratorNode().parse(container, elem: child, options: options)
+                    container.register(MeshGenerator.self, name: key!) { _ in
+                        // TODO: copy meshGen
+                        return meshGen
+                    }
                 case .Camera:
                     let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLCamera.self, name: key!) { _ in
@@ -278,6 +296,12 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
     public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
         let urlString = elem.attributes["url"]!
         var vertexDesc: MDLVertexDescriptor?
+        
+        // file formats:
+        // - Alembic *.abc
+        // - Wavefront Object *.obj
+        // - Polygon *.abc
+        // - Standard Tessellation Language *.stl
         
         if let vertexDescKey = elem.attributes["vertex-descriptor-ref"] {
             vertexDesc = container.resolve(MDLVertexDescriptor.self, name: vertexDescKey)
@@ -408,8 +432,92 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
 }
 
 // TODO: public class SpectraXMLWorldNode: SpectraXMLNode
-// TODO: public class SpectraXMLMeshNode: SpectraXMLNode
-// TODO: public class SpectraXMLMeshGeneratorNode: SpectraXMLNode
+
+public struct GeneratorArg {
+    // TODO: change to struct
+    public var name: String
+    public var type: String
+    public var value: String
+    
+    public init(name: String, type: String, value: String) {
+        self.name = name
+        self.type = type
+        self.value = value
+    }
+    
+//    public func parseValue<T>() -> T? {
+    
+        // TODO: populate type enum
+//        switch self.type {
+//        case .Float: return Float(value) as! T
+//        case .Float2: return SpectraSimd.parseFloat2(value) as! T
+//        case .Float3: return SpectraSimd.parseFloat3(value) as! T
+//        case .Float4: return SpectraSimd.parseFloat4(value) as! T
+//        
+//            
+//        }
+
+        // TODO: how to switch based on type
+//        switch T.self {
+//        case Float.self: return Float(value) as! T
+//        case is float2: return (value) as! T
+//        default: return nil
+//        }
+        
+//    }
+    
+    // TODO: decide on whether this is really necessary to enumerate types
+    // - node this can really be translated in the mesh generator
+    public enum GeneratorArgType: String {
+        case String = "String"
+        case Float = "Float"
+        case Float2 = "Float2"
+        case Float3 = "Float3"
+        case Float4 = "Float4"
+        case Int = "Int"
+        case Int2 = "Int2"
+        case Int3 = "Int3"
+        case Int4 = "Int4"
+    }
+}
+
+// TODO: store sets of arguments in <generator-arg-set> tags?
+// - make these monadic? so that values can be replaced?
+// - make these composable?
+
+public class SpectraXMLMeshNode: SpectraXMLNode {
+    public typealias NodeType = MDLMesh
+    
+    public func parse(container: Container, elem: XMLElement, options: [String : Any] = [:]) -> NodeType {
+        return MDLMesh()
+    }
+}
+
+public class MeshGeneratorNode {
+    public var type: String = "tetrahedron"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public func parseXML(container: Container, elem: XMLElement, options: [String : Any] = [:]) {
+        if let type = elem.attributes["type"] {
+            self.type = type
+        }
+        
+        let meshGenArgsSelector = "mesh-generator-args > mesh-generator-arg"
+        for (idx, el) in elem.css(meshGenArgsSelector).enumerate() {
+            let name = elem.attributes["name"]!
+            let type = elem.attributes["type"]!
+            let value = elem.attributes["value"]!
+            
+            args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+    
+    public func createGenerator(container: Container, options: [String : Any] = [:]) -> MeshGenerator {
+        // TODO: retrieve from container
+        return BoxMeshGen(container: container, args: self.args)
+    }
+}
+
 
 public class SpectraXMLObjectNode: SpectraXMLNode {
     public typealias NodeType = MDLObject
