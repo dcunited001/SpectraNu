@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import Metal
+import ModelIO
+import simd
 
 //TODO: decide on how to find MDLMeshBufferAllocators for generate?
 // - change API? add allocator: MDLMeshBufferAllocator to generate()?
@@ -28,19 +31,19 @@ import Foundation
 public class ModelIOMeshGenerators {
     
     public static func loadMeshGenerators(container: Container) {
-        container.register(MeshGenerator.self, name: "boxMeshGen") { _ in
+        container.register(MeshGenerator.self, name: "box_mesh_gen") { _ in
             return BoxMeshGen()
         }
-        container.register(MeshGenerator.self, name: "") { _ in
+        container.register(MeshGenerator.self, name: "ellipsoid_mesh_gen") { _ in
             return EllipsoidMeshGen()
         }
-        container.register(MeshGenerator.self, name: "") { _ in
+        container.register(MeshGenerator.self, name: "elliptical_cone_mesh_gen") { _ in
             return EllipticalConeMeshGen()
         }
-        container.register(MeshGenerator.self, name: "") { _ in
-            return PlaneDimMeshGen()
+        container.register(MeshGenerator.self, name: "plane_mesh_gen") { _ in
+            return PlaneMeshGen()
         }
-        container.register(MeshGenerator.self, name: "") { _ in
+        container.register(MeshGenerator.self, name: "icosohedron_mesh_gen") { _ in
             return IcosohedronMeshGen()
         }
     }

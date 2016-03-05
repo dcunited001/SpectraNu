@@ -2,53 +2,53 @@
 
 <root>
     
-    <mesh-generator key="boxMeshGen2" type="boxMeshGen">
+    <mesh-generator key="box_mesh_gen2" type="box_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="String" name="colCount" value="100" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="boxMesh" mesh-generator="boxMeshGen" />
-    <mesh key="boxMesh2" mesh-generator="boxMeshGen2" />
+    <mesh key="box_mesh" mesh-generator="box_mesh_gen" />
+    <mesh key="box_mesh2" mesh-generator="box_mesh_gen2" />
     
-    <mesh-generator key="ellipsoidMeshGen2" type="ellipsoidMeshGen">
+    <mesh-generator key="ellipsoid_mesh_gen2" type="ellipsoid_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="String" name="colCount" value="100" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="ellipsoidMesh" mesh-generator="ellipsoidMeshGen" />
-    <mesh key="ellipsoidMesh2" mesh-generator="ellipsoidMeshGen2" />
+    <mesh key="ellipsoid_mesh" mesh-generator="ellipsoid_mesh_gen" />
+    <mesh key="ellipsoid_mesh2" mesh-generator="ellipsoid_mesh_gen2" />
     
-    <mesh-generator key="ellipticConeMeshGen2" type="ellipticConeMeshGen">
+    <mesh-generator key="ellipticCone_mesh_gen2" type="ellipticCone_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="String" name="colCount" value="100" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="ellipticConeMesh" mesh-generator="ellipticConeMeshGen" />
-    <mesh key="ellipticConeMesh2" mesh-generator="ellipticConeMeshGen2" />
+    <mesh key="elliptic_cone_mesh" mesh-generator="ellipticCone_mesh_gen" />
+    <mesh key="elliptic_cone_mesh2" mesh-generator="ellipticCone_mesh_gen2" />
     
-    <mesh-generator key="cylinderMeshGen2" type="cylinderMeshGen">
+    <mesh-generator key="cylinder_mesh_gen2" type="cylinder_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="String" name="colCount" value="100" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="cylinderMesh" mesh-generator="cylinderMeshGen" />
-    <mesh key="cylinderMesh2" mesh-generator="cylinderMeshGen2" />
+    <mesh key="cylinder_mesh" mesh-generator="cylinder_mesh_gen" />
+    <mesh key="cylinder_mesh2" mesh-generator="cylinder_mesh_gen2" />
     
-    <mesh-generator key="planeMeshGen2" type="planeMeshGen">
+    <mesh-generator key="plane_mesh_gen2" type="plane_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="String" name="colCount" value="100" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="planeMesh" mesh-generator="planeMeshGen" />
-    <mesh key="planeMesh2" mesh-generator="planeMeshGen2" />
+    <mesh key="plane_mesh" mesh-generator="plane_mesh_gen" />
+    <mesh key="plane_mesh2" mesh-generator="plane_mesh_gen2" />
     
-    <mesh-generator key="icosohedronMeshGen2" type="icosohedronMeshGen">
+    <mesh-generator key="icosohedron_mesh_gen2" type="icosohedron_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="String" name="colCount" value="100" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="icosohedronMesh" mesh-generator="icosohedronMeshGen" />
-    <mesh key="icosohedronMesh2" mesh-generator="icosohedronMeshGen2" />
+    <mesh key="icosohedron_mesh" mesh-generator="icosohedron_mesh_gen" />
+    <mesh key="icosohedron_mesh2" mesh-generator="icosohedron_mesh_gen2" />
     
 </root>
 

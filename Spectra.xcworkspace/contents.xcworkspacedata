@@ -114,6 +114,12 @@
          <FileRef
             location = "group:/Users/dc/dev/apple/Spectra/Spectra/MeshGenerators/ModelIOMeshGenerators.swift">
          </FileRef>
+         <FileRef
+            location = "group:RandomMeshGenerators.swift">
+         </FileRef>
+         <FileRef
+            location = "group:BasicTessellationGenerators.swift">
+         </FileRef>
       </Group>
       <Group
          location = "group:Classes"
@@ -176,10 +182,16 @@
          location = "group:MeshGenerators"
          name = "MeshGenerators">
          <FileRef
-            location = "group:TriangularQuadTesselationGeneratorSpec.swift">
+            location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/MeshGenerators/PlatonicSolidMeshGeneratorsSpec.swift">
          </FileRef>
          <FileRef
-            location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/MeshGenerators/ModelIOMeshGeneratorSpecs.swift">
+            location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/MeshGenerators/ModelIOMeshGeneratorsSpec.swift">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/MeshGenerators/RandomMeshGeneratorsSpec.swift">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/MeshGenerators/BasicTessellationMeshGeneratorsSpec.swift">
          </FileRef>
       </Group>
       <FileRef

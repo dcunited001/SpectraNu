@@ -1,63 +1,63 @@
+////
+////  SceneGraphXMLSpec.swift
+////  Spectra
+////
+////  Created by David Conner on 10/20/15.
+////  Copyright © 2015 CocoaPods. All rights reserved.
+////
 //
-//  SceneGraphXMLSpec.swift
-//  Spectra
+//@testable import Spectra
+//import Foundation
+//import Fuzi
+//import Quick
+//import Nimble
+//import Metal
+//import simd
 //
-//  Created by David Conner on 10/20/15.
-//  Copyright © 2015 CocoaPods. All rights reserved.
+//class CustomView: BaseWorldView {
+//    var customVar: String?
+//}
 //
-
-@testable import Spectra
-import Foundation
-import Fuzi
-import Quick
-import Nimble
-import Metal
-import simd
-
-class CustomView: BaseWorldView {
-    var customVar: String?
-}
-
-class CustomCamera: BaseCamera {
-    var customVar: String?
-}
-
-func compareFloat4(x:float4, to:float4) -> Bool {
-    //no == ????
-    //wow that's dumb. or maybe i'm dumb?
-    return (x.x == to.x &&
-        x.y == to.y &&
-        x.z == to.z
-        && x.w == to.w)
-}
-
-class SceneGraphXMLSpec: QuickSpec {
-    
-    override func spec() {
-        let testBundle = NSBundle(forClass: S3DXMLSpec.self)
-        let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SpectraXMLSpec")
-        let sceneGraphXML = SceneGraphXML(data: xmlData)
-        
-        var sceneGraph = SceneGraph()
-        sceneGraph.registerViewMonad("custom") {
-            let v = CustomView()
-            v.customVar = "custom"
-            return v
-        }
-        sceneGraph.registerCameraMonad("custom") {
-            let c = CustomCamera()
-            c.customVar = "custom"
-            return c
-        }
-//        sceneGraph.registerMeshGeneratorMonad("triangular_quad_tesselation_gen") { args in
-//            return TriangularQuadTesselationGenerator(args: args)
+//class CustomCamera: BaseCamera {
+//    var customVar: String?
+//}
+//
+//func compareFloat4(x:float4, to:float4) -> Bool {
+//    //no == ????
+//    //wow that's dumb. or maybe i'm dumb?
+//    return (x.x == to.x &&
+//        x.y == to.y &&
+//        x.z == to.z
+//        && x.w == to.w)
+//}
+//
+//class SceneGraphXMLSpec: QuickSpec {
+//    
+//    override func spec() {
+//        let testBundle = NSBundle(forClass: S3DXMLSpec.self)
+//        let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SpectraXMLSpec")
+//        let sceneGraphXML = SceneGraphXML(data: xmlData)
+//        
+//        var sceneGraph = SceneGraph()
+//        sceneGraph.registerViewMonad("custom") {
+//            let v = CustomView()
+//            v.customVar = "custom"
+//            return v
 //        }
-        sceneGraph = sceneGraphXML.parse(sceneGraph)
-        
-        let defaultUniformsPos = float4(0,0,1,1)
-        let defaultUniformsRotation = float4(1,0,0,0)
-        let defaultUniformsScale = float4(1,1,1,0)
-        
+//        sceneGraph.registerCameraMonad("custom") {
+//            let c = CustomCamera()
+//            c.customVar = "custom"
+//            return c
+//        }
+////        sceneGraph.registerMeshGeneratorMonad("triangular_quad_tesselation_gen") { args in
+////            return TriangularQuadTesselationGenerator(args: args)
+////        }
+//        sceneGraph = sceneGraphXML.parse(sceneGraph)
+//        
+//        let defaultUniformsPos = float4(0,0,1,1)
+//        let defaultUniformsRotation = float4(1,0,0,0)
+//        let defaultUniformsScale = float4(1,1,1,0)
+//        
 //        describe("SGXMLUniformsNode") {
 //            it("parses uniforms nodes") {
 //                let u = sceneGraph.views["world"]!.uniforms
@@ -119,7 +119,7 @@ class SceneGraphXMLSpec: QuickSpec {
 //                expect(pers.perspectiveArgs["far"]!) == far
 //            }
 //        }
-        
+//        
 //        describe("SGXMLMeshGeneratorNode") {
 //            let cubeGen = sceneGraph.meshGenerators["cubeGen"]! as! CubeGenerator
 //            let tesselationGen = sceneGraph.meshGenerators["tesselationGen"]! as! TriangularQuadTesselationGenerator
@@ -135,14 +135,14 @@ class SceneGraphXMLSpec: QuickSpec {
 ////                expect(latticeGen.getVertices().count) == 121
 //            }
 //        }
-        
-        describe("SGXMLMeshNode") {
-            let cubeMesh = sceneGraph.meshes["cubeMesh"]!
-            
-            it("instantiates meshes using mesh generators") {
-                expect(cubeMesh.data["pos"]!.count == 8)
-            }
-        }
-    }
-    
-}
+//        
+//        describe("SGXMLMeshNode") {
+//            let cubeMesh = sceneGraph.meshes["cubeMesh"]!
+//            
+//            it("instantiates meshes using mesh generators") {
+//                expect(cubeMesh.data["pos"]!.count == 8)
+//            }
+//        }
+//    }
+//    
+//}

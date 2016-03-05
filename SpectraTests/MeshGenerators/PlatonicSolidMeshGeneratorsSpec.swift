@@ -11,8 +11,7 @@ import Foundation
 import Quick
 import Nimble
 
-
-class TriangularQuadLatticeGeneratorSpec: QuickSpec {
+class PlatonicSolidMeshGeneratorSpec: QuickSpec {
     override func spec() {
         
         let device = MTLCreateSystemDefaultDevice()
@@ -24,7 +23,7 @@ class TriangularQuadLatticeGeneratorSpec: QuickSpec {
         var descriptorManager = DescriptorManager(library: library!)
 //        descriptorManager = xml.parse(descriptorManager)
         
-        describe("TriangularQuadLatticeGenerator") {
+        describe("") {
 //            it("tesselates an existing quad") {
 //                //TODO: implement and test
 //            }
