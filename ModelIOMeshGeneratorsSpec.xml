@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    
+    <mesh-generator key="boxMeshGen2" type="boxMeshGen">
+        <mesh-generator-args>
+            <mesh-generator-arg type="String" name="colCount" value="100" />
+        </mesh-generator-args>
+    </mesh-generator>
+    <mesh key="boxMesh" mesh-generator="boxMeshGen" />
+    <mesh key="boxMesh2" mesh-generator="boxMeshGen2" />
+    
+    <mesh-generator key="ellipsoidMeshGen2" type="ellipsoidMeshGen">
+        <mesh-generator-args>
+            <mesh-generator-arg type="String" name="colCount" value="100" />
+        </mesh-generator-args>
+    </mesh-generator>
+    <mesh key="ellipsoidMesh" mesh-generator="ellipsoidMeshGen" />
+    <mesh key="ellipsoidMesh2" mesh-generator="ellipsoidMeshGen2" />
+    
+    <mesh-generator key="ellipticConeMeshGen2" type="ellipticConeMeshGen">
+        <mesh-generator-args>
+            <mesh-generator-arg type="String" name="colCount" value="100" />
+        </mesh-generator-args>
+    </mesh-generator>
+    <mesh key="ellipticConeMesh" mesh-generator="ellipticConeMeshGen" />
+    <mesh key="ellipticConeMesh2" mesh-generator="ellipticConeMeshGen2" />
+    
+    <mesh-generator key="cylinderMeshGen2" type="cylinderMeshGen">
+        <mesh-generator-args>
+            <mesh-generator-arg type="String" name="colCount" value="100" />
+        </mesh-generator-args>
+    </mesh-generator>
+    <mesh key="cylinderMesh" mesh-generator="cylinderMeshGen" />
+    <mesh key="cylinderMesh2" mesh-generator="cylinderMeshGen2" />
+    
+    <mesh-generator key="planeMeshGen2" type="planeMeshGen">
+        <mesh-generator-args>
+            <mesh-generator-arg type="String" name="colCount" value="100" />
+        </mesh-generator-args>
+    </mesh-generator>
+    <mesh key="planeMesh" mesh-generator="planeMeshGen" />
+    <mesh key="planeMesh2" mesh-generator="planeMeshGen2" />
+    
+    <mesh-generator key="icosohedronMeshGen2" type="icosohedronMeshGen">
+        <mesh-generator-args>
+            <mesh-generator-arg type="String" name="colCount" value="100" />
+        </mesh-generator-args>
+    </mesh-generator>
+    <mesh key="icosohedronMesh" mesh-generator="icosohedronMeshGen" />
+    <mesh key="icosohedronMesh2" mesh-generator="icosohedronMeshGen2" />
+    
+</root>
+
