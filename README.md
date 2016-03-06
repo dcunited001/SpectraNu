@@ -143,3 +143,9 @@ i think one thing i lose with MDLMesh and MDLSubmesh is the ability to do MeshCa
 
 [Finite State Automata (FSA) Algorithm](http://www.ltg.ed.ac.uk/~ht/XML_Europe_2003.html)
 
+### Misc Resources
+
+[Model I/O API - iOS](https://developer.apple.com/library/ios/documentation/ModelIO/Reference/ModelIO_Framework/)
+[Model I/O API - OSX](https://developer.apple.com/library/mac/documentation/ModelIO/Reference/ModelIO_Framework/index.html#//apple_ref/doc/uid/TP40015421)
+
+
