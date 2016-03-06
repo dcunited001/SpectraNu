@@ -91,15 +91,22 @@
          </FileRef>
       </Group>
       <Group
-         location = "group:TextureGenerators"
-         name = "TextureGenerators">
+         location = "container:Spectra/Lighting"
+         name = "Lighting">
+         <FileRef
+            location = "group:LightGenerator.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Textures"
+         name = "Textures">
          <FileRef
             location = "group:TextureGenerator.swift">
          </FileRef>
       </Group>
       <Group
-         location = "group:MeshGenerators"
-         name = "MeshGenerators">
+         location = "group:Meshes"
+         name = "Meshes">
          <FileRef
             location = "group:BasicTriangle.swift">
          </FileRef>
@@ -116,13 +123,13 @@
             location = "group:ArchimedeanSolids.swift">
          </FileRef>
          <FileRef
-            location = "group:/Users/dc/dev/apple/Spectra/Spectra/MeshGenerators/ModelIOMeshGenerators.swift">
+            location = "group:ModelIOMeshGenerators.swift">
          </FileRef>
          <FileRef
             location = "group:RandomMeshGenerators.swift">
          </FileRef>
          <FileRef
-            location = "group:/Users/dc/dev/apple/Spectra/Spectra/MeshGenerators/BasicTessellation.swift">
+            location = "group:BasicTessellation.swift">
          </FileRef>
       </Group>
       <Group
