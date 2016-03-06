@@ -2,59 +2,73 @@
 
 <root>
     
-    <mesh-generator key="box_mesh_gen2" type="box_mesh_gen">
-        <mesh-generator-args>
-            <mesh-generator-arg type="Float3" name="dimensions" value="5 5 5" />
-            <mesh-generator-arg type="Float3" name="segments" value="5 5 5" />
-        </mesh-generator-args>
-    </mesh-generator>
-    <mesh key="box_mesh" mesh-generator="box_mesh_gen" />
-    <mesh key="box_mesh2" mesh-generator="box_mesh_gen2" />
-    
     <mesh-generator key="ellipsoid_mesh_gen2" type="ellipsoid_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="Float3" name="radii" value="5 5 5" />
-            <mesh-generator-arg type="Int" name="radialSegments" value="5" />
-            <mesh-generator-arg type="Int" name="verticalSegments" value="5" />
+            <mesh-generator-arg type="Int" name="radial_segments" value="5" />
+            <mesh-generator-arg type="Int" name="vertical_segments" value="5" />
         </mesh-generator-args>
     </mesh-generator>
     <mesh key="ellipsoid_mesh" mesh-generator="ellipsoid_mesh_gen" />
     <mesh key="ellipsoid_mesh2" mesh-generator="ellipsoid_mesh_gen2" />
     
-    <mesh-generator key="ellipticCone_mesh_gen2" type="ellipticCone_mesh_gen">
+    <mesh-generator key="elliptical_cone_mesh_gen2" type="elliptical_cone_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="Float" name="height" value="100" />
             <mesh-generator-arg type="Float2" name="radii" value="5 5" />
-            <mesh-generator-arg type="Int" name="radialSegments" value="5" />
-            <mesh-generator-arg type="Int" name="verticalSegments" value="5" />
+            <mesh-generator-arg type="Int" name="radial_segments" value="5" />
+            <mesh-generator-arg type="Int" name="vertical_segments" value="5" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="elliptic_cone_mesh" mesh-generator="ellipticCone_mesh_gen" />
-    <mesh key="elliptic_cone_mesh2" mesh-generator="ellipticCone_mesh_gen2" />
+    <mesh key="elliptical_cone_mesh" mesh-generator="elliptical_cone_mesh_gen" />
+    <mesh key="elliptic_cone_mesh2" mesh-generator="elliptical_cone_mesh_gen2" />
     
-    <mesh-generator key="cylinder_mesh_gen2" type="cylinder_mesh_gen">
+<!--    <mesh-generator key="cylinder_mesh_gen2" type="cylinder_mesh_gen">-->
+<!--        <mesh-generator-args>-->
+<!--            <mesh-generator-arg type="Float" name="height" value="100" />-->
+<!--            <mesh-generator-arg type="Float2" name="radii" value="5 5" />-->
+<!--            <mesh-generator-arg type="Int" name="radial_segments" value="5" />-->
+<!--            <mesh-generator-arg type="Int" name="vertical_segments" value="5" />-->
+<!--        </mesh-generator-args>-->
+<!--    </mesh-generator>-->
+<!--    <mesh key="cylinder_mesh" mesh-generator="cylinder_mesh_gen" />-->
+<!--    <mesh key="cylinder_mesh2" mesh-generator="cylinder_mesh_gen2" />-->
+<!--    -->
+<!--    <mesh-generator key="icosahedron_mesh_gen2" type="icosahedron_mesh_gen">-->
+<!--        <mesh-generator-args>-->
+<!--            <mesh-generator-arg type="Float" name="radius" value="100" />-->
+<!--        </mesh-generator-args>-->
+<!--    </mesh-generator>-->
+<!--    <mesh key="icosahedron_mesh" mesh-generator="icosahedron_mesh_gen" />-->
+<!--    <mesh key="icosahedron_mesh2" mesh-generator="icosahedron_mesh_gen2" />-->
+
+    <mesh-generator key="subdivision_mesh_gen2" type="subdivision_mesh_gen">
         <mesh-generator-args>
-            <mesh-generator-arg type="String" name="colCount" value="100" />
+            <mesh-generator-arg type="String" name="mesh_ref" value="ellipsoid_mesh2" />
+            <mesh-generator-arg type="Int" name="submesh_index" value="0" />
+            <mesh-generator-arg type="Int" name="subdivision_levels" value="2" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="cylinder_mesh" mesh-generator="cylinder_mesh_gen" />
-    <mesh key="cylinder_mesh2" mesh-generator="cylinder_mesh_gen2" />
-    
-    <mesh-generator key="plane_mesh_gen2" type="plane_mesh_gen">
-        <mesh-generator-args>
-            <mesh-generator-arg type="String" name="colCount" value="100" />
-        </mesh-generator-args>
-    </mesh-generator>
-    <mesh key="plane_mesh" mesh-generator="plane_mesh_gen" />
-    <mesh key="plane_mesh2" mesh-generator="plane_mesh_gen2" />
-    
-    <mesh-generator key="icosahedron_mesh_gen2" type="icosahedron_mesh_gen">
-        <mesh-generator-args>
-            <mesh-generator-arg type="String" name="colCount" value="100" />
-        </mesh-generator-args>
-    </mesh-generator>
-    <mesh key="icosahedron_mesh" mesh-generator="icosahedron_mesh_gen" />
-    <mesh key="icosahedron_mesh2" mesh-generator="icosahedron_mesh_gen2" />
+    <mesh key="subdivision_mesh_mesh" mesh-generator="subdivision_mesh_gen" />
+    <mesh key="subdivision_mesh_mesh2" mesh-generator="subdivision_mesh_gen2" />
+
+<!--    <mesh-generator key="box_mesh_gen2" type="box_mesh_gen">-->
+<!--        <mesh-generator-args>-->
+<!--            <mesh-generator-arg type="Float3" name="dimensions" value="5 5 5" />-->
+<!--            <mesh-generator-arg type="Float3" name="segments" value="5 5 5" />-->
+<!--        </mesh-generator-args>-->
+<!--    </mesh-generator>-->
+<!--    <mesh key="box_mesh" mesh-generator="box_mesh_gen" />-->
+<!--    <mesh key="box_mesh2" mesh-generator="box_mesh_gen2" />-->
+<!--    -->
+<!--    <mesh-generator key="plane_mesh_gen2" type="plane_mesh_gen">-->
+<!--        <mesh-generator-args>-->
+<!--            <mesh-generator-arg type="Float3" name="dimensions" value="5 5 5" />-->
+<!--            <mesh-generator-arg type="Float3" name="segments" value="5 5 5" />-->
+<!--        </mesh-generator-args>-->
+<!--    </mesh-generator>-->
+<!--    <mesh key="plane_mesh" mesh-generator="plane_mesh_gen" />-->
+<!--    <mesh key="plane_mesh2" mesh-generator="plane_mesh_gen2" />-->
     
 </root>
 
