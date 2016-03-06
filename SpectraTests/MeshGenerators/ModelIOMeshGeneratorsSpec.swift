@@ -28,6 +28,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         let xmlData: NSData = SpectraXML.readXML(testBundle, filename: "ModelIOMeshGeneratorsSpec")
         let assetContainer = Container(parent: parser)
         
+        ModelIOMeshGenerators.loadMeshGenerators(assetContainer)
+        
         SpectraXML.initParser(parser)
         let spectraXML = SpectraXML(parser: parser, data: xmlData)
         spectraXML.parse(assetContainer, options: [:])
@@ -59,8 +61,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("EllipticalConeMeshGen") {
-            let ellipticCone: MeshGenerator = self.containerGet(assetContainer, key: "elliptic_cone_mesh_gen")!
-            let ellipticCone2: MeshGenerator = self.containerGet(assetContainer, key: "elliptic_coner_mesh_gen2")!
+            let ellipticCone: MeshGenerator = self.containerGet(assetContainer, key: "elliptical_cone_mesh_gen")!
+            let ellipticCone2: MeshGenerator = self.containerGet(assetContainer, key: "elliptic_cone_mesh_gen2")!
             
             
             it("provides the basic model i/o mesh generators") {
