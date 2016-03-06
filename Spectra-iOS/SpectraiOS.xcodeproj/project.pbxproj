@@ -26,6 +26,7 @@
 		4317EA291C8C36E10019B2E2 /* RandomMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9D61C8BADE40019B2E2 /* RandomMeshGeneratorsSpec.swift */; };
 		4317EA2A1C8C36E60019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9D71C8BADE40019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift */; };
 		4317EA2B1C8C37090019B2E2 /* pencil.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4359545D1C895567000B3811 /* pencil.obj */; };
+		4317EA2F1C8C394A0019B2E2 /* ModelIOMeshGeneratorsSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4317EA2E1C8C394A0019B2E2 /* ModelIOMeshGeneratorsSpec.xml */; };
 		4334D67E1C1F5E7700D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */; };
 		4334D68E1C1F6EF600D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */; };
 		4334D6901C1F739C00D2DCA6 /* DefaultPipeline.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68F1C1F739C00D2DCA6 /* DefaultPipeline.xml */; };
@@ -148,6 +149,7 @@
 		4317EA141C8C23BD0019B2E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4317EA1C1C8C31940019B2E2 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		4317EA1D1C8C31940019B2E2 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		4317EA2E1C8C394A0019B2E2 /* ModelIOMeshGeneratorsSpec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = ModelIOMeshGeneratorsSpec.xml; path = /Users/dc/dev/apple/Spectra/ModelIOMeshGeneratorsSpec.xml; sourceTree = "<absolute>"; };
 		4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
 		4334D68F1C1F739C00D2DCA6 /* DefaultPipeline.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DefaultPipeline.xml; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				4359545D1C895567000B3811 /* pencil.obj */,
 				4338B7CB1C18B126007D3DF6 /* S3DXMLTest.xml */,
 				4338B7CC1C18B126007D3DF6 /* SpectraXMLSpec.xml */,
+				4317EA2E1C8C394A0019B2E2 /* ModelIOMeshGeneratorsSpec.xml */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				4338B7CD1C18B126007D3DF6 /* S3DXMLTest.xml in Resources */,
 				4317EA2B1C8C37090019B2E2 /* pencil.obj in Resources */,
 				4338B7CE1C18B126007D3DF6 /* SpectraXMLSpec.xml in Resources */,
+				4317EA2F1C8C394A0019B2E2 /* ModelIOMeshGeneratorsSpec.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
