@@ -6,15 +6,13 @@
 //
 //
 
-import Foundation
+@testable import Spectra
 import Quick
 import Nimble
+
 import ModelIO
-import Fuzi
-import Spectra
 import Swinject
 import Metal
-import MetalKit
 import simd
 
 class SpectraXMLSpec: QuickSpec {
