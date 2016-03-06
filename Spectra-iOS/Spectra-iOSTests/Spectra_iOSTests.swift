@@ -6,7 +6,7 @@
 //  Copyright © 2015 Spectra. All rights reserved.
 //
 
-@testable import SpectraiOS
+@testable import Spectra
 import Quick
 import Nimble
 
@@ -14,7 +14,7 @@ class SpectraOSXTests: QuickSpec {
     override func spec() {
         describe("a test") {
             it("tests something") {
-                expect(Spectra.foo()).to(beTrue())
+                // iOS Specific specs
             }
         }
     }
