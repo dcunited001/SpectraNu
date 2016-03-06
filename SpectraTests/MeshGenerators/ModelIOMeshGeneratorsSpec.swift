@@ -32,9 +32,7 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         let spectraXML = SpectraXML(parser: parser, data: xmlData)
         spectraXML.parse(assetContainer, options: [:])
         
-        describe("BoxMeshGen", flags: ["pending": true]) {
-            // PENDING: model i/o function not recognized
-            
+        pending("BoxMeshGen (not implemented in Model I/O)") {
             let box: MeshGenerator = self.containerGet(assetContainer, key: "box_mesh_gen")!
             let box2: MeshGenerator = self.containerGet(assetContainer, key: "box_mesh_gen2")!
             
@@ -87,9 +85,7 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
             }
         }
         
-        describe("PlaneDimMeshGen", flags: ["pending": true]) {
-            // PENDING: model i/o function not recognized
-            
+        pending("PlaneDimMeshGen (not implemented in Model I/O)") {
             let plane: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen")!
             let plane2: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen2")!
             
