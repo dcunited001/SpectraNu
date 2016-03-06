@@ -216,7 +216,7 @@ public class SpectraXML {
                 case .Asset:
                     let asset = SpectraXMLAssetNode().parse(container, elem: child, options: options)
                     container.register(MDLAsset.self, name: key!) { _ in
-                        return SpectraXMLAssetNode.copy(asset)
+                        return asset.copy() as! MDLAsset
                     }
                 case .Object:
                     let obj = SpectraXMLObjectNode().parse(container, elem: child, options: options)
