@@ -21,8 +21,25 @@ public class BasicTessellationGenerators {
 //   primitive should be at the class level
 
 public class MidpointTessellationMeshGen: MeshGenerator {
+    public var geometryType: MDLGeometryType = .TypeTriangles
+    public var mesh: MDLMesh?
+    public var numDivisions: Int = 1 // number of divisions per step
+    public var numIterations: Int = 1
+    
+    // should this require an edge submesh?
+    // - if it lacks an edge submesh, it should construct one
+    
+    // allow user to specify mesh generator instead of a pre-existing mesh?
+    // how to specify blocks to handle parameters? 
+    //  - like normals, anisotropy, etc
+    
     public required init(container: Container, args: [String: GeneratorArg] = [:]) {
-        
+        if let meshKey = args["mesh"] {
+            self.mesh = container.resolve(MDLMesh.self, name: meshKey.value)
+        }
+        if let geoType = args["geometryType"] {
+            self.geometryType = .TypeTriangles
+        }
     }
     
     public func generate(container: Container, args: [String: GeneratorArg] = [:]) -> MDLMesh {
@@ -31,7 +48,16 @@ public class MidpointTessellationMeshGen: MeshGenerator {
 }
 
 public class SierpenskiTessellationMeshGen: MeshGenerator {
+    public var geometryType: MDLGeometryType = .TypeTriangles
+    public var mesh: MDLMesh?
+    
     public required init(container: Container, args: [String: GeneratorArg] = [:]) {
+        if let meshKey = args["mesh"] {
+            self.mesh = container.resolve(MDLMesh.self, name: meshKey.value)
+        }
+        if let geoType = args["geometryType"] {
+            self.geometryType = .TypeTriangles
+        }
         
     }
     
