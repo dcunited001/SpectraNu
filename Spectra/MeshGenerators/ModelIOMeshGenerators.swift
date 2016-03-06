@@ -11,21 +11,6 @@ import Metal
 import ModelIO
 import simd
 
-//TODO: decide on how to find MDLMeshBufferAllocators for generate?
-// - change API? add allocator: MDLMeshBufferAllocator to generate()?
-// - or add a container to generate()?
-//   - i like this the best
-// - or force user to set gen.allocator before calling generate()? this makes API a bit more bumbly & awkward
-
-//        newBoxWithDimensions:(vector_float3)dimensions
-//        segments:(vector_uint3)segments
-//        geometryType:(MDLGeometryType)geometryType
-//        inwardNormals:(BOOL)inwardNormals
-//        allocator:(id<MDLMeshBufferAllocator>)allocator
-
-// TODO: evaluate adding container:Container to API for init() & generate()
-// - as i said above, this seems like the best option, but i donno
-
 // TODO: how to compose various functionalities together?
 
 public class ModelIOMeshGenerators {
@@ -201,8 +186,6 @@ public class CylinderMeshGen: MeshGenerator {
     public weak var allocator: MDLMeshBufferAllocator?
     
     public required init(container: Container, args: [String: GeneratorArg] = [:]) {
-        
-        
         // TODO: buffer allocator
     }
     
