@@ -27,6 +27,12 @@
 		4317EA2A1C8C36E60019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9D71C8BADE40019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift */; };
 		4317EA2B1C8C37090019B2E2 /* pencil.obj in Resources */ = {isa = PBXBuildFile; fileRef = 4359545D1C895567000B3811 /* pencil.obj */; };
 		4317EA2F1C8C394A0019B2E2 /* ModelIOMeshGeneratorsSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4317EA2E1C8C394A0019B2E2 /* ModelIOMeshGeneratorsSpec.xml */; };
+		4317EA441C8C4A3E0019B2E2 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; };
+		4317EA451C8C4A3E0019B2E2 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4317EA491C8C4A450019B2E2 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA0B1C8C23AD0019B2E2 /* Swinject.framework */; };
+		4317EA4A1C8C4A450019B2E2 /* Swinject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA0B1C8C23AD0019B2E2 /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4317EA4B1C8C4A4A0019B2E2 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA0A1C8C23AD0019B2E2 /* Fuzi.framework */; };
+		4317EA4C1C8C4A4A0019B2E2 /* Fuzi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA0A1C8C23AD0019B2E2 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4334D67E1C1F5E7700D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */; };
 		4334D68E1C1F6EF600D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */; };
 		4334D6901C1F739C00D2DCA6 /* DefaultPipeline.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68F1C1F739C00D2DCA6 /* DefaultPipeline.xml */; };
@@ -40,8 +46,6 @@
 		4338B8D61C18DC92007D3DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D41C18DC92007D3DF6 /* Main.storyboard */; };
 		4338B8D81C18DC92007D3DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D71C18DC92007D3DF6 /* Assets.xcassets */; };
 		4338B8DB1C18DC92007D3DF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D91C18DC92007D3DF6 /* LaunchScreen.storyboard */; };
-		4338B8FC1C18FBB5007D3DF6 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; };
-		4338B8FE1C18FBB5007D3DF6 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8321C0A2FF500EA2B30 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		43719B331C8808F900C14D56 /* MetalEnums.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 43719B321C8808F900C14D56 /* MetalEnums.xsd */; };
 		43719B371C88FEDF00C14D56 /* ArchimedeanSolids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43719B361C88FEDF00C14D56 /* ArchimedeanSolids.swift */; };
 		4371E89B1C190952001D1C39 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */; };
@@ -83,6 +87,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4317EA461C8C4A3E0019B2E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43EAF8291C0A2FF500EA2B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43EAF8311C0A2FF500EA2B30;
+			remoteInfo = SpectraiOS;
+		};
 		4334D6861C1F6C5800D2DCA6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43EAF8291C0A2FF500EA2B30 /* Project object */;
@@ -97,23 +108,18 @@
 			remoteGlobalIDString = 43EAF8311C0A2FF500EA2B30;
 			remoteInfo = SpectraiOS;
 		};
-		4338B8FF1C18FBB5007D3DF6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 43EAF8291C0A2FF500EA2B30 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43EAF8311C0A2FF500EA2B30;
-			remoteInfo = SpectraiOS;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4338B8FD1C18FBB5007D3DF6 /* Embed Frameworks */ = {
+		4317EA481C8C4A3F0019B2E2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4338B8FE1C18FBB5007D3DF6 /* Spectra.framework in Embed Frameworks */,
+				4317EA451C8C4A3E0019B2E2 /* Spectra.framework in Embed Frameworks */,
+				4317EA4C1C8C4A4A0019B2E2 /* Fuzi.framework in Embed Frameworks */,
+				4317EA4A1C8C4A450019B2E2 /* Swinject.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,7 +221,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4338B8FC1C18FBB5007D3DF6 /* Spectra.framework in Frameworks */,
+				4317EA441C8C4A3E0019B2E2 /* Spectra.framework in Frameworks */,
+				4317EA4B1C8C4A4A0019B2E2 /* Fuzi.framework in Frameworks */,
+				4317EA491C8C4A450019B2E2 /* Swinject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,12 +502,12 @@
 				4338B8CB1C18DC92007D3DF6 /* Frameworks */,
 				4338B8CC1C18DC92007D3DF6 /* Resources */,
 				4338B8E41C18F24D007D3DF6 /* Copy Carthage Frameworks */,
-				4338B8FD1C18FBB5007D3DF6 /* Embed Frameworks */,
+				4317EA481C8C4A3F0019B2E2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4338B9001C18FBB5007D3DF6 /* PBXTargetDependency */,
+				4317EA471C8C4A3E0019B2E2 /* PBXTargetDependency */,
 			);
 			name = "Spectra-iOSExample";
 			productName = "Spectra-iOSExample";
@@ -714,6 +722,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4317EA471C8C4A3E0019B2E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43EAF8311C0A2FF500EA2B30 /* SpectraiOS */;
+			targetProxy = 4317EA461C8C4A3E0019B2E2 /* PBXContainerItemProxy */;
+		};
 		4334D6871C1F6C5800D2DCA6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4338B8CD1C18DC92007D3DF6 /* Spectra-iOSExample */;
@@ -723,11 +736,6 @@
 			isa = PBXTargetDependency;
 			target = 43EAF8311C0A2FF500EA2B30 /* SpectraiOS */;
 			targetProxy = 4338B8871C18BEAA007D3DF6 /* PBXContainerItemProxy */;
-		};
-		4338B9001C18FBB5007D3DF6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43EAF8311C0A2FF500EA2B30 /* SpectraiOS */;
-			targetProxy = 4338B8FF1C18FBB5007D3DF6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
