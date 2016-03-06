@@ -341,10 +341,6 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
     }
 
     //TODO: ensure asset.copy() returns a deep copy
-//    public static func copy(object: NodeType) -> NodeType {
-//        let cp = MDLAsset()
-//        return cp
-//    }
 }
 
 public class SpectraXMLBufferAllocatorNode: SpectraXMLNode {
@@ -1209,8 +1205,8 @@ public class SpectraXMLTextureFilterNode: SpectraXMLNode {
     public static func copy(object: MDLTextureFilter) -> MDLTextureFilter {
         let cp = MDLTextureFilter()
         cp.rWrapMode = object.rWrapMode
-        cp.rWrapMode = object.rWrapMode
-        cp.rWrapMode = object.rWrapMode
+        cp.sWrapMode = object.sWrapMode
+        cp.tWrapMode = object.tWrapMode
         
         cp.minFilter = object.minFilter
         cp.magFilter = object.magFilter
