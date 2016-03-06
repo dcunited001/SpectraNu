@@ -93,8 +93,7 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
                 
                 expect(cone.submeshes.count) == 1
                 expect(cone.vertexBuffers.count) == 1
-                expect(cone.vertexCount) == 26
-                
+                expect(cone.vertexCount) == 43
             }
 
         }
@@ -121,11 +120,19 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
 
         describe("SubdivisionMeshGen") {
             let subdivide = assetContainer.resolve(MeshGenerator.self, name: "subdivision_mesh_gen") as! SubdivisionMeshGen
-            subdivide.meshRef = "ellipsoid_mesh2"
             let subdivide2 = assetContainer.resolve(MeshGenerator.self, name: "subdivision_mesh_gen2") as! SubdivisionMeshGen
+            subdivide2.meshRef = "elliptical_cone_mesh3"
             
             it("can extend the model i/o mesh generators") {
-
+                
+            }
+            
+            it("subdivides the existing mesh, modifying it in place") {
+                let subdividedCone = assetContainer.resolve(MeshGenerator.self, name: "elliptical_cone_mesh3")
+                
+                expect(subdividedCone.vertexCount) == 81
+                expect(subdividedCone.vertexBuffers.count) == 1
+                expect(subdividedCone.submeshes.count) == 1
             }
         }
         
