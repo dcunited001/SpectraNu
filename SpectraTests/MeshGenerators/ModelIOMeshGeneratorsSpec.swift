@@ -10,6 +10,8 @@
 import Quick
 import Nimble
 import Swinject
+import MetalKit
+import simd
 
 class ModelIOMeshGeneratorsSpec: QuickSpec {
     
@@ -34,84 +36,116 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         let spectraXML = SpectraXML(parser: parser, data: xmlData)
         spectraXML.parse(assetContainer, options: [:])
         
-        pending("BoxMeshGen (not implemented in Model I/O)") {
-            let box: MeshGenerator = self.containerGet(assetContainer, key: "box_mesh_gen")!
-            let box2: MeshGenerator = self.containerGet(assetContainer, key: "box_mesh_gen2")!
-            
-            it("provides the basic model i/o mesh generators") {
-                
-            }
-            
-            it("allows the for the extension of the basic mesh generator") {
-                
-            }
-        }
+        let device = MTLCreateSystemDefaultDevice()!
+        let allocator = MTKMeshBufferAllocator(device: device)
         
         describe("EllipsoidMeshGen") {
-            let ellisoid: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoid_mesh_gen")!
-            let ellisoid2: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoid_mesh_gen2")!
+            let ellipsoid = assetContainer.resolve(MeshGenerator.self, name: "ellipsoid_mesh_gen") as! EllipsoidMeshGen
+            let ellipsoid2 = assetContainer.resolve(MeshGenerator.self, name: "ellipsoid_mesh_gen2") as! EllipsoidMeshGen
             
-            it("provides the basic model i/o mesh generators") {
-                
+            ellipsoid.allocator = allocator
+            ellipsoid2.allocator = allocator
+            
+            it("can extend the model i/o mesh generators") {
+                expect(SpectraSimd.compareFloat3(ellipsoid.radii, with: float3(10, 10, 10))).to(beTrue())
+                expect(ellipsoid.radialSegments) == 30
+                expect(ellipsoid.verticalSegments) == 10
+                expect(SpectraSimd.compareFloat3(ellipsoid2.radii, with: float3(5, 5, 5))).to(beTrue())
+                expect(ellipsoid2.radialSegments) == 5
+                expect(ellipsoid2.verticalSegments) == 5
             }
             
-            it("allows the for the extension of the basic mesh generator") {
+            it("can generate a MDLMesh with the appropriate vertices & submeshes") {
+                // TODO: use objects instantiated via XML
                 
+                let ellipsoidMesh = ellipsoid.generate(assetContainer)
+                let ellipsoidMesh2: MDLMesh = ellipsoid2.generate(assetContainer)
+                
+                expect(ellipsoidMesh.vertexCount) == 281
+                expect(ellipsoidMesh.submeshes.count) == 1
+                expect(ellipsoidMesh.vertexBuffers.count) == 1
+                
+                expect(ellipsoidMesh.vertexDescriptor.attributes[0].name) == "position"
+                expect(ellipsoidMesh.vertexDescriptor.attributes[0].offset) == 0
+                expect(ellipsoidMesh.vertexDescriptor.attributes[1].name) == "normal"
+                expect(ellipsoidMesh.vertexDescriptor.attributes[1].offset) == 12
+                expect(ellipsoidMesh.vertexDescriptor.attributes[2].name) == "textureCoordinate"
+                expect(ellipsoidMesh.vertexDescriptor.attributes[2].offset) == 24
+                
+                expect(ellipsoidMesh2.vertexCount) == 26
+                expect(ellipsoidMesh.submeshes.count) == 1
+                expect(ellipsoidMesh.vertexBuffers.count) == 1
             }
         }
         
         describe("EllipticalConeMeshGen") {
-            let ellipticCone: MeshGenerator = self.containerGet(assetContainer, key: "elliptical_cone_mesh_gen")!
-            let ellipticCone2: MeshGenerator = self.containerGet(assetContainer, key: "elliptic_cone_mesh_gen2")!
+            let coneGen = assetContainer.resolve(MeshGenerator.self, name: "elliptical_cone_mesh_gen2") as! EllipticalConeMeshGen
             
-            
-            it("provides the basic model i/o mesh generators") {
-                
+            it("can extend the model i/o mesh generators") {
+                expect(coneGen.height) == 100.0
+                expect(SpectraSimd.compareFloat2(coneGen.radii, with: float2(5, 5))).to(beTrue())
+                expect(coneGen.radialSegments) == 5
+                expect(coneGen.verticalSegments) == 5
             }
             
-            it("allows the for the extension of the basic mesh generator") {
+            it("can generate a MDLMesh with the appropriate vertices & submeshes") {
+                let cone = assetContainer.resolve(MDLMesh.self, name: "elliptical_cone_mesh2")!
                 
+                expect(cone.submeshes.count) == 1
+                expect(cone.vertexBuffers.count) == 1
+                expect(cone.vertexCount) == 26
+                
+            }
+
+        }
+        
+//        describe("CylinderMeshGen") {
+//            let cylinder: MeshGenerator = self.containerGet(assetContainer, key: "cylinder_mesh_gen")!
+//            let cylinder2: MeshGenerator = self.containerGet(assetContainer, key: "cylinder_mesh_gen2")!
+//            
+//            it("can extend the model i/o mesh generators") {
+//                
+//            }
+//        }
+//
+//
+//        describe("IcosahedronMeshGen") {
+//            let icosahedron: MeshGenerator = self.containerGet(assetContainer, key: "icosahedron_mesh_gen")!
+//            let icosahedron2: MeshGenerator = self.containerGet(assetContainer, key: "icosahedron_mesh_gen2")!
+//
+//
+//            it("can extend the model i/o mesh generators") {
+//
+//            }
+//        }
+
+        describe("SubdivisionMeshGen") {
+            let subdivide = assetContainer.resolve(MeshGenerator.self, name: "subdivision_mesh_gen") as! SubdivisionMeshGen
+            subdivide.meshRef = "ellipsoid_mesh2"
+            let subdivide2 = assetContainer.resolve(MeshGenerator.self, name: "subdivision_mesh_gen2") as! SubdivisionMeshGen
+            
+            it("can extend the model i/o mesh generators") {
+
             }
         }
         
-        describe("CylinderMeshGen") {
-            let cylinder: MeshGenerator = self.containerGet(assetContainer, key: "cylinder_mesh_gen")!
-            let cylinder2: MeshGenerator = self.containerGet(assetContainer, key: "cylinder_mesh_gen2")!
-            
-            it("provides the basic model i/o mesh generators") {
-                
-            }
-            
-            it("allows the for the extension of the basic mesh generator") {
-                
-            }
-        }
+//        pending("BoxMeshGen (not implemented in Model I/O)") {
+//            let box: MeshGenerator = self.containerGet(assetContainer, key: "box_mesh_gen")!
+//            let box2: MeshGenerator = self.containerGet(assetContainer, key: "box_mesh_gen2")!
+//            
+//            it("can extend the model i/o mesh generators") {
+//                
+//            }
+//        }
         
-        pending("PlaneDimMeshGen (not implemented in Model I/O)") {
-            let plane: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen")!
-            let plane2: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen2")!
-            
-            it("provides the basic model i/o mesh generators") {
-                
-            }
-            
-            it("allows the for the extension of the basic mesh generator") {
-                
-            }
-        }
-        
-        describe("IcosahedronMeshGen") {
-            let icosahedron: MeshGenerator = self.containerGet(assetContainer, key: "icosahedron_mesh_gen")!
-            let icosahedron2: MeshGenerator = self.containerGet(assetContainer, key: "icosahedron_mesh_gen2")!
-            
-            it("provides the basic model i/o mesh generators") {
-                
-            }
-            
-            it("allows the for the extension of the basic mesh generator") {
-                
-            }
-        }
+        //        pending("PlaneDimMeshGen (not implemented in Model I/O)") {
+        //            let plane: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen")!
+        //            let plane2: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen2")!
+        //
+        //            it("can extend the model i/o mesh generators") {
+        //                
+        //            }
+        //        }
         
     }
 }

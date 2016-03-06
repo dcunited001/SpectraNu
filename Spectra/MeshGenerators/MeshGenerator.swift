@@ -12,8 +12,11 @@ import simd
 import Swinject
 
 public protocol MeshGenerator {
-    func generate(container: Container, args: [String: GeneratorArg]) -> MDLMesh
     init(container: Container, args: [String: GeneratorArg])
+    
+    func generate(container: Container, args: [String: GeneratorArg]) -> MDLMesh
+    func processArgs(container: Container, args: [String: GeneratorArg])
+    func copy(container: Container) -> MeshGenerator
 }
 
 //public typealias MeshGeneratorMonad = ((Container, ) -> )

@@ -236,10 +236,8 @@ public class SpectraXML {
                     meshGenNode.parseXML(container, elem: child, options: options)
                     let meshGen = meshGenNode.createGenerator(container, options: options)
                     
-//                    let meshGen = SpectraXMLMeshGeneratorNode().parse(container, elem: child, options: options)
                     container.register(MeshGenerator.self, name: key!) { _ in
-                        // TODO: copy meshGen
-                        return meshGen
+                        return meshGen.copy(container)
                     }
                 case .Camera:
                     let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
@@ -563,7 +561,7 @@ public class SpectraXMLMeshNode: SpectraXMLNode {
 }
 
 public class MeshGeneratorNode {
-    public var type: String = "tetrahedron"
+    public var type: String = "tetrahedron_mesh_gen"
     public var args: [String: GeneratorArg] = [:]
     
     public func parseXML(container: Container, elem: XMLElement, options: [String : Any] = [:]) {
@@ -582,8 +580,10 @@ public class MeshGeneratorNode {
     }
     
     public func createGenerator(container: Container, options: [String : Any] = [:]) -> MeshGenerator {
-        // TODO: retrieve from container
-        return BoxMeshGen(container: container, args: self.args)
+        
+        let meshGen = container.resolve(MeshGenerator.self, name: self.type)!
+        meshGen.processArgs(container, args: self.args)
+        return meshGen
     }
 }
 
@@ -1207,8 +1207,6 @@ public class SpectraXMLTextureFilterNode: SpectraXMLNode {
         cp.mipFilter = object.mipFilter
         return cp
     }
-}
-
 }
 
 // TODO: public class SpectraXMLLightNode: SpectraXMLNode {
