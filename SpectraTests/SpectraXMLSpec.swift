@@ -29,7 +29,7 @@ class SpectraXMLSpec: QuickSpec {
         spectraEnumXSD.parseEnumTypes(parser)
         
         let testBundle = NSBundle(forClass: SpectraXMLSpec.self)
-        let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "SpectraXMLSpec")
+        let xmlData: NSData = SpectraXML.readXML(testBundle, filename: "SpectraXMLSpec")
         let assetContainer = Container(parent: parser)
 
         SpectraXML.initParser(parser)

@@ -292,6 +292,19 @@ public class SpectraXML {
             }
         }
     }
+    
+    public class func readXML(bundle: NSBundle, filename: String, bundleResourceName: String? = nil) -> NSData {
+        
+        var resourceBundle: NSBundle = bundle
+        if let resourceName = bundleResourceName {
+            let bundleURL = bundle.URLForResource(resourceName, withExtension: "bundle")
+            resourceBundle = NSBundle(URL: bundleURL!)!
+        }
+        
+        let path = resourceBundle.pathForResource(filename, ofType: "xml")
+        let data = NSData(contentsOfFile: path!)
+        return data!
+    }
 }
 
 public protocol SpectraXMLNode {
