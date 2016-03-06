@@ -329,13 +329,19 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
         
         return asset
     }
+
+    //TODO: ensure asset.copy() returns a deep copy
+//    public static func copy(object: NodeType) -> NodeType {
+//        let cp = MDLAsset()
+//        return cp
+//    }
 }
 
 public class SpectraXMLBufferAllocatorNode: SpectraXMLNode {
     public typealias NodeType = MDLMeshBufferAllocator
     
     public func parse(container: Container, elem: XMLElement, options: [String: Any] =
-[:]) {
+[:]) -> NodeType {
         // TODO: add a MeshBufferAllocatorGenerator protocol
         // - with a generate function (also take an args: [String: GeneratorArg] = [:])
         // - instead of fetching from the container's MDLMeshBufferAllocator.self
@@ -346,7 +352,10 @@ public class SpectraXMLBufferAllocatorNode: SpectraXMLNode {
         if let type = elem.attributes["type"] {
             alloc8 = container.resolve(MDLMeshBufferAllocator.self, name: type)
         } else {
-            alloc8 = MTKMeshBufferAllocator()
+            // TODO: add available mtl devices to a root container
+            // - it will build, but it won't work
+            let mtlDevice = container.resolve(MTLDevice.self, name: "default")!
+            alloc8 = MTKMeshBufferAllocator(device: mtlDevice)
         }
         
         // TODO: how to assign other attributes of a buffer allocator?
