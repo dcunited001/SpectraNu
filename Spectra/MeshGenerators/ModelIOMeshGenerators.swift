@@ -17,18 +17,18 @@ import Swinject
 public class ModelIOMeshGenerators {
     
     public static func loadMeshGenerators(container: Container) {
-        container.register(MeshGenerator.self, name: "box_mesh_gen") { _ in
-            return BoxMeshGen(container: container)
-        }
+//        container.register(MeshGenerator.self, name: "box_mesh_gen") { _ in
+//            return BoxMeshGen(container: container)
+//        }
         container.register(MeshGenerator.self, name: "ellipsoid_mesh_gen") { _ in
             return EllipsoidMeshGen(container: container)
         }
         container.register(MeshGenerator.self, name: "elliptical_cone_mesh_gen") { _ in
             return EllipticalConeMeshGen(container: container)
         }
-        container.register(MeshGenerator.self, name: "plane_mesh_gen") { _ in
-            return PlaneMeshGen(container: container)
-        }
+//        container.register(MeshGenerator.self, name: "plane_mesh_gen") { _ in
+//            return PlaneMeshGen(container: container)
+//        }
         container.register(MeshGenerator.self, name: "icosahedron_mesh_gen") { _ in
             return IcosahedronMeshGen(container: container)
         }
