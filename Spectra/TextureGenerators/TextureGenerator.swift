@@ -10,6 +10,6 @@ import Foundation
 
 public protocol TextureGenerator {
     init(container: Container, args: [String: GeneratorArg])
-    func generate(container: Container, args [String: GeneratorArg])
+    func generate(container: Container, args: [String: GeneratorArg])
 }
 
