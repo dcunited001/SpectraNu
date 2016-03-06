@@ -19,10 +19,16 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        device = MTLCreateSystemDefaultDevice()
-        library = device!.newDefaultLibrary()
+        self.device = MTLCreateSystemDefaultDevice()
+        self.library = device!.newDefaultLibrary()
 
         // Do any additional setup after loading the view.
+        let appBundle = NSBundle(forClass: ViewController.self)
+        let xmlData: NSData = S3DXML.readXML(appBundle, filename: "DefaultPipeline")
+        let s3d = S3DXML(data: xmlData)
+
+        var descMan = DescriptorManager(library: library!)
+        descMan.parseS3DXML(s3d)
     }
 
     override var representedObject: AnyObject? {

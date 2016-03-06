@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Fuzi
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
