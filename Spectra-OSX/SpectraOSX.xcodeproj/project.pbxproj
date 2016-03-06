@@ -21,6 +21,10 @@
 		4317EA051C8C23880019B2E2 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA031C8C23880019B2E2 /* MetalKit.framework */; };
 		4317EA071C8C238D0019B2E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA061C8C238D0019B2E2 /* Foundation.framework */; };
 		4317EA091C8C23920019B2E2 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA081C8C23920019B2E2 /* ModelIO.framework */; };
+		4317EA181C8C31760019B2E2 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA161C8C31760019B2E2 /* Nimble.framework */; };
+		4317EA191C8C31760019B2E2 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA171C8C31760019B2E2 /* Quick.framework */; };
+		4317EA1A1C8C317C0019B2E2 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA161C8C31760019B2E2 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4317EA1B1C8C317C0019B2E2 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA171C8C31760019B2E2 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4334D6881C1F6D2900D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */; };
 		4334D68D1C1F6EE300D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */; };
 		4334D6971C1F73B000D2DCA6 /* Cube.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6951C1F73B000D2DCA6 /* Cube.xml */; };
@@ -116,6 +120,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4317EA1A1C8C317C0019B2E2 /* Nimble.framework in Copy Quick/Nimble Frameworks */,
+				4317EA1B1C8C317C0019B2E2 /* Quick.framework in Copy Quick/Nimble Frameworks */,
 			);
 			name = "Copy Quick/Nimble Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +153,8 @@
 		4317EA031C8C23880019B2E2 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		4317EA061C8C238D0019B2E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4317EA081C8C23920019B2E2 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
+		4317EA161C8C31760019B2E2 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = ../Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
+		4317EA171C8C31760019B2E2 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 		4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
 		4334D6951C1F73B000D2DCA6 /* Cube.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Cube.xml; sourceTree = "<group>"; };
@@ -243,6 +251,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4317EA191C8C31760019B2E2 /* Quick.framework in Frameworks */,
+				4317EA181C8C31760019B2E2 /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +446,8 @@
 		43EAF84C1C0A301300EA2B30 = {
 			isa = PBXGroup;
 			children = (
+				4317EA161C8C31760019B2E2 /* Nimble.framework */,
+				4317EA171C8C31760019B2E2 /* Quick.framework */,
 				4317EA081C8C23920019B2E2 /* ModelIO.framework */,
 				4317EA061C8C238D0019B2E2 /* Foundation.framework */,
 				4317EA021C8C23880019B2E2 /* Metal.framework */,
