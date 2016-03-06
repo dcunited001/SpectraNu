@@ -202,9 +202,6 @@
          location = "group:S3DXMLSpec.swift">
       </FileRef>
       <FileRef
-         location = "group:SceneGraphXMLSpec.swift">
-      </FileRef>
-      <FileRef
          location = "group:AssetManagerSpec.swift">
       </FileRef>
       <FileRef
