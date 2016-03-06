@@ -106,9 +106,6 @@
             location = "group:Quad.swift">
          </FileRef>
          <FileRef
-            location = "group:TriangularQuadTesselationGenerator.swift">
-         </FileRef>
-         <FileRef
             location = "group:ArchimedeanSolids.swift">
          </FileRef>
          <FileRef
@@ -118,7 +115,7 @@
             location = "group:RandomMeshGenerators.swift">
          </FileRef>
          <FileRef
-            location = "group:BasicTessellationGenerators.swift">
+            location = "group:/Users/dc/dev/apple/Spectra/Spectra/MeshGenerators/BasicTessellation.swift">
          </FileRef>
       </Group>
       <Group

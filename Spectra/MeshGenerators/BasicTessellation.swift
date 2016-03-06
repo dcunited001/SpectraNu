@@ -1,4 +1,46 @@
 //
+//  BasicTessellationGenerators.swift
+//  
+//
+//  Created by David Conner on 3/5/16.
+//
+//
+
+import Foundation
+import Metal
+import ModelIO
+import simd
+
+public class BasicTessellationGenerators {
+    public static func loadMeshGenerators(container: Container) {
+        
+    }
+}
+
+// TODO: decide on whether the distinction between generators for each 
+//   primitive should be at the class level
+
+public class MidpointTessellationMeshGen: MeshGenerator {
+    public required init(container: Container, args: [String: GeneratorArg] = [:]) {
+        
+    }
+    
+    public func generate(container: Container, args: [String: GeneratorArg] = [:]) -> MDLMesh {
+        return MDLMesh()
+    }
+}
+
+public class SierpenskiTessellationMeshGen: MeshGenerator {
+    public required init(container: Container, args: [String: GeneratorArg] = [:]) {
+        
+    }
+    
+    public func generate(container: Container, args: [String: GeneratorArg] = [:]) -> MDLMesh {
+        return MDLMesh()
+    }
+}
+
+//
 //  TriangularQuadTesselationGenerator.swift
 //  Pods
 //
@@ -10,10 +52,10 @@
 //import simd
 //
 //public class TriangularQuadTesselationGenerator: MeshGenerator {
-//    
+//
 //    var rowCount: Int = 10
 //    var colCount: Int = 10
-//    
+//
 //    public required init(args: [String: String] = [:]) {
 //        if let rCount = args["rowCount"] {
 //            rowCount = Int(rCount)!
@@ -22,7 +64,7 @@
 //            colCount = Int(cCount)!
 //        }
 //    }
-//    
+//
 //    public func getData(args: [String: AnyObject] = [:]) -> [String:[float4]] {
 //        return [
 //            "pos": getVertices(args),
@@ -30,7 +72,7 @@
 //            "tex": getTexCoords(args)
 //        ]
 //    }
-//    
+//
 //    public func getDataMaps(args: [String: AnyObject] = [:]) -> [String:[[Int]]] {
 //        return [
 //            "triangle_vertex_map": getTriangleVertexMap(args),
@@ -38,7 +80,7 @@
 //            "face_triangle_map": getFaceTriangleMap(args)
 //        ]
 //    }
-//    
+//
 //    public func getVertices(args: [String: AnyObject] = [:]) -> [float4] {
 //        return []
 //    }
