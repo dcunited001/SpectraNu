@@ -91,6 +91,13 @@
          </FileRef>
       </Group>
       <Group
+         location = "group:TextureGenerators"
+         name = "TextureGenerators">
+         <FileRef
+            location = "group:TextureGenerator.swift">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:MeshGenerators"
          name = "MeshGenerators">
          <FileRef
