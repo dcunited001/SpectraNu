@@ -69,6 +69,50 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="mdlGeometryType" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="5" value="TypeVariableTopology"/>
+      <xs:enumeration id="0" value="TypePoints"/>
+      <xs:enumeration id="3" value="TypeTriangleStrips"/>
+      <xs:enumeration id="1" value="TypeLines"/>
+      <xs:enumeration id="2" value="TypeTriangles"/>
+      <xs:enumeration id="4" value="TypeQuads"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mdlMeshBufferType" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="1" value="Vertex"/>
+      <xs:enumeration id="2" value="Index"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mdlIndexBitDepth" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="0" value="Invalid"/>
+      <xs:enumeration id="16" value="UInt16"/>
+      <xs:enumeration id="32" value="UInt32"/>
+      <xs:enumeration id="8" value="UInt8"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="mdlLightType" mtl-enum="true">
+    <xs:restriction base="xs:string">
+      <xs:enumeration id="11" value="Environment"/>
+      <xs:enumeration id="2" value="Directional"/>
+      <xs:enumeration id="3" value="Spot"/>
+      <xs:enumeration id="5" value="Linear"/>
+      <xs:enumeration id="9" value="Photometric"/>
+      <xs:enumeration id="1" value="Ambient"/>
+      <xs:enumeration id="6" value="DiscArea"/>
+      <xs:enumeration id="8" value="SuperElliptical"/>
+      <xs:enumeration id="10" value="Probe"/>
+      <xs:enumeration id="4" value="Point"/>
+      <xs:enumeration id="0" value="Unknown"/>
+      <xs:enumeration id="7" value="RectangularArea"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="mdlVertexFormat" mtl-enum="true">
     <xs:restriction base="xs:string">
       <xs:enumeration id="65536" value="UCharBits"/>

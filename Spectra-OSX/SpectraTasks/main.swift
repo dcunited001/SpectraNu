@@ -57,7 +57,11 @@ let enumsForModelIO: [String: [String: UInt]] = [
     "mdlMaterialPropertyType": SpectraEnumDefs.mdlMaterialPropertyType,
     "mdlMaterialTextureWrapMode": SpectraEnumDefs.mdlMaterialTextureWrapMode,
     "mdlMaterialTextureFilterMode": SpectraEnumDefs.mdlMaterialTextureFilterMode,
-    "mdlMaterialMipMapFilterMode": SpectraEnumDefs.mdlMaterialMipMapFilterMode
+    "mdlMaterialMipMapFilterMode": SpectraEnumDefs.mdlMaterialMipMapFilterMode,
+    "mdlMeshBufferType": SpectraEnumDefs.mdlMeshBufferType,
+    "mdlGeometryType": SpectraEnumDefs.mdlGeometryType,
+    "mdlIndexBitDepth": SpectraEnumDefs.mdlIndexBitDepth,
+    "mdlLightType": SpectraEnumDefs.mdlLightType
 ]
 
 let enumsForMetal: [String: [String: UInt]] = [
@@ -78,12 +82,30 @@ let enumsForMetal: [String: [String: UInt]] = [
     "mtlStorageMode": MetalEnumDefs.mtlStorageMode,
     "mtlPurgeableState": MetalEnumDefs.mtlPurgeableState,
     "mtlPixelFormat": MetalEnumDefs.mtlPixelFormat,
-    "mtlResourceOptions": MetalEnumDefs.mtlResourceOptions,
-    "mtlTextureUsage": MetalEnumDefs.mtlTextureUsage
+    "mtlResourceOptions": MetalEnumDefs.mtlResourceOptions, // option set
+    "mtlTextureUsage": MetalEnumDefs.mtlTextureUsage, // option set
+    "mtlPrimitiveType": MetalEnumDefs.mtlPrimitiveType,
+    "mtlIndexType": MetalEnumDefs.mtlIndexType,
+    "mtlVisibilityResultMode": MetalEnumDefs.mtlVisibilityResultMode,
+    "mtlCullMode": MetalEnumDefs.mtlCullMode,
+    "mtlWinding": MetalEnumDefs.mtlWinding,
+    "mtlDepthClipMode": MetalEnumDefs.mtlDepthClipMode,
+    "mtlTriangleFillMode": MetalEnumDefs.mtlTriangleFillMode,
+    "mtlDataType": MetalEnumDefs.mtlDataType,
+    "mtlArgumentType": MetalEnumDefs.mtlArgumentType,
+    "mtlArgumentAccess": MetalEnumDefs.mtlArgumentAccess,
+    "mtlBlitOption": MetalEnumDefs.mtlBlitOption, // option set
+    "mtlBufferStatus": MetalEnumDefs.mtlBufferStatus,
+    "mtlCommandBufferError": MetalEnumDefs.mtlCommandBufferError,
+    "mtlFeatureSet": MetalEnumDefs.mtlFeatureSet,
+    "mtlPipelineOption": MetalEnumDefs.mtlPipelineOption, // option set
+    "mtlFunctionType": MetalEnumDefs.mtlFunctionType,
+    "mtlLibraryError": MetalEnumDefs.mtlLibraryError,
+    "mtlRenderPipelineError": MetalEnumDefs.mtlRenderPipelineError,
+    "mtlPrimitiveTopologyClass": MetalEnumDefs.mtlPrimitiveTopologyClass
 ]
 
 updateSpectraEnums(projectPath + "/../SpectraAssets/SpectraEnums.xsd", enums: enumsForModelIO)
-
 updateSpectraEnums(projectPath + "/../SpectraAssets/MetalEnums.xsd", enums: enumsForMetal)
 
 

@@ -136,6 +136,41 @@ class SpectraEnumDefs {
         "Linear": MDLMaterialMipMapFilterMode.Linear.rawValue
     ]
     
+    static let mdlMeshBufferType = [
+        "Vertex": MDLMeshBufferType.Vertex.rawValue,
+        "Index": MDLMeshBufferType.Index.rawValue
+    ]
+    
+    static let mdlGeometryType = [
+        "TypePoints": UInt(MDLGeometryType.TypePoints.rawValue),
+        "TypeLines": UInt(MDLGeometryType.TypeLines.rawValue),
+        "TypeTriangles": UInt(MDLGeometryType.TypeTriangles.rawValue),
+        "TypeTriangleStrips": UInt(MDLGeometryType.TypeTriangleStrips.rawValue),
+        "TypeQuads": UInt(MDLGeometryType.TypeQuads.rawValue),
+        "TypeVariableTopology": UInt(MDLGeometryType.TypeVariableTopology.rawValue)
+    ]
+    
+    static let mdlIndexBitDepth = [
+        "Invalid": MDLIndexBitDepth.Invalid.rawValue,
+        "UInt8": MDLIndexBitDepth.UInt8.rawValue,
+        "UInt16": MDLIndexBitDepth.UInt16.rawValue,
+        "UInt32": MDLIndexBitDepth.UInt32.rawValue
+    ]
+    
+    static let mdlLightType = [
+        "Unknown": MDLLightType.Unknown.rawValue,
+        "Ambient": MDLLightType.Ambient.rawValue,
+        "Directional": MDLLightType.Directional.rawValue,
+        "Spot": MDLLightType.Spot.rawValue,
+        "Point": MDLLightType.Point.rawValue,
+        "Linear": MDLLightType.Linear.rawValue,
+        "DiscArea": MDLLightType.DiscArea.rawValue,
+        "RectangularArea": MDLLightType.RectangularArea.rawValue,
+        "SuperElliptical": MDLLightType.SuperElliptical.rawValue,
+        "Photometric": MDLLightType.Photometric.rawValue,
+        "Probe": MDLLightType.Probe.rawValue,
+        "Environment": MDLLightType.Environment.rawValue
+    ]
 }
 
 class MetalEnumDefs {
@@ -398,4 +433,196 @@ class MetalEnumDefs {
         "PixelFormatView": MTLTextureUsage.PixelFormatView.rawValue
     ]
     
+    //
+    
+    static let mtlPrimitiveType = [
+        "Point": MTLPrimitiveType.Point.rawValue,
+        "Line": MTLPrimitiveType.Line.rawValue,
+        "LineStrip": MTLPrimitiveType.LineStrip.rawValue,
+        "Triangle": MTLPrimitiveType.Triangle.rawValue,
+        "TriangleStrip": MTLPrimitiveType.TriangleStrip.rawValue
+    ]
+    
+    static let mtlIndexType = [
+        "UInt16": MTLIndexType.UInt16.rawValue,
+        "UInt32": MTLIndexType.UInt32.rawValue
+    ]
+    
+    static let mtlVisibilityResultMode = [
+        "Disabled": MTLVisibilityResultMode.Disabled.rawValue,
+        "Boolean": MTLVisibilityResultMode.Boolean.rawValue,
+        "Counting": MTLVisibilityResultMode.Counting.rawValue
+    ]
+    
+    static let mtlCullMode = [
+        "None": MTLCullMode.None.rawValue,
+        "Front": MTLCullMode.Front.rawValue,
+        "Back": MTLCullMode.Back.rawValue
+    ]
+    
+    static let mtlWinding = [
+        "Clockwise": MTLWinding.Clockwise.rawValue,
+        "CounterClockwise": MTLWinding.CounterClockwise.rawValue
+    ]
+    
+    static let mtlDepthClipMode = [
+        "Clamp": MTLDepthClipMode.Clamp.rawValue,
+        "Clip": MTLDepthClipMode.Clip.rawValue
+    ]
+    
+    static let mtlTriangleFillMode = [
+        "Fill": MTLTriangleFillMode.Fill.rawValue,
+        "Lines": MTLTriangleFillMode.Lines.rawValue
+    ]
+    
+    static let mtlDataType = [
+        "None": MTLDataType.None.rawValue,
+        
+        "Struct": MTLDataType.Struct.rawValue,
+        "Array": MTLDataType.Array.rawValue,
+        "Float": MTLDataType.Float.rawValue,
+        
+        "Float2": MTLDataType.Float2.rawValue,
+        "Float3": MTLDataType.Float3.rawValue,
+        "Float4": MTLDataType.Float4.rawValue,
+        
+        "Float2x2": MTLDataType.Float2x2.rawValue,
+        "Float2x3": MTLDataType.Float2x3.rawValue,
+        "Float2x4": MTLDataType.Float2x4.rawValue,
+        
+        "Float3x2": MTLDataType.Float3x2.rawValue,
+        "Float3x3": MTLDataType.Float3x3.rawValue,
+        "Float3x4": MTLDataType.Float3x4.rawValue,
+        
+        "Float4x2": MTLDataType.Float4x2.rawValue,
+        "Float4x3": MTLDataType.Float4x3.rawValue,
+        "Float4x4": MTLDataType.Float4x4.rawValue,
+        "Half": MTLDataType.Half.rawValue,
+        "Half2": MTLDataType.Half2.rawValue,
+        "Half3": MTLDataType.Half3.rawValue,
+        "Half4": MTLDataType.Half4.rawValue,
+        
+        "Half2x2": MTLDataType.Half2x2.rawValue,
+        "Half2x3": MTLDataType.Half2x3.rawValue,
+        "Half2x4": MTLDataType.Half2x4.rawValue,
+        
+        "Half3x2": MTLDataType.Half3x2.rawValue,
+        "Half3x3": MTLDataType.Half3x3.rawValue,
+        "Half3x4": MTLDataType.Half3x4.rawValue,
+        
+        "Half4x2": MTLDataType.Half4x2.rawValue,
+        "Half4x3": MTLDataType.Half4x3.rawValue,
+        "Half4x4": MTLDataType.Half4x4.rawValue,
+        
+        "Int": MTLDataType.Int.rawValue,
+        "Int2": MTLDataType.Int2.rawValue,
+        "Int3": MTLDataType.Int3.rawValue,
+        "Int4": MTLDataType.Int4.rawValue,
+        
+        "UInt": MTLDataType.UInt.rawValue,
+        "UInt2": MTLDataType.UInt2.rawValue,
+        "UInt3": MTLDataType.UInt3.rawValue,
+        "UInt4": MTLDataType.UInt4.rawValue,
+        
+        "Short": MTLDataType.Short.rawValue,
+        "Short2": MTLDataType.Short2.rawValue,
+        "Short3": MTLDataType.Short3.rawValue,
+        "Short4": MTLDataType.Short4.rawValue,
+        
+        "UShort": MTLDataType.UShort.rawValue,
+        "UShort2": MTLDataType.UShort2.rawValue,
+        "UShort3": MTLDataType.UShort3.rawValue,
+        "UShort4": MTLDataType.UShort4.rawValue,
+        
+        "Char": MTLDataType.Char.rawValue,
+        "Char2": MTLDataType.Char2.rawValue,
+        "Char3": MTLDataType.Char3.rawValue,
+        "Char4": MTLDataType.Char4.rawValue,
+        
+        "UChar": MTLDataType.UChar.rawValue,
+        "UChar2": MTLDataType.UChar2.rawValue,
+        "UChar3": MTLDataType.UChar3.rawValue,
+        "UChar4": MTLDataType.UChar4.rawValue,
+        
+        "Bool": MTLDataType.Bool.rawValue,
+        "Bool2": MTLDataType.Bool2.rawValue,
+        "Bool3": MTLDataType.Bool3.rawValue,
+        "Bool4": MTLDataType.Bool4.rawValue
+    ]
+    
+    static let mtlArgumentType = [
+        "Buffer": MTLArgumentType.Buffer.rawValue,
+        "ThreadgroupMemory": MTLArgumentType.ThreadgroupMemory.rawValue,
+        "Texture": MTLArgumentType.Texture.rawValue,
+        "Sampler": MTLArgumentType.Sampler.rawValue
+    ]
+    
+    static let mtlArgumentAccess = [
+        "ReadOnly": MTLArgumentAccess.ReadOnly.rawValue,
+        "ReadWrite": MTLArgumentAccess.ReadWrite.rawValue,
+        "WriteOnly": MTLArgumentAccess.WriteOnly.rawValue
+    ]
+    
+    // option set type
+    static let mtlBlitOption = [
+        "None": MTLBlitOption.None.rawValue,
+        "DepthFromDepthStencil": MTLBlitOption.DepthFromDepthStencil.rawValue,
+        "StencilFromDepthStencil": MTLBlitOption.StencilFromDepthStencil.rawValue
+    ]
+    
+    static let mtlBufferStatus = [
+        "NotEnqueued": MTLCommandBufferStatus.NotEnqueued.rawValue,
+        "Enqueued": MTLCommandBufferStatus.Enqueued.rawValue,
+        "Committed": MTLCommandBufferStatus.Committed.rawValue,
+        "Scheduled": MTLCommandBufferStatus.Scheduled.rawValue,
+        "Completed": MTLCommandBufferStatus.Completed.rawValue,
+        "Error": MTLCommandBufferStatus.Error.rawValue
+    ]
+    
+    static let mtlCommandBufferError = [
+        "None": MTLCommandBufferError.None.rawValue,
+        "Internal": MTLCommandBufferError.Internal.rawValue,
+        "Timeout": MTLCommandBufferError.Timeout.rawValue,
+        "PageFault": MTLCommandBufferError.PageFault.rawValue,
+        "Blacklisted": MTLCommandBufferError.Blacklisted.rawValue,
+        "NotPermitted": MTLCommandBufferError.NotPermitted.rawValue,
+        "OutOfMemory": MTLCommandBufferError.OutOfMemory.rawValue,
+        "InvalidResource": MTLCommandBufferError.InvalidResource.rawValue
+    ]
+    
+    static let mtlFeatureSet = [
+        "OSX_GPUFamily1_v1": MTLFeatureSet.OSX_GPUFamily1_v1.rawValue
+    ]
+    
+    static let mtlPipelineOption = [
+        "None": MTLPipelineOption.None.rawValue,
+        "ArgumentInfo": MTLPipelineOption.ArgumentInfo.rawValue,
+        "BufferTypeInfo": MTLPipelineOption.BufferTypeInfo.rawValue
+    ]
+    
+    static let mtlFunctionType = [
+        "Vertex": MTLFunctionType.Vertex.rawValue,
+        "Fragment": MTLFunctionType.Fragment.rawValue,
+        "Kernel": MTLFunctionType.Kernel.rawValue
+    ]
+    
+    static let mtlLibraryError = [
+        "Unsupported": MTLLibraryError.Unsupported.rawValue,
+        "Internal": MTLLibraryError.Internal.rawValue,
+        "CompileFailure": MTLLibraryError.CompileFailure.rawValue,
+        "CompileWarning": MTLLibraryError.CompileWarning.rawValue
+    ]
+    
+    static let mtlRenderPipelineError = [
+        "Internal": MTLRenderPipelineError.Internal.rawValue,
+        "Unsupported": MTLRenderPipelineError.Unsupported.rawValue,
+        "InvalidInput": MTLRenderPipelineError.InvalidInput.rawValue
+    ]
+    
+    static let mtlPrimitiveTopologyClass = [
+        "Unspecified": MTLPrimitiveTopologyClass.Unspecified.rawValue,
+        "Point": MTLPrimitiveTopologyClass.Point.rawValue,
+        "Line": MTLPrimitiveTopologyClass.Line.rawValue,
+        "Triangle": MTLPrimitiveTopologyClass.Triangle.rawValue
+    ]
 }
