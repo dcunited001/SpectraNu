@@ -7,7 +7,7 @@
 <root>
     
     <!--
-     must define any reusable vertex-attribute's ahead-of-time, 
+     must define any reusable vertex-attribute's ahead-of-time,
      - unless you are going to use a packed data format
      -->
     
@@ -29,8 +29,8 @@
     </vertex-descriptor>
     
     <!-- TODO: test parent-descriptor for vertex-descriptor or remove -->
-
-    <!-- can mix/match ref'd attributes with new ones -->
+     
+     <!-- can mix/match ref'd attributes with new ones -->
     <vertex-descriptor key="vert_pos_rgb_float">
         <vertex-attributes>
             <vertex-attribute ref="pos_float4"/>
@@ -112,31 +112,31 @@
     <transform key="xform_compose1" translation="5.0 5.0 100.0" rotation="0.5 0.5 1.0" scale="10.0 10.0 10.0" />
     <transform key="xform_compose2" scale="10.0 10.0 10.0" shear="10.0 20.0 30.0" />
     
-<!--    <!-- register mesh generators -->
-<!--    <mesh-generator key="cube_gen" type="cube" />-->
-<!--    <mesh-generator key="quad_gen" type="quad" />-->
-<!--    <mesh-generator key="tesselationGen" type="triangular_quad_tesselation_gen">-->
-<!--        <mesh-generator-args>-->
-<!--            <mesh-generator-arg type="String" name="row_count" value="100" />-->
-<!--            <mesh-generator-arg type="String" name="col_count" value="100" />-->
-<!--        </mesh-generator-args>-->
-<!--    </mesh-generator>-->
-<!--    -->
-<!--    <!-- create mesh using generator -->
-<!--    <mesh key="cube_mesh" mesh-generator="cube_gen" />-->
-<!--    <mesh key="quad_mesh" mesh-generator="quad_gen" />-->
-<!--    -->
-<!--    <!-- create mesh using generator requiring mesh-generator-args -->
-<!--    <mesh key="tesselated_quad" mesh-generator="tesselation_gen" />-->
-<!--    -->
-<!--    <!-- create mesh using generator requiring generate-args -->
-<!--    <mesh key="tesselated_quad_ref" mesh-generator="tesselation_gen">-->
-<!--        <generate-args>-->
-<!--            <generate-arg type="String" name="mesh_ref" value="quad_mesh" />-->
-<!--        </generate-args>-->
-<!--    </mesh>-->
-<!--    -->
-
+    <!--    <!-- register mesh generators -->
+    <!--    <mesh-generator key="cube_gen" type="cube" />-->
+    <!--    <mesh-generator key="quad_gen" type="quad" />-->
+    <!--    <mesh-generator key="tesselationGen" type="triangular_quad_tesselation_gen">-->
+    <!--        <mesh-generator-args>-->
+    <!--            <mesh-generator-arg type="String" name="row_count" value="100" />-->
+    <!--            <mesh-generator-arg type="String" name="col_count" value="100" />-->
+    <!--        </mesh-generator-args>-->
+    <!--    </mesh-generator>-->
+    <!--    -->
+    <!--    <!-- create mesh using generator -->
+    <!--    <mesh key="cube_mesh" mesh-generator="cube_gen" />-->
+    <!--    <mesh key="quad_mesh" mesh-generator="quad_gen" />-->
+    <!--    -->
+    <!--    <!-- create mesh using generator requiring mesh-generator-args -->
+    <!--    <mesh key="tesselated_quad" mesh-generator="tesselation_gen" />-->
+    <!--    -->
+    <!--    <!-- create mesh using generator requiring generate-args -->
+    <!--    <mesh key="tesselated_quad_ref" mesh-generator="tesselation_gen">-->
+    <!--        <generate-args>-->
+    <!--            <generate-arg type="String" name="mesh_ref" value="quad_mesh" />-->
+    <!--        </generate-args>-->
+    <!--    </mesh>-->
+    <!--    -->
+    
     
     <!-- create mesh by specifying points -->
     
@@ -149,37 +149,37 @@
         <transform ref="xform_translate" />
         <camera ref="default" />
         <stereoscopic-camera ref="default" />
-        <!-- 
-         TODO: add some meshes 
+        <!--
+         TODO: add some meshes
          -->
     </object>
     
-<!--    <object key="scene2">-->
-<!--        <transform ref="xform_translate" />-->
-<!--        <camera ref="default" />-->
-<!--        <stereoscopic-camera ref="default" />-->
-<!--    </object>-->
-<!--    -->
-<!--    <object key="scene2">-->
-<!--        <transform ref="xform_translate" />-->
-<!--        <camera ref="default" />-->
-<!--        <stereoscopic-camera ref="default" />-->
-<!--    </object>-->
-
-<texture-filter key="default" />
-<texture-filter key="filter_clamp" r-wrap-mode="Clamp" t-wrap-mode="Clamp" s-wrap-mode"Clamp" />
-<texture-filter key="filter_repeat" r-wrap-mode="Repeat" t-wrap-mode="Repeat" s-wrap-mode"Repeat" />
-<texture-filter key="filter_mirror" r-wrap-mode="Mirror" t-wrap-mode="Mirror" s-wrap-mode"Mirror" />
-<texture-filter key="filter_linear" min-filter="Linear" mag-filter="Linear" mip-filter="Linear" />
-<texture-filter key="filter_nearest" min-filter="Nearest" mag-filter="Nearest" mip-filter="Nearest" />
-
-<texture-sampler key="default" />
-<texture-sampler key="sampler1">
-    <texture-filter ref="default" />
-    <texture ref="default" />
-</texture-sampler>
-<texture-sampler key="sampler_with_transform">
-    <transform ref="default" />
-</texture-sampler>
-
+    <!--    <object key="scene2">-->
+    <!--        <transform ref="xform_translate" />-->
+    <!--        <camera ref="default" />-->
+    <!--        <stereoscopic-camera ref="default" />-->
+    <!--    </object>-->
+    <!--    -->
+    <!--    <object key="scene2">-->
+    <!--        <transform ref="xform_translate" />-->
+    <!--        <camera ref="default" />-->
+    <!--        <stereoscopic-camera ref="default" />-->
+    <!--    </object>-->
+    
+    <texture-filter key="default" />
+    <texture-filter key="filter_clamp" r-wrap-mode="Clamp" t-wrap-mode="Clamp" s-wrap-mode"Clamp" />
+    <texture-filter key="filter_repeat" r-wrap-mode="Repeat" t-wrap-mode="Repeat" s-wrap-mode"Repeat" />
+    <texture-filter key="filter_mirror" r-wrap-mode="Mirror" t-wrap-mode="Mirror" s-wrap-mode"Mirror" />
+    <texture-filter key="filter_linear" min-filter="Linear" mag-filter="Linear" mip-filter="Linear" />
+    <texture-filter key="filter_nearest" min-filter="Nearest" mag-filter="Nearest" mip-filter="Nearest" />
+    
+    <texture-sampler key="default" />
+    <texture-sampler key="sampler1">
+        <texture-filter ref="default" />
+        <texture ref="default" />
+    </texture-sampler>
+    <texture-sampler key="sampler_with_transform">
+        <transform ref="default" />
+    </texture-sampler>
+    
 </root>
