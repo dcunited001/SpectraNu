@@ -48,8 +48,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("EllipsoidMeshGen") {
-            let ellisoid: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoidMeshGen")!
-            let ellisoid2: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoidMeshGen2")!
+            let ellisoid: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoid_mesh_gen")!
+            let ellisoid2: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoid_mesh_gen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -61,8 +61,9 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("EllipticalConeMeshGen") {
-            let ellipticCone: MeshGenerator = self.containerGet(assetContainer, key: "ellipticConeMeshGen")!
-            let ellipticCone2: MeshGenerator = self.containerGet(assetContainer, key: "ellipticConeMeshGen2")!
+            let ellipticCone: MeshGenerator = self.containerGet(assetContainer, key: "elliptic_cone_mesh_gen")!
+            let ellipticCone2: MeshGenerator = self.containerGet(assetContainer, key: "elliptic_coner_mesh_gen2")!
+            
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -74,8 +75,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("CylinderMeshGen") {
-            let cylinder: MeshGenerator = self.containerGet(assetContainer, key: "cylinderMeshGen")!
-            let cylinder2: MeshGenerator = self.containerGet(assetContainer, key: "cylinderMeshGen2")!
+            let cylinder: MeshGenerator = self.containerGet(assetContainer, key: "cylinder_mesh_gen")!
+            let cylinder2: MeshGenerator = self.containerGet(assetContainer, key: "cylinder_mesh_gen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -86,9 +87,11 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
             }
         }
         
-        describe("PlaneDimMeshGen") {
-            let plane: MeshGenerator = self.containerGet(assetContainer, key: "planeMeshGen")!
-            let plane2: MeshGenerator = self.containerGet(assetContainer, key: "planeMeshGen2")!
+        describe("PlaneDimMeshGen", flags: ["pending": true]) {
+            // PENDING: model i/o function not recognized
+            
+            let plane: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen")!
+            let plane2: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -100,8 +103,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("IcosahedronMeshGen") {
-            let icosahedron: MeshGenerator = self.containerGet(assetContainer, key: "icosahedronMeshGen")!
-            let icosahedron2: MeshGenerator = self.containerGet(assetContainer, key: "icosahedronMeshGen2")!
+            let icosahedron: MeshGenerator = self.containerGet(assetContainer, key: "icosahedron_mesh_gen")!
+            let icosahedron2: MeshGenerator = self.containerGet(assetContainer, key: "icosahedron_mesh_gen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
