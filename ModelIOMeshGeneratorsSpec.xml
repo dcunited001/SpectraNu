@@ -46,11 +46,11 @@
         <mesh-generator-args>
             <mesh-generator-arg type="String" name="mesh_ref" value="elliptical_cone_mesh3" />
             <mesh-generator-arg type="Int" name="submesh_index" value="0" />
-            <mesh-generator-arg type="Int" name="subdivision_levels" value="2" />
+            <mesh-generator-arg type="Int" name="subdivision_levels" value="1" />
         </mesh-generator-args>
     </mesh-generator>
     <mesh key="elliptical_cone_mesh3" mesh-generator="elliptical_cone_mesh_gen2" />
-    <mesh key="subdivision_mesh2" mesh-generator="subdivision_mesh_gen2" />
+    <mesh key="elliptical_cone_mesh3" mesh-generator="subdivision_mesh_gen2" />
 
 <!--    <mesh-generator key="box_mesh_gen2" type="box_mesh_gen">-->
 <!--        <mesh-generator-args>-->

@@ -128,7 +128,7 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
             }
             
             it("subdivides the existing mesh, modifying it in place") {
-                let subdividedCone = assetContainer.resolve(MeshGenerator.self, name: "elliptical_cone_mesh3")
+                let subdividedCone = assetContainer.resolve(MDLMesh.self, name: "elliptical_cone_mesh3")!
                 
                 expect(subdividedCone.vertexCount) == 81
                 expect(subdividedCone.vertexBuffers.count) == 1
