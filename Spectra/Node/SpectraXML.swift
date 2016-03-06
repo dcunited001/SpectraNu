@@ -9,6 +9,7 @@
 import Foundation
 import Fuzi
 import Swinject
+import MetalKit
 import ModelIO
 
 // PLZ NOTE: i promise I'm not pursuing this terrible XML parsing design for
@@ -33,6 +34,8 @@ public enum SpectraXMLNodeType: String {
     case World = "world"
     case Camera = "camera"
     case Transform = "transform"
+    case Asset = "asset"
+    case BufferAllocator = "buffer-allocator"
     case Object = "object"
     case Mesh = "mesh"
     case MeshGenerator = "mesh-generator"
@@ -41,7 +44,6 @@ public enum SpectraXMLNodeType: String {
     case StereoscopicCamera = "stereoscopic-camera"
     case VertexAttribute = "vertex-attribute"
     case VertexDescriptor = "vertex-descriptor"
-    case Asset = "asset"
     case Material = "material"
     case MaterialProperty = "material-property"
     case ScatteringFunction = "scattering-function"
@@ -211,6 +213,11 @@ public class SpectraXML {
                     container.register(MDLVertexDescriptor.self, name: key!)  { _ in
                         return MDLVertexDescriptor(vertexDescriptor: vertexDesc)
                         }.inObjectScope(.None)
+                case .Asset:
+                    let asset = SpectraXMLAssetNode().parse(container, elem: child, options: options)
+                    container.register(MDLAsset.self, name: key!) { _ in
+                        return SpectraXMLAssetNode.copy(asset)
+                    }
                 case .Object:
                     let obj = SpectraXMLObjectNode().parse(container, elem: child, options: options)
                     container.register(MDLObject.self, name: key!) { _ in
@@ -290,8 +297,6 @@ public class SpectraXML {
 public protocol SpectraXMLNode {
     typealias NodeType
     
-    // TODO: why not attach elem, etc. as attributes? scoping?
-    
     func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType
 }
 
@@ -308,11 +313,13 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
         // - Polygon *.abc
         // - Standard Tessellation Language *.stl
         
-        if let vertexDescKey = elem.attributes["vertex-descriptor-ref"] {
+        let descSelector = "vertex-descriptor"
+        
+        if let vertexDescKey = elem.attributes["vertex-descriptor"] {
             vertexDesc = container.resolve(MDLVertexDescriptor.self, name: vertexDescKey)
         }
         
-        if let bufferAllocKey = elem.attributes["mesh-buffer-allocator-ref"] {
+        if let bufferAllocKey = elem.attributes["mesh-buffer-allocator"] {
             // TODO: buffer allocation
         }
         
@@ -322,6 +329,41 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
         
         return asset
     }
+}
+
+public class SpectraXMLBufferAllocatorNode: SpectraXMLNode {
+    public typealias NodeType = MDLMeshBufferAllocator
+    
+    public func parse(container: Container, elem: XMLElement, options: [String: Any] =
+[:]) {
+        // TODO: add a MeshBufferAllocatorGenerator protocol
+        // - with a generate function (also take an args: [String: GeneratorArg] = [:])
+        // - instead of fetching from the container's MDLMeshBufferAllocator.self
+        //   - we fetch from the MeshBufferAllocatorGenerator.self registration
+        
+        let alloc8: MDLMeshBufferAllocator?
+        
+        if let type = elem.attributes["type"] {
+            alloc8 = container.resolve(MDLMeshBufferAllocator.self, name: type)
+        } else {
+            alloc8 = MTKMeshBufferAllocator()
+        }
+        
+        // TODO: how to assign other attributes of a buffer allocator?
+        // - especially when users can define their own properties
+        //   - mimic the mesh generation setup, so users can define args
+        
+        return alloc8!
+    }
+    
+    // TODO: copy?  honestly, can a memory management object like this be copied?
+    // - or at least efficiently copied in some meaningful way?  i think not
+    // - no copies for you!
+    //   - instead create a new registration and manage instances
+    // - registrations for MDLMeshBufferAllocator.self manage instances
+    // - and registration for MeshBufferAllocatorGenerators manage generator instances
+    //   - and pop out new buffer allocators
+    
 }
 
 public class SpectraXMLVertexAttributeNode: SpectraXMLNode {
