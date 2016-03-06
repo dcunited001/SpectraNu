@@ -268,8 +268,8 @@ public class SpectraXML {
                     }
                 case .TextureFilter:
                     let textureFilter = SpectraXMLTextureFilterNode().parse(container, elem: child, options: options)
-                    container.register(MDLMaterialTextureFilterMode.self, name: key!) { _ in
-                        return SpectraXMLTextureFilter.copy(textureFilter)
+                    container.register(MDLTextureFilter.self, name: key!) { _ in
+                        return SpectraXMLTextureFilterNode.copy(textureFilter)
                     }
                 default: break
                 }
@@ -1143,36 +1143,38 @@ public class SpectraXMLTextureFilterNode: SpectraXMLNode {
     
     public typealias NodeType = MDLTextureFilter
     
-    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
+    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
         let textureFilter = MDLTextureFilter()
         
         if let rWrap = elem.attributes["r-wrap-mode"] {
             let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialTextureWrapMode")!.getValue(rWrap)
-            textureFilter.rWrapMode = enumVal
+            textureFilter.rWrapMode = MDLMaterialTextureWrapMode(rawValue: enumVal)!
         }
         if let tWrap = elem.attributes["t-wrap-mode"] {
             let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialTextureWrapMode")!.getValue(tWrap)
-            textureFilter.tWrapMode = enumVal
+            textureFilter.tWrapMode = MDLMaterialTextureWrapMode(rawValue: enumVal)!
         }
         if let sWrap = elem.attributes["s-wrap-mode"] {
             let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialTextureWrapMode")!.getValue(sWrap)
-            textureFilter.sWrapMode = enumVal
+            textureFilter.sWrapMode = MDLMaterialTextureWrapMode(rawValue: enumVal)!
         }
         if let minFilter = elem.attributes["min-filter"] {
-            let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialTextureFilterMode")!.getValue(sWrap)
-            textureFilter.minFilter = enumVal
+            let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialTextureFilterMode")!.getValue(minFilter)
+            textureFilter.minFilter = MDLMaterialTextureFilterMode(rawValue: enumVal)!
         }
         if let magFilter = elem.attributes["mag-filter"] {
-            let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialTextureFilterMode")!.getValue(sWrap)
-            textureFilter.magFilter = enumVal
+            let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialTextureFilterMode")!.getValue(magFilter)
+            textureFilter.magFilter = MDLMaterialTextureFilterMode(rawValue: enumVal)!
         }
         if let mipFilter = elem.attributes["mip-filter"] {
-            let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialMipMapFilterMode")!.getValue(sWrap)
-            textureFilter.mipFilter = enumVal
+            let enumVal = container.resolve(SpectraEnum.self, name: "mdlMaterialMipMapFilterMode")!.getValue(mipFilter)
+            textureFilter.mipFilter = MDLMaterialMipMapFilterMode(rawValue: enumVal)!
         }
+        
+        return textureFilter
     }
     
-    public static func copy(object: NodeType) {
+    public static func copy(object: MDLTextureFilter) -> MDLTextureFilter {
         let cp = MDLTextureFilter()
         cp.rWrapMode = object.rWrapMode
         cp.rWrapMode = object.rWrapMode
