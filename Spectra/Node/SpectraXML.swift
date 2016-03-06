@@ -224,18 +224,18 @@ public class SpectraXML {
                         return SpectraXMLObjectNode.copy(obj)
                         }.inObjectScope(.None)
                 case .Mesh:
-                    let mesh = SpectraXMLMeshNode().parse(container, elem: child, options: options)
+                    let meshNode = MeshNode()
+                    meshNode.parse(container, elem: child, options: options)
+                    let meshGen = container.resolve(MeshGenerator.self, name: meshNode.generator)!
+                    let mesh = meshGen.generate(container, args: meshNode.args)
                     container.register(MDLMesh.self, name: key!) { _ in
-                        //TODO: decide whether all of these should always copy()?
-                        // - and always deepCopy()?
+                        // TODO: don't copy meshes?
                         return mesh
-//                        return SpectraXMLMeshNode.copy(mesh)
                     }.inObjectScope(.None)
                 case .MeshGenerator:
                     let meshGenNode = MeshGeneratorNode()
                     meshGenNode.parseXML(container, elem: child, options: options)
                     let meshGen = meshGenNode.createGenerator(container, options: options)
-                    
                     container.register(MeshGenerator.self, name: key!) { _ in
                         return meshGen.copy(container)
                     }
@@ -292,7 +292,6 @@ public class SpectraXML {
     }
     
     public class func readXML(bundle: NSBundle, filename: String, bundleResourceName: String? = nil) -> NSData {
-        
         var resourceBundle: NSBundle = bundle
         if let resourceName = bundleResourceName {
             let bundleURL = bundle.URLForResource(resourceName, withExtension: "bundle")
@@ -552,11 +551,22 @@ public struct GeneratorArg {
 // - make these monadic? so that values can be replaced?
 // - make these composable?
 
-public class SpectraXMLMeshNode: SpectraXMLNode {
-    public typealias NodeType = MDLMesh
+public class MeshNode {
+    public var generator: String = "ellipsoid_mesh_gen"
+    public var args: [String: GeneratorArg] = [:]
     
-    public func parse(container: Container, elem: XMLElement, options: [String : Any] = [:]) -> NodeType {
-        return MDLMesh()
+    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
+        if let generator = elem.attributes["mesh-generator"] {
+            self.generator = generator
+        }
+        
+        let generatorArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(generatorArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+            args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
     }
 }
 
