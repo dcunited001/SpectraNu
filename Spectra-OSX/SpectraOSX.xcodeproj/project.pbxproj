@@ -741,14 +741,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4317EA241C8C36940019B2E2 /* ModelIOMeshGeneratorsSpec.swift in Sources */,
-				43D4FDC81C7B6AAC004E2CF7 /* AssetManagerSpec.swift in Sources */,
-				4317EA231C8C368F0019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift in Sources */,
-				4334D6DB1C1FACB200D2DCA6 /* S3DXMLSpec.swift in Sources */,
-				4317EA221C8C36840019B2E2 /* RandomMeshGeneratorsSpec.swift in Sources */,
-				43D4FDD01C7C3E76004E2CF7 /* SpectraXMLSpec.swift in Sources */,
 				4334D6BD1C1FAAE800D2DCA6 /* Spectra_OSXTests.swift in Sources */,
+				4334D6DB1C1FACB200D2DCA6 /* S3DXMLSpec.swift in Sources */,
+				43D4FDD01C7C3E76004E2CF7 /* SpectraXMLSpec.swift in Sources */,
+				43D4FDC81C7B6AAC004E2CF7 /* AssetManagerSpec.swift in Sources */,
+				4317EA221C8C36840019B2E2 /* RandomMeshGeneratorsSpec.swift in Sources */,
+				4317EA241C8C36940019B2E2 /* ModelIOMeshGeneratorsSpec.swift in Sources */,
 				4317EA251C8C36980019B2E2 /* PlatonicSolidMeshGeneratorsSpec.swift in Sources */,
+				4317EA231C8C368F0019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
