@@ -351,6 +351,7 @@ class SpectraXMLSpec: QuickSpec {
         }
         
         describe("asset") {
+            
             it("can load a MDLAsset, but only from a file url") {
                 
             }
@@ -412,7 +413,7 @@ class SpectraXMLSpec: QuickSpec {
         
         describe("texture-filter") {
             it("parses the correct defaults") {
-                let defaultFilter = self.containerGet(assetContainer, key: "default")
+                let defaultFilter: MDLTextureFilter = self.containerGet(assetContainer, key: "default")!
                 
                 expect(defaultFilter.rWrapMode) == MDLMaterialTextureWrapMode.Clamp
                 expect(defaultFilter.tWrapMode) == MDLMaterialTextureWrapMode.Clamp
@@ -421,11 +422,11 @@ class SpectraXMLSpec: QuickSpec {
             }
             
             it("parses other texture filters") {
-                let filterClamp = self.containerGet(assetContainer, key: "filter_clamp")
-                let filterRepeat = self.containerGet(assetContainer, key: "filter_repeat")
-                let filterMirror = self.containerGet(assetContainer, key: "filter_mirror")
-                let filterLinear = self.containerGet(assetContainer, key: "filter_linear")
-                let filterNearest = self.containerGet(assetContainer, key: "filter_nearest")
+                let filterClamp: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_clamp")!
+                let filterRepeat: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_repeat")!
+                let filterMirror: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_mirror")!
+                let filterLinear: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_linear")!
+                let filterNearest: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_nearest")!
                 
                 expect(filterClamp.rWrapMode) == MDLMaterialTextureWrapMode.Clamp
                 expect(filterClamp.tWrapMode) == MDLMaterialTextureWrapMode.Clamp
