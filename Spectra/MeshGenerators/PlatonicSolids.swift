@@ -14,19 +14,21 @@ import ModelIO
 //N.B. textures are 1-to-1 with vertex-face map
 // - for simple 3d objects
 
+//TODO: change "size" to "radius"
+
 public class PlatonicSolidMeshGenerators {
     public static func loadMeshGenerators(container: Container) {
         container.register(MeshGenerator.self, name: "tetrahedron_mesh_gen") { _ in
-            return TetrahedronMeshGen()
+            return TetrahedronMeshGen(container: container)
         }
         container.register(MeshGenerator.self, name: "cube_mesh_gen") { _ in
-            return CubeMeshGen()
+            return CubeMeshGen(container: container)
         }
         container.register(MeshGenerator.self, name: "octahedron_mesh_gen") { _ in
-            return CubeMeshGen()
+            return OctahedronMeshGen(container: container)
         }
         container.register(MeshGenerator.self, name: "dodecahedron_mesh_gen") { _ in
-            return CubeMeshGen()
+            return DodecahedronMeshGen(container: container)
         }
         // icosahedron is defined in Model I/O
     }
@@ -37,7 +39,6 @@ public class TetrahedronMeshGen: MeshGenerator {
     public var geometryType: MDLGeometryType = .TypeTriangles
     
     public var vertexDescriptor: MDLVertexDescriptor = SpectraGeo.defaultVertexDescriptor()
-    
     public var meshData: [String: [AnyObject]] = [:]
     public var subMeshData: [String: [AnyObject]] = [:]
     
@@ -47,8 +48,8 @@ public class TetrahedronMeshGen: MeshGenerator {
     public var colorGenerator: (() -> AnyObject)?
     public var textureGenerator: (() -> AnyObject)?
     
-    public required init(container: Container, args: [String: GeneratorArg]) {
-        if let size = options["size"] {
+    public required init(container: Container, args: [String: GeneratorArg] = [:]) {
+        if let size = args["size"] {
             self.size = Float(size.value)!
         }
     }
@@ -81,7 +82,7 @@ public class CubeMeshGen: MeshGenerator {
     public var geometryType: MDLGeometryType = .TypeTriangles
     
     public required init(container: Container, args: [String: GeneratorArg] = [:]) {
-        if let size = options["size"] {
+        if let size = args["size"] {
             self.size = Float(size.value)!
         }
     }
@@ -91,13 +92,12 @@ public class CubeMeshGen: MeshGenerator {
     }
 }
 
-public class OcathedronMeshGen: MeshGenerator {
+public class OctahedronMeshGen: MeshGenerator {
     public var size: Float = 10.0
     public var geometryType: MDLGeometryType = .TypeTriangles
     
-    
     public required init(container: Container, args: [String: GeneratorArg] = [:]) {
-        if let size = options["size"] {
+        if let size = args["size"] {
             self.size = Float(size.value)!
         }
     }
@@ -112,7 +112,7 @@ public class DodecahedronMeshGen: MeshGenerator {
     public var geometryType: MDLGeometryType = .TypeTriangles
     
     public required init(container: Container, args: [String: GeneratorArg] = [:]) {
-        if let size = options["size"] {
+        if let size = args["size"] {
             self.size = Float(size.value)!
         }
     }

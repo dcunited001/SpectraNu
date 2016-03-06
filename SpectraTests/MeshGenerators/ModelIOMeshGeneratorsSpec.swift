@@ -25,7 +25,7 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         let spectraEnumXSD = SpectraXSD(data: spectraEnumData)
         spectraEnumXSD.parseEnumTypes(parser)
         
-        let testBundle = NSBundle(forClass: SpectraXMLSpec.self)
+        let testBundle = NSBundle(forClass: ModelIOMeshGeneratorsSpec.self)
         let xmlData: NSData = SceneGraphXML.readXML(testBundle, filename: "ModelIOMeshGeneratorSpecs")
         let assetContainer = Container(parent: parser)
         
@@ -34,8 +34,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         spectraXML.parse(assetContainer, options: [:])
         
         describe("BoxMeshGen") {
-            let box: MeshGenerator = self.containerGet(assetContainer, key: "boxMeshGen")
-            let box2: MeshGenerator = self.containerGet(assetContainer, key: "boxMeshGen2")
+            let box: MeshGenerator = self.containerGet(assetContainer, key: "boxMeshGen")!
+            let box2: MeshGenerator = self.containerGet(assetContainer, key: "boxMeshGen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -47,8 +47,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("EllipsoidMeshGen") {
-            let ellisoid: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoidMeshGen")
-            let ellisoid2: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoidMeshGen2")
+            let ellisoid: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoidMeshGen")!
+            let ellisoid2: MeshGenerator = self.containerGet(assetContainer, key: "ellipsoidMeshGen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -60,8 +60,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("EllipticalConeMeshGen") {
-            let ellipticCone: MeshGenerator = self.containerGet(assetContainer, key: "ellipticConeMeshGen")
-            let ellipticCone2: MeshGenerator = self.containerGet(assetContainer, key: "ellipticConeMeshGen2")
+            let ellipticCone: MeshGenerator = self.containerGet(assetContainer, key: "ellipticConeMeshGen")!
+            let ellipticCone2: MeshGenerator = self.containerGet(assetContainer, key: "ellipticConeMeshGen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -73,8 +73,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("CylinderMeshGen") {
-            let cylinder: MeshGenerator = self.containerGet(assetContainer, key: "cylinderMeshGen")
-            let cylinder2: MeshGenerator = self.containerGet(assetContainer, key: "cylinderMeshGen2")
+            let cylinder: MeshGenerator = self.containerGet(assetContainer, key: "cylinderMeshGen")!
+            let cylinder2: MeshGenerator = self.containerGet(assetContainer, key: "cylinderMeshGen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -86,8 +86,8 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
         }
         
         describe("PlaneDimMeshGen") {
-            let plane: MeshGenerator = self.containerGet(assetContainer, key: "planeMeshGen")
-            let plane2: MeshGenerator = self.containerGet(assetContainer, key: "planeMeshGen2")
+            let plane: MeshGenerator = self.containerGet(assetContainer, key: "planeMeshGen")!
+            let plane2: MeshGenerator = self.containerGet(assetContainer, key: "planeMeshGen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
@@ -98,9 +98,9 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
             }
         }
         
-        describe("IcosohedronMeshGen") {
-            let icosohedron: MeshGenerator = self.containerGet(assetContainer, key: "icosohedronMeshGen")
-            let icosohedron2: MeshGenerator = self.containerGet(assetContainer, key: "icosohedronMeshGen2")
+        describe("IcosahedronMeshGen") {
+            let icosahedron: MeshGenerator = self.containerGet(assetContainer, key: "icosahedronMeshGen")!
+            let icosahedron2: MeshGenerator = self.containerGet(assetContainer, key: "icosahedronMeshGen2")!
             
             it("provides the basic model i/o mesh generators") {
                 
