@@ -4,7 +4,8 @@
     
     <mesh-generator key="box_mesh_gen2" type="box_mesh_gen">
         <mesh-generator-args>
-            <mesh-generator-arg type="String" name="colCount" value="100" />
+            <mesh-generator-arg type="Float3" name="dimensions" value="5 5 5" />
+            <mesh-generator-arg type="Float3" name="segments" value="5 5 5" />
         </mesh-generator-args>
     </mesh-generator>
     <mesh key="box_mesh" mesh-generator="box_mesh_gen" />
@@ -12,7 +13,9 @@
     
     <mesh-generator key="ellipsoid_mesh_gen2" type="ellipsoid_mesh_gen">
         <mesh-generator-args>
-            <mesh-generator-arg type="String" name="colCount" value="100" />
+            <mesh-generator-arg type="Float3" name="radii" value="5 5 5" />
+            <mesh-generator-arg type="Int" name="radialSegments" value="5" />
+            <mesh-generator-arg type="Int" name="verticalSegments" value="5" />
         </mesh-generator-args>
     </mesh-generator>
     <mesh key="ellipsoid_mesh" mesh-generator="ellipsoid_mesh_gen" />
@@ -20,7 +23,10 @@
     
     <mesh-generator key="ellipticCone_mesh_gen2" type="ellipticCone_mesh_gen">
         <mesh-generator-args>
-            <mesh-generator-arg type="String" name="colCount" value="100" />
+            <mesh-generator-arg type="Float" name="height" value="100" />
+            <mesh-generator-arg type="Float2" name="radii" value="5 5" />
+            <mesh-generator-arg type="Int" name="radialSegments" value="5" />
+            <mesh-generator-arg type="Int" name="verticalSegments" value="5" />
         </mesh-generator-args>
     </mesh-generator>
     <mesh key="elliptic_cone_mesh" mesh-generator="ellipticCone_mesh_gen" />
