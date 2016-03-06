@@ -9,7 +9,7 @@
 @testable import Spectra
 import Quick
 import Nimble
-
+import Swinject
 
 class BasicTessellationMeshGeneratorsSpec: QuickSpec {
     

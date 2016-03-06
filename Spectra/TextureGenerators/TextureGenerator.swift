@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Swinject
 
 public protocol TextureGenerator {
     init(container: Container, args: [String: GeneratorArg])

@@ -10,6 +10,7 @@ import Foundation
 import Metal
 import ModelIO
 import simd
+import Swinject
 
 // TODO: how to compose various functionalities together?
 

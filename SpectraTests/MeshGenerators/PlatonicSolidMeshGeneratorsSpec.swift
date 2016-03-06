@@ -10,13 +10,14 @@
 import Foundation
 import Quick
 import Nimble
+import Swinject
 
 class PlatonicSolidMeshGeneratorSpec: QuickSpec {
     override func spec() {
         
         let device = MTLCreateSystemDefaultDevice()
         let library = device!.newDefaultLibrary()
-        let testBundle = NSBundle(forClass: S3DXMLSpec.self)
+        let testBundle = NSBundle(forClass: PlatonicSolidMeshGeneratorSpec.self)
         let xmlData: NSData = S3DXML.readXML(testBundle, filename: "S3DXMLTest")
         let xml = S3DXML(data: xmlData)
         

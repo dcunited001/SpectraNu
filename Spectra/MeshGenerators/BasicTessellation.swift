@@ -9,6 +9,7 @@
 import Foundation
 import Metal
 import ModelIO
+import Swinject
 import simd
 
 public class BasicTessellationGenerators {
