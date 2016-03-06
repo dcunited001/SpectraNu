@@ -48,13 +48,13 @@
     <mesh key="plane_mesh" mesh-generator="plane_mesh_gen" />
     <mesh key="plane_mesh2" mesh-generator="plane_mesh_gen2" />
     
-    <mesh-generator key="icosohedron_mesh_gen2" type="icosohedron_mesh_gen">
+    <mesh-generator key="icosahedron_mesh_gen2" type="icosahedron_mesh_gen">
         <mesh-generator-args>
             <mesh-generator-arg type="String" name="colCount" value="100" />
         </mesh-generator-args>
     </mesh-generator>
-    <mesh key="icosohedron_mesh" mesh-generator="icosohedron_mesh_gen" />
-    <mesh key="icosohedron_mesh2" mesh-generator="icosohedron_mesh_gen2" />
+    <mesh key="icosahedron_mesh" mesh-generator="icosahedron_mesh_gen" />
+    <mesh key="icosahedron_mesh2" mesh-generator="icosahedron_mesh_gen2" />
     
 </root>
 
