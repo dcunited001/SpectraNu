@@ -560,9 +560,9 @@ public class MeshGeneratorNode {
         
         let meshGenArgsSelector = "mesh-generator-args > mesh-generator-arg"
         for (idx, el) in elem.css(meshGenArgsSelector).enumerate() {
-            let name = elem.attributes["name"]!
-            let type = elem.attributes["type"]!
-            let value = elem.attributes["value"]!
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
             
             args[name] = GeneratorArg(name: name, type: type, value: value)
         }
