@@ -108,16 +108,10 @@
          location = "group:Meshes"
          name = "Meshes">
          <FileRef
-            location = "group:BasicTriangle.swift">
-         </FileRef>
-         <FileRef
             location = "group:MeshGenerator.swift">
          </FileRef>
          <FileRef
             location = "group:PlatonicSolids.swift">
-         </FileRef>
-         <FileRef
-            location = "group:Quad.swift">
          </FileRef>
          <FileRef
             location = "group:ArchimedeanSolids.swift">
