@@ -56,8 +56,6 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
             }
             
             it("can generate a MDLMesh with the appropriate vertices & submeshes") {
-                // TODO: use objects instantiated via XML
-                
                 let ellipsoidMesh = ellipsoid.generate(assetContainer)
                 let ellipsoidMesh2: MDLMesh = ellipsoid2.generate(assetContainer)
                 
@@ -98,33 +96,33 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
 
         }
         
-//        describe("CylinderMeshGen") {
-//            let cylinder: MeshGenerator = self.containerGet(assetContainer, key: "cylinder_mesh_gen")!
-//            let cylinder2: MeshGenerator = self.containerGet(assetContainer, key: "cylinder_mesh_gen2")!
-//            
-//            it("can extend the model i/o mesh generators") {
-//                
-//            }
-//        }
-//
-//
-//        describe("IcosahedronMeshGen") {
-//            let icosahedron: MeshGenerator = self.containerGet(assetContainer, key: "icosahedron_mesh_gen")!
-//            let icosahedron2: MeshGenerator = self.containerGet(assetContainer, key: "icosahedron_mesh_gen2")!
-//
-//
-//            it("can extend the model i/o mesh generators") {
-//
-//            }
-//        }
+        describe("CylinderMeshGen") {
+            let cylinderGen = assetContainer.resolve(MeshGenerator.self, name: "cylinder_mesh_gen") as! CylinderMeshGen
+            let cylinderGen2 = assetContainer.resolve(MeshGenerator.self, name: "cylinder_mesh_gen2") as! CylinderMeshGen
+            
+            it("can extend the model i/o mesh generators") {
+                expect(cylinderGen2.height) == 100.0
+                expect(SpectraSimd.compareFloat2(cylinderGen2.radii, with: float2(5,5))).to(beTrue())
+                expect(cylinderGen2.radialSegments) == 5
+                expect(cylinderGen2.verticalSegments) == 5
+            }
+        }
+
+        describe("IcosahedronMeshGen") {
+            let icosahedronGen = assetContainer.resolve(MeshGenerator.self, name: "icosahedron_mesh_gen") as! IcosahedronMeshGen
+            let icosahedronGen2 = assetContainer.resolve(MeshGenerator.self, name: "icosahedron_mesh_gen2") as! IcosahedronMeshGen
+
+            it("can extend the model i/o mesh generators") {
+                expect(icosahedronGen2.radius) == 100
+            }
+        }
 
         describe("SubdivisionMeshGen") {
             let subdivide = assetContainer.resolve(MeshGenerator.self, name: "subdivision_mesh_gen") as! SubdivisionMeshGen
             let subdivide2 = assetContainer.resolve(MeshGenerator.self, name: "subdivision_mesh_gen2") as! SubdivisionMeshGen
-            subdivide2.meshRef = "elliptical_cone_mesh3"
             
             it("can extend the model i/o mesh generators") {
-                
+                expect(subdivide2.meshRef) == "elliptical_cone_mesh3"
             }
             
             it("subdivides the existing mesh, modifying it in place") {
@@ -135,24 +133,5 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
                 expect(subdividedCone.submeshes.count) == 1
             }
         }
-        
-//        pending("BoxMeshGen (not implemented in Model I/O)") {
-//            let box: MeshGenerator = self.containerGet(assetContainer, key: "box_mesh_gen")!
-//            let box2: MeshGenerator = self.containerGet(assetContainer, key: "box_mesh_gen2")!
-//            
-//            it("can extend the model i/o mesh generators") {
-//                
-//            }
-//        }
-        
-        //        pending("PlaneDimMeshGen (not implemented in Model I/O)") {
-        //            let plane: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen")!
-        //            let plane2: MeshGenerator = self.containerGet(assetContainer, key: "plane_mesh_gen2")!
-        //
-        //            it("can extend the model i/o mesh generators") {
-        //                
-        //            }
-        //        }
-        
     }
 }

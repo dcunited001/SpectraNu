@@ -29,12 +29,12 @@ public class ModelIOMeshGenerators {
         container.register(MeshGenerator.self, name: "elliptical_cone_mesh_gen") { _ in
             return EllipticalConeMeshGen(container: container)
         }.inObjectScope(.None)
-//        container.register(MeshGenerator.self, name: "cylinder_mesh_gen") { _ in
-//            return CylinderMeshGen(container: container)
-//        }.inObjectScope(.None)
-//        container.register(MeshGenerator.self, name: "icosahedron_mesh_gen") { _ in
-//            return IcosahedronMeshGen(container: container)
-//        }.inObjectScope(.None)
+        container.register(MeshGenerator.self, name: "cylinder_mesh_gen") { _ in
+            return CylinderMeshGen(container: container)
+        }.inObjectScope(.None)
+        container.register(MeshGenerator.self, name: "icosahedron_mesh_gen") { _ in
+            return IcosahedronMeshGen(container: container)
+        }.inObjectScope(.None)
         container.register(MeshGenerator.self, name: "subdivision_mesh_gen") { _ in
             return SubdivisionMeshGen(container: container)
             }.inObjectScope(.None)
@@ -138,7 +138,7 @@ public class EllipticalConeMeshGen: MeshGenerator {
         processArgs(container, args: args)
     }
     
-    public func processArgs(container: Container, args: [String: GeneratorArg]) {
+    public func processArgs(container: Container, args: [String: GeneratorArg] = [:]) {
         if let height = args["height"] {
             self.height = Float(height.value)!
         }
@@ -188,69 +188,104 @@ public class EllipticalConeMeshGen: MeshGenerator {
     }
 }
 
-//public class CylinderMeshGen: MeshGenerator {
-//    public var height: Float = 10.0
-//    public var radii = float2(10.0, 10.0)
-//    public var radialSegments: Int = 30
-//    public var verticalSegments: Int = 10
-//    public var geometryType: MDLGeometryType = .TypeTriangles
-//    public var inwardNormals = false
-//    public weak var allocator: MDLMeshBufferAllocator?
-//    
-//    public required init(container: Container, args: [String: GeneratorArg] = [:]) {
-//        if let height = args["height"] {
-//            self.height = Float(height.value)!
-//        }
-//        if let radii = args["radii"] {
-//            self.radii = SpectraSimd.parseFloat2(radii.value)
-//        }
-//        if let radialSegments = args["radial_segments"] {
-//            self.radialSegments = Int(radialSegments.value)!
-//        }
-//        if let verticalSegments = args["vertical_segments"] {
-//            self.verticalSegments = Int(verticalSegments.value)!
-//        }
-//        if let geometryType = args["geometry-type"] {
-//            self.geometryType = .TypeTriangles
-//        }
-//        
-//        // TODO: buffer allocator
-//    }
-//    
-//    public func generate(container: Container, args: [String : GeneratorArg] = [:]) -> MDLMesh {
-//        return MDLMesh.newCylinderWithHeight(self.height,
-//            radii: self.radii,
-//            radialSegments: self.radialSegments,
-//            verticalSegments: self.verticalSegments,
-//            geometryType: .TypeTriangles,
-//            inwardNormals: self.inwardNormals,
-//            allocator: self.allocator)
-//    }
-//}
-//
-//public class IcosahedronMeshGen: MeshGenerator {
-//    public var radius: Float = 10.0
-//    public var inwardNormals = false
-//    public weak var allocator: MDLMeshBufferAllocator?
-//    
-//    public required init(container: Container, args: [String: GeneratorArg] = [:]) {
-//        if let radius = args["radius"] {
-//            self.radius = Float(radius.value)!
-//        }
-//        if let inwardNormals = args["inward_normals"] {
-//            let valAsBool = NSString(string: inwardNormals.value).boolValue
-//            self.inwardNormals = valAsBool
-//        }
-//        
-//        // TODO: buffer allocator
-//    }
-//    
-//    public func generate(container: Container, args: [String : GeneratorArg] = [:]) -> MDLMesh {
-//        return MDLMesh.newIcosahedronWithRadius(self.radius,
-//                                                inwardNormals: self.inwardNormals,
-//                                                allocator: self.allocator)
-//    }
-//}
+public class CylinderMeshGen: MeshGenerator {
+    public var height: Float = 10.0
+    public var radii = float2(10.0, 10.0)
+    public var radialSegments: Int = 30
+    public var verticalSegments: Int = 10
+    public var geometryType: MDLGeometryType = .TypeTriangles
+    public var inwardNormals = false
+    public weak var allocator: MDLMeshBufferAllocator?
+    
+    public required init(container: Container, args: [String: GeneratorArg] = [:]) {
+        processArgs(container, args: args)
+    }
+    
+    public func processArgs(container: Container, args: [String: GeneratorArg] = [:]) {
+        if let height = args["height"] {
+            self.height = Float(height.value)!
+        }
+        if let radii = args["radii"] {
+            self.radii = SpectraSimd.parseFloat2(radii.value)
+        }
+        if let radialSegments = args["radial_segments"] {
+            self.radialSegments = Int(radialSegments.value)!
+        }
+        if let verticalSegments = args["vertical_segments"] {
+            self.verticalSegments = Int(verticalSegments.value)!
+        }
+        if let geometryType = args["geometry_type"] {
+            self.geometryType = .TypeTriangles
+        }
+        if let inwardNormals = args["inward_normals"] {
+            let valAsBool = NSString(string: inwardNormals.value).boolValue
+            self.inwardNormals = valAsBool
+        }
+        
+        // TODO: buffer allocator
+    }
+    
+    public func generate(container: Container, args: [String : GeneratorArg] = [:]) -> MDLMesh {
+        return MDLMesh.newCylinderWithHeight(self.height,
+            radii: self.radii,
+            radialSegments: self.radialSegments,
+            verticalSegments: self.verticalSegments,
+            geometryType: .TypeTriangles,
+            inwardNormals: self.inwardNormals,
+            allocator: self.allocator)
+    }
+    
+    public func copy(container: Container) -> MeshGenerator {
+        let cp = CylinderMeshGen(container: container)
+
+        cp.height = self.height
+        cp.radii = self.radii
+        cp.radialSegments = self.radialSegments
+        cp.verticalSegments = self.verticalSegments
+        cp.geometryType = self.geometryType
+        cp.inwardNormals = self.inwardNormals
+        // allocator
+
+        return cp
+    }
+}
+
+public class IcosahedronMeshGen: MeshGenerator {
+    public var radius: Float = 10.0
+    public var inwardNormals = false
+    public weak var allocator: MDLMeshBufferAllocator?
+    
+    public required init(container: Container, args: [String: GeneratorArg] = [:]) {
+        processArgs(container, args: args)
+        // TODO: buffer allocator
+    }
+    
+    public func processArgs(container: Container, args: [String : GeneratorArg] = [:]) {
+        if let radius = args["radius"] {
+            self.radius = Float(radius.value)!
+        }
+        if let inwardNormals = args["inward_normals"] {
+            let valAsBool = NSString(string: inwardNormals.value).boolValue
+            self.inwardNormals = valAsBool
+        }
+    }
+    
+    public func generate(container: Container, args: [String : GeneratorArg] = [:]) -> MDLMesh {
+        return MDLMesh.newIcosahedronWithRadius(self.radius,
+                                                inwardNormals: self.inwardNormals,
+                                                allocator: self.allocator)
+    }
+    
+    public func copy(container: Container) -> MeshGenerator {
+        let cp = IcosahedronMeshGen(container: container)
+        
+        cp.radius = self.radius
+        cp.inwardNormals = self.inwardNormals
+        // allocator
+        
+        return cp
+    }
+}
 
 public class SubdivisionMeshGen: MeshGenerator {
     // NOTE: because copying MDLMesh's and other objects is expensive & complicated
