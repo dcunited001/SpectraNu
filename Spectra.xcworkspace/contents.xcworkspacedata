@@ -178,6 +178,9 @@
       location = "container:SpectraAssets"
       name = "SpectraAssets">
       <FileRef
+         location = "group:defaultTexture.jpg">
+      </FileRef>
+      <FileRef
          location = "group:Spectra3D.xsd">
       </FileRef>
       <FileRef
@@ -220,6 +223,17 @@
       location = "container:SpectraExampleResources"
       name = "SpectraExampleResources">
       <Group
+         location = "container:SpectraExampleResources/Models"
+         name = "Models">
+      </Group>
+      <Group
+         location = "container:SpectraExampleResources/Textures"
+         name = "Textures">
+         <FileRef
+            location = "group:defaultTexture.jpg">
+         </FileRef>
+      </Group>
+      <Group
          location = "container:SpectraExampleResources/S3DXML"
          name = "S3DXML">
          <FileRef
@@ -227,10 +241,10 @@
          </FileRef>
       </Group>
       <Group
-         location = "container:SpectraExampleResources/SceneGraph"
-         name = "SceneGraph">
+         location = "container:SpectraExampleResources/SpectraXML"
+         name = "SpectraXML">
          <FileRef
-            location = "group:Cube.xml">
+            location = "group:../../SpectraExampleResources/SpectraXML/Cube.xml">
          </FileRef>
          <FileRef
             location = "group:DefaultWorld.xml">
@@ -243,18 +257,37 @@
    <Group
       location = "container:"
       name = "SpectraTestsResources">
-      <FileRef
-         location = "group:SpectraTestsResources/pencil.obj">
-      </FileRef>
-      <FileRef
-         location = "group:SpectraTestsResources/S3DXMLTest.xml">
-      </FileRef>
-      <FileRef
-         location = "group:SpectraTestsResources/SpectraXMLSpec.xml">
-      </FileRef>
-      <FileRef
-         location = "group:/Users/dc/dev/apple/Spectra/ModelIOMeshGeneratorsSpec.xml">
-      </FileRef>
+      <Group
+         location = "container:SpectraTestsResources/SpectraXML"
+         name = "SpectraXML">
+         <FileRef
+            location = "group:ModelIOMeshGeneratorsSpec.xml">
+         </FileRef>
+         <FileRef
+            location = "group:ModelIOTextureGenerators.xml">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:SpectraTestsResources/S3DXML"
+         name = "S3DXML">
+         <FileRef
+            location = "group:S3DXMLTest.xml">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:SpectraTestsResources/Textures"
+         name = "Textures">
+         <FileRef
+            location = "group:defaultTexture.jpg">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:SpectraTestsResources/Models"
+         name = "Models">
+         <FileRef
+            location = "group:pencil.obj">
+         </FileRef>
+      </Group>
    </Group>
    <FileRef
       location = "group:Carthage">

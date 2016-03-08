@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <texture-generator key="resource_tex_gen2" type="resource_texture_gen">
+        <generator-args>
+            <generator-arg type="String" name="name" value="defaultTexture.jpg" />
+        </generator-args>
+    </texture-generator>
+    
+    <texture-generator key="url_tex_gen2" type="url_texture_gen">
+        <generator-args>
+            <generator-arg type="String" name="url" value="file:///itsafile.jpg" />
+        </generator-args>
+    </texture-generator>
+    
+    <texture-generator key="vector_noise_gen" type="noise_tex_gen">
+        <generator-args>
+            <generator-arg type="String" name="type" value="Vector" />
+        </generator-args>
+    </texture-generator>
+    
+    <texture-generator key="scalar_noise_gen" type="noise_tex_gen">
+        <generator-args>
+            <generator-arg type="String" name="type" value="Scalar" />
+        </generator-args>
+    </texture-generator>
+    
+    
+    
+</root>
