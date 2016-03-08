@@ -32,6 +32,13 @@
       location = "container:Spectra"
       name = "Spectra">
       <Group
+         location = "container:"
+         name = "Resources">
+         <FileRef
+            location = "group:BufferAllocatorGenerator.swift">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:S3DXML"
          name = "S3DXML">
          <FileRef

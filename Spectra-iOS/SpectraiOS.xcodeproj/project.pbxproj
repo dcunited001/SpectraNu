@@ -78,6 +78,7 @@
 		4371E8BA1C190960001D1C39 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81B1C18B39A007D3DF6 /* View.swift */; };
 		4371E8BB1C190980001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81D1C18B39A007D3DF6 /* Spectra.swift */; };
 		437D18F31C8CF26000C70975 /* LightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437D18F11C8CF26000C70975 /* LightGenerator.swift */; };
+		437D18F91C8EB1EA00C70975 /* BufferAllocatorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437D18F71C8EB1EA00C70975 /* BufferAllocatorGenerator.swift */; };
 		43D4FDCC1C7B745F004E2CF7 /* SpectraEnums.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 43D4FDCB1C7B745F004E2CF7 /* SpectraEnums.xsd */; };
 		43D4FDD21C7C3E9D004E2CF7 /* SpectraXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDD11C7C3E9D004E2CF7 /* SpectraXMLSpec.swift */; };
 		43D4FDD61C7C5044004E2CF7 /* SpectraXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDD51C7C5044004E2CF7 /* SpectraXML.swift */; };
@@ -203,6 +204,7 @@
 		43719B321C8808F900C14D56 /* MetalEnums.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = MetalEnums.xsd; path = ../../SpectraAssets/MetalEnums.xsd; sourceTree = "<group>"; };
 		43719B361C88FEDF00C14D56 /* ArchimedeanSolids.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchimedeanSolids.swift; sourceTree = "<group>"; };
 		437D18F11C8CF26000C70975 /* LightGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightGenerator.swift; sourceTree = "<group>"; };
+		437D18F71C8EB1EA00C70975 /* BufferAllocatorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferAllocatorGenerator.swift; sourceTree = "<group>"; };
 		43D4FDCB1C7B745F004E2CF7 /* SpectraEnums.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = SpectraEnums.xsd; path = /Users/dc/dev/apple/Spectra/SpectraAssets/SpectraEnums.xsd; sourceTree = "<absolute>"; };
 		43D4FDD11C7C3E9D004E2CF7 /* SpectraXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectraXMLSpec.swift; sourceTree = "<group>"; };
 		43D4FDD51C7C5044004E2CF7 /* SpectraXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectraXML.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 		4338B81E1C18B39A007D3DF6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				437D18F81C8EB1EA00C70975 /* Resources */,
 				4338B7FE1C18B39A007D3DF6 /* S3DXML */,
 				4338B8091C18B39A007D3DF6 /* Node */,
 				4338B8101C18B39A007D3DF6 /* Meshes */,
@@ -430,6 +433,15 @@
 				437D18F11C8CF26000C70975 /* LightGenerator.swift */,
 			);
 			path = Lighting;
+			sourceTree = "<group>";
+		};
+		437D18F81C8EB1EA00C70975 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				437D18F71C8EB1EA00C70975 /* BufferAllocatorGenerator.swift */,
+			);
+			name = Resources;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		43EAF8281C0A2FF500EA2B30 = {
@@ -678,6 +690,7 @@
 				4371E8A31C190957001D1C39 /* Node.swift in Sources */,
 				4371E8A21C190957001D1C39 /* Modelable.swift in Sources */,
 				4371E8B61C190960001D1C39 /* RenderStage.swift in Sources */,
+				437D18F91C8EB1EA00C70975 /* BufferAllocatorGenerator.swift in Sources */,
 				43D4FDD61C7C5044004E2CF7 /* SpectraXML.swift in Sources */,
 				4371E8A51C190957001D1C39 /* Perspectable.swift in Sources */,
 				4371E8B21C190960001D1C39 /* EncodableData.swift in Sources */,
