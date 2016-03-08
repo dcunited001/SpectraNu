@@ -195,7 +195,7 @@ public class CheckerboardTextureGen: TextureGenerator {
     public var channelEncoding = MDLTextureChannelEncoding.UInt8
     
     public var divisions: Float = 8
-    public var color1: CGColor = CGColorCreateRGB(0,0,0,1.0)
+    public var color1: CGColor = CGColorCreateRGB(0,0,0.0,1.0)
     public var color2: CGColor = CGColorCreateRGB(0.875,0.875,0.875,1.0)
     
     public required init(container: Container, args: [String: GeneratorArg]) {
