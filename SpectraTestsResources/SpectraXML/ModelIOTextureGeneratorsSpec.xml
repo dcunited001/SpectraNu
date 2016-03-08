@@ -5,6 +5,7 @@
             <generator-arg type="String" name="name" value="defaultTexture.jpg" />
         </generator-args>
     </texture-generator>
+    <texture key="resource_tex" generator="resource_texture_gen2"/>
     
     <texture-generator key="url_tex_gen2" type="url_texture_gen">
         <generator-args>
@@ -15,21 +16,24 @@
     <texture-generator key="vector_noise_gen" type="noise_tex_gen">
         <generator-args>
             <generator-arg type="String" name="type" value="Vector" />
+            <generator-arg type="Int2" name="dimensions" value="10 10" />
         </generator-args>
     </texture-generator>
+    <texture key="vector_noise_tex" generator="vector_noise_tex" />
     
     <texture-generator key="scalar_noise_gen" type="noise_tex_gen">
         <generator-args>
             <generator-arg type="String" name="type" value="Scalar" />
+            <generator-arg type="Int2" name="dimensions" value="10 10" />
         </generator-args>
     </texture-generator>
+    <texture key="scalar_noise_tex" generator="scalar_noise_tex" />
     
     <texture-generator key="checkerboard_tex_gen2" type="checkerboard_tex_gen">
         <generator-args>
-            <generator-arg type="String" name="type" value="Scalar" />
+            <generator-arg type="Int2" name="dimensions" value="19 19" />
+            <generator-arg type="Float" name="divisions" value="19" />
         </generator-args>
     </texture-generator>
-    
-    
-    
+    <texture key="checkerboard_tex" generator="checkerboard_tex_gen2" />
 </root>
