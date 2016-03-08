@@ -79,7 +79,7 @@
 		43C472751C8F0B5F00F90CED /* defaultTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43C4726B1C8F0B4B00F90CED /* defaultTexture.jpg */; };
 		43C472761C8F0B6400F90CED /* S3DXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472691C8F0B4B00F90CED /* S3DXMLTest.xml */; };
 		43C472771C8F0B6C00F90CED /* ModelIOMeshGeneratorsSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472661C8F0B4B00F90CED /* ModelIOMeshGeneratorsSpec.xml */; };
-		43C472781C8F0B6C00F90CED /* ModelIOTextureGenerators.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472671C8F0B4B00F90CED /* ModelIOTextureGenerators.xml */; };
+		43C472781C8F0B6C00F90CED /* ModelIOTextureGeneratorsSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472671C8F0B4B00F90CED /* ModelIOTextureGeneratorsSpec.xml */; };
 		43C4729B1C8F0C0600F90CED /* defaultTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43C472941C8F0C0600F90CED /* defaultTexture.jpg */; };
 		43C4729C1C8F0C0600F90CED /* DefaultPipeline.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472961C8F0C0600F90CED /* DefaultPipeline.xml */; };
 		43C4729D1C8F0C0600F90CED /* Cube.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472981C8F0C0600F90CED /* Cube.xml */; };
@@ -206,7 +206,7 @@
 		43BDD45B1C8ED64800AEFA9E /* ModelIOTextureGeneratorsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelIOTextureGeneratorsSpec.swift; path = /Users/dc/dev/apple/Spectra/SpectraTests/Textures/ModelIOTextureGeneratorsSpec.swift; sourceTree = "<absolute>"; };
 		43BDD45E1C8EDEAF00AEFA9E /* ModelIOTextureGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelIOTextureGenerators.swift; sourceTree = "<group>"; };
 		43C472661C8F0B4B00F90CED /* ModelIOMeshGeneratorsSpec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ModelIOMeshGeneratorsSpec.xml; sourceTree = "<group>"; };
-		43C472671C8F0B4B00F90CED /* ModelIOTextureGenerators.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ModelIOTextureGenerators.xml; sourceTree = "<group>"; };
+		43C472671C8F0B4B00F90CED /* ModelIOTextureGeneratorsSpec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ModelIOTextureGeneratorsSpec.xml; sourceTree = "<group>"; };
 		43C472691C8F0B4B00F90CED /* S3DXMLTest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = S3DXMLTest.xml; sourceTree = "<group>"; };
 		43C4726B1C8F0B4B00F90CED /* defaultTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultTexture.jpg; sourceTree = "<group>"; };
 		43C4726D1C8F0B4B00F90CED /* pencil.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pencil.obj; sourceTree = "<group>"; };
@@ -452,7 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				43C472661C8F0B4B00F90CED /* ModelIOMeshGeneratorsSpec.xml */,
-				43C472671C8F0B4B00F90CED /* ModelIOTextureGenerators.xml */,
+				43C472671C8F0B4B00F90CED /* ModelIOTextureGeneratorsSpec.xml */,
 			);
 			name = SpectraXML;
 			path = ../../SpectraTestsResources/SpectraXML;
@@ -714,7 +714,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43C472781C8F0B6C00F90CED /* ModelIOTextureGenerators.xml in Resources */,
+				43C472781C8F0B6C00F90CED /* ModelIOTextureGeneratorsSpec.xml in Resources */,
 				43C472741C8F0B5700F90CED /* pencil.obj in Resources */,
 				43C472761C8F0B6400F90CED /* S3DXMLTest.xml in Resources */,
 				43C472751C8F0B5F00F90CED /* defaultTexture.jpg in Resources */,

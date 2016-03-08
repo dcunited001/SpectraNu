@@ -274,7 +274,7 @@
             location = "group:ModelIOMeshGeneratorsSpec.xml">
          </FileRef>
          <FileRef
-            location = "group:ModelIOTextureGenerators.xml">
+            location = "group:/Users/dc/dev/apple/Spectra/SpectraTestsResources/SpectraXML/ModelIOTextureGeneratorsSpec.xml">
          </FileRef>
       </Group>
       <Group

@@ -24,6 +24,12 @@
         </generator-args>
     </texture-generator>
     
+    <texture-generator key="checkerboard_tex_gen2" type="checkerboard_tex_gen">
+        <generator-args>
+            <generator-arg type="String" name="type" value="Scalar" />
+        </generator-args>
+    </texture-generator>
+    
     
     
 </root>
