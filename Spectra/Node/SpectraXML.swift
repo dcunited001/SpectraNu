@@ -48,9 +48,11 @@ public enum SpectraXMLNodeType: String {
     case MaterialProperty = "material-property"
     case ScatteringFunction = "scattering-function"
     case Texture = "texture"
+    case TextureGenerator = "texture-generator"
     case TextureFilter = "texture-filter"
     case TextureSampler = "texture-sampler"
     case Light = "light"
+    case LightGenerator = "light-generator"
     
     // TODO: reimplement nodeParser() once auto-injection is available in Swinject
     // - until then, I really can't resolve the type
@@ -263,7 +265,23 @@ public class SpectraXML {
                     let transform = SpectraXMLTransformNode().parse(container, elem: child, options: options)
                     container.register(MDLTransform.self, name: key!) { _ in
                         return SpectraXMLTransformNode.copy(transform)
+                    }.inObjectScope(.None)
+                case .Texture:
+                    let textureNode = TextureNode()
+                    textureNode.parseXML(container, elem: child, options: options)
+                    let textureGen = container.resolve(TextureGenerator.self, name: key!)!
+                    let texture = textureGen.generate(container, args: textureNode.args)
+                    container.register(MDLTexture.self, name: key!) { _ in
+                        // don't copy texture
+                        return texture
                     }
+                case .TextureGenerator:
+                    let texGenNode = TextureGeneratorNode()
+                    texGenNode.parseXML(container, elem: child, options: options)
+                    let texGen = texGenNode.createGenerator(container, options: options)
+                    container.register(TextureGenerator.self, name: key!) { _ in
+                        return texGen.copy(container)
+                        }.inObjectScope(.None)
                 case .TextureFilter:
                     let textureFilter = SpectraXMLTextureFilterNode().parse(container, elem: child, options: options)
                     container.register(MDLTextureFilter.self, name: key!) { _ in
@@ -551,7 +569,7 @@ public class MeshNode {
     public var generator: String = "ellipsoid_mesh_gen"
     public var args: [String: GeneratorArg] = [:]
     
-    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
+    public func parseXML(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
         if let generator = elem.attributes["mesh-generator"] {
             self.generator = generator
         }
@@ -586,10 +604,54 @@ public class MeshGeneratorNode {
     }
     
     public func createGenerator(container: Container, options: [String : Any] = [:]) -> MeshGenerator {
-        
         let meshGen = container.resolve(MeshGenerator.self, name: self.type)!
         meshGen.processArgs(container, args: self.args)
         return meshGen
+    }
+}
+
+public class TextureNode {
+    public var generator: String = "noise_texture_gen"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public func parseXML(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
+        if let generator = elem.attributes["mesh-generator"] {
+            self.generator = generator
+        }
+        
+        let generatorArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(generatorArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+            args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+}
+
+public class TextureGeneratorNode {
+    public var type: String = "noise_texture_gen"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public func parseXML(container: Container, elem: XMLElement, options: [String : Any] = [:]) {
+        if let type = elem.attributes["type"] {
+            self.type = type
+        }
+        
+        let texGenArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(texGenArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+            
+            self.args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+    
+    public func createGenerator(container: Container, options: [String : Any] = [:]) -> TextureGenerator {
+        let texGen = container.resolve(TextureGenerator.self, name: self.type)!
+        texGen.processArgs(container, args: self.args)
+        return texGen
     }
 }
 
