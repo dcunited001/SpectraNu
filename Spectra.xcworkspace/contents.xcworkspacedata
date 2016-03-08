@@ -110,6 +110,9 @@
          <FileRef
             location = "group:TextureGenerator.swift">
          </FileRef>
+         <FileRef
+            location = "group:ModelIOTextureGenerators.swift">
+         </FileRef>
       </Group>
       <Group
          location = "group:Meshes"
@@ -193,6 +196,13 @@
    <Group
       location = "container:SpectraTests"
       name = "SpectraTests">
+      <Group
+         location = "container:SpectraTests/Textures"
+         name = "Textures">
+         <FileRef
+            location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/Textures/ModelIOTextureGeneratorsSpec.swift">
+         </FileRef>
+      </Group>
       <Group
          location = "group:MeshGenerators"
          name = "MeshGenerators">
