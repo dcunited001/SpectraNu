@@ -217,7 +217,7 @@ public class SpectraXML {
                     let asset = SpectraXMLAssetNode().parse(container, elem: child, options: options)
                     container.register(MDLAsset.self, name: key!) { _ in
                         return asset.copy() as! MDLAsset
-                    }
+                        }.inObjectScope(.None)
                 case .Object:
                     let obj = SpectraXMLObjectNode().parse(container, elem: child, options: options)
                     container.register(MDLObject.self, name: key!) { _ in
@@ -225,20 +225,20 @@ public class SpectraXML {
                         }.inObjectScope(.None)
                 case .Mesh:
                     let meshNode = MeshNode()
-                    meshNode.parse(container, elem: child, options: options)
+                    meshNode.parseXML(container, elem: child, options: options)
                     let meshGen = container.resolve(MeshGenerator.self, name: meshNode.generator)!
                     let mesh = meshGen.generate(container, args: meshNode.args)
                     container.register(MDLMesh.self, name: key!) { _ in
                         // TODO: don't copy meshes?
                         return mesh
-                    }.inObjectScope(.None)
+                        }.inObjectScope(.None)
                 case .MeshGenerator:
                     let meshGenNode = MeshGeneratorNode()
                     meshGenNode.parseXML(container, elem: child, options: options)
                     let meshGen = meshGenNode.createGenerator(container, options: options)
                     container.register(MeshGenerator.self, name: key!) { _ in
                         return meshGen.copy(container)
-                    }
+                        }.inObjectScope(.None)
                 case .Camera:
                     let camera = SpectraXMLCameraNode().parse(container, elem: child, options: options)
                     container.register(MDLCamera.self, name: key!) { _ in
@@ -329,7 +329,7 @@ public class SpectraXMLAssetNode: SpectraXMLNode {
             vertexDesc = container.resolve(MDLVertexDescriptor.self, name: vertexDescKey)
         }
         
-        if let bufferAllocKey = elem.attributes["mesh-buffer-allocator"] {
+        if let bufferAllocKey = elem.attributes["buffer-allocator"] {
             // TODO: buffer allocation
         }
         
@@ -612,7 +612,9 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
             } else {
                 let transform = SpectraXMLTransformNode().parse(container, elem: transformTag, options: options)
                 if let transformKey = transformTag.attributes["key"] {
-                    container.register(MDLTransform.self, name: transformKey) { _ in return transform }
+                    container.register(MDLTransform.self, name: transformKey) { _ in
+                        return SpectraXMLTransformNode.copy(transform)
+                    }
                 }
                 object.transform = transform
             }
@@ -632,7 +634,9 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
                     } else {
                         let obj = SpectraXMLObjectNode().parse(container, elem: el, options: options)
                         if let key = objKey {
-                            container.register(MDLObject.self, name: key) { _ in return obj }
+                            container.register(MDLObject.self, name: key) { _ in
+                                return SpectraXMLObjectNode.copy(obj)
+                            }
                         }
                         object.addChild(obj)
                     }
@@ -645,7 +649,9 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
                     } else {
                         let cam = SpectraXMLCameraNode().parse(container, elem: el, options: options)
                         if let key = objKey {
-                            container.register(MDLCamera.self, name: key) { _ in return cam }
+                            container.register(MDLCamera.self, name: key) { _ in
+                                return SpectraXMLCameraNode.copy(cam)
+                            }
                         }
                     }
                     
@@ -656,7 +662,9 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
                     } else {
                         let cam = SpectraXMLStereoscopicCameraNode().parse(container, elem: el, options: options)
                         if let key = objKey {
-                            container.register(MDLStereoscopicCamera.self, name: key) { _ in return cam }
+                            container.register(MDLStereoscopicCamera.self, name: key) { _ in
+                                return SpectraXMLStereoscopicCameraNode.copy(cam)
+                            }
                         }
                     }
                     
@@ -997,7 +1005,9 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
             } else {
                 let lens = SpectraXMLPhysicalLensNode().parse(container, elem: lensTag, options: options)
                 if let lensKey = lensTag["key"] {
-                    container.register(PhysicalLens.self, name: lensKey) { _ in return lens }
+                    container.register(PhysicalLens.self, name: lensKey) { _ in return
+                        lens.copy() as! PhysicalLens
+                    }
                 }
                 lens.applyToCamera(cam)
             }
@@ -1011,7 +1021,9 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
             } else {
                 let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: imagingTag, options: options)
                 if let imagingSurfaceKey = imagingTag["key"] {
-                    container.register(PhysicalImagingSurface.self, name: imagingTag["key"]!) { _ in return imagingSurface }
+                    container.register(PhysicalImagingSurface.self, name: imagingTag["key"]!) { _ in
+                        return imagingSurface.copy() as! PhysicalImagingSurface
+                    }
                 }
                 imagingSurface.applyToCamera(cam)
             }
