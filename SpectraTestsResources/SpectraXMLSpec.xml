@@ -116,17 +116,17 @@
     <!--    <mesh-generator key="cube_gen" type="cube" />-->
     <!--    <mesh-generator key="quad_gen" type="quad" />-->
     <!--    <mesh-generator key="tesselationGen" type="triangular_quad_tesselation_gen">-->
-    <!--        <mesh-generator-args>-->
-    <!--            <mesh-generator-arg type="String" name="row_count" value="100" />-->
-    <!--            <mesh-generator-arg type="String" name="col_count" value="100" />-->
-    <!--        </mesh-generator-args>-->
+    <!--        <generator-args>-->
+    <!--            <generator-arg type="String" name="row_count" value="100" />-->
+    <!--            <generator-arg type="String" name="col_count" value="100" />-->
+    <!--        </generator-args>-->
     <!--    </mesh-generator>-->
     <!--    -->
     <!--    <!-- create mesh using generator -->
     <!--    <mesh key="cube_mesh" mesh-generator="cube_gen" />-->
     <!--    <mesh key="quad_mesh" mesh-generator="quad_gen" />-->
     <!--    -->
-    <!--    <!-- create mesh using generator requiring mesh-generator-args -->
+    <!--    <!-- create mesh using generator requiring generator-args -->
     <!--    <mesh key="tesselated_quad" mesh-generator="tesselation_gen" />-->
     <!--    -->
     <!--    <!-- create mesh using generator requiring generate-args -->
