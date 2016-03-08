@@ -215,6 +215,11 @@ public class SpectraXML {
                     container.register(MDLVertexDescriptor.self, name: key!)  { _ in
                         return MDLVertexDescriptor(vertexDescriptor: vertexDesc)
                         }.inObjectScope(.None)
+                case .BufferAllocator:
+                    let allocator = SpectraXMLBufferAllocatorNode().parse(container, elem: child, options: options)
+                    container.register(MDLMeshBufferAllocator.self, name: key!) { _ in
+                        return allocator
+                        }.inObjectScope(.None)
                 case .Asset:
                     let asset = SpectraXMLAssetNode().parse(container, elem: child, options: options)
                     container.register(MDLAsset.self, name: key!) { _ in
