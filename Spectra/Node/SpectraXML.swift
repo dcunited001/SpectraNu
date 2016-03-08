@@ -274,7 +274,7 @@ public class SpectraXML {
                 case .Texture:
                     let textureNode = TextureNode()
                     textureNode.parseXML(container, elem: child, options: options)
-                    let textureGen = container.resolve(TextureGenerator.self, name: key!)!
+                    let textureGen = container.resolve(TextureGenerator.self, name: textureNode.generator)!
                     let texture = textureGen.generate(container, args: textureNode.args)
                     container.register(MDLTexture.self, name: key!) { _ in
                         // don't copy texture
@@ -620,7 +620,7 @@ public class TextureNode {
     public var args: [String: GeneratorArg] = [:]
     
     public func parseXML(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
-        if let generator = elem.attributes["mesh-generator"] {
+        if let generator = elem.attributes["generator"] {
             self.generator = generator
         }
         

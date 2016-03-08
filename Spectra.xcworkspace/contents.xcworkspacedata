@@ -276,6 +276,9 @@
          <FileRef
             location = "group:/Users/dc/dev/apple/Spectra/SpectraTestsResources/SpectraXML/ModelIOTextureGeneratorsSpec.xml">
          </FileRef>
+         <FileRef
+            location = "group:SpectraXMLSpec.xml">
+         </FileRef>
       </Group>
       <Group
          location = "container:SpectraTestsResources/S3DXML"
