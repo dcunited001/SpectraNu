@@ -106,6 +106,11 @@ class ModelIOMeshGeneratorsSpec: QuickSpec {
                 expect(cylinderGen2.radialSegments) == 5
                 expect(cylinderGen2.verticalSegments) == 5
             }
+            
+            it("allows the geometry type to be updated") {
+                print(cylinderGen2.geometryType.rawValue)
+                expect(cylinderGen2.geometryType) == MDLGeometryType.TypeQuads
+            }
         }
 
         describe("IcosahedronMeshGen") {

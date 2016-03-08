@@ -14,7 +14,6 @@ import Swinject
 
 // TODO: how to compose various functionalities together?
 
-
 // Model I/O generators create meshes using a VertexDescriptor with:
 // - position: 12B
 // - normal: 12B
@@ -79,16 +78,14 @@ public class EllipsoidMeshGen: MeshGenerator {
         if let verticalSegments = args["vertical_segments"] {
             self.verticalSegments = Int(verticalSegments.value)!
         }
-        
         if let geoType = args["geometry_type"] {
-            // self.geometryType = .TypeTriangles
+            let enumVal = container.resolve(SpectraEnum.self, name: "mdlGeometryType")!.getValue(geoType.value)
+            self.geometryType = MDLGeometryType(rawValue: Int(enumVal))!
         }
-        
         if let inwardNormals = args["inward_normals"] {
             let valAsBool = NSString(string: inwardNormals.value).boolValue
             self.inwardNormals = valAsBool
         }
-        
         if let hemisphere = args["hemisphere"] {
             let valAsBool = NSString(string: hemisphere.value).boolValue
             self.hemisphere = valAsBool
@@ -98,7 +95,6 @@ public class EllipsoidMeshGen: MeshGenerator {
     }
     
     public func generate(container: Container, args: [String : GeneratorArg] = [:]) -> MDLMesh {
-        
         // TODO: merge arguments for mesh generators
         
         return MDLMesh.newEllipsoidWithRadii(self.radii,
@@ -151,8 +147,9 @@ public class EllipticalConeMeshGen: MeshGenerator {
         if let verticalSegments = args["vertical_segments"] {
             self.verticalSegments = Int(verticalSegments.value)!
         }
-        if let geometryType = args["geometry_type"] {
-            self.geometryType = .TypeTriangles
+        if let geoType = args["geometry_type"] {
+            let enumVal = container.resolve(SpectraEnum.self, name: "mdlGeometryType")!.getValue(geoType.value)
+            self.geometryType = MDLGeometryType(rawValue: Int(enumVal))!
         }
         if let inwardNormals = args["inward_normals"] {
             let valAsBool = NSString(string: inwardNormals.value).boolValue
@@ -214,8 +211,9 @@ public class CylinderMeshGen: MeshGenerator {
         if let verticalSegments = args["vertical_segments"] {
             self.verticalSegments = Int(verticalSegments.value)!
         }
-        if let geometryType = args["geometry_type"] {
-            self.geometryType = .TypeTriangles
+        if let geoType = args["geometry_type"] {
+            let enumVal = container.resolve(SpectraEnum.self, name: "mdlGeometryType")!.getValue(geoType.value)
+            self.geometryType = MDLGeometryType(rawValue: Int(enumVal))!
         }
         if let inwardNormals = args["inward_normals"] {
             let valAsBool = NSString(string: inwardNormals.value).boolValue

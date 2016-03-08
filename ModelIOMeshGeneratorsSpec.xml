@@ -25,6 +25,7 @@
     
     <mesh-generator key="cylinder_mesh_gen2" type="cylinder_mesh_gen">
         <generator-args>
+            <generator-arg type="String" name="geometry_type" value="TypeQuads" />
             <generator-arg type="Float" name="height" value="100" />
             <generator-arg type="Float2" name="radii" value="5 5" />
             <generator-arg type="Int" name="radial_segments" value="5" />
