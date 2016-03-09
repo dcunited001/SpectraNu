@@ -51,9 +51,6 @@
             location = "group:S3DXSD.swift">
          </FileRef>
          <FileRef
-            location = "group:SceneGraphXML.swift">
-         </FileRef>
-         <FileRef
             location = "group:StateManager.swift">
          </FileRef>
       </Group>
