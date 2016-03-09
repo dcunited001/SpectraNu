@@ -31,6 +31,7 @@ class SpectraXMLSpec: QuickSpec {
         let testBundle = NSBundle(forClass: SpectraXMLSpec.self)
         let xmlData: NSData = SpectraXML.readXML(testBundle, filename: "SpectraXMLSpec")
         let assetContainer = Container(parent: parser)
+        ModelIOTextureGenerators.loadTextureGenerators(assetContainer)
 
         SpectraXML.initParser(parser)
         let spectraXML = SpectraXML(parser: parser, data: xmlData)
