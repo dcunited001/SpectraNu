@@ -39,8 +39,8 @@ public enum SpectraXMLNodeType: String {
     case Object = "object"
     case Mesh = "mesh"
     case MeshGenerator = "mesh-generator"
-    case PhysicalLensParams = "physical-lens"
-    case PhysicalImagingSurfaceParams = "physical-imaging-surface"
+    case PhysicalLens = "physical-lens"
+    case PhysicalImagingSurface = "physical-imaging-surface"
     case StereoscopicCamera = "stereoscopic-camera"
     case VertexAttribute = "vertex-attribute"
     case VertexDescriptor = "vertex-descriptor"
@@ -81,16 +81,6 @@ public enum SpectraXMLNodeType: String {
             return {(container, node, key, options) in
                 let cam = SpectraXMLCameraNode().parse(container, elem: node, options: options)
                 return cam
-            }
-        case .PhysicalLensParams:
-            return {(container, node, key, options) in
-                let lens = SpectraXMLPhysicalLensNode().parse(container, elem: node, options: options)
-                return lens
-            }
-        case .PhysicalImagingSurfaceParams:
-            return {(container, node, key, options) in
-                let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: node, options: options)
-                return imagingSurface
             }
         case .MeshGenerator:
             return {(container, node, key, options) in
@@ -173,12 +163,12 @@ public class SpectraXML {
             return SpectraXMLNodeType.StereoscopicCamera.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.PhysicalLensParams.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
-            return SpectraXMLNodeType.PhysicalLensParams.nodeParser(node, key: k, options: options)!
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.PhysicalLens.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
+            return SpectraXMLNodeType.PhysicalLens.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
-        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.PhysicalImagingSurfaceParams.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
-            return SpectraXMLNodeType.PhysicalImagingSurfaceParams.nodeParser(node, key: k, options: options)!
+        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.PhysicalImagingSurface.rawValue) { (r, k: String, node: XMLElement, options: [String:Any]) in
+            return SpectraXMLNodeType.PhysicalImagingSurface.nodeParser(node, key: k, options: options)!
             }.inObjectScope(.None) // always return a new instance of the closure
         
         //        parser.register(SpectraXMLNodeParser.self, name: SpectraXMLNodeType.World.rawValue) { (r, k: String, node: XMLElement, options: [String: Any]) in
@@ -256,15 +246,17 @@ public class SpectraXML {
                     container.register(MDLStereoscopicCamera.self, name: key!) { _ in
                         return SpectraXMLStereoscopicCameraNode.copy(stereoCam)
                         }.inObjectScope(.None)
-                case .PhysicalLensParams:
-                    let lens = SpectraXMLPhysicalLensNode().parse(container, elem: child, options: options)
-                    container.register(PhysicalLens.self, name: key!) { _ in
-                        return (lens.copy() as! PhysicalLens)
+                case .PhysicalLens:
+                    let lensNode = PhysicalLensNode()
+                    lensNode.parseXML(container, elem: child, options: options)
+                    container.register(PhysicalLensNode.self, name: key!) { _ in
+                        return (lensNode.copy() as! PhysicalLensNode)
                         }.inObjectScope(.None)
-                case .PhysicalImagingSurfaceParams:
-                    let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: child, options: options)
-                    container.register(PhysicalImagingSurface.self, name: key!) { _ in
-                        return (imagingSurface.copy() as! PhysicalImagingSurface)
+                case .PhysicalImagingSurface:
+                    let imagingSurfaceNode = PhysicalImagingSurfaceNode()
+                    imagingSurfaceNode.parseXML(container, elem: child, options: options)
+                    container.register(PhysicalImagingSurfaceNode.self, name: key!) { _ in
+                        return (imagingSurfaceNode.copy() as! PhysicalImagingSurfaceNode)
                         }.inObjectScope(.None)
                 case .Transform:
                     let transform = SpectraXMLTransformNode().parse(container, elem: child, options: options)
@@ -289,7 +281,7 @@ public class SpectraXML {
                         }.inObjectScope(.None)
                 case .TextureFilter:
                     let filterNode = TextureFilterNode()
-                    filterNode.parseXML(nodeContainer: container, elem: child, options: options)
+                    filterNode.parseXML(container, elem: child, options: options)
                     let filter = filterNode.generate(container, options: options)
                     container.register(MDLTextureFilter.self, name: key!) { _ in
                         return TextureFilterNode.copy(filter)
@@ -799,7 +791,7 @@ public class SpectraXMLObjectNode: SpectraXMLNode {
 // - there's also the mesh-generator pattern from the original SceneGraphXML
 //   - this draws from a map of monads passed in and executes the one for a specific type, if found
 
-public class PhysicalLens: NSObject, NSCopying {
+public class PhysicalLensNode: NSObject, NSCopying {
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
     
     public var worldToMetersConversionScale: Float?
@@ -916,7 +908,7 @@ public class PhysicalLens: NSObject, NSCopying {
     }
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        let cp = PhysicalLens()
+        let cp = PhysicalLensNode()
         cp.worldToMetersConversionScale = self.worldToMetersConversionScale
         cp.barrelDistortion = self.barrelDistortion
         cp.fisheyeDistortion = self.fisheyeDistortion
@@ -931,18 +923,7 @@ public class PhysicalLens: NSObject, NSCopying {
     }
 }
 
-public class SpectraXMLPhysicalLensNode: SpectraXMLNode {
-    public typealias NodeType = PhysicalLens
-    
-    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
-        let lensParams = PhysicalLens()
-        lensParams.parseXML(container, elem: elem, options: options)
-        
-        return lensParams
-    }
-}
-
-public class PhysicalImagingSurface: NSObject, NSCopying {
+public class PhysicalImagingSurfaceNode: NSObject, NSCopying {
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
     
     public var sensorVerticalAperture: Float?
@@ -1025,7 +1006,7 @@ public class PhysicalImagingSurface: NSObject, NSCopying {
     }
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        let cp = PhysicalImagingSurface()
+        let cp = PhysicalImagingSurfaceNode()
         cp.sensorVerticalAperture = self.sensorVerticalAperture
         cp.sensorAspect = self.sensorAspect
         cp.sensorEnlargement = self.sensorEnlargement
@@ -1035,17 +1016,6 @@ public class PhysicalImagingSurface: NSObject, NSCopying {
         cp.exposureCompression = self.exposureCompression
         
         return cp
-    }
-}
-
-public class SpectraXMLPhysicalImagingSurfaceNode: SpectraXMLNode {
-    public typealias NodeType = PhysicalImagingSurface
-    
-    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
-        let imagingSurface = PhysicalImagingSurface()
-        imagingSurface.parseXML(container, elem: elem, options: options)
-        
-        return imagingSurface
     }
 }
 
@@ -1066,35 +1036,37 @@ public class SpectraXMLCameraNode: SpectraXMLNode {
             cam.fieldOfView = Float(fieldOfView)!
         }
         
-        let lensSelector = SpectraXMLNodeType.PhysicalLensParams.rawValue
+        let lensSelector = SpectraXMLNodeType.PhysicalLens.rawValue
         if let lensTag = elem.firstChild(tag: lensSelector) {
             if let ref = lensTag.attributes["ref"] {
-                let lens = container.resolve(PhysicalLens.self, name: ref)!
+                let lens = container.resolve(PhysicalLensNode.self, name: ref)!
                 lens.applyToCamera(cam)
             } else {
-                let lens = SpectraXMLPhysicalLensNode().parse(container, elem: lensTag, options: options)
+                let lensNode = PhysicalLensNode()
+                lensNode.parseXML(container, elem: lensTag, options: options)
                 if let lensKey = lensTag["key"] {
-                    container.register(PhysicalLens.self, name: lensKey) { _ in return
-                        lens.copy() as! PhysicalLens
+                    container.register(PhysicalLensNode.self, name: lensKey) { _ in return
+                        lensNode.copy() as! PhysicalLensNode
                     }
                 }
-                lens.applyToCamera(cam)
+                lensNode.applyToCamera(cam)
             }
         }
         
-        let imagingSelector = SpectraXMLNodeType.PhysicalImagingSurfaceParams.rawValue
+        let imagingSelector = SpectraXMLNodeType.PhysicalImagingSurface.rawValue
         if let imagingTag = elem.firstChild(tag: imagingSelector) {
             if let ref = imagingTag.attributes["ref"] {
-                let imagingSurface = container.resolve(PhysicalImagingSurface.self, name: ref)!
+                let imagingSurface = container.resolve(PhysicalImagingSurfaceNode.self, name: ref)!
                 imagingSurface.applyToCamera(cam)
             } else {
-                let imagingSurface = SpectraXMLPhysicalImagingSurfaceNode().parse(container, elem: imagingTag, options: options)
+                let imagingSurfaceNode = PhysicalImagingSurfaceNode()
+                imagingSurfaceNode.parseXML(container, elem: imagingTag, options: options)
                 if let imagingSurfaceKey = imagingTag["key"] {
-                    container.register(PhysicalImagingSurface.self, name: imagingTag["key"]!) { _ in
-                        return imagingSurface.copy() as! PhysicalImagingSurface
+                    container.register(PhysicalImagingSurfaceNode.self, name: imagingTag["key"]!) { _ in
+                        return imagingSurfaceNode.copy() as! PhysicalImagingSurfaceNode
                     }
                 }
-                imagingSurface.applyToCamera(cam)
+                imagingSurfaceNode.applyToCamera(cam)
             }
         }
         
@@ -1332,7 +1304,7 @@ public class TextureSamplerNode: NSObject, NSCopying {
     // - having a separate nodeContainer ensures that each dependency registered
     //   - can be totally self-contained
     
-    public func parseXML(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
+    public func parseXML(nodeContainer: Container, elem: XMLElement, options: [String: Any] = [:]) {
         if let texture = elem.attributes["texture"] {
             self.texture = texture
         }
@@ -1372,7 +1344,7 @@ public class TextureSamplerNode: NSObject, NSCopying {
         cp.texture = obj.texture // can't really copy textures for resource reasons
         cp.transform = obj.transform ?? MDLTransform()
         if let filter = obj.hardwareFilter {
-            cp.hardwareFilter = SpectraXMLTextureFilterNode.copy(filter)
+            cp.hardwareFilter = TextureFilterNode.copy(filter)
         }
         return cp
     }

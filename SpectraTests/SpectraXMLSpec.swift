@@ -252,12 +252,12 @@ class SpectraXMLSpec: QuickSpec {
         }
         
         describe("MDLCamera") {
-            let lens1: PhysicalLens = self.containerGet(assetContainer, key: "lens1")!
-            let lens2: PhysicalLens = self.containerGet(assetContainer, key: "lens2")!
-            let lens3: PhysicalLens = self.containerGet(assetContainer, key: "lens3")!
+            let lens1: PhysicalLensNode = self.containerGet(assetContainer, key: "lens1")!
+            let lens2: PhysicalLensNode = self.containerGet(assetContainer, key: "lens2")!
+            let lens3: PhysicalLensNode = self.containerGet(assetContainer, key: "lens3")!
             
-            let physImg1: PhysicalImagingSurface = self.containerGet(assetContainer, key: "phys_img1")!
-            let physImg2: PhysicalImagingSurface = self.containerGet(assetContainer, key: "phys_img2")!
+            let physImg1: PhysicalImagingSurfaceNode = self.containerGet(assetContainer, key: "phys_img1")!
+            let physImg2: PhysicalImagingSurfaceNode = self.containerGet(assetContainer, key: "phys_img2")!
             
             // camera with defaults
             // camera with lens applied
