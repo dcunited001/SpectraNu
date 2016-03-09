@@ -167,9 +167,9 @@
     <!--    </object>-->
     
     <texture-filter key="default" />
-    <texture-filter key="filter_clamp" r-wrap-mode="Clamp" t-wrap-mode="Clamp" s-wrap-mode"Clamp" />
-    <texture-filter key="filter_repeat" r-wrap-mode="Repeat" t-wrap-mode="Repeat" s-wrap-mode"Repeat" />
-    <texture-filter key="filter_mirror" r-wrap-mode="Mirror" t-wrap-mode="Mirror" s-wrap-mode"Mirror" />
+    <texture-filter key="filter_clamp" r-wrap-mode="Clamp" t-wrap-mode="Clamp" s-wrap-mode="Clamp" />
+    <texture-filter key="filter_repeat" r-wrap-mode="Repeat" t-wrap-mode="Repeat" s-wrap-mode="Repeat" />
+    <texture-filter key="filter_mirror" r-wrap-mode="Mirror" t-wrap-mode="Mirror" s-wrap-mode="Mirror" />
     <texture-filter key="filter_linear" min-filter="Linear" mag-filter="Linear" mip-filter="Linear" />
     <texture-filter key="filter_nearest" min-filter="Nearest" mag-filter="Nearest" mip-filter="Nearest" />
     
