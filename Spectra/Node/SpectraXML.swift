@@ -330,7 +330,8 @@ public protocol SpectraXMLNode {
 }
 
 public class AssetNode: NSObject, NSCopying {
-    public var url: NSURL?
+    public var urlString: String?
+    public var resource: String?
     public var vertexDescriptor: String = "default"
     public var bufferAllocator: String = "default"
     
@@ -346,8 +347,12 @@ public class AssetNode: NSObject, NSCopying {
     
     public func parseXML(nodeContainer: Container, elem: XMLElement, options: [String: Any] = [:]) {
         
-        let urlString = elem.attributes["url"]!
-        self.url = NSURL(string: urlString)
+        if let urlString = elem.attributes["url"] {
+            self.urlString = urlString
+        }
+        if let resource = elem.attributes["resource"] {
+            self.resource = resource
+        }
         
         var vertexDesc: MDLVertexDescriptor?
         
@@ -367,6 +372,13 @@ public class AssetNode: NSObject, NSCopying {
     }
     
     public func generate(container: Container, options: [String: Any] = [:]) -> MDLAsset {
+        
+        let url = NSURL(string: self.url!)
+        
+//        if resource != nil {
+//            // TODO: need to have access to bundles
+//        }
+        
         var vertexDescriptor = container.resolve(MDLVertexDescriptor.self, name: self.vertexDescriptor)
         var bufferAllocator = container.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
         
@@ -539,8 +551,6 @@ public class SpectraXMLTransformNode: SpectraXMLNode {
         return newTransform
     }
 }
-
-// TODO: public class SpectraXMLWorldNode: SpectraXMLNode
 
 public struct GeneratorArg {
     public var name: String

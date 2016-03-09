@@ -339,20 +339,17 @@ class SpectraXMLSpec: QuickSpec {
         }
         
         describe("asset") {
+            let pencils = container.resolve(MDLAsset.self, name: "pencil_model")!
             
-            it("can load a MDLAsset, but only from a file url") {
-                
+            it("can parse asset nodes") {
+
             }
             
-            it("can load a MDLAsset with a URL & vertex descriptor") {
-                
+            it("can generate asset nodes") {
+                // TODO: how to generate environment-independent path?
             }
             
-            it("can load a MDLAsset with a URL, vertex descriptor & buffer allocator") {
-                
-            }
-            
-            it("can load a MDLAsset while preserving the topology") {
+            it ("can generate asset nodes with a vertex descriptor and/or buffer allocator") {
                 
             }
         }
