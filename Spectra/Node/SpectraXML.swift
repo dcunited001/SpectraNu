@@ -1294,6 +1294,72 @@ public class SpectraXMLTextureFilterNode: SpectraXMLNode {
     }
 }
 
+public class TextureSamplerNode: NSObject, NSCopying {
+    public var texture: String?
+    public var hardwareFilter: String?
+    public var transform: String?
+    
+    // public func parseJSON()
+    // public func parsePlist()
+    // public func parseXML(nodeContainer: Container)
+    
+    // so, as above ^^^ there would instead be a nodeContainer, for parsing SpectraXML
+    // - this would just contain very easily copyable definitions of nodes - no Model I/O
+    // - these nodes could also instead be structs
+    // - these nodes could generate the Model I/O, whenever app developer wants
+    //   - the generate method would instead receive a different container.
+    //     - but, does this really work? 
+    //     - (parsing works now because it's assumed 
+    //     - to proceed in the order which things are declared)
+    // - having a separate nodeContainer ensures that each dependency registered
+    //   - can be totally self-contained
+    
+    public func parseXML(container: Container, elem: XMLElement, options: [String: Any] = [:]) {
+        if let texture = elem.attributes["texture"] {
+            self.texture = texture
+        }
+        if let hardwareFilter = elem.attributes["hardware-filter"] {
+            self.hardwareFilter = hardwareFilter
+        }
+        if let transform = elem.attributes["transform"] {
+            self.transform = transform
+        }
+    }
+    
+    public func generate(container: Container, options: [String: Any] = [:]) -> MDLTextureSampler {
+        
+        let sampler = MDLTextureSampler()
+        sampler.texture = container.resolve(MDLTexture.self, name: self.texture)!
+        sampler.hardwareFilter = container.resolve(MDLTextureFilter.self, name: self.texture)!
+        if let transform = container.resolve(MDLTransform.self, name: self.transform) {
+            sampler.transform = transform
+        } else {
+            sampler.transform = MDLTransform()
+        }
+        
+        return sampler
+    }
+    
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let cp = TextureSamplerNode()
+        cp.texture = self.texture
+        cp.hardwareFilter = self.hardwareFilter
+        cp.transform = self.transform
+        return cp
+    }
+    
+    // implemented copy() as a static method for compatibility for now
+    public static func copy(obj: MDLTextureSampler) -> MDLTextureSampler {
+        let cp = MDLTextureSampler()
+        cp.texture = obj.texture // can't really copy textures for resource reasons
+        cp.transform = obj.transform ?? MDLTransform()
+        if let filter = obj.hardwareFilter {
+            cp.hardwareFilter = SpectraXMLTextureFilterNode.copy(filter)
+        }
+        return cp
+    }
+}
+
 // TODO: public class SpectraXMLLightNode: SpectraXMLNode {
 // TODO: public class SpectraXML ... etc
 // TODO: public class SpectraXMLMaterialNode: SpectraXMLNode {
