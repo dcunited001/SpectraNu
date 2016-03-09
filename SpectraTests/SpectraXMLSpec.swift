@@ -235,17 +235,7 @@ class SpectraXMLSpec: QuickSpec {
                 
                 expect(scene1.children)
             }
-        }
-        
-        describe("mesh") {
-            //TODO: doc mesh attributes
-        }
-        
-        describe("mesh-generator") {
-            //TODO: doc mesh-generator attributes
-        }
-        
-        describe("object") {
+            
             it("can create root objects that can be used to contain other objects") {
                 // i think this is the best place for this?
                 // - or object container?
@@ -301,7 +291,6 @@ class SpectraXMLSpec: QuickSpec {
             }
             
             describe("camera") {
-                
                 it("manages the inherited MDLObject properties") {
                     // transform
                     // parent
@@ -447,6 +436,10 @@ class SpectraXMLSpec: QuickSpec {
                 expect(filterNearest.magFilter) == MDLMaterialTextureFilterMode.Nearest
                 expect(filterNearest.mipFilter) == MDLMaterialMipMapFilterMode.Nearest
             }
+            
+            it("generates a MDLTextureFilter") {
+                
+            }
         }
         
         describe("texture-sampler") {
@@ -455,6 +448,14 @@ class SpectraXMLSpec: QuickSpec {
             // transform: MDLTransform (translate/scale/rotate textures relative to their surfaces)
             
             // TODO: MDLTextureSampler => MTLTextureSampler
+            
+            it("parses texture samplers") {
+                
+            }
+            
+            it("generates a MDLTextureSampler") {
+                
+            }
         }
         
         describe("light") {
