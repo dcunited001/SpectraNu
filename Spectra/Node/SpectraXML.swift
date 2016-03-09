@@ -211,7 +211,9 @@ public class SpectraXML {
                         return allocator
                         }.inObjectScope(.None)
                 case .Asset:
-                    let asset = SpectraXMLAssetNode().parse(container, elem: child, options: options)
+                    let assetNode = AssetNode()
+                    assetNode.parseXML(container, elem: child, options: options)
+                    let asset = assetNode.generate(container)
                     container.register(MDLAsset.self, name: key!) { _ in
                         return asset.copy() as! MDLAsset
                         }.inObjectScope(.None)
@@ -327,37 +329,65 @@ public protocol SpectraXMLNode {
     func parse(container: Container, elem: XMLElement, options: [String: Any]) -> NodeType
 }
 
-public class SpectraXMLAssetNode: SpectraXMLNode {
-    public typealias NodeType = MDLAsset
+public class AssetNode: NSObject, NSCopying {
+    public var url: NSURL?
+    public var vertexDescriptor: String = "default"
+    public var bufferAllocator: String = "default"
     
-    public func parse(container: Container, elem: XMLElement, options: [String: Any] = [:]) -> NodeType {
+    // TODO: error handling for preserveTopology 
+    // - (when true the constructor throws. for now, my protocol can't handle this)
+    public var preserveTopology: Bool = false
+    
+    // file formats:
+    // - Alembic *.abc
+    // - Wavefront Object *.obj
+    // - Polygon *.abc
+    // - Standard Tessellation Language *.stl
+    
+    public func parseXML(nodeContainer: Container, elem: XMLElement, options: [String: Any] = [:]) {
+        
         let urlString = elem.attributes["url"]!
+        self.url = NSURL(string: urlString)
+        
         var vertexDesc: MDLVertexDescriptor?
         
-        // file formats:
-        // - Alembic *.abc
-        // - Wavefront Object *.obj
-        // - Polygon *.abc
-        // - Standard Tessellation Language *.stl
-        
         let descSelector = "vertex-descriptor"
-        
         if let vertexDescKey = elem.attributes["vertex-descriptor"] {
-            vertexDesc = container.resolve(MDLVertexDescriptor.self, name: vertexDescKey)
-        }
+            self.vertexDescriptor = vertexDescKey
+        } // TODO: else if contains a vertexDescriptor node
         
         if let bufferAllocKey = elem.attributes["buffer-allocator"] {
-            // TODO: buffer allocation
+            self.bufferAllocator = bufferAllocKey
         }
         
-        let asset = MDLAsset()
+        if let preserveTopology = elem.attributes["preserve-topology"] {
+            let valAsBool = NSString(string: preserveTopology).boolValue
+            self.preserveTopology = valAsBool
+        }
+    }
+    
+    public func generate(container: Container, options: [String: Any] = [:]) -> MDLAsset {
+        var vertexDescriptor = container.resolve(MDLVertexDescriptor.self, name: self.vertexDescriptor)
+        var bufferAllocator = container.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
         
-        // TODO: set asset properties
+        let asset = MDLAsset(URL: self.url!, vertexDescriptor: vertexDescriptor, bufferAllocator: bufferAllocator)
+        
+        // TODO: change to call with preserveTopology (it throws though)
         
         return asset
     }
-
-    //TODO: ensure asset.copy() returns a deep copy
+    
+    public func copyWithZone(zone: NSZone) -> AnyObject {
+        let cp = AssetNode()
+        cp.url = self.url
+        cp.vertexDescriptor = self.vertexDescriptor
+        cp.bufferAllocator = self.bufferAllocator
+        return cp
+    }
+    
+    public static func copy(obj: MDLAsset) -> MDLAsset {
+        return obj.copy() as! MDLAsset
+    }
 }
 
 public class SpectraXMLBufferAllocatorNode: SpectraXMLNode {
