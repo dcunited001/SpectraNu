@@ -68,7 +68,6 @@
 		4371E8961C190934001D1C39 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8401C18B3AF007D3DF6 /* DescriptorManager.swift */; };
 		4371E8971C190934001D1C39 /* S3DXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8411C18B3AF007D3DF6 /* S3DXML.swift */; };
 		4371E8981C190934001D1C39 /* S3DXSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8421C18B3AF007D3DF6 /* S3DXSD.swift */; };
-		4371E8991C190934001D1C39 /* SceneGraphXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8431C18B3AF007D3DF6 /* SceneGraphXML.swift */; };
 		4371E89A1C190934001D1C39 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8441C18B3AF007D3DF6 /* StateManager.swift */; };
 		4371E8BC1C190991001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8641C18B3AF007D3DF6 /* Spectra.swift */; };
 		437D18F61C8CF28D00C70975 /* LightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437D18F41C8CF28D00C70975 /* LightGenerator.swift */; };
@@ -186,7 +185,6 @@
 		4338B8401C18B3AF007D3DF6 /* DescriptorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptorManager.swift; sourceTree = "<group>"; };
 		4338B8411C18B3AF007D3DF6 /* S3DXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXML.swift; sourceTree = "<group>"; };
 		4338B8421C18B3AF007D3DF6 /* S3DXSD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXSD.swift; sourceTree = "<group>"; };
-		4338B8431C18B3AF007D3DF6 /* SceneGraphXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneGraphXML.swift; sourceTree = "<group>"; };
 		4338B8441C18B3AF007D3DF6 /* StateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		4338B8461C18B3AF007D3DF6 /* Camable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camable.swift; sourceTree = "<group>"; };
 		4338B8471C18B3AF007D3DF6 /* Mesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
@@ -372,7 +370,6 @@
 				4338B8401C18B3AF007D3DF6 /* DescriptorManager.swift */,
 				4338B8411C18B3AF007D3DF6 /* S3DXML.swift */,
 				4338B8421C18B3AF007D3DF6 /* S3DXSD.swift */,
-				4338B8431C18B3AF007D3DF6 /* SceneGraphXML.swift */,
 				4338B8441C18B3AF007D3DF6 /* StateManager.swift */,
 			);
 			path = S3DXML;
@@ -851,7 +848,6 @@
 				4371E8881C190928001D1C39 /* MeshGenerator.swift in Sources */,
 				4371E8931C19092F001D1C39 /* Uniformable.swift in Sources */,
 				4371E87B1C190921001D1C39 /* BufferPool.swift in Sources */,
-				4371E8991C190934001D1C39 /* SceneGraphXML.swift in Sources */,
 				437D18F61C8CF28D00C70975 /* LightGenerator.swift in Sources */,
 				43D4FDD41C7C5025004E2CF7 /* SpectraXML.swift in Sources */,
 			);
