@@ -1319,8 +1319,8 @@ public class TextureSamplerNode: NSObject, NSCopying {
     public func generate(container: Container, options: [String: Any] = [:]) -> MDLTextureSampler {
         
         let sampler = MDLTextureSampler()
-        sampler.texture = container.resolve(MDLTexture.self, name: self.texture)!
-        sampler.hardwareFilter = container.resolve(MDLTextureFilter.self, name: self.texture)!
+        sampler.texture = container.resolve(MDLTexture.self, name: self.texture)
+        sampler.hardwareFilter = container.resolve(MDLTextureFilter.self, name: self.texture)
         if let transform = container.resolve(MDLTransform.self, name: self.transform) {
             sampler.transform = transform
         } else {
