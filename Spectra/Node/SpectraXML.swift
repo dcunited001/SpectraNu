@@ -373,7 +373,7 @@ public class AssetNode: NSObject, NSCopying {
     
     public func generate(container: Container, options: [String: Any] = [:]) -> MDLAsset {
         
-        let url = NSURL(string: self.url!)
+        let url = NSURL(string: self.urlString!)
         
 //        if resource != nil {
 //            // TODO: need to have access to bundles
@@ -382,7 +382,7 @@ public class AssetNode: NSObject, NSCopying {
         var vertexDescriptor = container.resolve(MDLVertexDescriptor.self, name: self.vertexDescriptor)
         var bufferAllocator = container.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
         
-        let asset = MDLAsset(URL: self.url!, vertexDescriptor: vertexDescriptor, bufferAllocator: bufferAllocator)
+        let asset = MDLAsset(URL: url!, vertexDescriptor: vertexDescriptor, bufferAllocator: bufferAllocator)
         
         // TODO: change to call with preserveTopology (it throws though)
         
@@ -391,7 +391,7 @@ public class AssetNode: NSObject, NSCopying {
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
         let cp = AssetNode()
-        cp.url = self.url
+        cp.urlString = self.urlString
         cp.vertexDescriptor = self.vertexDescriptor
         cp.bufferAllocator = self.bufferAllocator
         return cp

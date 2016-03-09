@@ -339,7 +339,7 @@ class SpectraXMLSpec: QuickSpec {
         }
         
         describe("asset") {
-            let pencils = container.resolve(MDLAsset.self, name: "pencil_model")!
+//            let pencils = assetContainer.resolve(MDLAsset.self, name: "pencil_model")!
             
             it("can parse asset nodes") {
 
