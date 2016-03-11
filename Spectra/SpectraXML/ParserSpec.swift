@@ -6,17 +6,19 @@
 //
 //
 
-import Foundation
+@testable import Spectra
 import Quick
 import Nimble
-
-@testable import Spectra
 import Fuzi
 import Swinject
 import ModelIO
 
-class SpectraXMLParserSpec: QuickSpec {
+class SpectraParserSpec: QuickSpec {
     override func spec() {
-        
+        describe("SpectraParser") {
+            it("sometimes requires a spec") {
+            
+            }
+        }
     }
 }
