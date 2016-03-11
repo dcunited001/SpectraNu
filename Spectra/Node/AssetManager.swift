@@ -17,7 +17,7 @@ public class AssetManager {
     public var container: Container = Container()
     
     public init() {
-        let spectraEnumXSD = SpectraXSD.readXSD("SpectraEnums")
+        let spectraEnumXSD = SpectraXSD.readXSD("SpectraEnums")!
         let spectraXSD = SpectraXSD()
         container = spectraXSD.parseXSD(spectraEnumXSD, container: container)
     }
