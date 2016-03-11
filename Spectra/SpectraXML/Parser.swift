@@ -128,7 +128,7 @@ public class SpectraParser {
         }
     }
     
-    public static func readXML(bundle: NSBundle, filename: String, bundleResourceName: String?) throws -> XMLDocument {
+    public static func readXML(bundle: NSBundle, filename: String, bundleResourceName: String?) -> XMLDocument? {
         var resourceBundle: NSBundle = bundle
         if let resourceName = bundleResourceName {
             let bundleURL = bundle.URLForResource(resourceName, withExtension: "bundle")
@@ -137,7 +137,19 @@ public class SpectraParser {
 
         let path = resourceBundle.pathForResource(filename, ofType: "xml")
         let data = NSData(contentsOfFile: path!)
-        return try XMLDocument(data: data!)
+        
+        do {
+            return try XMLDocument(data: data!)
+        } catch let err as XMLError {
+            switch err {
+            case .ParserFailure, .InvalidData: print(err)
+            case .LibXMLError(let code, let message): print("libxml error code: \(code), message: \(message)")
+            default: break
+            }
+        } catch let err {
+            print("error: \(err)")
+        }
+        return nil
     }
     
     
