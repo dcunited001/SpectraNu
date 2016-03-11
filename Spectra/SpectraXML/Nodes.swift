@@ -107,18 +107,18 @@ public struct GeneratorArg {
     //        default: return nil
     //        }
     //    }
-
 }
 
 public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode protocol
     public typealias NodeType = AssetNode
     public typealias MDLType = MDLAsset
     
+    public var id: String?
     public var urlString: String?
     public var resource: String?
     public var vertexDescriptor: String = "default"
     public var bufferAllocator: String = "default"
-
+    
     // TODO: error handling for preserveTopology
     // - (when true the constructor throws. for now, my protocol can't handle this)
     public var preserveTopology: Bool = false
@@ -132,7 +132,6 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
             self.resource = resource
         }
         
-        let descSelector = "vertex-descriptor"
         if let vertexDescKey = elem.attributes["vertex-descriptor"] {
             self.vertexDescriptor = vertexDescKey
         } // TODO: else if contains a vertexDescriptor node
@@ -145,10 +144,6 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
         }
         
     }
-    
-    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
-
-    }
 
     public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLType {
         let url = NSURL(string: self.urlString!)
@@ -158,6 +153,8 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
 //        if resource != nil {
 //            // TODO: need to have access to bundles
 //        }
+        
+//        let descSelector = "vertex-descriptor"
 
         var vertexDescriptor = mdlContainer.resolve(MDLVertexDescriptor.self, name: self.vertexDescriptor)
         var bufferAllocator = mdlContainer.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
@@ -179,11 +176,11 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
     }
 }
 
-
 public class VertexAttributeNode: SpectraParserNode {
     public typealias MDLType = MDLVertexAttribute
     public typealias NodeType = VertexAttributeNode
     
+    public var id: String?
     public var name: String?
     public var format: MDLVertexFormat?
     public var offset: Int = 0
@@ -207,10 +204,6 @@ public class VertexAttributeNode: SpectraParserNode {
         if let initializationValue = elem.attributes["initialization-value"] {
             self.initializationValue = SpectraSimd.parseFloat4(initializationValue)
         }
-    }
-    
-    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
-        
     }
     
     public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLType {
@@ -238,6 +231,7 @@ public class VertexDescriptorNode {
     public typealias NodeType = VertexDescriptorNode
     public typealias MDLType = MDLVertexDescriptor
     
+    public var id: String?
     public var parentDescriptor: VertexDescriptorNode?
     public var attributes: [VertexAttributeNode] = []
     
@@ -288,41 +282,38 @@ public class VertexDescriptorNode {
 
 // TODO: World = "world"
 
-public class TransformNode {
+public class TransformNode: SpectraParserNode {
+    public typealias NodeType = TransformNode
+    public typealias MDLType = MDLTransform
+    
+    public var id: String?
     public var scale: float3 = float3(1.0, 1.0, 1.0)
     public var rotation: float3 = float3(0.0, 0.0, 0.0)
     public var translation: float3 = float3(0.0, 0.0, 0.0)
     public var shear: float3 = float3(0.0, 0.0, 0.0)
     
-    public func parseXML(nodes: Container, elem: XMLElement, options: [String: Any] = [:]) {
+    public func parseXML(nodes: Container, elem: XMLElement) {
         // N.B. scale first, then rotate, finally translate
         // - but how can a shear operation be composed into this?
-
+        
         if let scale = elem.attributes["scale"] {
             self.scale = SpectraSimd.parseFloat3(scale)
         }
-
         if let shear = elem.attributes["shear"] {
             self.shear = SpectraSimd.parseFloat3(shear)
         }
-
         if let rotation = elem.attributes["rotation"] {
             self.rotation = SpectraSimd.parseFloat3(rotation)
         } else if let rotationDeg = elem.attributes["rotation-deg"] {
             let rotationDegrees = SpectraSimd.parseFloat3(rotationDeg)
             self.rotation = Float(M_PI / 180.0) * rotationDegrees
         }
-
         if let translation = elem.attributes["translation"] {
             self.translation = SpectraSimd.parseFloat3(translation)
         }
     }
-    
-    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
-        
-    }
 
-    public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLTransform {
+    public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLType {
         let transform = MDLTransform()
         transform.scale = self.scale
         transform.shear = self.shear
@@ -353,7 +344,8 @@ public class PhysicalLensNode: SpectraParserNode {
     public typealias NodeType = PhysicalLensNode
     
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
-
+    
+    public var id: String?
     public var worldToMetersConversionScale: Float?
     public var barrelDistortion: Float?
     public var fisheyeDistortion: Float?
@@ -467,10 +459,6 @@ public class PhysicalLensNode: SpectraParserNode {
 
     }
     
-    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
-        
-    }
-    
     public func generate(containers: [String : Container], options: [String : Any]) -> MDLType {
         return self.copy()
     }
@@ -497,6 +485,7 @@ public class PhysicalImagingSurfaceNode: SpectraParserNode {
     
     // for any of this to do anything, renderer must support the math (visual distortion, etc)
 
+    public var id: String?
     public var sensorVerticalAperture: Float?
     public var sensorAspect: Float?
     public var sensorEnlargement: vector_float2?
@@ -576,10 +565,6 @@ public class PhysicalImagingSurfaceNode: SpectraParserNode {
 
     }
     
-    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
-        
-    }
-    
     public func generate(containers: [String : Container], options: [String : Any] = [:]) -> MDLType {
         return self.copy()
     }
@@ -602,6 +587,7 @@ public class CameraNode: SpectraParserNode {
     public typealias MDLType = MDLCamera
     public typealias NodeType = CameraNode
     
+    public var id: String?
     public var nearVisibilityDistance: Float = 0.1
     public var farVisibilityDistance: Float = 1000.0
     public var fieldOfView: Float = Float(53.999996185302734375)
@@ -667,10 +653,6 @@ public class CameraNode: SpectraParserNode {
         }
     }
     
-    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
-        
-    }
-    
     public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLType {
         let cam = MDLCamera()
         
@@ -707,13 +689,13 @@ public class CameraNode: SpectraParserNode {
         
         return cp
     }
-    
 }
 
 public class StereoscopicCameraNode: SpectraParserNode {
     public typealias MDLType = MDLStereoscopicCamera
     public typealias NodeType = StereoscopicCameraNode
-    
+
+    public var id: String?
     public var nearVisibilityDistance: Float = 0.1
     public var farVisibilityDistance: Float = 1000.0
     public var fieldOfView: Float = Float(53.999996185302734375)
@@ -788,10 +770,6 @@ public class StereoscopicCameraNode: SpectraParserNode {
         }
         
         return cam
-    }
-    
-    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
-        
     }
     
     public func copy() -> NodeType {
