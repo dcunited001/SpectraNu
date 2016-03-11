@@ -95,6 +95,7 @@ class SpectraXMLNodesSpec: QuickSpec {
             it("can parse a descriptor with a packed array-of-struct indexing") {
                 let packedDescNode = spectraParser.getVertexDescriptor("vertdesc_packed")!
                 let packedDesc = packedDescNode.generate()
+                
                 let pos = packedDesc.attributeNamed("position")!
                 let tex = packedDesc.attributeNamed("textureCoordinate")!
                 let aniso = packedDesc.attributeNamed("anisotropy")!
@@ -115,6 +116,7 @@ class SpectraXMLNodesSpec: QuickSpec {
             it("can parse a descriptor with an unpacked struct-of-array indexing (each attribute has a buffer)") {
                 let unpackedDescNode = spectraParser.getVertexDescriptor("vertdesc_unpacked")!
                 let unpackedDesc = unpackedDescNode.generate()
+                
                 let pos = unpackedDesc.attributeNamed("position")!
                 let tex = unpackedDesc.attributeNamed("textureCoordinate")!
                 let aniso = unpackedDesc.attributeNamed("anisotropy")!
@@ -135,6 +137,7 @@ class SpectraXMLNodesSpec: QuickSpec {
             it("can parse a more complex layout") {
                 let complexDescNode = spectraParser.getVertexDescriptor("vertdesc_complex")!
                 let complexDesc = complexDescNode.generate()
+                
                 let pos = complexDesc.attributeNamed("position")!
                 let tex = complexDesc.attributeNamed("textureCoordinate")!
                 let aniso = complexDesc.attributeNamed("anisotropy")!
@@ -154,6 +157,27 @@ class SpectraXMLNodesSpec: QuickSpec {
                 expect(tex.bufferIndex) == 1
                 expect(aniso.bufferIndex) == 1
                 expect(rgb.bufferIndex) == 2
+            }
+        }
+        
+        describe("Transform") {
+            let xformTranslate = spectraParser.getTransform("xform_translate")!
+            let xformRotate = spectraParser.getTransform("xform_rotate")!
+            let xformScale = spectraParser.getTransform("xform_scale")!
+            let xformShear = spectraParser.getTransform("xform_shear")!
+//            let xformCompose1: MDLTransform = spectraParser.getTransform("xform_compose1")!
+//            let xformCompose2: MDLTransform = spectraParser.getTransform("xform_compose2")!
+
+            it("parses translation/rotation/scale/shear") {
+                //TODO: rotation with degrees
+                expect(SpectraSimd.compareFloat3(xformTranslate.translation, with: float3(10.0, 20.0, 30.0))).to(beTrue())
+                expect(SpectraSimd.compareFloat3(xformRotate.rotation, with: float3(0.25, 0.50, 1.0))).to(beTrue())
+                expect(SpectraSimd.compareFloat3(xformScale.scale, with: float3(2.0, 2.0, 2.0))).to(beTrue())
+                expect(SpectraSimd.compareFloat3(xformShear.shear, with: float3(10.0, 10.0, 1.0))).to(beTrue())
+            }
+
+            pending("correctly composes multiple operations") {
+                // check that translate/rotate/scale/shear is calculated correctly when composed
             }
         }
     }
