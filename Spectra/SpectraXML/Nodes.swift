@@ -785,6 +785,7 @@ public class StereoscopicCameraNode: SpectraParserNode {
     }
  
     public func applyCameraToStereoscopic(cam: CameraNode) {
+        self.id = cam.id
         self.nearVisibilityDistance = cam.nearVisibilityDistance
         self.farVisibilityDistance = cam.farVisibilityDistance
         self.fieldOfView = cam.fieldOfView

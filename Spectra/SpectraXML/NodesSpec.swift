@@ -28,6 +28,10 @@ class SpectraXMLNodesSpec: QuickSpec {
         let spectraXML = SpectraParser.readXML(testBundle, filename: "SpectraXMLSpec", bundleResourceName: nil)!
         spectraParser.parseXML(spectraXML)
         
+//        describe("Attribute") {
+//            
+//        }
+        
         describe("VertexAttribute") {
             let attrPos = spectraParser.getVertexAttribute("pos_float4")!
             let attrTex = spectraParser.getVertexAttribute("tex_float2")!
@@ -68,7 +72,7 @@ class SpectraXMLNodesSpec: QuickSpec {
 //            }
         }
         
-        describe("vertex-descriptor") {
+        describe("VertexDescriptor") {
             let attrPos = spectraParser.getVertexAttribute("pos_float4")!
             let attrTex = spectraParser.getVertexAttribute("tex_float2")!
             let vertDescPosTex = spectraParser.getVertexDescriptor("vert_pos_tex_float")!
@@ -181,7 +185,7 @@ class SpectraXMLNodesSpec: QuickSpec {
             }
         }
         
-        describe("MDLCamera") {
+        describe("Camera") {
             let lens1 = spectraParser.getPhysicalLens("lens1")!
             let lens2 = spectraParser.getPhysicalLens("lens2")!
             let lens3 = spectraParser.getPhysicalLens("lens3")!
@@ -204,7 +208,7 @@ class SpectraXMLNodesSpec: QuickSpec {
             let stereoCam1 = spectraParser.getStereoscopicCamera("stereo_cam1")!
             let stereoCam2 = spectraParser.getStereoscopicCamera("stereo_cam2")!
 
-            describe("physical-lens") {
+            describe("PhysicalLens") {
                 it("can specify Physical Lens parameters") {
                     expect(lens1.barrelDistortion) == 0.1
                     expect(lens1.fisheyeDistortion) == 0.5
@@ -217,7 +221,7 @@ class SpectraXMLNodesSpec: QuickSpec {
                 }
             }
 
-            describe("physical-imaging-surface") {
+            describe("PhysicalImagingSurface") {
                 it("can specify Physical Imaging Surface parameters") {
                     expect(physImg1.sensorVerticalAperture) == 24
                     expect(physImg1.sensorAspect) == 2.0
@@ -229,7 +233,7 @@ class SpectraXMLNodesSpec: QuickSpec {
                 }
             }
 
-            describe("camera") {
+            describe("Camera") {
                 it("manages the inherited MDLObject properties") {
                     // transform
                     // parent
@@ -275,6 +279,10 @@ class SpectraXMLNodesSpec: QuickSpec {
                 // it can attach a physical-lens
                 // it can attach a physical-imaging-surface
             }
+        }
+        
+        describe("Texture") {
+            
         }
 
     }
