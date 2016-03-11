@@ -19,7 +19,7 @@ public protocol SpectraParserNode {
     init()
     func parseXML(nodes: Container, elem: XMLElement)
     func generate(containers: [String: Container], options: [String: Any]) -> MDLType
-    func register(nodes: Container, objectScope: ObjectScope, copyOnResolve: Bool)
+    func register(nodes: Container, objectScope: ObjectScope)
     func copy() -> NodeType
 }
 
