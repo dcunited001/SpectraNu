@@ -919,7 +919,86 @@ public class TextureFilterNode: SpectraParserNode {
     }
 }
 
-// TODO: TextureSampler = "texture-sampler"
+public class TextureSamplerNode: SpectraParserNode {
+    public typealias NodeType = TextureSamplerNode
+    public typealias MDLType = MDLTextureSampler
+    
+    public var id: String?
+    public var texture: String?
+    public var hardwareFilter: String?
+    public var transform: String?
+    
+    public required init() {
+        
+    }
+    
+    // public func parseJSON()
+    // public func parsePlist()
+    // public func parseXML(nodeContainer: Container)
+    
+    // so, as above ^^^ there would instead be a nodeContainer, for parsing SpectraXML
+    // - this would just contain very easily copyable definitions of nodes - no Model I/O
+    // - these nodes could also instead be structs
+    // - these nodes could generate the Model I/O, whenever app developer wants
+    //   - the generate method would instead receive a different container.
+    //     - but, does this really work?
+    //     - (parsing works now because it's assumed
+    //     - to proceed in the order which things are declared)
+    // - having a separate nodeContainer ensures that each dependency registered
+    //   - can be totally self-contained
+    
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
+        if let texture = elem.attributes["texture"] {
+            self.texture = texture
+        }
+        if let hardwareFilter = elem.attributes["hardware-filter"] {
+            self.hardwareFilter = hardwareFilter
+        }
+        if let transform = elem.attributes["transform"] {
+            self.transform = transform
+        }
+    }
+    
+    public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLTextureSampler {
+        let mdlContainer = containers["mdl"]!
+        
+        let sampler = MDLTextureSampler()
+        sampler.texture = mdlContainer.resolve(MDLTexture.self, name: self.texture)
+        sampler.hardwareFilter = mdlContainer.resolve(MDLTextureFilter.self, name: self.texture)
+        if let transform = mdlContainer.resolve(MDLTransform.self, name: self.transform) {
+            sampler.transform = transform
+        } else {
+            sampler.transform = MDLTransform()
+        }
+        
+        return sampler
+    }
+    
+    public func copy() -> NodeType {
+        let cp = TextureSamplerNode()
+        cp.id = self.id
+        cp.texture = self.texture
+        cp.hardwareFilter = self.hardwareFilter
+        cp.transform = self.transform
+        return cp
+    }
+    
+//    // implemented copy() as a static method for compatibility for now
+//    public static func copy(obj: MDLTextureSampler) -> MDLTextureSampler {
+//        let cp = MDLTextureSampler()
+//        cp.texture = obj.texture // can't really copy textures for resource reasons
+//        cp.transform = obj.transform ?? MDLTransform()
+//        if let filter = obj.hardwareFilter {
+//            cp.hardwareFilter = TextureFilterNode.copy(filter)
+//        }
+//        return cp
+//    }
+}
+
+
 
 // TODO: Light = "light"
 // TODO: LightGenerator = "light-generator"
