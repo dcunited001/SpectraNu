@@ -100,29 +100,62 @@ public class SpectraParser {
         for child in xml.root!.children {
             let (tag, id) = (child.tag!, child.attributes["id"])
             
+            // TODO: how to refactor this giant switch statement
             if let nodeType = SpectraNodeType(rawValue: tag) {
-                switch nodeType {
-                case .Asset: break
-                case .VertexAttribute: break
-                case .VertexDescriptor: break
-                case .Transform: break
-                case .Object: break
-                case .PhysicalLens: break
-                case .PhysicalImagingSurface: break
-                case .Camera: break
-                case .StereoscopicCamera: break
-                case .Mesh: break
-                case .MeshGenerator: break
-                case .Texture: break
-                case .TextureGenerator: break
-                case .TextureFilter: break
-                case .TextureSampler: break
-                case .Material: break
-                case .MaterialProperty: break
-                case .ScatteringFunction: break
-                case .Light: break
-                case .LightGenerator: break
                 
+                switch nodeType {
+                case .Asset:
+                    let node = AssetNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .VertexAttribute:
+                    let node = VertexAttributeNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .VertexDescriptor:
+                    let node = VertexDescriptorNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .Transform:
+                    let node = TransformNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+//                case .Object:
+//                    let node = ObjectNode()
+//                    node.parseXML(nodes, elem: child)
+                case .PhysicalLens:
+                    let node = PhysicalLensNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .PhysicalImagingSurface:
+                    let node = PhysicalImagingSurfaceNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .Camera:
+                    let node = CameraNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .StereoscopicCamera:
+                    let node = StereoscopicCameraNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+//                case .Mesh:
+//                    let node = MeshNode()
+//                    node.parseXML(nodes, elem: child)
+//                case .MeshGenerator:
+//                    let node = MeshGeneratorNode()
+//                    node.parseXML(nodes, elem: child)
+//                case .Texture:
+//                    let node = TextureNode()
+//                    node.parseXML(nodes, elem: child)
+//                case .TextureGenerator: break
+//                case .TextureFilter: break
+//                case .TextureSampler: break
+//                case .Material: break
+//                case .MaterialProperty: break
+//                case .ScatteringFunction: break
+//                case .Light: break
+//                case .LightGenerator: break
                 default: break
                 }
             }
@@ -152,8 +185,6 @@ public class SpectraParser {
         }
         return nil
     }
-    
-    
 }
 
 //public class SpectraXML {
