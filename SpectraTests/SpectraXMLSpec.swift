@@ -142,65 +142,7 @@ class SpectraXMLSpec: QuickSpec {
 //            }
 //        }
 //        
-//        describe("texture-filter") {
-//            it("parses the correct defaults") {
-//                let defaultFilter: MDLTextureFilter = self.containerGet(assetContainer, key: "default")!
-//                
-//                expect(defaultFilter.rWrapMode) == MDLMaterialTextureWrapMode.Clamp
-//                expect(defaultFilter.tWrapMode) == MDLMaterialTextureWrapMode.Clamp
-//                expect(defaultFilter.sWrapMode) == MDLMaterialTextureWrapMode.Clamp
-//                
-//            }
-//            
-//            it("parses other texture filters") {
-//                let filterClamp: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_clamp")!
-//                let filterRepeat: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_repeat")!
-//                let filterMirror: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_mirror")!
-//                let filterLinear: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_linear")!
-//                let filterNearest: MDLTextureFilter = self.containerGet(assetContainer, key: "filter_nearest")!
-//                
-//                expect(filterClamp.rWrapMode) == MDLMaterialTextureWrapMode.Clamp
-//                expect(filterClamp.tWrapMode) == MDLMaterialTextureWrapMode.Clamp
-//                expect(filterClamp.sWrapMode) == MDLMaterialTextureWrapMode.Clamp
-//                
-//                expect(filterRepeat.rWrapMode) == MDLMaterialTextureWrapMode.Repeat
-//                expect(filterRepeat.tWrapMode) == MDLMaterialTextureWrapMode.Repeat
-//                expect(filterRepeat.sWrapMode) == MDLMaterialTextureWrapMode.Repeat
-//                
-//                expect(filterMirror.rWrapMode) == MDLMaterialTextureWrapMode.Mirror
-//                expect(filterMirror.tWrapMode) == MDLMaterialTextureWrapMode.Mirror
-//                expect(filterMirror.sWrapMode) == MDLMaterialTextureWrapMode.Mirror
-//                
-//                expect(filterLinear.minFilter) == MDLMaterialTextureFilterMode.Linear
-//                expect(filterLinear.magFilter) == MDLMaterialTextureFilterMode.Linear
-//                expect(filterLinear.mipFilter) == MDLMaterialMipMapFilterMode.Linear
-//                
-//                expect(filterNearest.minFilter) == MDLMaterialTextureFilterMode.Nearest
-//                expect(filterNearest.magFilter) == MDLMaterialTextureFilterMode.Nearest
-//                expect(filterNearest.mipFilter) == MDLMaterialMipMapFilterMode.Nearest
-//            }
-//            
-//            it("generates a MDLTextureFilter") {
-//                
-//            }
-//        }
-//        
-//        describe("texture-sampler") {
-//            // texture: MDLTexture
-//            // hardwareFilter: MDLTextureFilter
-//            // transform: MDLTransform (translate/scale/rotate textures relative to their surfaces)
-//            
-//            // TODO: MDLTextureSampler => MTLTextureSampler
-//            
-//            it("parses texture samplers") {
-//                
-//            }
-//            
-//            it("generates a MDLTextureSampler") {
-//                
-//            }
-//        }
-//        
+
 //        describe("light") {
 //            // TODO: finish filling out attributes
 //            // - MDLLightProbe

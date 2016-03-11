@@ -81,7 +81,11 @@ public class SpectraParser {
     // TODO: MeshGenerator
     // TODO: Texture
     // TODO: TextureGenerator
-    // TODO: TextureFilter
+    
+    public func getTextureFilter(id: String?) -> TextureFilterNode? {
+        return nodes.resolve(TextureFilterNode.self, name: id)
+    }
+    
     // TODO: TextureSampler
     // TODO: Material
     // TODO: MaterialProperty
@@ -149,7 +153,10 @@ public class SpectraParser {
 //                    let node = TextureNode()
 //                    node.parseXML(nodes, elem: child)
 //                case .TextureGenerator: break
-//                case .TextureFilter: break
+                case .TextureFilter:
+                    let node = TextureFilterNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
 //                case .TextureSampler: break
 //                case .Material: break
 //                case .MaterialProperty: break
