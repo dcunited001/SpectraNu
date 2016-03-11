@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <texture-generator key="resource_texture_gen2" type="resource_texture_gen">
+    <texture-generator id="resource_texture_gen2" type="resource_texture_gen">
         <generator-args>
             <generator-arg type="String" name="name" value="defaultTexture.jpg" />
         </generator-args>
     </texture-generator>
-    <texture key="resource_tex" generator="resource_texture_gen2"/>
+    <texture id="resource_tex" generator="resource_texture_gen2"/>
     
-    <texture-generator key="url_texture_gen2" type="url_texture_gen">
+    <texture-generator id="url_texture_gen2" type="url_texture_gen">
         <generator-args>
             <generator-arg type="String" name="url" value="file:///itsafile.jpg" />
         </generator-args>
     </texture-generator>
     
-    <texture-generator key="vector_noise_gen" type="noise_texture_gen">
+    <texture-generator id="vector_noise_gen" type="noise_texture_gen">
         <generator-args>
             <generator-arg type="String" name="type" value="Vector" />
             <generator-arg type="Int2" name="dimensions" value="10 10" />
         </generator-args>
     </texture-generator>
-    <texture key="vector_noise_tex" generator="vector_noise_gen" />
+    <texture id="vector_noise_tex" generator="vector_noise_gen" />
 
-    <texture-generator key="scalar_noise_gen" type="noise_texture_gen">
+    <texture-generator id="scalar_noise_gen" type="noise_texture_gen">
         <generator-args>
             <generator-arg type="String" name="type" value="Scalar" />
             <generator-arg type="Int2" name="dimensions" value="10 10" />
         </generator-args>
     </texture-generator>
-    <texture key="scalar_noise_tex" generator="scalar_noise_gen" />
+    <texture id="scalar_noise_tex" generator="scalar_noise_gen" />
 
-    <texture-generator key="checkerboard_texture_gen2" type="checkerboard_texture_gen">
+    <texture-generator id="checkerboard_texture_gen2" type="checkerboard_texture_gen">
         <generator-args>
             <generator-arg type="Int2" name="dimensions" value="19 19" />
             <generator-arg type="Float" name="divisions" value="19" />
         </generator-args>
     </texture-generator>
-    <texture key="checkerboard_tex" generator="checkerboard_texture_gen2" />
+    <texture id="checkerboard_tex" generator="checkerboard_texture_gen2" />
 </root>

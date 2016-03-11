@@ -11,17 +11,17 @@
      - unless you are going to use a packed data format
      -->
     
-    <vertex-attribute key="pos_float4" name="position" format="Float4"/>
-    <vertex-attribute key="tex_float2" name="textureCoordinate" format="Float2"/>
-    <vertex-attribute key="rgb_float4" name="color" format="Float4"/>
-    <vertex-attribute key="rgb_int4" name="color" format="Int4"/>
-    <vertex-attribute key="aniso_float4" name="anisotropy" format="Float4"/>
+    <vertex-attribute id="pos_float4" name="position" format="Float4"/>
+    <vertex-attribute id="tex_float2" name="textureCoordinate" format="Float2"/>
+    <vertex-attribute id="rgb_float4" name="color" format="Float4"/>
+    <vertex-attribute id="rgb_int4" name="color" format="Int4"/>
+    <vertex-attribute id="aniso_float4" name="anisotropy" format="Float4"/>
     
-    <vertex-attribute key="test_custom_label" name="custom" format="Int" />
-    <vertex-attribute key="test_immutable" name="custom" format="Int" buffer-index="0"/>
+    <vertex-attribute id="test_custom_label" name="custom" format="Int" />
+    <vertex-attribute id="test_immutable" name="custom" format="Int" buffer-index="0"/>
     
     <!-- can ref vertex-attributes -->
-    <vertex-descriptor key="vert_pos_tex_float">
+    <vertex-descriptor id="vert_pos_tex_float">
         <vertex-attributes>
             <vertex-attribute ref="pos_float4"/>
             <vertex-attribute ref="tex_float2"/>
@@ -31,14 +31,14 @@
     <!-- TODO: test parent-descriptor for vertex-descriptor or remove -->
      
      <!-- can mix/match ref'd attributes with new ones -->
-    <vertex-descriptor key="vert_pos_rgb_float">
+    <vertex-descriptor id="vert_pos_rgb_float">
         <vertex-attributes>
             <vertex-attribute ref="pos_float4"/>
             <vertex-attribute name="color" format="Int4"/>
         </vertex-attributes>
     </vertex-descriptor>
     
-    <vertex-descriptor key="vertdesc_packed" packed-layout="true">
+    <vertex-descriptor id="vertdesc_packed" packed-layout="true">
         <vertex-attributes>
             <vertex-attribute ref="pos_float4"/>
             <vertex-attribute ref="tex_float2"/>
@@ -46,7 +46,7 @@
         </vertex-attributes>
     </vertex-descriptor>
     
-    <vertex-descriptor key="vertdesc_unpacked">
+    <vertex-descriptor id="vertdesc_unpacked">
         <vertex-attributes>
             <vertex-attribute name="position" format="Float4" buffer-index="0" />
             <vertex-attribute name="textureCoordinate" format="Float2" buffer-index="1" />
@@ -54,7 +54,7 @@
         </vertex-attributes>
     </vertex-descriptor>
     
-    <vertex-descriptor key="vertdesc_complex">
+    <vertex-descriptor id="vertdesc_complex">
         <vertex-attributes>
             <vertex-attribute name="position" format="Float4" buffer-index="0" />
             <vertex-attribute name="textureCoordinate" format="Float2" buffer-index="1" />
@@ -63,59 +63,59 @@
         </vertex-attributes>
     </vertex-descriptor>
     
-    <!--    <view key="world">-->
+    <!--    <view id="world">-->
     <!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
     <!--    </view>-->
-    <!--    <view key="customWorld" type="custom">-->
+    <!--    <view id="customWorld" type="custom">-->
     <!--        <uniforms pos="0 0 1 1" rotation="1 0 0 0" scale="1 1 1 0" />-->
     <!--    </view>-->
     
-    <physical-lens key="lens1" barrel-distortion="0.1" fisheye-distortion="0.5" />
-    <physical-lens key="lens2" focal-length="77" f-stop="7.0" maximum-circle-of-confusion="0.10" />
-    <physical-lens key="lens3" aperture-blade-count="7" />
+    <physical-lens id="lens1" barrel-distortion="0.1" fisheye-distortion="0.5" />
+    <physical-lens id="lens2" focal-length="77" f-stop="7.0" maximum-circle-of-confusion="0.10" />
+    <physical-lens id="lens3" aperture-blade-count="7" />
     
-    <physical-imaging-surface key="phys_img1" sensor-vertical-aperture="24" sensor-aspect="2.0" />
-    <physical-imaging-surface key="phys_img2" flash="0.1 0.1 0.1" exposure="1.5 1.5 1.5" />
+    <physical-imaging-surface id="phys_img1" sensor-vertical-aperture="24" sensor-aspect="2.0" />
+    <physical-imaging-surface id="phys_img2" flash="0.1 0.1 0.1" exposure="1.5 1.5 1.5" />
     
-    <camera key="default" />
-    <camera key="cam1">
+    <camera id="default" />
+    <camera id="cam1">
         
     </camera>
     
-    <camera key="cam2">
+    <camera id="cam2">
         <physical-lens ref="lens1"/>
     </camera>
     
-    <camera key="cam3">
+    <camera id="cam3">
         <physical-imaging-surface ref="phys_img1"/>
     </camera>
     
-    <transform key="xform_camera" translation="10.0 100.0 -10.0" />
-    <camera key="cam4" lookAt="10.0 10.0 100.0">
+    <transform id="xform_camera" translation="10.0 100.0 -10.0" />
+    <camera id="cam4" lookAt="10.0 10.0 100.0">
         
     </camera>
     
-    <stereoscopic-camera key="default">
+    <stereoscopic-camera id="default">
     </stereoscopic-camera>
     
-    <stereoscopic-camera key="stereo_cam1" field-of-view="60">
+    <stereoscopic-camera id="stereo_cam1" field-of-view="60">
     </stereoscopic-camera>
     
-    <stereoscopic-camera key="stereo_cam2">
+    <stereoscopic-camera id="stereo_cam2">
         <physical-lens ref="lens1" />
     </stereoscopic-camera>
     
-    <transform key="xform_translate" translation="10.0 20.0 30.0" />
-    <transform key="xform_rotate" rotation="0.25 0.50 1.0" />
-    <transform key="xform_scale" scale="2.0 2.0 2.0" />
-    <transform key="xform_shear" shear="10.0 10.0 1.0" />
-    <transform key="xform_compose1" translation="5.0 5.0 100.0" rotation="0.5 0.5 1.0" scale="10.0 10.0 10.0" />
-    <transform key="xform_compose2" scale="10.0 10.0 10.0" shear="10.0 20.0 30.0" />
+    <transform id="xform_translate" translation="10.0 20.0 30.0" />
+    <transform id="xform_rotate" rotation="0.25 0.50 1.0" />
+    <transform id="xform_scale" scale="2.0 2.0 2.0" />
+    <transform id="xform_shear" shear="10.0 10.0 1.0" />
+    <transform id="xform_compose1" translation="5.0 5.0 100.0" rotation="0.5 0.5 1.0" scale="10.0 10.0 10.0" />
+    <transform id="xform_compose2" scale="10.0 10.0 10.0" shear="10.0 20.0 30.0" />
     
     <!--    <!-- register mesh generators -->
-    <!--    <mesh-generator key="cube_gen" type="cube" />-->
-    <!--    <mesh-generator key="quad_gen" type="quad" />-->
-    <!--    <mesh-generator key="tesselationGen" type="triangular_quad_tesselation_gen">-->
+    <!--    <mesh-generator id="cube_gen" type="cube" />-->
+    <!--    <mesh-generator id="quad_gen" type="quad" />-->
+    <!--    <mesh-generator id="tesselationGen" type="triangular_quad_tesselation_gen">-->
     <!--        <generator-args>-->
     <!--            <generator-arg type="String" name="row_count" value="100" />-->
     <!--            <generator-arg type="String" name="col_count" value="100" />-->
@@ -123,14 +123,14 @@
     <!--    </mesh-generator>-->
     <!--    -->
     <!--    <!-- create mesh using generator -->
-    <!--    <mesh key="cube_mesh" mesh-generator="cube_gen" />-->
-    <!--    <mesh key="quad_mesh" mesh-generator="quad_gen" />-->
+    <!--    <mesh id="cube_mesh" mesh-generator="cube_gen" />-->
+    <!--    <mesh id="quad_mesh" mesh-generator="quad_gen" />-->
     <!--    -->
     <!--    <!-- create mesh using generator requiring generator-args -->
-    <!--    <mesh key="tesselated_quad" mesh-generator="tesselation_gen" />-->
+    <!--    <mesh id="tesselated_quad" mesh-generator="tesselation_gen" />-->
     <!--    -->
     <!--    <!-- create mesh using generator requiring generate-args -->
-    <!--    <mesh key="tesselated_quad_ref" mesh-generator="tesselation_gen">-->
+    <!--    <mesh id="tesselated_quad_ref" mesh-generator="tesselation_gen">-->
     <!--        <generate-args>-->
     <!--            <generate-arg type="String" name="mesh_ref" value="quad_mesh" />-->
     <!--        </generate-args>-->
@@ -142,10 +142,10 @@
     
     <!-- don't... just dont... don't even use this
      - write a generator or use model i/o or something
-     - map to the appropriate scene graph keys -->
+     - map to the appropriate scene graph ids -->
     
-    <object key="default" name="default" />
-    <object key="scene1" name="scene1" >
+    <object id="default" name="default" />
+    <object id="scene1" name="scene1" >
         <transform ref="xform_translate" />
         <camera ref="default" />
         <stereoscopic-camera ref="default" />
@@ -154,34 +154,34 @@
          -->
     </object>
     
-    <!--    <object key="scene2">-->
+    <!--    <object id="scene2">-->
     <!--        <transform ref="xform_translate" />-->
     <!--        <camera ref="default" />-->
     <!--        <stereoscopic-camera ref="default" />-->
     <!--    </object>-->
     <!--    -->
-    <!--    <object key="scene2">-->
+    <!--    <object id="scene2">-->
     <!--        <transform ref="xform_translate" />-->
     <!--        <camera ref="default" />-->
     <!--        <stereoscopic-camera ref="default" />-->
     <!--    </object>-->
     
     <!-- 8x8 checkerboard texture -->
-    <texture key="default" generator="checkerboard_texture_gen" />
+    <texture id="default" generator="checkerboard_texture_gen" />
     
-    <texture-filter key="default" />
-    <texture-filter key="filter_clamp" r-wrap-mode="Clamp" t-wrap-mode="Clamp" s-wrap-mode="Clamp" />
-    <texture-filter key="filter_repeat" r-wrap-mode="Repeat" t-wrap-mode="Repeat" s-wrap-mode="Repeat" />
-    <texture-filter key="filter_mirror" r-wrap-mode="Mirror" t-wrap-mode="Mirror" s-wrap-mode="Mirror" />
-    <texture-filter key="filter_linear" min-filter="Linear" mag-filter="Linear" mip-filter="Linear" />
-    <texture-filter key="filter_nearest" min-filter="Nearest" mag-filter="Nearest" mip-filter="Nearest" />
+    <texture-filter id="default" />
+    <texture-filter id="filter_clamp" r-wrap-mode="Clamp" t-wrap-mode="Clamp" s-wrap-mode="Clamp" />
+    <texture-filter id="filter_repeat" r-wrap-mode="Repeat" t-wrap-mode="Repeat" s-wrap-mode="Repeat" />
+    <texture-filter id="filter_mirror" r-wrap-mode="Mirror" t-wrap-mode="Mirror" s-wrap-mode="Mirror" />
+    <texture-filter id="filter_linear" min-filter="Linear" mag-filter="Linear" mip-filter="Linear" />
+    <texture-filter id="filter_nearest" min-filter="Nearest" mag-filter="Nearest" mip-filter="Nearest" />
 
-    <texture-sampler key="default" />
-    <texture-sampler key="sampler1">
+    <texture-sampler id="default" />
+    <texture-sampler id="sampler1">
         <hardware-filter ref="default" />
         <texture ref="default" />
     </texture-sampler>
-    <texture-sampler key="sampler_with_transform">
+    <texture-sampler id="sampler_with_transform">
         <transform ref="default" />
     </texture-sampler>
     
