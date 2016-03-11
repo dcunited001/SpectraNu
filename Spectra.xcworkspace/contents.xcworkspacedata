@@ -32,6 +32,19 @@
       location = "container:Spectra"
       name = "Spectra">
       <Group
+         location = "container:Spectra/SpectraXML"
+         name = "SpectraXML">
+         <FileRef
+            location = "group:Nodes.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Parser.swift">
+         </FileRef>
+         <FileRef
+            location = "group:XSD.swift">
+         </FileRef>
+      </Group>
+      <Group
          location = "container:"
          name = "Resources">
          <FileRef
