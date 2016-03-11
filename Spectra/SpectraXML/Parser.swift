@@ -39,12 +39,8 @@ public class SpectraParser {
         self.nodes = nodes
     }
     
-    public func nodeGet<N: SpectraParserNode>(nodeType: N.Type, id: String?) -> N? {
-        return nodes.resolve(N.self, name: id)
-    }
-    
     public func getAsset(id: String?) -> AssetNode? {
-        return nodeGet(AssetNode.self, id: id)
+        return nodes.resolve(AssetNode.self, name: id)
     }
     
     public func getVertexAttribute(id: String?) -> VertexAttributeNode? {
@@ -59,7 +55,9 @@ public class SpectraParser {
         return nodes.resolve(TransformNode.self, name: id)
     }
     
-    // TODO: Object
+    public func getObject(id: String?) -> ObjectNode? {
+        return nodes.resolve(ObjectNode.self, name: id)
+    }
     
     public func getPhysicalLens(id: String?) -> PhysicalLensNode? {
         return nodes.resolve(PhysicalLensNode.self, name: id)
@@ -77,16 +75,38 @@ public class SpectraParser {
         return nodes.resolve(StereoscopicCameraNode.self, name: id)
     }
     
-    // TODO: Mesh
-    // TODO: MeshGenerator
-    // TODO: Texture
-    // TODO: TextureGenerator
+    public func getMesh(id: String?) -> MeshNode? {
+        return nodes.resolve(MeshNode.self, name: id)
+    }
+    
+    public func getMeshGenerator(id: String?) -> MeshGeneratorNode? {
+        return nodes.resolve(MeshGeneratorNode.self, name: id)
+    }
+    
+    public func getSubmesh(id: String?) -> SubmeshNode? {
+        return nodes.resolve(SubmeshNode.self, name: id)
+    }
+    
+    public func getSubmeshGenerator(id: String?) -> SubmeshGeneratorNode? {
+        return nodes.resolve(SubmeshGeneratorNode.self, name: id)
+    }
+    
+    public func getTexture(id: String?) -> TextureNode? {
+        return nodes.resolve(TextureNode.self, name: id)
+    }
+    
+    public func getTextureGenerator(id: String?) -> TextureGeneratorNode? {
+        return nodes.resolve(TextureGeneratorNode.self, name: id)
+    }
     
     public func getTextureFilter(id: String?) -> TextureFilterNode? {
         return nodes.resolve(TextureFilterNode.self, name: id)
     }
     
-    // TODO: TextureSampler
+    public func getTextureSampler(id: String?) -> TextureSamplerNode? {
+        return nodes.resolve(TextureSamplerNode.self, name: id)
+    }
+    
     // TODO: Material
     // TODO: MaterialProperty
     // TODO: ScatteringFunction
@@ -127,6 +147,7 @@ public class SpectraParser {
 //                case .Object:
 //                    let node = ObjectNode()
 //                    node.parseXML(nodes, elem: child)
+//                    if (node.id != nil) { node.register(nodes) }
                 case .PhysicalLens:
                     let node = PhysicalLensNode()
                     node.parseXML(nodes, elem: child)
@@ -143,15 +164,26 @@ public class SpectraParser {
                     let node = StereoscopicCameraNode()
                     node.parseXML(nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
-//                case .Mesh:
-//                    let node = MeshNode()
-//                    node.parseXML(nodes, elem: child)
-//                case .MeshGenerator:
-//                    let node = MeshGeneratorNode()
-//                    node.parseXML(nodes, elem: child)
-//                case .Texture:
-//                    let node = TextureNode()
-//                    node.parseXML(nodes, elem: child)
+                case .Mesh:
+                    let node = MeshNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .MeshGenerator:
+                    let node = MeshGeneratorNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .Submesh:
+                    let node = SubmeshNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .SubmeshGenerator:
+                    let node = SubmeshGeneratorNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
+                case .Texture:
+                    let node = TextureNode()
+                    node.parseXML(nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
 //                case .TextureGenerator: break
                 case .TextureFilter:
                     let node = TextureFilterNode()

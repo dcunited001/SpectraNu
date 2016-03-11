@@ -17,9 +17,12 @@ public enum SpectraNodeType: String {
     case Transform = "transform"
     case Asset = "asset"
     case BufferAllocator = "buffer-allocator"
+    case BufferAllocatorGenerator = "buffer-allocator-generator"
     case Object = "object"
     case Mesh = "mesh"
     case MeshGenerator = "mesh-generator"
+    case Submesh = "submesh"
+    case SubmeshGenerator = "submesh-generator"
     // wtf submesh? not really sure how to add "attributes" to mesh using submeshes
     case Camera = "camera"
     case CameraGenerator = "camera-generator"
@@ -152,11 +155,11 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
 
     public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
         let url = NSURL(string: self.urlString!)
-        let mdlContainer = containers["mdl"]
-        let resourceContainer = containers["resources"]
+        let models = containers["model"]
+        let resources = containers["resources"]
         
-        var vertexDescriptor = self.vertexDescriptor?.generate(containers, options: options)
-        var bufferAllocator = resourceContainer?.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
+        let vertexDescriptor = self.vertexDescriptor?.generate(containers, options: options)
+        let bufferAllocator = resources?.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
 
         let asset = MDLAsset(URL: url!, vertexDescriptor: vertexDescriptor, bufferAllocator: bufferAllocator)
 
@@ -357,9 +360,213 @@ public class TransformNode: SpectraParserNode {
 }
 
 // TODO: BufferAllocator = "buffer-allocator"
-// TODO: Object = "object"
-// TODO: Mesh = "mesh"
-// TODO: MeshGenerator = "mesh-generator"
+// TODO: BufferAllocatorGenerator = "buffer-allocator-generator"
+
+
+public class ObjectNode { // SpectraParserNode
+    // stub
+}
+
+public class MeshNode: SpectraParserNode {
+    public typealias NodeType = MeshNode
+    public typealias MDLType = MDLMesh
+    
+    public var id: String?
+    public var generator: String = "ellipsoid_mesh_gen"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public required init() {
+        
+    }
+
+    public func parseXML(container: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
+        
+        if let generator = elem.attributes["generator"] {
+            self.generator = generator
+        }
+
+        let generatorArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(generatorArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+            self.args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+    
+    public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {
+        let models = containers["models"]!
+        let meshGen = models.resolve(MeshGenerator.self, name: self.generator)!
+        let mesh = meshGen.generate(models, args: self.args)
+        // TODO: register mesh?
+        return mesh
+    }
+    
+    public func copy() -> NodeType {
+        let cp = MeshNode()
+        cp.id = self.id
+        cp.generator = self.generator
+        cp.args = self.args
+        return cp
+    }
+    
+}
+
+public class MeshGeneratorNode: SpectraParserNode {
+    public typealias NodeType = MeshGeneratorNode
+    public typealias MDLType = MeshGenerator
+    
+    public var id: String?
+    public var type: String = "tetrahedron_mesh_gen"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public required init() {
+        
+    }
+
+    public func parseXML(container: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
+        if let type = elem.attributes["type"] {
+            self.type = type
+        }
+        let genArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(genArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+
+            self.args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+
+//    public func createGenerator(container: Container, options: [String : Any] = [:]) -> MeshGenerator {
+//        let meshGen = container.resolve(MeshGenerator.self, name: self.type)!
+//        meshGen.processArgs(container, args: self.args)
+//        return meshGen
+//    }
+    
+    public func generate(containers: [String : Container], options: [String : Any]) -> MeshGenerator {
+        // TODO: add to a generators container instead?
+        let models = containers["models"]!
+        let meshGen = models.resolve(MeshGenerator.self, name: self.type)!
+        meshGen.processArgs(models, args: self.args)
+        return meshGen
+    }
+    
+    public func copy() -> NodeType {
+        let cp = MeshGeneratorNode()
+        cp.id = self.id
+        cp.type = self.type
+        cp.args = self.args
+        return cp
+    }
+}
+
+public class SubmeshNode: SpectraParserNode {
+    public typealias NodeType = SubmeshNode
+    public typealias MDLType = MDLSubmesh
+    
+    public var id: String?
+    public var generator: String = "tetrahedron_mesh_gen"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public required init() {
+        
+    }
+    
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
+        if let type = elem.attributes["type"] {
+            self.generator = type
+        }
+        let genArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(genArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+            
+            self.args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+    
+    public func generate(containers: [String : Container], options: [String : Any]) -> MDLType {
+        let models = containers["models"]!
+        let submeshGen = models.resolve(SubmeshGenerator.self, name: self.generator)!
+        let submesh = submeshGen.generate(models, args: self.args)
+        // TODO: register submesh?
+        return submesh
+    }
+    
+//    // TODO: add to a generators container instead?
+//    let models = containers["models"]!
+//    let submeshGen = models.resolve(SubmeshGenerator.self, name: self.type)!
+//    submeshGen.processArgs(models, args: self.args)
+//    return submeshGen
+    
+    public func copy() -> NodeType {
+        let cp = SubmeshNode()
+        cp.id = self.id
+        cp.generator = self.generator
+        cp.args = self.args
+        return cp
+    }
+}
+
+public class SubmeshGeneratorNode: SpectraParserNode {
+    public typealias NodeType = SubmeshGeneratorNode
+    public typealias MDLType = SubmeshGenerator
+    
+    public var id: String?
+    public var type: String = "random_balanced_graph_submesh_gen"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public required init() {
+        
+    }
+    
+    public func parseXML(container: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
+        if let type = elem.attributes["type"] {
+            self.type = type
+        }
+        let genArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(genArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+            
+            self.args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+    
+    public func generate(containers: [String : Container], options: [String : Any]) -> SubmeshGenerator {
+        // TODO: add to a generators container instead?
+        let models = containers["models"]!
+        let meshGen = models.resolve(SubmeshGenerator.self, name: self.type)!
+        meshGen.processArgs(models, args: self.args)
+        // TODO: register submeshGen?
+        return meshGen
+    }
+    
+    public func copy() -> NodeType {
+        let cp = SubmeshGeneratorNode()
+        cp.id = self.id
+        cp.type = self.type
+        cp.args = self.args
+        return cp
+    }
+
+}
+
 // TODO: submeshes: not really sure how to add "attributes" to mesh using submeshes
 
 public class PhysicalLensNode: SpectraParserNode {
@@ -844,8 +1051,97 @@ public class StereoscopicCameraNode: SpectraParserNode {
 // TODO: MaterialProperty = "material-property"
 // TODO: ScatteringFunction = "scattering-function"
 
-// TODO: Texture = "texture"
-// TODO: TextureGenerator = "texture-generator"
+public class TextureNode: SpectraParserNode {
+    public typealias NodeType = TextureNode
+    public typealias MDLType = MDLTexture
+    
+    public var id: String?
+    public var generator: String = "noise_texture_gen"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public required init() {
+        
+    }
+
+    public func parseXML(container: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
+        if let generator = elem.attributes["generator"] {
+            self.generator = generator
+        }
+        let generatorArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(generatorArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+            self.args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+    
+    public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {
+        let models = containers["models"]!
+        let textureGen = models.resolve(TextureGenerator.self, name: self.generator)!
+        let texture = textureGen.generate(models, args: self.args)
+        // TODO: register texture?
+//        container.register(MDLTexture.self, name: key!) { _ in
+//            // don't copy texture
+//            return texture
+//        }
+        return texture
+    }
+    
+    public func copy() -> NodeType {
+        let cp = TextureNode()
+        cp.id = self.id
+        cp.generator = self.generator
+        cp.args = self.args
+        return cp
+    }
+}
+
+public class TextureGeneratorNode: SpectraParserNode {
+    public typealias NodeType = TextureGeneratorNode
+    public typealias MDLType = TextureGenerator
+    
+    public var id: String?
+    public var type: String = "noise_texture_gen"
+    public var args: [String: GeneratorArg] = [:]
+    
+    public required init() {
+        
+    }
+
+    public func parseXML(container: Container, elem: XMLElement) {
+        if let type = elem.attributes["type"] {
+            self.type = type
+        }
+
+        let texGenArgsSelector = "generator-args > generator-arg"
+        for (idx, el) in elem.css(texGenArgsSelector).enumerate() {
+            let name = el.attributes["name"]!
+            let type = el.attributes["type"]!
+            let value = el.attributes["value"]!
+            self.args[name] = GeneratorArg(name: name, type: type, value: value)
+        }
+    }
+    
+    public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {
+        // TODO: add to a generators container instead?
+        let models = containers["models"]!
+        let texGen = models.resolve(TextureGenerator.self, name: self.type)!
+        texGen.processArgs(models, args: self.args)
+        return texGen
+    }
+
+    public func copy() -> NodeType {
+        let cp = TextureGeneratorNode()
+        cp.id = self.id
+        cp.type = self.type
+        cp.args = self.args
+        return cp
+    }
+}
 
 public class TextureFilterNode: SpectraParserNode {
     public typealias NodeType = TextureFilterNode
@@ -963,12 +1259,12 @@ public class TextureSamplerNode: SpectraParserNode {
     }
     
     public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLTextureSampler {
-        let mdlContainer = containers["mdl"]!
+        let models = containers["model"]!
         
         let sampler = MDLTextureSampler()
-        sampler.texture = mdlContainer.resolve(MDLTexture.self, name: self.texture)
-        sampler.hardwareFilter = mdlContainer.resolve(MDLTextureFilter.self, name: self.texture)
-        if let transform = mdlContainer.resolve(MDLTransform.self, name: self.transform) {
+        sampler.texture = models.resolve(MDLTexture.self, name: self.texture)
+        sampler.hardwareFilter = models.resolve(MDLTextureFilter.self, name: self.texture)
+        if let transform = models.resolve(MDLTransform.self, name: self.transform) {
             sampler.transform = transform
         } else {
             sampler.transform = MDLTransform()
