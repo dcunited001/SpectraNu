@@ -116,7 +116,7 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
     public var id: String?
     public var urlString: String?
     public var resource: String?
-    public var vertexDescriptor: String = "default"
+    public var vertexDescriptor: VertexDescriptorNode?
     public var bufferAllocator: String = "default"
     
     public required init() {
@@ -137,8 +137,9 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
         }
         
         if let vertexDescKey = elem.attributes["vertex-descriptor"] {
-            self.vertexDescriptor = vertexDescKey
+            self.vertexDescriptor = nodes.resolve(VertexDescriptorNode.self, name: vertexDescKey)
         } // TODO: else if contains a vertexDescriptor node
+          // TODO: else set to default vertexDescriptor?
         if let bufferAllocKey = elem.attributes["buffer-allocator"] {
             self.bufferAllocator = bufferAllocKey
         }
@@ -151,17 +152,11 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
 
     public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
         let url = NSURL(string: self.urlString!)
+        let mdlContainer = containers["mdl"]
+        let resourceContainer = containers["resources"]
         
-        let mdlContainer = containers["mdl"]!
-
-//        if resource != nil {
-//            // TODO: need to have access to bundles
-//        }
-        
-//        let descSelector = "vertex-descriptor"
-
-        var vertexDescriptor = mdlContainer.resolve(MDLVertexDescriptor.self, name: self.vertexDescriptor)
-        var bufferAllocator = mdlContainer.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
+        var vertexDescriptor = self.vertexDescriptor?.generate(containers, options: options)
+        var bufferAllocator = resourceContainer?.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
 
         let asset = MDLAsset(URL: url!, vertexDescriptor: vertexDescriptor, bufferAllocator: bufferAllocator)
 
