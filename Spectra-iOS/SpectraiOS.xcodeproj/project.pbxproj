@@ -841,6 +841,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */,
 				43D40E1E1C923B9600DB35D3 /* XSDSpec.swift in Sources */,
 				43D4FDD21C7C3E9D004E2CF7 /* SpectraXMLSpec.swift in Sources */,
 				4334D6E71C1FAF4E00D2DCA6 /* S3DXMLSpec.swift in Sources */,
@@ -849,7 +850,6 @@
 				4317EA281C8C36DD0019B2E2 /* ModelIOMeshGeneratorsSpec.swift in Sources */,
 				43BDD4601C8EDEBD00AEFA9E /* ModelIOTextureGeneratorsSpec.swift in Sources */,
 				43D40E1F1C923B9600DB35D3 /* NodesSpec.swift in Sources */,
-				43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */,
 				4317EA2A1C8C36E60019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift in Sources */,
 				4317EA271C8C36D70019B2E2 /* PlatonicSolidMeshGeneratorsSpec.swift in Sources */,
 			);
