@@ -57,11 +57,13 @@ public enum SpectraVertexAttrType: String {
 }
 
 public class SpectraXSD {
-    public var xsd: XMLDocument?
-
-    public init(data: NSData) {
+    public class func readXSD(filename: String) -> XMLDocument? {
+        let bundle = NSBundle(forClass: S3DXSD.self)
+        let path = bundle.pathForResource(filename, ofType: "xsd")
+        let data = NSData(contentsOfFile: path!)
+        
         do {
-            xsd = try XMLDocument(data: data)
+            return try XMLDocument(data: data!)
         } catch let err as XMLError {
             switch err {
             case .ParserFailure, .InvalidData: print(err)
@@ -71,23 +73,19 @@ public class SpectraXSD {
         } catch let err {
             print("error: \(err)")
         }
+        return nil
     }
 
-    public class func readXSD(filename: String) -> NSData {
-        let bundle = NSBundle(forClass: S3DXSD.self)
-        let path = bundle.pathForResource(filename, ofType: "xsd")
-        let data = NSData(contentsOfFile: path!)
-        return data!
-    }
-
-    public func parseEnumTypes(container: Container) {
+    public func parseXSD(xsd: XMLDocument, container: Container = Container()) -> Container {
         let enumTypesSelector = "xs:simpleType[mtl-enum=true]"
 
-        for enumChild in xsd!.css(enumTypesSelector) {
+        for enumChild in xsd.css(enumTypesSelector) {
             let enumType = SpectraEnum(elem: enumChild)
             container.register(SpectraEnum.self, name: enumType.name) { _ in
                 return enumType
             }
         }
+        
+        return container
     }
 }
