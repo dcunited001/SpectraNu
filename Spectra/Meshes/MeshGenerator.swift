@@ -21,6 +21,14 @@ public protocol MeshGenerator {
 
 //public typealias MeshGeneratorMonad = ((Container, ) -> )
 
+public protocol SubmeshGenerator {
+    init(container: Container, args: [String: GeneratorArg])
+    
+    func generate(container: Container, args: [String: GeneratorArg]) -> MDLSubmesh
+    func processArgs(container: Container, args: [String: GeneratorArg])
+    func copy(container: Container) -> SubmeshGenerator
+}
+
 // NOTE: trying to decouple SpectraGeo from the rest of Spectra
 // - or at least parts of it
 
