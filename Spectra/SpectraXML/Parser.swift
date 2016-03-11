@@ -16,6 +16,7 @@ public protocol SpectraParserNode {
     typealias MDLType
     
     var id: String? { get set }
+    init()
     func parseXML(nodes: Container, elem: XMLElement)
     func generate(containers: [String: Container], options: [String: Any]) -> MDLType
     func register(nodes: Container, objectScope: ObjectScope, copyOnResolve: Bool)
@@ -23,8 +24,8 @@ public protocol SpectraParserNode {
 }
 
 extension SpectraParserNode {
-    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
-        var nodeCopy: NodeType = copyOnResolve ? self.copy() : self as! NodeType
+    public func register(nodes: Container, objectScope: ObjectScope = .None) {
+        let nodeCopy = self.copy()
         nodes.register(NodeType.self, name: self.id!) { _ in
             return nodeCopy
             }.inObjectScope(objectScope)
