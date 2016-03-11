@@ -20,8 +20,8 @@ class SpectraXMLSpec: QuickSpec {
 //    func containerGet<T>(container: Container, key: String) -> T? {
 //        return container.resolve(T.self, name: key)
 //    }
-//    
-//    override func spec() {
+    
+    override func spec() {
 //        let parser = Container()
 //        
 //        let spectraEnumData = SpectraXSD.readXSD("SpectraEnums")
@@ -50,145 +50,7 @@ class SpectraXMLSpec: QuickSpec {
 //            }
 //        }
 //        
-//        describe("SpectraXMLNodeTuple") {
-//            it("can recursively resolve dependencies using (construct, meta)") {
-//                
-//            }
-//        }
-//        
-//        describe("vertex-attribute") {
-//            let attrPos: MDLVertexAttribute = self.containerGet(assetContainer, key: "pos_float4")!
-//            let attrTex: MDLVertexAttribute = self.containerGet(assetContainer, key: "tex_float2")!
-//            let attrRgb: MDLVertexAttribute = self.containerGet(assetContainer, key: "rgb_float4")!
-//            let attrRgbInt: MDLVertexAttribute = self.containerGet(assetContainer, key: "rgb_int4")!
-//            let attrAniso: MDLVertexAttribute = self.containerGet(assetContainer, key: "aniso_float4")!
-//            let attrCustomLabel: MDLVertexAttribute = self.containerGet(assetContainer, key: "test_custom_label")!
-//            let attrImmutable: MDLVertexAttribute = self.containerGet(assetContainer, key: "test_immutable")!
-//            
-//            it("can parse vertex attribute nodes") {
-//                // for now, deferring assignment of bufferIndex and offset to MDLVertexDescriptor
-//                expect(attrPos.name) == MDLVertexAttributePosition
-//                expect(attrTex.name) == MDLVertexAttributeTextureCoordinate
-//                expect(attrRgb.name) == MDLVertexAttributeColor
-//                expect(attrAniso.name) == MDLVertexAttributeAnisotropy
-//            }
-//            
-//            it("can create attributes with custom labels") {
-//                expect(attrCustomLabel.name) == "custom"
-//            }
-//            
-//            it("reads the correct MDLVertexFormat") {
-//                expect(attrPos.format) == MDLVertexFormat.Float4
-//                expect(attrTex.format) == MDLVertexFormat.Float2
-//                expect(attrRgb.format) == MDLVertexFormat.Float4
-//                expect(attrRgbInt.format) == MDLVertexFormat.Int4
-//                expect(attrAniso.format) == MDLVertexFormat.Float4
-//                expect(attrImmutable.format) == MDLVertexFormat.Int
-//            }
-//            
-//            it("retains immutable copies which are not changed") {
-//                let origIndex = attrImmutable.bufferIndex
-//                attrImmutable.bufferIndex = origIndex + 1
-//                let attrImmutable2: MDLVertexAttribute = self.containerGet(assetContainer, key: "test_immutable")!
-//                expect(attrImmutable.bufferIndex) != attrImmutable2.bufferIndex
-//                expect(attrImmutable2.bufferIndex) == origIndex
-//                
-//                // just want to see how default values are initialized
-//                let origAttrPosIndex = attrPos.bufferIndex
-//                attrPos.bufferIndex = origAttrPosIndex + 1
-//                
-//                let attrPos2: MDLVertexAttribute = self.containerGet(assetContainer, key: "pos_float4")!
-//                expect(attrPos.bufferIndex) != attrPos2.bufferIndex
-//                expect(attrPos2.bufferIndex) == origAttrPosIndex
-//            }
-//        }
-//        
-//        describe("vertex-descriptor") {
-//            let attrPos: MDLVertexAttribute = self.containerGet(assetContainer, key: "pos_float4")!
-//            let attrTex: MDLVertexAttribute = self.containerGet(assetContainer, key: "tex_float2")!
-//            let vertDescPosTex: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vert_pos_tex_float")!
-//            let vertDescPosRgb: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vert_pos_rgb_float")!
-//            
-//            it("can parse vertex descriptor with references to vertex attributes") {
-//                let pos1 = vertDescPosTex.attributeNamed("position")!
-//                let tex1 = vertDescPosTex.attributeNamed("textureCoordinate")!
-//                let pos2 = vertDescPosRgb.attributeNamed("position")!
-//                let rgb2 = vertDescPosRgb.attributeNamed("color")!
-//                
-//                expect(pos1.format) == MDLVertexFormat.Float4
-//                expect(tex1.format) == MDLVertexFormat.Float2
-//                expect(pos2.format) == MDLVertexFormat.Float4
-//                expect(rgb2.format) == MDLVertexFormat.Int4
-//                
-//                expect(vertDescPosTex.attributes[0].name) == "position"
-//                expect(vertDescPosTex.attributes[1].name) == "textureCoordinate"
-//                
-//                expect(vertDescPosRgb.attributes[0].name) == "position"
-//                expect(vertDescPosRgb.attributes[1].name) == "color"
-//            }
-//            
-//            it("can parse a descriptor with a packed array-of-struct indexing") {
-//                let packedDesc: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vertdesc_packed")!
-//                let pos = packedDesc.attributeNamed("position")!
-//                let tex = packedDesc.attributeNamed("textureCoordinate")!
-//                let aniso = packedDesc.attributeNamed("anisotropy")!
-//                
-//                expect(pos.format) == MDLVertexFormat.Float4
-//                expect(tex.format) == MDLVertexFormat.Float2
-//                expect(aniso.format) == MDLVertexFormat.Float4
-//                
-//                expect(pos.offset) == 0
-//                expect(tex.offset) == 16
-//                expect(aniso.offset) == 24
-//                
-//                expect(pos.bufferIndex) == 0
-//                expect(tex.bufferIndex) == 0
-//                expect(aniso.bufferIndex) == 0
-//            }
-//            
-//            it("can parse a descriptor with an unpacked struct-of-array indexing (each attribute has a buffer)") {
-//                let packedDesc: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vertdesc_unpacked")!
-//                let pos = packedDesc.attributeNamed("position")!
-//                let tex = packedDesc.attributeNamed("textureCoordinate")!
-//                let aniso = packedDesc.attributeNamed("anisotropy")!
-//                
-//                expect(pos.format) == MDLVertexFormat.Float4
-//                expect(tex.format) == MDLVertexFormat.Float2
-//                expect(aniso.format) == MDLVertexFormat.Float4
-//                
-//                expect(pos.offset) == 0
-//                expect(tex.offset) == 0
-//                expect(aniso.offset) == 0
-//                
-//                expect(pos.bufferIndex) == 0
-//                expect(tex.bufferIndex) == 1
-//                expect(aniso.bufferIndex) == 2
-//            }
-//            
-//            it("can parse a more complex layout") {
-//                let packedDesc: MDLVertexDescriptor = self.containerGet(assetContainer, key: "vertdesc_complex")!
-//                let pos = packedDesc.attributeNamed("position")!
-//                let tex = packedDesc.attributeNamed("textureCoordinate")!
-//                let aniso = packedDesc.attributeNamed("anisotropy")!
-//                let rgb = packedDesc.attributeNamed("color")!
-//                
-//                expect(pos.format) == MDLVertexFormat.Float4
-//                expect(tex.format) == MDLVertexFormat.Float2
-//                expect(aniso.format) == MDLVertexFormat.Float4
-//                expect(rgb.format) == MDLVertexFormat.Float4
-//                
-//                expect(pos.offset) == 0
-//                expect(tex.offset) == 0
-//                expect(aniso.offset) == 8
-//                expect(rgb.offset) == 0
-//                
-//                expect(pos.bufferIndex) == 0
-//                expect(tex.bufferIndex) == 1
-//                expect(aniso.bufferIndex) == 1
-//                expect(rgb.bufferIndex) == 2
-//            }
-//        }
-//        
+
 //        // TODO: convert from VertexDescriptor with array-of-struct to struct-of-array indexing
 //        // TODO: convert MDLVertexDescriptor <=> MTLVertexDescriptor
 //        
@@ -531,5 +393,5 @@ class SpectraXMLSpec: QuickSpec {
 //        describe("voxel-array") {
 //            // transformations to voxels from meshes that are already loaded
 //        }
-//    }
+    }
 }
