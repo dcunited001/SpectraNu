@@ -8,8 +8,8 @@
             <generator-arg type="Int" name="vertical_segments" value="5" />
         </generator-args>
     </mesh-generator>
-    <mesh id="ellipsoid_mesh" mesh-generator="ellipsoid_mesh_gen" />
-    <mesh id="ellipsoid_mesh2" mesh-generator="ellipsoid_mesh_gen2" />
+    <mesh id="ellipsoid_mesh" generator="ellipsoid_mesh_gen" />
+    <mesh id="ellipsoid_mesh2" generator="ellipsoid_mesh_gen2" />
     
     <mesh-generator id="elliptical_cone_mesh_gen2" type="elliptical_cone_mesh_gen">
         <generator-args>
@@ -19,8 +19,8 @@
             <generator-arg type="Int" name="vertical_segments" value="5" />
         </generator-args>
     </mesh-generator>
-    <mesh id="elliptical_cone_mesh" mesh-generator="elliptical_cone_mesh_gen" />
-    <mesh id="elliptical_cone_mesh2" mesh-generator="elliptical_cone_mesh_gen2" />
+    <mesh id="elliptical_cone_mesh" generator="elliptical_cone_mesh_gen" />
+    <mesh id="elliptical_cone_mesh2" generator="elliptical_cone_mesh_gen2" />
     
     <mesh-generator id="cylinder_mesh_gen2" type="cylinder_mesh_gen">
         <generator-args>
@@ -31,16 +31,16 @@
             <generator-arg type="Int" name="vertical_segments" value="5" />
         </generator-args>
     </mesh-generator>
-    <mesh id="cylinder_mesh" mesh-generator="cylinder_mesh_gen" />
-    <mesh id="cylinder_mesh2" mesh-generator="cylinder_mesh_gen2" />
+    <mesh id="cylinder_mesh" generator="cylinder_mesh_gen" />
+    <mesh id="cylinder_mesh2" generator="cylinder_mesh_gen2" />
     
     <mesh-generator id="icosahedron_mesh_gen2" type="icosahedron_mesh_gen">
         <generator-args>
             <generator-arg type="Float" name="radius" value="100" />
         </generator-args>
     </mesh-generator>
-    <mesh id="icosahedron_mesh" mesh-generator="icosahedron_mesh_gen" />
-    <mesh id="icosahedron_mesh2" mesh-generator="icosahedron_mesh_gen2" />
+    <mesh id="icosahedron_mesh" generator="icosahedron_mesh_gen" />
+    <mesh id="icosahedron_mesh2" generator="icosahedron_mesh_gen2" />
 
     <mesh-generator id="subdivision_mesh_gen2" type="subdivision_mesh_gen">
         <generator-args>
@@ -54,8 +54,8 @@
      the above mesh gen is called.  in practice, devs can specify a new gen with mesh-generator & args,
      then call it from code.
      -->
-    <mesh id="elliptical_cone_mesh3" mesh-generator="elliptical_cone_mesh_gen2" />
-    <mesh id="elliptical_cone_mesh3" mesh-generator="subdivision_mesh_gen2" />
+    <mesh id="elliptical_cone_mesh3" generator="elliptical_cone_mesh_gen2" />
+    <mesh id="elliptical_cone_mesh3" generator="subdivision_mesh_gen2" />
 
     <!--
      these mesh generators are based on methods in Model I/O that appear in the headers, but cannot
