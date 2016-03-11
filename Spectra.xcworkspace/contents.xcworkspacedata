@@ -207,6 +207,19 @@
       location = "container:SpectraTests"
       name = "SpectraTests">
       <Group
+         location = "container:Spectra/SpectraXML"
+         name = "SpectraXML">
+         <FileRef
+            location = "group:XSDSpec.swift">
+         </FileRef>
+         <FileRef
+            location = "group:NodesSpec.swift">
+         </FileRef>
+         <FileRef
+            location = "group:ParserSpec.swift">
+         </FileRef>
+      </Group>
+      <Group
          location = "container:SpectraTests/Textures"
          name = "Textures">
          <FileRef
