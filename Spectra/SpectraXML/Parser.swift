@@ -9,17 +9,26 @@
 import Foundation
 import Swinject
 import Fuzi
+import ModelIO
 
 public protocol SpectraParserNode {
     typealias NodeType
     typealias MDLType
     
     var id: String? { get set }
-    
     func parseXML(nodes: Container, elem: XMLElement)
     func generate(containers: [String: Container], options: [String: Any]) -> MDLType
     func register(nodes: Container, objectScope: ObjectScope, copyOnResolve: Bool)
     func copy() -> NodeType
+}
+
+extension SpectraParserNode {
+    public func register(nodes: Container, objectScope: ObjectScope = .None, copyOnResolve: Bool = false) {
+        var nodeCopy: NodeType = copyOnResolve ? self.copy() : self as! NodeType
+        nodes.register(NodeType.self, name: self.id!) { _ in
+            return nodeCopy
+            }.inObjectScope(objectScope)
+    }
 }
 
 public class SpectraParser {
@@ -29,12 +38,62 @@ public class SpectraParser {
         self.nodes = nodes
     }
     
+    public func nodeGet<N: SpectraParserNode>(nodeType: N.Type, id: String?) -> N? {
+        return nodes.resolve(N.self, name: id)
+    }
+    
+    public func getAsset(id: String?) -> AssetNode? {
+        return nodeGet(AssetNode.self, id: id)
+    }
+    
+    public func getVertexAttribute(id: String?) -> VertexAttributeNode? {
+        return nodes.resolve(VertexAttributeNode.self, name: id)
+    }
+    
+    public func getVertexDescriptor(id: String?) -> VertexDescriptorNode? {
+        return nodes.resolve(VertexDescriptorNode.self, name: id)
+    }
+    
+    public func getTransform(id: String?) -> TransformNode? {
+        return nodes.resolve(TransformNode.self, name: id)
+    }
+    
+    // TODO: Object
+    
+    public func getPhysicalLens(id: String?) -> PhysicalLensNode? {
+        return nodes.resolve(PhysicalLensNode.self, name: id)
+    }
+    
+    public func getPhysicalImagingSurface(id: String?) -> PhysicalImagingSurfaceNode? {
+        return nodes.resolve(PhysicalImagingSurfaceNode.self, name: id)
+    }
+    
+    public func getCamera(id: String?) -> CameraNode? {
+        return nodes.resolve(CameraNode.self, name: id)
+    }
+    
+    public func getStereoscopicCamera(id: String?) -> StereoscopicCameraNode? {
+        return nodes.resolve(StereoscopicCameraNode.self, name: id)
+    }
+    
+    // TODO: Mesh
+    // TODO: MeshGenerator
+    // TODO: Texture
+    // TODO: TextureGenerator
+    // TODO: TextureFilter
+    // TODO: TextureSampler
+    // TODO: Material
+    // TODO: MaterialProperty
+    // TODO: ScatteringFunction
+    // TODO: Light
+    // TODO: LightGenerator
+
+//    public func get(id: String?) -> Node? {
+//        return nodes.resolve(Node.self, name: id)
+//    }
+    
     // public func parseJSON()
     // public func parsePList()
-    
-//    public func registerNode<N: SpectraParserNode>(node: N) {
-//        
-//    }
     
     public func parseXML(xml: XMLDocument) {
         for child in xml.root!.children {
