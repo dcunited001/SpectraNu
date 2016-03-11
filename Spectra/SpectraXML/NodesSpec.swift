@@ -180,5 +180,102 @@ class SpectraXMLNodesSpec: QuickSpec {
                 // check that translate/rotate/scale/shear is calculated correctly when composed
             }
         }
+        
+        describe("MDLCamera") {
+            let lens1 = spectraParser.getPhysicalLens("lens1")!
+            let lens2 = spectraParser.getPhysicalLens("lens2")!
+            let lens3 = spectraParser.getPhysicalLens("lens3")!
+
+            let physImg1 = spectraParser.getPhysicalImagingSurface("phys_img1")!
+            let physImg2 = spectraParser.getPhysicalImagingSurface("phys_img2")!
+
+            // camera with defaults
+            // camera with lens applied
+            // camera with physImg applied
+            // camera with lookAt applied
+
+            let defaultCam = spectraParser.getCamera("default")!
+            let cam1 = spectraParser.getCamera("cam1")!
+            let cam2 = spectraParser.getCamera("cam2")!
+            let cam3 = spectraParser.getCamera("cam3")!
+            let cam4 = spectraParser.getCamera("cam4")!
+
+            let defaultStereoCam = spectraParser.getStereoscopicCamera("default")!
+            let stereoCam1 = spectraParser.getStereoscopicCamera("stereo_cam1")!
+            let stereoCam2 = spectraParser.getStereoscopicCamera("stereo_cam2")!
+
+            describe("physical-lens") {
+                it("can specify Physical Lens parameters") {
+                    expect(lens1.barrelDistortion) == 0.1
+                    expect(lens1.fisheyeDistortion) == 0.5
+
+                    expect(lens2.focalLength) == 77.0
+                    expect(lens2.fStop) == 7.0
+                    expect(lens2.maximumCircleOfConfusion) == 0.10
+
+                    expect(lens3.apertureBladeCount) == 7
+                }
+            }
+
+            describe("physical-imaging-surface") {
+                it("can specify Physical Imaging Surface parameters") {
+                    expect(physImg1.sensorVerticalAperture) == 24
+                    expect(physImg1.sensorAspect) == 2.0
+
+                    let expectedFlash = float3([0.1, 0.1, 0.1])
+                    let expectedExposure = float3([1.5, 1.5, 1.5])
+                    expect(SpectraSimd.compareFloat3(physImg2.flash!, with: float3([0.1, 0.1, 0.1]))).to(beTrue())
+                    expect(SpectraSimd.compareFloat3(physImg2.exposure!, with: float3([1.5, 1.5, 1.5]))).to(beTrue())
+                }
+            }
+
+            describe("camera") {
+                it("manages the inherited MDLObject properties") {
+                    // transform
+                    // parent
+                }
+
+                it("loads default values") {
+                    expect(defaultCam.nearVisibilityDistance) == 0.1
+                    expect(defaultCam.farVisibilityDistance) == 1000.0
+                    expect(defaultCam.fieldOfView) == Float(53.999996185302734375)
+                }
+
+                it("is created with near-visibility-distance, far-visibility-distance and field-of-view") {
+                    // these are required and produce a corresponding projection matrix (formerly perspective)
+                }
+
+                it("can be set to look at a position and look from a position") {
+                    // look-at (and optionally look-from)
+                }
+
+                it("can have a transform attached to it") {
+
+                }
+
+            }
+
+            describe("stereoscopic-camera") {
+                it("loads default values") {
+                    expect(defaultStereoCam.nearVisibilityDistance) == 0.1
+                    expect(defaultStereoCam.farVisibilityDistance) == 1000.0
+                    expect(defaultStereoCam.fieldOfView) == Float(53.999996185302734375)
+
+                    // TODO: default stereo values
+                    expect(defaultStereoCam.interPupillaryDistance) == 63.0
+                    expect(defaultStereoCam.leftVergence) == 0.0
+                    expect(defaultStereoCam.rightVergence) == 0.0
+                    expect(defaultStereoCam.overlap) == 0.0
+                }
+                
+                it("is created by additionally specifying interPupillaryDistance, overlap & left/right vergence") {
+                    
+                }
+                
+                // it can attach a physical-lens
+                // it can attach a physical-imaging-surface
+            }
+        }
+
     }
 }
