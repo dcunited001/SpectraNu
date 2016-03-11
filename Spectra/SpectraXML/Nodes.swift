@@ -168,6 +168,7 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
 
     public func copy() -> NodeType {
         let cp = AssetNode()
+        cp.id = self.id
         cp.urlString = self.urlString
         cp.resource = self.resource
         cp.vertexDescriptor = self.vertexDescriptor
@@ -188,6 +189,9 @@ public class VertexAttributeNode: SpectraParserNode {
     public var initializationValue: float4 = float4()
     
     public func parseXML(nodes: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
         if let name = elem.attributes["name"] {
             self.name = name
         }
@@ -218,6 +222,7 @@ public class VertexAttributeNode: SpectraParserNode {
     
     public func copy() -> NodeType {
         let cp = VertexAttributeNode()
+        cp.id = self.id
         cp.name = self.name
         cp.format = self.format
         cp.offset = self.offset
@@ -236,6 +241,9 @@ public class VertexDescriptorNode {
     public var attributes: [VertexAttributeNode] = []
     
     public func parseXML(nodes: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
         
         if let parentDescriptor = elem.attributes["parent-descriptor"] {
             let parentDesc = nodes.resolve(VertexDescriptorNode.self, name: parentDescriptor)!
@@ -273,6 +281,7 @@ public class VertexDescriptorNode {
     
     public func copy() -> VertexDescriptorNode {
         let cp = VertexDescriptorNode()
+        cp.id = self.id
         cp.attributes = self.attributes
         cp.parentDescriptor = self.parentDescriptor
         return cp
@@ -295,7 +304,9 @@ public class TransformNode: SpectraParserNode {
     public func parseXML(nodes: Container, elem: XMLElement) {
         // N.B. scale first, then rotate, finally translate
         // - but how can a shear operation be composed into this?
-        
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
         if let scale = elem.attributes["scale"] {
             self.scale = SpectraSimd.parseFloat3(scale)
         }
@@ -324,6 +335,7 @@ public class TransformNode: SpectraParserNode {
     
     public func copy() -> TransformNode {
         let cp = TransformNode()
+        cp.id = self.id
         cp.scale = self.scale
         cp.shear = self.shear
         cp.rotation = self.rotation
@@ -374,6 +386,9 @@ public class PhysicalLensNode: SpectraParserNode {
     public var shutterOpenInterval: NSTimeInterval = (0.5 * (1.0/60.0))
 
     public func parseXML(nodes: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
         if let worldToMetersConversionScale = elem.attributes["world-to-meters-conversion-scale"] {
             self.worldToMetersConversionScale = Float(worldToMetersConversionScale)!
         }
@@ -465,6 +480,7 @@ public class PhysicalLensNode: SpectraParserNode {
 
     public func copy() -> NodeType {
         let cp = PhysicalLensNode()
+        cp.id = self.id
         cp.worldToMetersConversionScale = self.worldToMetersConversionScale
         cp.barrelDistortion = self.barrelDistortion
         cp.fisheyeDistortion = self.fisheyeDistortion
@@ -504,6 +520,10 @@ public class PhysicalImagingSurfaceNode: SpectraParserNode {
     public static let exposureCompression: vector_float2 = float2(1.0, 0.0)
 
     public func parseXML(nodes: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
+        
         if let sensorVerticalAperture = elem.attributes["sensor-vertical-aperture"] {
             self.sensorVerticalAperture = Float(sensorVerticalAperture)
         }
@@ -571,6 +591,7 @@ public class PhysicalImagingSurfaceNode: SpectraParserNode {
 
     public func copy() -> NodeType {
         let cp = PhysicalImagingSurfaceNode()
+        cp.id = self.id
         cp.sensorVerticalAperture = self.sensorVerticalAperture
         cp.sensorAspect = self.sensorAspect
         cp.sensorEnlargement = self.sensorEnlargement
@@ -578,7 +599,6 @@ public class PhysicalImagingSurfaceNode: SpectraParserNode {
         cp.flash = self.flash
         cp.exposure = self.exposure
         cp.exposureCompression = self.exposureCompression
-
         return cp
     }
 }
@@ -599,6 +619,9 @@ public class CameraNode: SpectraParserNode {
     public var physicalImagingSurface = PhysicalImagingSurfaceNode()
     
     public func parseXML(nodes: Container, elem: XMLElement) {
+        if let id = elem.attributes["id"] {
+            self.id = id
+        }
         if let nearVisibility = elem.attributes["near-visibility-distance"] {
             self.nearVisibilityDistance = Float(nearVisibility)!
         }
@@ -676,7 +699,7 @@ public class CameraNode: SpectraParserNode {
     
     public func copy() -> NodeType {
         let cp = CameraNode()
-        
+        cp.id = self.id
         cp.nearVisibilityDistance = self.nearVisibilityDistance
         cp.farVisibilityDistance = self.farVisibilityDistance
         cp.fieldOfView = self.fieldOfView
@@ -774,7 +797,7 @@ public class StereoscopicCameraNode: SpectraParserNode {
     
     public func copy() -> NodeType {
         let cp = StereoscopicCameraNode()
-        
+        cp.id = self.id
         cp.nearVisibilityDistance = self.nearVisibilityDistance
         cp.farVisibilityDistance = self.farVisibilityDistance
         cp.fieldOfView = self.fieldOfView
