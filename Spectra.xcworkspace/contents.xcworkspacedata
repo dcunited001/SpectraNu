@@ -32,6 +32,19 @@
       location = "container:Spectra"
       name = "Spectra">
       <Group
+         location = "container:Spectra/SpectraXML"
+         name = "SpectraXML">
+         <FileRef
+            location = "group:Nodes.swift">
+         </FileRef>
+         <FileRef
+            location = "group:Parser.swift">
+         </FileRef>
+         <FileRef
+            location = "group:XSD.swift">
+         </FileRef>
+      </Group>
+      <Group
          location = "container:"
          name = "Resources">
          <FileRef
@@ -49,9 +62,6 @@
          </FileRef>
          <FileRef
             location = "group:S3DXSD.swift">
-         </FileRef>
-         <FileRef
-            location = "group:SceneGraphXML.swift">
          </FileRef>
          <FileRef
             location = "group:StateManager.swift">
@@ -137,6 +147,16 @@
          </FileRef>
       </Group>
       <Group
+         location = "container:Spectra/Submeshes"
+         name = "Submeshes">
+         <FileRef
+            location = "group:SubmeshGenerator.swift">
+         </FileRef>
+         <FileRef
+            location = "group:BasicSubmeshGenerators.swift">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:Classes"
          name = "Classes">
          <FileRef
@@ -197,6 +217,19 @@
       location = "container:SpectraTests"
       name = "SpectraTests">
       <Group
+         location = "container:Spectra/SpectraXML"
+         name = "SpectraXML">
+         <FileRef
+            location = "group:XSDSpec.swift">
+         </FileRef>
+         <FileRef
+            location = "group:NodesSpec.swift">
+         </FileRef>
+         <FileRef
+            location = "group:ParserSpec.swift">
+         </FileRef>
+      </Group>
+      <Group
          location = "container:SpectraTests/Textures"
          name = "Textures">
          <FileRef
@@ -217,6 +250,13 @@
          </FileRef>
          <FileRef
             location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/MeshGenerators/BasicTessellationMeshGeneratorsSpec.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:SpectraTests/Submeshes"
+         name = "Submeshes">
+         <FileRef
+            location = "group:BasicSubmeshGeneratorsSpec.swift">
          </FileRef>
       </Group>
       <FileRef
