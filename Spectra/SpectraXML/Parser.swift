@@ -11,6 +11,26 @@ import Swinject
 import Fuzi
 import ModelIO
 
+// GeneratorClosure =~ RegisterClosure
+// - they both transform the containers and options passed into generate & register
+// - they're both optional
+// - i need some way for each node type to "declare" the options it needs to be available
+//   - as well as a function for default transformation 4 resolving params from [String: Container]
+
+// problems: how to pass the GeneratorClosures down through the tree of nodes (if necessary)
+// - for now, just passing nil down the tree, but allowing the following order for resolving params for generate
+//   - (1) if closure exists, run & set params from the resulting Container Map & Options Map.
+//     - this closure is only passed to the top level node for now.  
+//     - it's possible to pass thru to the child nodes.  maybe later
+//     - need a kind of inverted-map structure for options
+//   - (2) if not, then if necessary params are defined in the Options Map, set the params 4 generate from those
+//     - how to distinguish the params defined in option for a parent node and child nodes
+//   - (3) otherwise, run the default behavior for fetching params from Container Map
+// ...
+public typealias GeneratorClosure = ((containers: [String: Container], options: [String: Any]?) ->
+    (containers: [String: Container], options: [String: Any]?))
+public typealias RegisterClosure = (containers: [String: Container], options: [String: Any]) -> (containers: [String: Container], options: [String: Any]?)
+
 public protocol SpectraParserNode {
     typealias NodeType
     typealias MDLType
