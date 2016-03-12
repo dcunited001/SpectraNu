@@ -36,7 +36,8 @@ public protocol SpectraParserNode {
     typealias MDLType
     
     var id: String? { get set }
-    init()
+    // requires init() for copy()
+    init(nodes: Container, elem: XMLElement)
     func parseXML(nodes: Container, elem: XMLElement)
     func generate(containers: [String: Container], options: [String: Any]) -> MDLType
     func register(nodes: Container, objectScope: ObjectScope)
@@ -149,65 +150,50 @@ public class SpectraParser {
                 
                 switch nodeType {
                 case .Asset:
-                    let node = AssetNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = AssetNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .VertexAttribute:
-                    let node = VertexAttributeNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = VertexAttributeNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .VertexDescriptor:
-                    let node = VertexDescriptorNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = VertexDescriptorNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .Transform:
-                    let node = TransformNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = TransformNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
 //                case .Object:
-//                    let node = ObjectNode()
-//                    node.parseXML(nodes, elem: child)
+//                    let node = ObjectNode(nodes: nodes, elem: child)
 //                    if (node.id != nil) { node.register(nodes) }
                 case .PhysicalLens:
-                    let node = PhysicalLensNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = PhysicalLensNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .PhysicalImagingSurface:
-                    let node = PhysicalImagingSurfaceNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = PhysicalImagingSurfaceNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .Camera:
-                    let node = CameraNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = CameraNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .StereoscopicCamera:
-                    let node = StereoscopicCameraNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = StereoscopicCameraNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .Mesh:
-                    let node = MeshNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = MeshNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .MeshGenerator:
-                    let node = MeshGeneratorNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = MeshGeneratorNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .Submesh:
-                    let node = SubmeshNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = SubmeshNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .SubmeshGenerator:
-                    let node = SubmeshGeneratorNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = SubmeshGeneratorNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
                 case .Texture:
-                    let node = TextureNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = TextureNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
 //                case .TextureGenerator: break
                 case .TextureFilter:
-                    let node = TextureFilterNode()
-                    node.parseXML(nodes, elem: child)
+                    let node = TextureFilterNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
 //                case .TextureSampler: break
 //                case .Material: break

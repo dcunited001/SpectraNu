@@ -113,19 +113,22 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
     public var vertexDescriptor: VertexDescriptorNode?
     public var bufferAllocator: String = "default"
     
-    public required init() {
-        
-    }
-    
     // TODO: error handling for preserveTopology
     // - (when true the constructor throws. for now, my protocol can't handle this)
     public var preserveTopology: Bool = false
+    
+    init() {
+        
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
 
     public func parseXML(nodes: Container, elem: XMLElement) {
         if let urlString = elem.attributes["url"] { self.urlString = urlString }
         if let resource = elem.attributes["resource"] { self.resource = resource }
         if let bufferAllocId = elem.attributes["buffer-allocator"] { self.bufferAllocator = bufferAllocId }
-        
         if let vertexDescId = elem.attributes["vertex-descriptor"] {
             self.vertexDescriptor = nodes.resolve(VertexDescriptorNode.self, name: vertexDescId)
         } // TODO: else if contains a vertexDescriptor node
@@ -174,8 +177,12 @@ public class VertexAttributeNode: SpectraParserNode {
     public var bufferIndex: Int = 0
     public var initializationValue: float4 = float4()
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
@@ -223,8 +230,12 @@ public class VertexDescriptorNode: SpectraParserNode {
     public var parentDescriptor: VertexDescriptorNode?
     public var attributes: [VertexAttributeNode] = []
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
@@ -282,8 +293,12 @@ public class TransformNode: SpectraParserNode {
     public var translation: float3 = float3(0.0, 0.0, 0.0)
     public var shear: float3 = float3(0.0, 0.0, 0.0)
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
@@ -339,14 +354,17 @@ public class MeshNode: SpectraParserNode {
     public var generator: String = "ellipsoid_mesh_gen"
     public var args: [String: GeneratorArg] = [:]
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
 
     public func parseXML(container: Container, elem: XMLElement) {
         if let id = elem.attributes["id"] { self.id = id }
         if let generator = elem.attributes["generator"] { self.generator = generator }
-
         let genArgsSelector = "generator-args > generator-arg"
         self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
@@ -377,14 +395,17 @@ public class MeshGeneratorNode: SpectraParserNode {
     public var type: String = "tetrahedron_mesh_gen"
     public var args: [String: GeneratorArg] = [:]
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
 
     public func parseXML(container: Container, elem: XMLElement) {
         if let id = elem.attributes["id"] { self.id = id }
         if let type = elem.attributes["type"] { self.type = type }
-        
         let genArgsSelector = "generator-args > generator-arg"
         self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
@@ -420,8 +441,12 @@ public class SubmeshNode: SpectraParserNode {
     public var generator: String = "tetrahedron_mesh_gen"
     public var args: [String: GeneratorArg] = [:]
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
@@ -530,8 +555,12 @@ public class PhysicalLensNode: SpectraParserNode {
     public static let maximumCircleOfConfusion: Float = 0.05
     public static let focusDistance: Float = 2.5
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
 
     // doc's don't list default shutterOpenInterval value,
@@ -610,8 +639,12 @@ public class PhysicalImagingSurfaceNode: SpectraParserNode {
     public static let exposure: vector_float3 = float3(1.0, 1.0, 1.0)
     public static let exposureCompression: vector_float2 = float2(1.0, 0.0)
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
 
     public func parseXML(nodes: Container, elem: XMLElement) {
@@ -668,8 +701,12 @@ public class CameraNode: SpectraParserNode {
     public var physicalLens = PhysicalLensNode()
     public var physicalImagingSurface = PhysicalImagingSurfaceNode()
     
-    public required init() {
-
+    init() {
+        
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
@@ -774,8 +811,12 @@ public class StereoscopicCameraNode: SpectraParserNode {
     public var rightVergence: Float = 0.0
     public var overlap: Float = 0.0
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
@@ -857,8 +898,12 @@ public class TextureNode: SpectraParserNode {
     public var generator: String = "noise_texture_gen"
     public var args: [String: GeneratorArg] = [:]
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
 
     public func parseXML(container: Container, elem: XMLElement) {
@@ -897,8 +942,12 @@ public class TextureGeneratorNode: SpectraParserNode {
     public var type: String = "noise_texture_gen"
     public var args: [String: GeneratorArg] = [:]
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
 
     public func parseXML(container: Container, elem: XMLElement) {
@@ -937,8 +986,12 @@ public class TextureFilterNode: SpectraParserNode {
     public var magFilter = MDLMaterialTextureFilterMode.Nearest
     public var mipFilter = MDLMaterialMipMapFilterMode.Nearest
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
 
     public func parseXML(nodes: Container, elem: XMLElement) {
@@ -1004,8 +1057,12 @@ public class TextureSamplerNode: SpectraParserNode {
     public var hardwareFilter: String?
     public var transform: String?
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
     
     // public func parseJSON()
