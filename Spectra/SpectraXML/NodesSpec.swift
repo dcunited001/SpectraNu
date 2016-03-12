@@ -28,10 +28,6 @@ class SpectraXMLNodesSpec: QuickSpec {
         let spectraXML = SpectraParser.readXML(testBundle, filename: "SpectraXMLSpec", bundleResourceName: nil)!
         spectraParser.parseXML(spectraXML)
         
-//        describe("Attribute") {
-//            
-//        }
-        
         describe("VertexAttribute") {
             let attrPos = spectraParser.getVertexAttribute("pos_float4")!
             let attrTex = spectraParser.getVertexAttribute("tex_float2")!
@@ -281,11 +277,12 @@ class SpectraXMLNodesSpec: QuickSpec {
             }
         }
         
-//        describe("Texture") {
-//            
-//        }
+        describe("Texture") {
+            
+            
+        }
         
-        describe("texture-filter") {
+        describe("TextureFilter") {
             it("parses the correct defaults") {
                 let defaultFilter = spectraParser.getTextureFilter("default")!
 
@@ -327,7 +324,7 @@ class SpectraXMLNodesSpec: QuickSpec {
             }
         }
 
-        describe("texture-sampler") {
+        describe("TextureSampler") {
             // texture: MDLTexture
             // hardwareFilter: MDLTextureFilter
             // transform: MDLTransform (translate/scale/rotate textures relative to their surfaces)

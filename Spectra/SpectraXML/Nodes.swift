@@ -453,13 +453,7 @@ public class SubmeshNode: SpectraParserNode {
         if let id = elem.attributes["id"] { self.id = id }
         if let generator = elem.attributes["generator"] { self.generator = generator }
         let genArgsSelector = "generator-args > generator-arg"
-        for (idx, el) in elem.css(genArgsSelector).enumerate() {
-            let name = el.attributes["name"]!
-            let type = el.attributes["type"]!
-            let value = el.attributes["value"]!
-            
-            self.args[name] = GeneratorArg(name: name, type: type, value: value)
-        }
+        self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
     public func generate(containers: [String : Container], options: [String : Any]) -> MDLType {
@@ -1123,26 +1117,6 @@ public class TextureSamplerNode: SpectraParserNode {
 //    }
 }
 
-
-
 // TODO: Light = "light"
 // TODO: LightGenerator = "light-generator"
-
-//public class :SpectraParserNode { // TODO: implement SpectraParserNode protocol
-//    public typealias NodeType =
-//    public typealias MDLType =
-//    // attrs
-//    
-//    public func parseXML(nodes: Container, elem: XMLElement) {
-//        
-//    }
-//    
-//    public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLType {
-//        
-//    }
-//    
-//    public func copy() -> NodeType {
-//        
-//    }
-//}
 
