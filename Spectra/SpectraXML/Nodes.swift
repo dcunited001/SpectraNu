@@ -13,7 +13,7 @@ import Swinject
 import ModelIO
 
 public enum SpectraNodeType: String {
-    case World = "world"
+    case World = "world" // TODO: design node & object
     case Transform = "transform"
     case Asset = "asset"
     case BufferAllocator = "buffer-allocator"
@@ -74,6 +74,14 @@ public struct GeneratorArg {
         case Int3 = "Int3"
         case Int4 = "Int4"
         case Mesh = "Mesh"
+    }
+    
+    public static func parseGenArgs(elem: XMLElement, selector: String) -> [String: GeneratorArg] {
+        return elem.css(selector).reduce([:]) { (var args, el) in
+            let name = el.attributes["name"]!
+            args[name] = GeneratorArg(elem: el)
+            return args
+        }
     }
 
     // TODO: delete?  do i really need type checking for generator args?
@@ -264,8 +272,6 @@ public class VertexDescriptorNode: SpectraParserNode {
     
 }
 
-// TODO: World = "world"
-
 public class TransformNode: SpectraParserNode {
     public typealias NodeType = TransformNode
     public typealias MDLType = MDLTransform
@@ -341,13 +347,8 @@ public class MeshNode: SpectraParserNode {
         if let id = elem.attributes["id"] { self.id = id }
         if let generator = elem.attributes["generator"] { self.generator = generator }
 
-        let generatorArgsSelector = "generator-args > generator-arg"
-        for (idx, el) in elem.css(generatorArgsSelector).enumerate() {
-            let name = el.attributes["name"]!
-            let type = el.attributes["type"]!
-            let value = el.attributes["value"]!
-            self.args[name] = GeneratorArg(name: name, type: type, value: value)
-        }
+        let genArgsSelector = "generator-args > generator-arg"
+        self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
     public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {
@@ -385,13 +386,7 @@ public class MeshGeneratorNode: SpectraParserNode {
         if let type = elem.attributes["type"] { self.type = type }
         
         let genArgsSelector = "generator-args > generator-arg"
-        for (idx, el) in elem.css(genArgsSelector).enumerate() {
-            let name = el.attributes["name"]!
-            let type = el.attributes["type"]!
-            let value = el.attributes["value"]!
-
-            self.args[name] = GeneratorArg(name: name, type: type, value: value)
-        }
+        self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
 
 //    public func createGenerator(container: Container, options: [String : Any] = [:]) -> MeshGenerator {
@@ -481,13 +476,7 @@ public class SubmeshGeneratorNode: SpectraParserNode {
         if let id = elem.attributes["id"] { self.id = id }
         if let type = elem.attributes["type"] { self.type = type }
         let genArgsSelector = "generator-args > generator-arg"
-        for (idx, el) in elem.css(genArgsSelector).enumerate() {
-            let name = el.attributes["name"]!
-            let type = el.attributes["type"]!
-            let value = el.attributes["value"]!
-            
-            self.args[name] = GeneratorArg(name: name, type: type, value: value)
-        }
+        self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
     public func generate(containers: [String : Container], options: [String : Any]) -> SubmeshGenerator {
@@ -875,13 +864,8 @@ public class TextureNode: SpectraParserNode {
     public func parseXML(container: Container, elem: XMLElement) {
         if let id = elem.attributes["id"] { self.id = id }
         if let generator = elem.attributes["generator"] { self.generator = generator }
-        let generatorArgsSelector = "generator-args > generator-arg"
-        for (idx, el) in elem.css(generatorArgsSelector).enumerate() {
-            let name = el.attributes["name"]!
-            let type = el.attributes["type"]!
-            let value = el.attributes["value"]!
-            self.args[name] = GeneratorArg(name: name, type: type, value: value)
-        }
+        let genArgsSelector = "generator-args > generator-arg"
+        self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
     public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {
@@ -920,13 +904,8 @@ public class TextureGeneratorNode: SpectraParserNode {
     public func parseXML(container: Container, elem: XMLElement) {
         if let id = elem.attributes["id"] { self.id = id }
         if let type = elem.attributes["type"] { self.type = type }
-        let texGenArgsSelector = "generator-args > generator-arg"
-        for (idx, el) in elem.css(texGenArgsSelector).enumerate() {
-            let name = el.attributes["name"]!
-            let type = el.attributes["type"]!
-            let value = el.attributes["value"]!
-            self.args[name] = GeneratorArg(name: name, type: type, value: value)
-        }
+        let genArgsSelector = "generator-args > generator-arg"
+        self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
     public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {

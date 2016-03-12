@@ -17,10 +17,6 @@ import simd
 
 class SpectraXMLSpec: QuickSpec {
     
-//    func containerGet<T>(container: Container, key: String) -> T? {
-//        return container.resolve(T.self, name: key)
-//    }
-    
     override func spec() {
 //        let parser = Container()
 //        
