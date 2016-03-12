@@ -72,6 +72,9 @@
 		4371E8BB1C190980001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B81D1C18B39A007D3DF6 /* Spectra.swift */; };
 		437D18F31C8CF26000C70975 /* LightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437D18F11C8CF26000C70975 /* LightGenerator.swift */; };
 		437D18F91C8EB1EA00C70975 /* BufferAllocatorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437D18F71C8EB1EA00C70975 /* BufferAllocatorGenerator.swift */; };
+		4388340D1C9391170098D71A /* SubmeshGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4388340B1C9391170098D71A /* SubmeshGenerator.swift */; };
+		438834111C9391E60098D71A /* BasicSubmeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4388340E1C9391DF0098D71A /* BasicSubmeshGeneratorsSpec.swift */; };
+		438834191C9393930098D71A /* BasicSubmeshGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438834181C9393930098D71A /* BasicSubmeshGenerators.swift */; };
 		43BDD45F1C8EDEAF00AEFA9E /* ModelIOTextureGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BDD45E1C8EDEAF00AEFA9E /* ModelIOTextureGenerators.swift */; };
 		43BDD4601C8EDEBD00AEFA9E /* ModelIOTextureGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BDD45B1C8ED64800AEFA9E /* ModelIOTextureGeneratorsSpec.swift */; };
 		43C472711C8F0B4B00F90CED /* S3DXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472691C8F0B4B00F90CED /* S3DXMLTest.xml */; };
@@ -209,6 +212,9 @@
 		43719B361C88FEDF00C14D56 /* ArchimedeanSolids.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchimedeanSolids.swift; sourceTree = "<group>"; };
 		437D18F11C8CF26000C70975 /* LightGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightGenerator.swift; sourceTree = "<group>"; };
 		437D18F71C8EB1EA00C70975 /* BufferAllocatorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferAllocatorGenerator.swift; sourceTree = "<group>"; };
+		4388340B1C9391170098D71A /* SubmeshGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmeshGenerator.swift; sourceTree = "<group>"; };
+		4388340E1C9391DF0098D71A /* BasicSubmeshGeneratorsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSubmeshGeneratorsSpec.swift; sourceTree = "<group>"; };
+		438834181C9393930098D71A /* BasicSubmeshGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSubmeshGenerators.swift; sourceTree = "<group>"; };
 		43BDD45B1C8ED64800AEFA9E /* ModelIOTextureGeneratorsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelIOTextureGeneratorsSpec.swift; path = /Users/dc/dev/apple/Spectra/SpectraTests/Textures/ModelIOTextureGeneratorsSpec.swift; sourceTree = "<absolute>"; };
 		43BDD45E1C8EDEAF00AEFA9E /* ModelIOTextureGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelIOTextureGenerators.swift; sourceTree = "<group>"; };
 		43C472661C8F0B4B00F90CED /* ModelIOMeshGeneratorsSpec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ModelIOMeshGeneratorsSpec.xml; sourceTree = "<group>"; };
@@ -328,6 +334,7 @@
 				43D40E1D1C923B9600DB35D3 /* SpectraXML */,
 				43BDD45C1C8ED64800AEFA9E /* Textures */,
 				4334D6E11C1FAF4E00D2DCA6 /* MeshGenerators */,
+				4388340F1C9391DF0098D71A /* Submeshes */,
 				4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */,
 				43D4FDD11C7C3E9D004E2CF7 /* SpectraXMLSpec.swift */,
 			);
@@ -414,6 +421,7 @@
 				4338B7FE1C18B39A007D3DF6 /* S3DXML */,
 				4338B8091C18B39A007D3DF6 /* Node */,
 				4338B8101C18B39A007D3DF6 /* Meshes */,
+				4388340C1C9391170098D71A /* Submeshes */,
 				437D18F21C8CF26000C70975 /* Lighting */,
 				4317E9E81C8BC2000019B2E2 /* Textures */,
 				4338B81C1C18B39A007D3DF6 /* Classes */,
@@ -451,6 +459,23 @@
 			);
 			name = Resources;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		4388340C1C9391170098D71A /* Submeshes */ = {
+			isa = PBXGroup;
+			children = (
+				4388340B1C9391170098D71A /* SubmeshGenerator.swift */,
+				438834181C9393930098D71A /* BasicSubmeshGenerators.swift */,
+			);
+			path = Submeshes;
+			sourceTree = "<group>";
+		};
+		4388340F1C9391DF0098D71A /* Submeshes */ = {
+			isa = PBXGroup;
+			children = (
+				4388340E1C9391DF0098D71A /* BasicSubmeshGeneratorsSpec.swift */,
+			);
+			path = Submeshes;
 			sourceTree = "<group>";
 		};
 		43BDD45C1C8ED64800AEFA9E /* Textures */ = {
@@ -800,6 +825,7 @@
 				4317E9CB1C8BAD360019B2E2 /* ModelIOMeshGenerators.swift in Sources */,
 				4371E8A81C190957001D1C39 /* Vertexable.swift in Sources */,
 				4371E8A31C190957001D1C39 /* Node.swift in Sources */,
+				438834191C9393930098D71A /* BasicSubmeshGenerators.swift in Sources */,
 				4371E8A21C190957001D1C39 /* Modelable.swift in Sources */,
 				4371E8B61C190960001D1C39 /* RenderStage.swift in Sources */,
 				437D18F91C8EB1EA00C70975 /* BufferAllocatorGenerator.swift in Sources */,
@@ -819,6 +845,7 @@
 				4371E89C1C190952001D1C39 /* S3DXML.swift in Sources */,
 				4371E8B41C190960001D1C39 /* PipelineGenerator.swift in Sources */,
 				4371E89B1C190952001D1C39 /* DescriptorManager.swift in Sources */,
+				4388340D1C9391170098D71A /* SubmeshGenerator.swift in Sources */,
 				4371E89F1C190952001D1C39 /* StateManager.swift in Sources */,
 				4371E8B51C190960001D1C39 /* Renderer.swift in Sources */,
 				4371E8BB1C190980001D1C39 /* Spectra.swift in Sources */,
@@ -847,6 +874,7 @@
 				4334D6E71C1FAF4E00D2DCA6 /* S3DXMLSpec.swift in Sources */,
 				43D40E201C923B9600DB35D3 /* ParserSpec.swift in Sources */,
 				4317EA291C8C36E10019B2E2 /* RandomMeshGeneratorsSpec.swift in Sources */,
+				438834111C9391E60098D71A /* BasicSubmeshGeneratorsSpec.swift in Sources */,
 				4317EA281C8C36DD0019B2E2 /* ModelIOMeshGeneratorsSpec.swift in Sources */,
 				43BDD4601C8EDEBD00AEFA9E /* ModelIOTextureGeneratorsSpec.swift in Sources */,
 				43D40E1F1C923B9600DB35D3 /* NodesSpec.swift in Sources */,

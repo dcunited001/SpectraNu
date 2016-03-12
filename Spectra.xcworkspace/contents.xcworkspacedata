@@ -147,6 +147,16 @@
          </FileRef>
       </Group>
       <Group
+         location = "container:Spectra/Submeshes"
+         name = "Submeshes">
+         <FileRef
+            location = "group:SubmeshGenerator.swift">
+         </FileRef>
+         <FileRef
+            location = "group:BasicSubmeshGenerators.swift">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:Classes"
          name = "Classes">
          <FileRef
@@ -240,6 +250,13 @@
          </FileRef>
          <FileRef
             location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/MeshGenerators/BasicTessellationMeshGeneratorsSpec.swift">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:SpectraTests/Submeshes"
+         name = "Submeshes">
+         <FileRef
+            location = "group:BasicSubmeshGeneratorsSpec.swift">
          </FileRef>
       </Group>
       <FileRef
