@@ -251,15 +251,11 @@ public class VertexDescriptorNode: SpectraParserNode {
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        
+        if let id = elem.attributes["id"] { self.id = id }
         if let parentDescriptor = elem.attributes["parent-descriptor"] {
             let parentDesc = nodes.resolve(VertexDescriptorNode.self, name: parentDescriptor)!
             self.parentDescriptor = parentDesc
         }
-        
         let attributeSelector = "vertex-attributes > vertex-attribute"
         for (idx, el) in elem.css(attributeSelector).enumerate() {
             if let ref = el.attributes["ref"] {
@@ -318,23 +314,16 @@ public class TransformNode: SpectraParserNode {
     public func parseXML(nodes: Container, elem: XMLElement) {
         // N.B. scale first, then rotate, finally translate
         // - but how can a shear operation be composed into this?
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let scale = elem.attributes["scale"] {
-            self.scale = SpectraSimd.parseFloat3(scale)
-        }
-        if let shear = elem.attributes["shear"] {
-            self.shear = SpectraSimd.parseFloat3(shear)
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let scale = elem.attributes["scale"] { self.scale = SpectraSimd.parseFloat3(scale) }
+        if let shear = elem.attributes["shear"] { self.shear = SpectraSimd.parseFloat3(shear) }
+        if let translation = elem.attributes["translation"] { self.translation = SpectraSimd.parseFloat3(translation) }
+        
         if let rotation = elem.attributes["rotation"] {
             self.rotation = SpectraSimd.parseFloat3(rotation)
         } else if let rotationDeg = elem.attributes["rotation-deg"] {
             let rotationDegrees = SpectraSimd.parseFloat3(rotationDeg)
             self.rotation = Float(M_PI / 180.0) * rotationDegrees
-        }
-        if let translation = elem.attributes["translation"] {
-            self.translation = SpectraSimd.parseFloat3(translation)
         }
     }
 
@@ -380,13 +369,8 @@ public class MeshNode: SpectraParserNode {
     }
 
     public func parseXML(container: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        
-        if let generator = elem.attributes["generator"] {
-            self.generator = generator
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let generator = elem.attributes["generator"] { self.generator = generator }
 
         let generatorArgsSelector = "generator-args > generator-arg"
         for (idx, el) in elem.css(generatorArgsSelector).enumerate() {
@@ -428,12 +412,9 @@ public class MeshGeneratorNode: SpectraParserNode {
     }
 
     public func parseXML(container: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let type = elem.attributes["type"] {
-            self.type = type
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let type = elem.attributes["type"] { self.type = type }
+        
         let genArgsSelector = "generator-args > generator-arg"
         for (idx, el) in elem.css(genArgsSelector).enumerate() {
             let name = el.attributes["name"]!
@@ -480,12 +461,8 @@ public class SubmeshNode: SpectraParserNode {
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let type = elem.attributes["type"] {
-            self.generator = type
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let generator = elem.attributes["generator"] { self.generator = generator }
         let genArgsSelector = "generator-args > generator-arg"
         for (idx, el) in elem.css(genArgsSelector).enumerate() {
             let name = el.attributes["name"]!
@@ -532,12 +509,8 @@ public class SubmeshGeneratorNode: SpectraParserNode {
     }
     
     public func parseXML(container: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let type = elem.attributes["type"] {
-            self.type = type
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let type = elem.attributes["type"] { self.type = type }
         let genArgsSelector = "generator-args > generator-arg"
         for (idx, el) in elem.css(genArgsSelector).enumerate() {
             let name = el.attributes["name"]!
@@ -1064,12 +1037,8 @@ public class TextureNode: SpectraParserNode {
     }
 
     public func parseXML(container: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let generator = elem.attributes["generator"] {
-            self.generator = generator
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let generator = elem.attributes["generator"] { self.generator = generator }
         let generatorArgsSelector = "generator-args > generator-arg"
         for (idx, el) in elem.css(generatorArgsSelector).enumerate() {
             let name = el.attributes["name"]!
@@ -1113,10 +1082,8 @@ public class TextureGeneratorNode: SpectraParserNode {
     }
 
     public func parseXML(container: Container, elem: XMLElement) {
-        if let type = elem.attributes["type"] {
-            self.type = type
-        }
-
+        if let id = elem.attributes["id"] { self.id = id }
+        if let type = elem.attributes["type"] { self.type = type }
         let texGenArgsSelector = "generator-args > generator-arg"
         for (idx, el) in elem.css(texGenArgsSelector).enumerate() {
             let name = el.attributes["name"]!
