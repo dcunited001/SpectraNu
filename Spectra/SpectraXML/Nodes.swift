@@ -54,6 +54,12 @@ public struct GeneratorArg {
         self.type = type
         self.value = value
     }
+    
+    public init(elem: XMLElement) {
+        self.name = elem.attributes["name"]!
+        self.type = elem.attributes["type"]!
+        self.value = elem.attributes["value"]!
+    }
 
     public enum GeneratorArgType: String {
         // TODO: decide on whether this is really necessary to enumerate types (it's not .. really)
@@ -69,26 +75,6 @@ public struct GeneratorArg {
         case Int4 = "Int4"
         case Mesh = "Mesh"
     }
-    
-    public static func parseXML(elem: XMLElement) -> GeneratorArg {
-        let name = elem.attributes["name"]!
-        let type = elem.attributes["type"]!
-        let value = elem.attributes["value"]!
-        
-        return GeneratorArg(name: name, type: type, value: value)
-    }
-    
-    public static func parseArgsXML(elem: XMLElement, selector: String = "generator-args > generator-arg") -> [String: GeneratorArg] {
-        var args: [String: GeneratorArg] = [:]
-        
-        for (idx, el) in elem.css(selector).enumerate() {
-            let name = el.attributes["name"]!
-            let arg = parseXML(el)
-            args[name] = arg
-        }
-        
-        return args
-    }
 
     // TODO: delete?  do i really need type checking for generator args?
 
@@ -99,10 +85,7 @@ public struct GeneratorArg {
     //        case .Float2: return SpectraSimd.parseFloat2(value) as! T
     //        case .Float3: return SpectraSimd.parseFloat3(value) as! T
     //        case .Float4: return SpectraSimd.parseFloat4(value) as! T
-    //
-    //
     //        }
-
     // TODO: how to switch based on type
     //        switch T.self {
     //        case Float.self: return Float(value) as! T
