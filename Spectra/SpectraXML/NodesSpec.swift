@@ -283,12 +283,20 @@ class SpectraXMLNodesSpec: QuickSpec {
         }
         
         describe("TextureFilter") {
+            let wrapClamp = MDLMaterialTextureWrapMode.Clamp
+            let wrapRepeat = MDLMaterialTextureWrapMode.Repeat
+            let wrapMirror = MDLMaterialTextureWrapMode.Mirror
+            let linear = MDLMaterialTextureFilterMode.Linear
+            let nearest = MDLMaterialTextureFilterMode.Nearest
+            let mipmapLinear = MDLMaterialMipMapFilterMode.Linear
+            let mipmapNearest = MDLMaterialMipMapFilterMode.Nearest
+            
             it("parses the correct defaults") {
                 let defaultFilter = spectraParser.getTextureFilter("default")!
 
-                expect(defaultFilter.rWrapMode) == MDLMaterialTextureWrapMode.Clamp
-                expect(defaultFilter.tWrapMode) == MDLMaterialTextureWrapMode.Clamp
-                expect(defaultFilter.sWrapMode) == MDLMaterialTextureWrapMode.Clamp
+                expect(defaultFilter.rWrapMode) == wrapClamp
+                expect(defaultFilter.tWrapMode) == wrapClamp
+                expect(defaultFilter.sWrapMode) == wrapClamp
             }
 
             it("parses other texture filters") {
@@ -297,26 +305,26 @@ class SpectraXMLNodesSpec: QuickSpec {
                 let filterMirror = spectraParser.getTextureFilter("filter_mirror")!
                 let filterLinear = spectraParser.getTextureFilter("filter_linear")!
                 let filterNearest = spectraParser.getTextureFilter("filter_nearest")!
+                
+                expect(filterClamp.rWrapMode) == wrapClamp
+                expect(filterClamp.tWrapMode) == wrapClamp
+                expect(filterClamp.sWrapMode) == wrapClamp
 
-                expect(filterClamp.rWrapMode) == MDLMaterialTextureWrapMode.Clamp
-                expect(filterClamp.tWrapMode) == MDLMaterialTextureWrapMode.Clamp
-                expect(filterClamp.sWrapMode) == MDLMaterialTextureWrapMode.Clamp
+                expect(filterRepeat.rWrapMode) == wrapRepeat
+                expect(filterRepeat.tWrapMode) == wrapRepeat
+                expect(filterRepeat.sWrapMode) == wrapRepeat
 
-                expect(filterRepeat.rWrapMode) == MDLMaterialTextureWrapMode.Repeat
-                expect(filterRepeat.tWrapMode) == MDLMaterialTextureWrapMode.Repeat
-                expect(filterRepeat.sWrapMode) == MDLMaterialTextureWrapMode.Repeat
+                expect(filterMirror.rWrapMode) == wrapMirror
+                expect(filterMirror.tWrapMode) == wrapMirror
+                expect(filterMirror.sWrapMode) == wrapMirror
 
-                expect(filterMirror.rWrapMode) == MDLMaterialTextureWrapMode.Mirror
-                expect(filterMirror.tWrapMode) == MDLMaterialTextureWrapMode.Mirror
-                expect(filterMirror.sWrapMode) == MDLMaterialTextureWrapMode.Mirror
+                expect(filterLinear.minFilter) == linear
+                expect(filterLinear.magFilter) == linear
+                expect(filterLinear.mipFilter) == mipmapLinear
 
-                expect(filterLinear.minFilter) == MDLMaterialTextureFilterMode.Linear
-                expect(filterLinear.magFilter) == MDLMaterialTextureFilterMode.Linear
-                expect(filterLinear.mipFilter) == MDLMaterialMipMapFilterMode.Linear
-
-                expect(filterNearest.minFilter) == MDLMaterialTextureFilterMode.Nearest
-                expect(filterNearest.magFilter) == MDLMaterialTextureFilterMode.Nearest
-                expect(filterNearest.mipFilter) == MDLMaterialMipMapFilterMode.Nearest
+                expect(filterNearest.minFilter) == nearest
+                expect(filterNearest.magFilter) == nearest
+                expect(filterNearest.mipFilter) == mipmapNearest
             }
 
             it("generates a MDLTextureFilter") {
