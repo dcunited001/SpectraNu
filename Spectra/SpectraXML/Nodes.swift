@@ -140,11 +140,10 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
         }
     }
 
-    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let url = NSURL(string: self.urlString!)
         let models = containers["model"]
         let resources = containers["resources"]
-        
         let vertexDescriptor = self.vertexDescriptor?.generate(containers, options: options)
         let bufferAllocator = resources?.resolve(MDLMeshBufferAllocator.self, name: self.bufferAllocator)
 
@@ -200,7 +199,7 @@ public class VertexAttributeNode: SpectraParserNode {
         }
     }
     
-    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let attr = MDLVertexAttribute()
         attr.name = self.name!
         attr.format = self.format!
@@ -257,7 +256,7 @@ public class VertexDescriptorNode: SpectraParserNode {
         }
     }
     
-    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         var desc = parentDescriptor?.generate(containers, options: options) ?? MDLVertexDescriptor()
         
         for attr in self.attributes {
@@ -317,7 +316,7 @@ public class TransformNode: SpectraParserNode {
         }
     }
 
-    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let transform = MDLTransform()
         transform.scale = self.scale
         transform.shear = self.shear
@@ -369,7 +368,7 @@ public class MeshNode: SpectraParserNode {
         self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
-    public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let models = containers["models"]!
         let meshGen = models.resolve(MeshGenerator.self, name: self.generator)!
         let mesh = meshGen.generate(models, args: self.args)
@@ -415,8 +414,8 @@ public class MeshGeneratorNode: SpectraParserNode {
 //        meshGen.processArgs(container, args: self.args)
 //        return meshGen
 //    }
-    
-    public func generate(containers: [String : Container], options: [String : Any]) -> MeshGenerator {
+
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         // TODO: add to a generators container instead?
         let models = containers["models"]!
         let meshGen = models.resolve(MeshGenerator.self, name: self.type)!
@@ -456,7 +455,7 @@ public class SubmeshNode: SpectraParserNode {
         self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
-    public func generate(containers: [String : Container], options: [String : Any]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let models = containers["models"]!
         let submeshGen = models.resolve(SubmeshGenerator.self, name: self.generator)!
         let submesh = submeshGen.generate(models, args: self.args)
@@ -487,8 +486,12 @@ public class SubmeshGeneratorNode: SpectraParserNode {
     public var type: String = "random_balanced_graph_submesh_gen"
     public var args: [String: GeneratorArg] = [:]
     
-    public required init() {
+    init() {
         
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
     }
     
     public func parseXML(container: Container, elem: XMLElement) {
@@ -498,7 +501,7 @@ public class SubmeshGeneratorNode: SpectraParserNode {
         self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
-    public func generate(containers: [String : Container], options: [String : Any]) -> SubmeshGenerator {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         // TODO: add to a generators container instead?
         let models = containers["models"]!
         let meshGen = models.resolve(SubmeshGenerator.self, name: self.type)!
@@ -588,7 +591,7 @@ public class PhysicalLensNode: SpectraParserNode {
         if let val = self.focusDistance { camera.focusDistance = val }
     }
     
-    public func generate(containers: [String : Container] = [:], options: [String : Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         return self.copy()
     }
 
@@ -662,7 +665,7 @@ public class PhysicalImagingSurfaceNode: SpectraParserNode {
         if let val = self.exposureCompression {camera.exposureCompression = val }
     }
     
-    public func generate(containers: [String : Container] = [:], options: [String : Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         return self.copy()
     }
 
@@ -747,7 +750,7 @@ public class CameraNode: SpectraParserNode {
         if let lookFromAttr = elem.attributes["look-from"] { self.lookFrom = SpectraSimd.parseFloat3(lookFromAttr) }
     }
     
-    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let cam = MDLCamera()
         
         cam.nearVisibilityDistance = self.nearVisibilityDistance
@@ -837,7 +840,7 @@ public class StereoscopicCameraNode: SpectraParserNode {
         self.lookFrom = cam.lookFrom
     }
 
-    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let cam = MDLStereoscopicCamera()
         
         cam.nearVisibilityDistance = self.nearVisibilityDistance
@@ -907,7 +910,7 @@ public class TextureNode: SpectraParserNode {
         self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
-    public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let models = containers["models"]!
         let textureGen = models.resolve(TextureGenerator.self, name: self.generator)!
         let texture = textureGen.generate(models, args: self.args)
@@ -951,7 +954,7 @@ public class TextureGeneratorNode: SpectraParserNode {
         self.args = GeneratorArg.parseGenArgs(elem, selector: genArgsSelector)
     }
     
-    public func generate(containers: [String: Container], options: [String: Any]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         // TODO: add to a generators container instead?
         let models = containers["models"]!
         let texGen = models.resolve(TextureGenerator.self, name: self.type)!
@@ -1016,7 +1019,7 @@ public class TextureFilterNode: SpectraParserNode {
         }
     }
 
-    public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLType {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let filter = MDLTextureFilter()
 
         filter.rWrapMode = self.rWrapMode
@@ -1081,7 +1084,7 @@ public class TextureSamplerNode: SpectraParserNode {
         if let transform = elem.attributes["transform"] { self.transform = transform }
     }
     
-    public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLTextureSampler {
+    public func generate(containers: [String: Container] = [:], options: [String: Any] = [:], injector: GeneratorClosure? = nil) -> MDLType {
         let models = containers["model"]!
         
         let sampler = MDLTextureSampler()

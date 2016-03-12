@@ -29,7 +29,7 @@ import ModelIO
 // ...
 public typealias GeneratorClosure = ((containers: [String: Container], options: [String: Any]?) ->
     (containers: [String: Container], options: [String: Any]?))
-public typealias RegisterClosure = (containers: [String: Container], options: [String: Any]) -> (containers: [String: Container], options: [String: Any]?)
+public typealias RegisterClosure = (containers: [String: Container], options: [String: Any]?) -> (containers: [String: Container], options: [String: Any]?)
 
 public protocol SpectraParserNode {
     typealias NodeType
@@ -39,7 +39,9 @@ public protocol SpectraParserNode {
     // requires init() for copy()
     init(nodes: Container, elem: XMLElement)
     func parseXML(nodes: Container, elem: XMLElement)
-    func generate(containers: [String: Container], options: [String: Any]) -> MDLType
+    func generate(containers: [String: Container],
+        options: [String: Any],
+        injector: GeneratorClosure?) -> MDLType
     func register(nodes: Container, objectScope: ObjectScope)
     func copy() -> NodeType
 }
