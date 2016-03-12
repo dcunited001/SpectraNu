@@ -131,26 +131,19 @@ public class AssetNode: SpectraParserNode { // TODO: implement SpectraParserNode
     public var preserveTopology: Bool = false
 
     public func parseXML(nodes: Container, elem: XMLElement) {
+        if let urlString = elem.attributes["url"] { self.urlString = urlString }
+        if let resource = elem.attributes["resource"] { self.resource = resource }
+        if let bufferAllocId = elem.attributes["buffer-allocator"] { self.bufferAllocator = bufferAllocId }
         
-        if let urlString = elem.attributes["url"] {
-            self.urlString = urlString
-        }
-        if let resource = elem.attributes["resource"] {
-            self.resource = resource
-        }
-        
-        if let vertexDescKey = elem.attributes["vertex-descriptor"] {
-            self.vertexDescriptor = nodes.resolve(VertexDescriptorNode.self, name: vertexDescKey)
+        if let vertexDescId = elem.attributes["vertex-descriptor"] {
+            self.vertexDescriptor = nodes.resolve(VertexDescriptorNode.self, name: vertexDescId)
         } // TODO: else if contains a vertexDescriptor node
           // TODO: else set to default vertexDescriptor?
-        if let bufferAllocKey = elem.attributes["buffer-allocator"] {
-            self.bufferAllocator = bufferAllocKey
-        }
+
         if let preserveTopology = elem.attributes["preserve-topology"] {
             let valAsBool = NSString(string: preserveTopology).boolValue
             self.preserveTopology = valAsBool
         }
-        
     }
 
     public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
@@ -195,21 +188,14 @@ public class VertexAttributeNode: SpectraParserNode {
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let name = elem.attributes["name"] {
-            self.name = name
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let name = elem.attributes["name"] { self.name = name }
+        if let offset = elem.attributes["offset"] { self.offset = Int(offset)! }
+        if let bufferIndex = elem.attributes["buffer-index"] { self.bufferIndex = Int(bufferIndex)! }
+        
         if let format = elem.attributes["format"] {
             let enumVal = nodes.resolve(SpectraEnum.self, name: "mdlVertexFormat")!.getValue(format)
             self.format = MDLVertexFormat(rawValue: enumVal)!
-        }
-        if let offset = elem.attributes["offset"] {
-            self.offset = Int(offset)!
-        }
-        if let bufferIndex = elem.attributes["buffer-index"] {
-            self.bufferIndex = Int(bufferIndex)!
         }
         if let initializationValue = elem.attributes["initialization-value"] {
             self.initializationValue = SpectraSimd.parseFloat4(initializationValue)
@@ -581,92 +567,30 @@ public class PhysicalLensNode: SpectraParserNode {
     public var shutterOpenInterval: NSTimeInterval = (0.5 * (1.0/60.0))
 
     public func parseXML(nodes: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let worldToMetersConversionScale = elem.attributes["world-to-meters-conversion-scale"] {
-            self.worldToMetersConversionScale = Float(worldToMetersConversionScale)!
-        }
-
-        if let barrelDistortion = elem.attributes["barrel-distortion"] {
-            self.barrelDistortion = Float(barrelDistortion)!
-        }
-
-        if let fisheyeDistortion = elem.attributes["fisheye-distortion"] {
-            self.fisheyeDistortion = Float(fisheyeDistortion)!
-        }
-
-        if let opticalVignetting = elem.attributes["optical-vignetting"] {
-            self.opticalVignetting = Float(opticalVignetting)!
-        }
-
-        if let chromaticAberration = elem.attributes["chromatic-aberration"] {
-            self.chromaticAberration = Float(chromaticAberration)!
-        }
-
-        if let focalLength = elem.attributes["focal-length"] {
-            self.focalLength = Float(focalLength)!
-        }
-
-        if let fStop = elem.attributes["f-stop"] {
-            self.fStop = Float(fStop)!
-        }
-
-        if let apertureBladeCount = elem.attributes["aperture-blade-count"] {
-            self.apertureBladeCount = Int(apertureBladeCount)!
-        }
-
-        if let maximumCircleOfConfusion = elem.attributes["maximum-circle-of-confusion"] {
-            self.maximumCircleOfConfusion = Float(maximumCircleOfConfusion)!
-        }
-
-        if let focusDistance = elem.attributes["focus-distance"] {
-            self.focusDistance = Float(focusDistance)!
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let val = elem.attributes["world-to-meters-conversion-scale"] { self.worldToMetersConversionScale = Float(val)! }
+        if let val = elem.attributes["barrel-distortion"] { self.barrelDistortion = Float(val)! }
+        if let val = elem.attributes["fisheye-distortion"] { self.fisheyeDistortion = Float(val)! }
+        if let val = elem.attributes["optical-vignetting"] { self.opticalVignetting = Float(val)! }
+        if let val = elem.attributes["chromatic-aberration"] { self.chromaticAberration = Float(val)! }
+        if let val = elem.attributes["focal-length"] { self.focalLength = Float(val)! }
+        if let val = elem.attributes["f-stop"] { self.fStop = Float(val)! }
+        if let val = elem.attributes["aperture-blade-count"] { self.apertureBladeCount = Int(val)! }
+        if let val = elem.attributes["maximum-circle-of-confusion"] { self.maximumCircleOfConfusion = Float(val)! }
+        if let val = elem.attributes["focus-distance"] { self.focusDistance = Float(val)! }
     }
 
     public func applyToCamera(camera: MDLCamera) {
-
-        if let val = self.worldToMetersConversionScale {
-            camera.worldToMetersConversionScale = val
-        }
-
-        if let val = self.barrelDistortion {
-            camera.barrelDistortion = val
-        }
-
-        if let val = self.fisheyeDistortion {
-            camera.fisheyeDistortion = val
-        }
-
-        if let val = self.opticalVignetting {
-            camera.opticalVignetting = val
-        }
-
-        if let val = self.chromaticAberration {
-            camera.chromaticAberration = val
-        }
-
-        if let val = self.focalLength {
-            camera.focalLength = val
-        }
-
-        if let val = self.fStop {
-            camera.fStop = val
-        }
-
-        if let val = self.apertureBladeCount {
-            camera.apertureBladeCount = val
-        }
-
-        if let val = self.maximumCircleOfConfusion {
-            camera.maximumCircleOfConfusion = val
-        }
-
-        if let val = self.focusDistance {
-            camera.focusDistance = val
-        }
-
+        if let val = self.worldToMetersConversionScale { camera.worldToMetersConversionScale = val }
+        if let val = self.barrelDistortion { camera.barrelDistortion = val }
+        if let val = self.fisheyeDistortion { camera.fisheyeDistortion = val }
+        if let val = self.opticalVignetting { camera.opticalVignetting = val }
+        if let val = self.chromaticAberration { camera.chromaticAberration = val }
+        if let val = self.focalLength { camera.focalLength = val }
+        if let val = self.fStop { camera.fStop = val }
+        if let val = self.apertureBladeCount { camera.apertureBladeCount = val }
+        if let val = self.maximumCircleOfConfusion { camera.maximumCircleOfConfusion = val }
+        if let val = self.focusDistance { camera.focusDistance = val }
     }
     
     public func generate(containers: [String : Container] = [:], options: [String : Any] = [:]) -> MDLType {
@@ -719,69 +643,24 @@ public class PhysicalImagingSurfaceNode: SpectraParserNode {
     }
 
     public func parseXML(nodes: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        
-        if let sensorVerticalAperture = elem.attributes["sensor-vertical-aperture"] {
-            self.sensorVerticalAperture = Float(sensorVerticalAperture)
-        }
-
-        if let sensorAspect = elem.attributes["sensor-aspect"] {
-            self.sensorAspect = Float(sensorAspect)
-        }
-
-        if let sensorEnlargement = elem.attributes["sensor-enlargement"] {
-            self.sensorEnlargement = SpectraSimd.parseFloat2(sensorEnlargement)
-        }
-
-        if let sensorShift = elem.attributes["sensor-shift"] {
-            self.sensorShift = SpectraSimd.parseFloat2(sensorShift)
-        }
-
-        if let flash = elem.attributes["flash"] {
-            self.flash = SpectraSimd.parseFloat3(flash)
-        }
-
-        if let exposure = elem.attributes["exposure"] {
-            self.exposure = SpectraSimd.parseFloat3(exposure)
-        }
-
-        if let exposureCompression = elem.attributes["exposure-compression"] {
-            self.exposureCompression = SpectraSimd.parseFloat2(exposureCompression)
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let val = elem.attributes["sensor-vertical-aperture"] { self.sensorVerticalAperture = Float(val) }
+        if let val = elem.attributes["sensor-aspect"] { self.sensorAspect = Float(val) }
+        if let val = elem.attributes["sensor-enlargement"] { self.sensorEnlargement = SpectraSimd.parseFloat2(val) }
+        if let val = elem.attributes["sensor-shift"] { self.sensorShift = SpectraSimd.parseFloat2(val) }
+        if let val = elem.attributes["flash"] { self.flash = SpectraSimd.parseFloat3(val) }
+        if let val = elem.attributes["exposure"] { self.exposure = SpectraSimd.parseFloat3(val) }
+        if let val = elem.attributes["exposure-compression"] { self.exposureCompression = SpectraSimd.parseFloat2(val) }
     }
 
     public func applyToCamera(camera: MDLCamera) {
-
-        if let val = self.sensorVerticalAperture {
-            camera.sensorVerticalAperture = val
-        }
-
-        if let val = self.sensorAspect {
-            camera.sensorAspect = val
-        }
-
-        if let val = self.sensorEnlargement {
-            camera.sensorEnlargement = val
-        }
-
-        if let val = self.sensorShift {
-            camera.sensorShift = val
-        }
-
-        if let val = self.flash {
-            camera.flash = val
-        }
-
-        if let val = self.exposure {
-            camera.exposure = val
-        }
-
-        if let val = self.exposureCompression {
-            camera.exposureCompression = val
-        }
-
+        if let val = self.sensorVerticalAperture { camera.sensorVerticalAperture = val }
+        if let val = self.sensorAspect { camera.sensorAspect = val }
+        if let val = self.sensorEnlargement {camera.sensorEnlargement = val }
+        if let val = self.sensorShift {camera.sensorShift = val }
+        if let val = self.flash {camera.flash = val }
+        if let val = self.exposure {camera.exposure = val }
+        if let val = self.exposureCompression {camera.exposureCompression = val }
     }
     
     public func generate(containers: [String : Container] = [:], options: [String : Any] = [:]) -> MDLType {
@@ -822,20 +701,10 @@ public class CameraNode: SpectraParserNode {
     }
     
     public func parseXML(nodes: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let nearVisibility = elem.attributes["near-visibility-distance"] {
-            self.nearVisibilityDistance = Float(nearVisibility)!
-        }
-        if let farVisibility = elem.attributes["far-visibility-distance"] {
-            self.farVisibilityDistance = Float(farVisibility)!
-        }
-        if let fieldOfView = elem.attributes["field-of-view"] {
-            self.fieldOfView = Float(fieldOfView)!
-        }
-        
-        // TODO: parse/apply physical lens
+        if let id = elem.attributes["id"] { self.id = id }
+        if let val = elem.attributes["near-visibility-distance"] { self.nearVisibilityDistance = Float(val)! }
+        if let val = elem.attributes["far-visibility-distance"] { self.farVisibilityDistance = Float(val)! }
+        if let val = elem.attributes["field-of-view"] { self.fieldOfView = Float(val)! }
         
         let lensSelector = SpectraNodeType.PhysicalLens.rawValue
         if let lensTag = elem.firstChild(tag: lensSelector) {
@@ -845,8 +714,8 @@ public class CameraNode: SpectraParserNode {
             } else {
                 let lens = PhysicalLensNode()
                 lens.parseXML(nodes, elem: lensTag)
-                if let lensKey = lensTag["key"] {
-                    nodes.register(PhysicalLensNode.self, name: lensKey) { _ in return
+                if let lensId = lensTag["id"] {
+                    nodes.register(PhysicalLensNode.self, name: lensId) { _ in return
                         lens.copy() as! PhysicalLensNode
                     }
                 }
@@ -862,8 +731,8 @@ public class CameraNode: SpectraParserNode {
             } else {
                 let imgSurface = PhysicalImagingSurfaceNode()
                 imgSurface.parseXML(nodes, elem: imagingTag)
-                if let imagingSurfaceKey = imagingTag["key"] {
-                    nodes.register(PhysicalImagingSurfaceNode.self, name: imagingTag["key"]!) { _ in
+                if let imagingSurfaceId = imagingTag["id"] {
+                    nodes.register(PhysicalImagingSurfaceNode.self, name: imagingTag["id"]!) { _ in
                         return imgSurface.copy() as! PhysicalImagingSurfaceNode
                     }
                 }
@@ -871,12 +740,8 @@ public class CameraNode: SpectraParserNode {
             }
         }
 
-        if let lookAtAttr = elem.attributes["look-at"] {
-            self.lookAt = SpectraSimd.parseFloat3(lookAtAttr)
-        }
-        if let lookFromAttr = elem.attributes["look-from"] {
-            self.lookFrom = SpectraSimd.parseFloat3(lookFromAttr)
-        }
+        if let lookAtAttr = elem.attributes["look-at"] { self.lookAt = SpectraSimd.parseFloat3(lookAtAttr) }
+        if let lookFromAttr = elem.attributes["look-from"] { self.lookFrom = SpectraSimd.parseFloat3(lookFromAttr) }
     }
     
     public func generate(containers: [String: Container] = [:], options: [String: Any] = [:]) -> MDLType {
@@ -944,24 +809,12 @@ public class StereoscopicCameraNode: SpectraParserNode {
     public func parseXML(nodes: Container, elem: XMLElement) {
         let cam = CameraNode()
         cam.parseXML(nodes, elem: elem)
-        
         let stereoCam = applyCameraToStereoscopic(cam)
-
-        if let interPupillaryDistance = elem.attributes["inter-pupillary-distance"] {
-            self.interPupillaryDistance = Float(interPupillaryDistance)!
-        }
-
-        if let leftVergence = elem.attributes["left-vergence"] {
-            self.leftVergence = Float(leftVergence)!
-        }
-
-        if let rightVergence = elem.attributes["right-vergence"] {
-            self.rightVergence = Float(rightVergence)!
-        }
-
-        if let overlap = elem.attributes["overlap"] {
-            self.overlap = Float(overlap)!
-        }
+        
+        if let interPupillaryDistance = elem.attributes["inter-pupillary-distance"] { self.interPupillaryDistance = Float(interPupillaryDistance)! }
+        if let leftVergence = elem.attributes["left-vergence"] { self.leftVergence = Float(leftVergence)! }
+        if let rightVergence = elem.attributes["right-vergence"] { self.rightVergence = Float(rightVergence)! }
+        if let overlap = elem.attributes["overlap"] { self.overlap = Float(overlap)! }
     }
  
     public func applyCameraToStereoscopic(cam: CameraNode) {
@@ -1053,7 +906,7 @@ public class TextureNode: SpectraParserNode {
         let textureGen = models.resolve(TextureGenerator.self, name: self.generator)!
         let texture = textureGen.generate(models, args: self.args)
         // TODO: register texture?
-//        container.register(MDLTexture.self, name: key!) { _ in
+//        container.register(MDLTexture.self, name: id!) { _ in
 //            // don't copy texture
 //            return texture
 //        }
@@ -1127,9 +980,7 @@ public class TextureFilterNode: SpectraParserNode {
     }
 
     public func parseXML(nodes: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
+        if let id = elem.attributes["id"] { self.id = id }
         if let rWrap = elem.attributes["r-wrap-mode"] {
             let enumVal = nodes.resolve(SpectraEnum.self, name: "mdlMaterialTextureWrapMode")!.getValue(rWrap)
             self.rWrapMode = MDLMaterialTextureWrapMode(rawValue: enumVal)!
@@ -1211,18 +1062,10 @@ public class TextureSamplerNode: SpectraParserNode {
     //   - can be totally self-contained
     
     public func parseXML(nodes: Container, elem: XMLElement) {
-        if let id = elem.attributes["id"] {
-            self.id = id
-        }
-        if let texture = elem.attributes["texture"] {
-            self.texture = texture
-        }
-        if let hardwareFilter = elem.attributes["hardware-filter"] {
-            self.hardwareFilter = hardwareFilter
-        }
-        if let transform = elem.attributes["transform"] {
-            self.transform = transform
-        }
+        if let id = elem.attributes["id"] { self.id = id }
+        if let texture = elem.attributes["texture"] { self.texture = texture }
+        if let hardwareFilter = elem.attributes["hardware-filter"] { self.hardwareFilter = hardwareFilter }
+        if let transform = elem.attributes["transform"] { self.transform = transform }
     }
     
     public func generate(containers: [String: Container], options: [String: Any] = [:]) -> MDLTextureSampler {
