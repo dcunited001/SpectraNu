@@ -1,23 +1,37 @@
-////
-////  ModelIOTextureGenerators.swift
-////  
-////
-////  Created by David Conner on 3/8/16.
-////
-////
 //
-//@testable import Spectra
-//import Foundation
-//import Quick
-//import Nimble
-//import ModelIO
-//import Swinject
+//  ModelIOTextureGenerators.swift
+//  
 //
-//// TODO: test overriding args in generate()
+//  Created by David Conner on 3/8/16.
 //
-//class ModelIOTextureGeneratorsSpec: QuickSpec {
-//    
-//    override func spec() {
+//
+
+@testable import Spectra
+import Foundation
+import Quick
+import Nimble
+import ModelIO
+import Swinject
+
+class ModelIOTextureGeneratorsSharedExamples: QuickConfiguration {
+    override class func configure(configuration: Configuration) {
+        sharedExamples("A Model I/O Texture Generator") {
+            it("foos") {
+                
+            }
+        }
+    }
+}
+
+class ModelIOTextureGeneratorsSpec: QuickSpec {
+
+    override func spec() {
+        describe("must foo") {
+            it("to bar") {
+                
+            }
+        }
+        
 //        let parser = Container()
 //        
 //        let spectraEnumData = SpectraXSD.readXSD("SpectraEnums")
@@ -105,6 +119,6 @@
 //        // TODO: describe("color_swatch_texture") { }
 //        // TODO: describe("normal_map_texture") { }
 //        // TODO: describe("sky_cube_texture") { }
-//        
-//    }
-//}
+        
+    }
+}

@@ -1,25 +1,37 @@
-////
-////  MDLMeshGeneratorSpecs.swift
-////  
-////
-////  Created by David Conner on 3/4/16.
-////
-////
 //
-//@testable import Spectra
-//import Quick
-//import Nimble
-//import Swinject
-//import MetalKit
-//import simd
+//  MDLMeshGeneratorSpecs.swift
+//  
 //
-//class ModelIOMeshGeneratorsSpec: QuickSpec {
-//    
-//    func containerGet<T>(container: Container, key: String) -> T? {
-//        return container.resolve(T.self, name: key)
-//    }
-//    
-//    override func spec() {
+//  Created by David Conner on 3/4/16.
+//
+//
+
+@testable import Spectra
+import Quick
+import Nimble
+import Swinject
+import MetalKit
+import simd
+
+class ModelIOMeshGeneratorsSharedExamples: QuickConfiguration {
+    override class func configure(configuration: Configuration) {
+        sharedExamples("A Model I/O Mesh Generator") {
+            it("foos") {
+                
+            }
+        }
+    }
+}
+
+class ModelIOMeshGeneratorsSpec: QuickSpec {
+    
+    override func spec() {
+        describe("must foo") {
+            it("to bar") {
+                
+            }
+        }
+
 //        let parser = Container()
 //        
 //        let spectraEnumData = SpectraXSD.readXSD("SpectraEnums")

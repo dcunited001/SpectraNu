@@ -268,6 +268,9 @@
       <FileRef
          location = "group:SpectraXMLSpec.swift">
       </FileRef>
+      <FileRef
+         location = "group:SpectraSharedExamples.swift">
+      </FileRef>
    </Group>
    <Group
       location = "container:SpectraExampleResources"
