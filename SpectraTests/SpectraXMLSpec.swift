@@ -95,50 +95,6 @@ class SpectraXMLSpec: QuickSpec {
 //                
 //            }
 //        }
-//        
-//        describe("texture") {
-//            it("can init a texture with nil data to be written to later") {
-//                // TODO: figure out how to best splat pixel data into a NSData? array
-//                // - NSData generation can be deferred - `pixelData: nil` is allowed
-//                //   - in this case, can i write to the NSData? object from texelDataWithTopLeftOrigin() ???
-//                //   - if so, this is useful.  if not, it's not and i have no idea how to write to it.
-//            }
-//            
-//            it("can init a texture, specifying a spectra texture data generator for deferred execution") {
-//                
-//            }
-//            
-//            it("can create the various types of MDLTexture subclasses") {
-//                // MDLCheckerboardTexture
-//                // MDLColorSwatchTexture
-//                // MDLNoiseTexture
-//                // MDLNormalMapTexture
-//                // MDLSkyCubeTexture
-//                // MDLURLTexture
-//            }
-//            
-//            it("can load a texture from a bundle resource") {
-//                
-//            }
-//            
-//            it("can load a texture from a named bundle resource") {
-//                
-//            }
-//            
-//            it("can load a texture cube from a bundle resource") {
-//                
-//            }
-//            
-//            it("can load a texture cube from a named bundle resource") {
-//                
-//            }
-//            
-//            it("can load a texture from a url") {
-//                
-//            }
-//        }
-//        
-
 //        describe("light") {
 //            // TODO: finish filling out attributes
 //            // - MDLLightProbe
