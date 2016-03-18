@@ -14,6 +14,8 @@ import Swinject
 public protocol MeshGenerator {
     init(container: Container, args: [String: GeneratorArg])
     
+    // every mesh generator should create the vertices for the mesh, with position as a minimum attribute
+    // - and at least one submesh, representing the triangle (or other geometric primitive)
     func generate(container: Container, args: [String: GeneratorArg]) -> MDLMesh
     func processArgs(container: Container, args: [String: GeneratorArg])
     func copy(container: Container) -> MeshGenerator
