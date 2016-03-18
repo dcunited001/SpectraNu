@@ -193,7 +193,9 @@ public class SpectraParser {
                 case .Texture:
                     let node = TextureNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
-//                case .TextureGenerator: break
+                case .TextureGenerator:
+                    let node = TextureGeneratorNode(nodes: nodes, elem: child)
+                    if (node.id != nil) { node.register(nodes) }
                 case .TextureFilter:
                     let node = TextureFilterNode(nodes: nodes, elem: child)
                     if (node.id != nil) { node.register(nodes) }
