@@ -42,6 +42,27 @@ public class S3DXML {
     }
 }
 
+// TODO: convert to nodes?
+public enum S3DNodeType: String {
+    case VertexFunction = "vertex-function"
+    case FragmentFunction = "fragment-function"
+    case ComputeFunction = "compute-function"
+    case ClearColor = "clear-color"
+    case VertexDescriptor = "vertex-descriptor"
+    case VertexAttributeDescriptor = "vertex-attribute-descriptor"
+    case VertexBufferLayoutDescriptor = "vertex-buffer-layout-descriptor"
+    case TextureDescriptor = "texture-descriptor"
+    case SamplerDescriptor = "sampler-descriptor"
+    case StencilDescriptor = "stencil-descriptor"
+    case DepthStencilDescriptor = "depth-stencil-descriptor"
+    case RenderPipelineDescriptor = "render-pipeline-descriptor"
+    case ComputePipelineDescriptor = "compute-pipeline-descriptor"
+    case RenderPassColorAttachmentDescriptor = "render-pass-color-attachment-descriptor"
+    case RenderPassDepthAttachmentDescriptor = "render-pass-depth-attachment-descriptor"
+    case RenderPassStencilAttachmentDescriptor = "render-pass-stencil-attachment-descriptor"
+    case RenderPassDescriptor = "render-pass-descriptor"
+}
+
 public protocol S3DXMLNodeParser {
     typealias NodeType
     
