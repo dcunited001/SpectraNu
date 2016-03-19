@@ -116,7 +116,7 @@ public class S3DXMLMTLVertexAttributeDescriptorNode: S3DXMLNodeParser {
         let vertexAttrDesc = MTLVertexAttributeDescriptor()
         
         if let format = elem.attributes["format"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlVertexFormat")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlVertexFormat")!
             let enumVal = mtlEnum.getValue(format)
             vertexAttrDesc.format = MTLVertexFormat(rawValue: enumVal)!
         }
@@ -141,7 +141,7 @@ public class S3DXMLMTLVertexBufferLayoutDescriptorNode: S3DXMLNodeParser {
         bufferLayoutDesc.stride = Int(stride)!
         
         if let stepFunction = elem.attributes["step-function"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlVertexStepFunction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlVertexStepFunction")!
             let enumVal = mtlEnum.getValue(stepFunction)
             bufferLayoutDesc.stepFunction = MTLVertexStepFunction(rawValue: enumVal)!
         }
@@ -160,12 +160,12 @@ public class S3DXMLMTLTextureDescriptorNode: S3DXMLNodeParser {
         
         let texDesc = MTLTextureDescriptor()
         if let textureType = elem.attributes["texture-type"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlTextureType")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlTextureType")!
             let enumVal = mtlEnum.getValue(textureType)
             texDesc.textureType = MTLTextureType(rawValue: enumVal)!
         }
         if let pixelFormat = elem.attributes["pixel-format"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlPixelFormat")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlPixelFormat")!
             let enumVal = mtlEnum.getValue(pixelFormat)
             texDesc.pixelFormat = MTLPixelFormat(rawValue: enumVal)!
         }
@@ -189,18 +189,18 @@ public class S3DXMLMTLTextureDescriptorNode: S3DXMLNodeParser {
         }
         //TODO: resource options is an option set type, haven't decided on XML specification
         if let cpuCacheMode = elem.attributes["cpu-cache-mode"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlCpuCacheMode")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlCpuCacheMode")!
             let enumVal = mtlEnum.getValue(cpuCacheMode)
             texDesc.cpuCacheMode = MTLCPUCacheMode(rawValue: enumVal)!
         }
         if let storageMode = elem.attributes["storage-mode"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlStorageMode")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStorageMode")!
             let enumVal = mtlEnum.getValue(storageMode)
             texDesc.storageMode = MTLStorageMode(rawValue: enumVal)!
         }
         //TODO: usage is an option set type, haven't decided on XML specification
 //        if let usage = elem.attributes["usage"] {
-//            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlTextureUsage")!
+//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlTextureUsage")!
 //            let enumVal = mtlEnum.getValue(usage)
 //            texDesc.usage = MTLTextureUsage(rawValue: enumVal)
 //        }
@@ -219,17 +219,17 @@ public class S3DXMLMTLSamplerDescriptorNode: S3DXMLNodeParser {
             samplerDesc.label = label
         }
         if let minFilter = elem.attributes["min-filter"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlSamplerMinMagFilter")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerMinMagFilter")!
             let enumVal = mtlEnum.getValue(minFilter)
             samplerDesc.minFilter = MTLSamplerMinMagFilter(rawValue: enumVal)!
         }
         if let magFilter = elem.attributes["mag-filter"]{
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlSamplerMinMagFilter")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerMinMagFilter")!
             let enumVal = mtlEnum.getValue(magFilter)
             samplerDesc.magFilter = MTLSamplerMinMagFilter(rawValue: enumVal)!
         }
         if let mipFilter = elem.attributes["mip-filter"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlSamplerMipFilter")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerMipFilter")!
             let enumVal = mtlEnum.getValue(mipFilter)
             samplerDesc.mipFilter = MTLSamplerMipFilter(rawValue: enumVal)!
         }
@@ -237,17 +237,17 @@ public class S3DXMLMTLSamplerDescriptorNode: S3DXMLNodeParser {
             samplerDesc.maxAnisotropy = Int(maxAnisotropy)!
         }
         if let sAddress = elem.attributes["s-address-mode"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlSamplerAddressMode")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
             let enumVal = mtlEnum.getValue(sAddress)
             samplerDesc.sAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
         }
         if let rAddress = elem.attributes["r-address-mode"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlSamplerAddressMode")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
             let enumVal = mtlEnum.getValue(rAddress)
             samplerDesc.rAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
         }
         if let tAddress = elem.attributes["t-address-mode"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlSamplerAddressMode")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
             let enumVal = mtlEnum.getValue(tAddress)
             samplerDesc.tAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
         }
@@ -266,7 +266,7 @@ public class S3DXMLMTLSamplerDescriptorNode: S3DXMLNodeParser {
         }
         #endif
         if let compareFn = elem.attributes["compare-function"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlCompareFunction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlCompareFunction")!
             let enumVal = mtlEnum.getValue(compareFn)
             samplerDesc.compareFunction = MTLCompareFunction(rawValue: enumVal)!
         }
@@ -282,22 +282,22 @@ public class S3DXMLMTLStencilDescriptorNode: S3DXMLNodeParser {
         let stencilDesc = MTLStencilDescriptor()
         
         if let stencilCompare = elem.attributes["stencil-compare-function"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlCompareFunction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlCompareFunction")!
             let enumVal = mtlEnum.getValue(stencilCompare)
             stencilDesc.stencilCompareFunction = MTLCompareFunction(rawValue: enumVal)!
         }
         if let stencilFailureOp = elem.attributes["stencil-failure-operation"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlStencilOperation")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStencilOperation")!
             let enumVal = mtlEnum.getValue(stencilFailureOp)
             stencilDesc.stencilFailureOperation = MTLStencilOperation(rawValue: enumVal)!
         }
         if let depthFailureOp = elem.attributes["depth-failure-operation"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlStencilOperation")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStencilOperation")!
             let enumVal = mtlEnum.getValue(depthFailureOp)
             stencilDesc.depthFailureOperation = MTLStencilOperation(rawValue: enumVal)!
         }
         if let depthStencilPassOp = elem.attributes["depth-stencil-pass-operation"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlStencilOperation")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStencilOperation")!
             let enumVal = mtlEnum.getValue(depthStencilPassOp)
             stencilDesc.depthStencilPassOperation = MTLStencilOperation(rawValue: enumVal)!
         }
@@ -322,7 +322,7 @@ public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
             depthDesc.label = label
         }
         if let depthCompare = elem.attributes["depth-compare-function"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlCompareFunction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlCompareFunction")!
             let enumVal = mtlEnum.getValue(depthCompare)
             depthDesc.depthCompareFunction = MTLCompareFunction(rawValue: enumVal)!
         }
@@ -373,7 +373,7 @@ public class S3DXMLMTLColorAttachmentDescriptorNode: S3DXMLNodeParser {
         let desc = MTLRenderPipelineColorAttachmentDescriptor()
         
         if let pixelFormat = elem.attributes["pixel-format"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlPixelFormat")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlPixelFormat")!
             let enumVal = mtlEnum.getValue(pixelFormat)
             desc.pixelFormat = MTLPixelFormat(rawValue: enumVal)!
         }
@@ -381,32 +381,32 @@ public class S3DXMLMTLColorAttachmentDescriptorNode: S3DXMLNodeParser {
             desc.blendingEnabled = true
         }
         if let sourceRgbBlendFactor = elem.attributes["source-rgb-blend-factor"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlBlendFactor")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendFactor")!
             let enumVal = mtlEnum.getValue(sourceRgbBlendFactor)
             desc.sourceRGBBlendFactor = MTLBlendFactor(rawValue: enumVal)!
         }
         if let destRgbBlendFactor = elem.attributes["destination-rgb-blend-factor"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlBlendFactor")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendFactor")!
             let enumVal = mtlEnum.getValue(destRgbBlendFactor)
             desc.destinationRGBBlendFactor = MTLBlendFactor(rawValue: enumVal)!
         }
         if let rgbBlendOp = elem.attributes["rgb-blend-operation"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlBlendOperation")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendOperation")!
             let enumVal = mtlEnum.getValue(rgbBlendOp)
             desc.rgbBlendOperation = MTLBlendOperation(rawValue: enumVal)!
         }
         if let sourceAlphaBlendFactor = elem.attributes["source-alpha-blend-factor"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlBlendFactor")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendFactor")!
             let enumVal = mtlEnum.getValue(sourceAlphaBlendFactor)
             desc.sourceAlphaBlendFactor = MTLBlendFactor(rawValue: enumVal)!
         }
         if let destAlphaBlendFactor = elem.attributes["destination-alpha-blend-factor"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlBlendFactor")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendFactor")!
             let enumVal = mtlEnum.getValue(destAlphaBlendFactor)
             desc.destinationAlphaBlendFactor = MTLBlendFactor(rawValue: enumVal)!
         }
         if let alphaBlendOp = elem.attributes["alpha-blend-operation"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlBlendOperation")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendOperation")!
             let enumVal = mtlEnum.getValue(alphaBlendOp)
             desc.alphaBlendOperation = MTLBlendOperation(rawValue: enumVal)!
         }
@@ -503,12 +503,12 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
             desc.rasterizationEnabled = true
         }
         if let depthPixelFormat = elem.attributes["depth-attachment-pixel-format"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlPixelFormat")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlPixelFormat")!
             let enumVal = mtlEnum.getValue(depthPixelFormat)
             desc.depthAttachmentPixelFormat = MTLPixelFormat(rawValue: enumVal)!
         }
         if let stencilPixelFormat = elem.attributes["stencil-attachment-pixel-format"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlPixelFormat")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlPixelFormat")!
             let enumVal = mtlEnum.getValue(stencilPixelFormat)
             desc.stencilAttachmentPixelFormat = MTLPixelFormat(rawValue: enumVal)!
         }
@@ -603,12 +603,12 @@ public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode: S3DXMLNodeParser 
             desc.resolveDepthPlane = Int(resolveDepthPlane)!
         }
         if let loadAction = elem.attributes["load-action"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlLoadAction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlLoadAction")!
             let enumVal = mtlEnum.getValue(loadAction)
             desc.loadAction = MTLLoadAction(rawValue: enumVal)!
         }
         if let storeAction = elem.attributes["store-action"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlStoreAction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStoreAction")!
             let enumVal = mtlEnum.getValue(storeAction)
             desc.storeAction = MTLStoreAction(rawValue: enumVal)!
         }
@@ -662,12 +662,12 @@ public class S3DXMLMTLRenderPassDepthAttachmentDescriptorNode: S3DXMLNodeParser 
             desc.resolveDepthPlane = Int(resolveDepthPlane)!
         }
         if let loadAction = elem.attributes["load-action"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlLoadAction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlLoadAction")!
             let enumVal = mtlEnum.getValue(loadAction)
             desc.loadAction = MTLLoadAction(rawValue: enumVal)!
         }
         if let storeAction = elem.attributes["store-action"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlStoreAction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStoreAction")!
             let enumVal = mtlEnum.getValue(storeAction)
             desc.storeAction = MTLStoreAction(rawValue: enumVal)!
         }
@@ -676,7 +676,7 @@ public class S3DXMLMTLRenderPassDepthAttachmentDescriptorNode: S3DXMLNodeParser 
         }
         #if os(iOS)
         if let depthResolveFilter = elem.attributes["depth-resolve-filter"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlMultisampleDepthResolveFilter")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlMultisampleDepthResolveFilter")!
             let enumVal = mtlEnum.getValue(depthResolveFilter)
             desc.depthResolveFilter = MTLMultisampleDepthResolveFilter(rawValue: enumVal)!
         }
@@ -715,12 +715,12 @@ public class S3DXMLMTLRenderPassStencilAttachmentDescriptorNode: S3DXMLNodeParse
             desc.resolveDepthPlane = Int(resolveDepthPlane)!
         }
         if let loadAction = elem.attributes["load-action"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlLoadAction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlLoadAction")!
             let enumVal = mtlEnum.getValue(loadAction)
             desc.loadAction = MTLLoadAction(rawValue: enumVal)!
         }
         if let storeAction = elem.attributes["store-action"] {
-            let mtlEnum = container.resolve(S3DMtlEnum.self, name: "mtlStoreAction")!
+            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStoreAction")!
             let enumVal = mtlEnum.getValue(storeAction)
             desc.storeAction = MTLStoreAction(rawValue: enumVal)!
         }

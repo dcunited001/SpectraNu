@@ -58,7 +58,7 @@ public enum SpectraVertexAttrType: String {
 
 public class SpectraXSD {
     public class func readXSD(filename: String) -> XMLDocument? {
-        let bundle = NSBundle(forClass: S3DXSD.self)
+        let bundle = NSBundle(forClass: MetalXSD.self)
         let path = bundle.pathForResource(filename, ofType: "xsd")
         let data = NSData(contentsOfFile: path!)
         

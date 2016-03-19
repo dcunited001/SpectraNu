@@ -14,7 +14,7 @@ import Swinject
 public class DescriptorManager {
     public var library: MTLLibrary // TODO: support multiple libraries?
     
-    public var xsd: S3DXSD
+    public var xsd: MetalXSD
     public var container: Container = Container()
     
     //TODO: consolidate vertex/fragment/compute functions as getMtlFunction()?
@@ -87,13 +87,13 @@ public class DescriptorManager {
         self.container.register(MTLLibrary.self, name: "default") { _ in return library }.inObjectScope(.Container)
         
         // just parsing enum types from XSD for now
-        let xmlData = S3DXSD.readXSD("MetalEnums")
-        xsd = S3DXSD(data: xmlData)
+        let xmlData = MetalXSD.readXSD("MetalEnums")
+        xsd = MetalXSD(data: xmlData)
         xsd.parseEnumTypes(container)
     }
     
     public func getMtlEnum(name: String, id: String) -> UInt {
-        return container.resolve(S3DMtlEnum.self, name: name)!.getValue(id)
+        return container.resolve(MetalEnum.self, name: name)!.getValue(id)
     }
     
     public func assembleHigherOrderFactories() {

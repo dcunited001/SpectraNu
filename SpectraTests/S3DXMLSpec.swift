@@ -10,6 +10,7 @@
 import Foundation
 import Quick
 import Nimble
+import Swinject
 
 //TODO: fix filepath must not be nil error
 //let library = device!.newDefaultLibrary()
@@ -21,20 +22,32 @@ class S3DXMLSpec: QuickSpec {
         let library = device!.newDefaultLibrary()
         let testBundle = NSBundle(forClass: S3DXMLSpec.self)
         let xmlData: NSData = S3DXML.readXML(testBundle, filename: "S3DXMLTest")
-        let s3d = S3DXML(data: xmlData)
+
+        let metaContainer = MetalParser.initMetalEnums(Container())
+        MetalParser.initMetal(metaContainer)
         
-        var descMan = DescriptorManager(library: library!)
-        descMan.parseS3DXML(s3d)
+        let metalParser = MetalParser(parentContainer: metaContainer)
         
-        describe("DescriptorManager") {
-            it("parses enumGroups from XSD") {
-                expect(descMan.getMtlEnum("mtlSamplerAddressMode", id: "ClampToEdge") == 0)
-            }
-        }
+//        var metalParser = DescriptorManager(library: library!)
+//        metalParser.parseS3DXML(s3d)
         
-//        describe("S3DXML") {
-//            
+//        describe("DescriptorManager") {
+//            it("parses enumGroups from XSD") {
+//                expect(metalParser.getMtlEnum("mtlSamplerAddressMode", id: "ClampToEdge") == 0)
+//            }
 //        }
+        
+        describe("MetalParser") {
+            
+            it("has a container with a default device & library") {
+                
+            }
+            
+            it("reads the Metal Enums from the XSD File") {
+                
+            }
+            
+        }
 
         describe("S3DXMLMTLFunctionNode") {
             let vertName = "basic_color_vertex"
@@ -42,11 +55,11 @@ class S3DXMLSpec: QuickSpec {
             let compName = "test_compute_function"
             
             it("can parse render and compute functions") {
-                let vert = descMan.getVertexFunction(vertName)
+                let vert = metalParser.getVertexFunction(vertName)
                 expect(vert.name) == vertName
-                let frag = descMan.getFragmentFunction(fragName)
+                let frag = metalParser.getFragmentFunction(fragName)
                 expect(frag.name) == fragName
-                let comp = descMan.getComputeFunction("test_compute_function")
+                let comp = metalParser.getComputeFunction("test_compute_function")
                 expect(comp.name) == compName
             }
             
@@ -57,26 +70,26 @@ class S3DXMLSpec: QuickSpec {
 
         describe("S3DXMLMTLVertexDescriptorNode") {
             it("can parse the attribute descriptor array") {
-                let vertDesc = descMan.getVertexDescriptor("common_vertex_desc")
+                let vertDesc = metalParser.getVertexDescriptor("common_vertex_desc")
                 expect(vertDesc.attributes[0].format) == MTLVertexFormat.Float4
                 expect(vertDesc.attributes[1].offset) == 16
             }
             
             it("can parse the buffer layout descriptor array") {
-                let vertDesc = descMan.getVertexDescriptor("common_vertex_desc")
+                let vertDesc = metalParser.getVertexDescriptor("common_vertex_desc")
                 expect(vertDesc.layouts[0].stepFunction) == MTLVertexStepFunction.PerVertex
                 expect(vertDesc.layouts[0].stride) == 48
                 expect(vertDesc.layouts[0].stepRate) == 1
             }
             
 //            it("can parse from references") {
-//                let vertDesc = descMan.vertexDescriptors["common_vertex_desc"]!
+//                let vertDesc = metalParser.vertexDescriptors["common_vertex_desc"]!
 //            }
         }
         
         describe("S3DXMLMTLTextureDescriptorNode") {
             it("can parse a MTLVertexDescriptor") {
-                let desc = descMan.getTextureDescriptor("texture_desc")
+                let desc = metalParser.getTextureDescriptor("texture_desc")
                 expect(desc.textureType) == MTLTextureType.Type3D
                 expect(desc.pixelFormat) == MTLPixelFormat.RGBA32Float
                 expect(desc.width) == 100
@@ -98,7 +111,7 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLSamplerDescriptorNode") {
             it("can parse a sampler descriptor") {
-                let desc = descMan.getSamplerDescriptor("sampler_desc")
+                let desc = metalParser.getSamplerDescriptor("sampler_desc")
                 expect(desc.minFilter) == MTLSamplerMinMagFilter.Linear
                 expect(desc.magFilter) == MTLSamplerMinMagFilter.Linear
                 expect(desc.mipFilter) == MTLSamplerMipFilter.Linear
@@ -117,7 +130,7 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLStencilDescriptorNode") {
             it("can parse a stencil descriptor") {
-                let desc = descMan.getStencilDescriptor("stencil_desc")
+                let desc = metalParser.getStencilDescriptor("stencil_desc")
                 expect(desc.stencilCompareFunction) == MTLCompareFunction.Never
                 expect(desc.stencilFailureOperation) == MTLStencilOperation.Replace
                 expect(desc.depthFailureOperation) == MTLStencilOperation.IncrementWrap
@@ -127,17 +140,17 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLDepthStencilDescriptorNode") {
             it("can parse a depth stencil descriptor") {
-                let desc = descMan.getDepthStencilDescriptor("depth_stencil_desc")
+                let desc = metalParser.getDepthStencilDescriptor("depth_stencil_desc")
                 expect(desc.depthCompareFunction) == MTLCompareFunction.Never
                 expect(desc.depthWriteEnabled) == true
-                expect(desc.frontFaceStencil) == descMan.getStencilDescriptor("stencil_desc")
-                expect(desc.backFaceStencil) == descMan.getStencilDescriptor("stencil_desc")
+                expect(desc.frontFaceStencil) == metalParser.getStencilDescriptor("stencil_desc")
+                expect(desc.backFaceStencil) == metalParser.getStencilDescriptor("stencil_desc")
             }
         }
         
         describe("S3DXMLMTLRenderPipelineColorAttachmentDescriptorNode") {
             it("can parse a render pipeline color attachment descriptor") {
-                let desc = descMan.getColorAttachmentDescriptor("color_attach_desc")
+                let desc = metalParser.getColorAttachmentDescriptor("color_attach_desc")
                 expect(desc.blendingEnabled) == true
                 expect(desc.sourceRGBBlendFactor) == MTLBlendFactor.Zero
                 expect(desc.destinationRGBBlendFactor) == MTLBlendFactor.SourceColor
@@ -151,7 +164,7 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLRenderPipelineDescriptorNode") {
             it("can parse a render pipeline descriptor") {
-                let desc = descMan.getRenderPipelineDescriptor("render_pipeline_desc")
+                let desc = metalParser.getRenderPipelineDescriptor("render_pipeline_desc")
                 expect(desc.label) == "render-pipeline-descriptor"
                 expect(desc.sampleCount) == 2
                 expect(desc.alphaToCoverageEnabled) == true
@@ -161,14 +174,14 @@ class S3DXMLSpec: QuickSpec {
                 expect(desc.stencilAttachmentPixelFormat) == MTLPixelFormat.Stencil8
                 expect(desc.vertexFunction!.name) == "basic_color_vertex"
                 expect(desc.fragmentFunction!.name) == "basic_color_fragment"
-                expect(desc.vertexDescriptor) == descMan.getVertexDescriptor("common_vertex_desc")
-                expect(desc.colorAttachments[0]) == descMan.getColorAttachmentDescriptor("color_attach_desc")
+                expect(desc.vertexDescriptor) == metalParser.getVertexDescriptor("common_vertex_desc")
+                expect(desc.colorAttachments[0]) == metalParser.getColorAttachmentDescriptor("color_attach_desc")
             }
         }
         
         describe("S3DXMLMTLComputePipelineDescribeNode") {
             it("can parse a compute pipeline descriptor") {
-                let desc = descMan.getComputePipelineDescriptor("compute_pipeline_desc")
+                let desc = metalParser.getComputePipelineDescriptor("compute_pipeline_desc")
                 expect(desc.label) == "compute-pipeline-descriptor"
                 expect(desc.threadGroupSizeIsMultipleOfThreadExecutionWidth) == true
                 expect(desc.computeFunction!.name) == "test_compute_function"
@@ -177,7 +190,7 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLClearColorNode") {
             it("can parse a clear color") {
-                let color = descMan.getClearColor("clear_color_black")
+                let color = metalParser.getClearColor("clear_color_black")
                 expect(color.red) == 0.0
                 expect(color.green) == 0.0
                 expect(color.blue) == 0.0
@@ -187,8 +200,8 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLRenderPassColorAttachmentDescriptorNode") {
             it("can parse a render pass color attachment descriptor") {
-                let desc = descMan.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
-                let clearColor = descMan.getClearColor("clear_color_black")
+                let desc = metalParser.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
+                let clearColor = metalParser.getClearColor("clear_color_black")
                 
                 expect(desc.level) == 1
                 expect(desc.slice) == 1
@@ -205,7 +218,7 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLRenderPassDepthAttachmentDescriptorNode") {
             it("can parse a render pass depth attachment descriptor") {
-                let desc = descMan.getRenderPassDepthAttachmentDescriptor("rpass_depth_attach_desc")
+                let desc = metalParser.getRenderPassDepthAttachmentDescriptor("rpass_depth_attach_desc")
                 expect(desc.level) == 1
                 expect(desc.slice) == 1
                 expect(desc.depthPlane) == 1
@@ -222,7 +235,7 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLRenderPassStencilAttachmentDescriptorNode") {
             it("can parse a render pass stencil attachment descriptor") {
-                let desc = descMan.getRenderPassStencilAttachmentDescriptor("rpass_stencil_attach_desc")
+                let desc = metalParser.getRenderPassStencilAttachmentDescriptor("rpass_stencil_attach_desc")
                 expect(desc.level) == 1
                 expect(desc.slice) == 1
                 expect(desc.depthPlane) == 1
@@ -237,10 +250,10 @@ class S3DXMLSpec: QuickSpec {
         
         describe("S3DXMLMTLRenderPassDescriptorNode") {
             it("can parse a render pass descriptor") {
-                let desc = descMan.getRenderPassDescriptor("render_pass_desc")
-                let colorAttach = descMan.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
-                let depthAttach = descMan.getRenderPassDepthAttachmentDescriptor("rpass_depth_attach_desc")
-                let stencilAttach = descMan.getRenderPassStencilAttachmentDescriptor("rpass_stencil_attach_desc")
+                let desc = metalParser.getRenderPassDescriptor("render_pass_desc")
+                let colorAttach = metalParser.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
+                let depthAttach = metalParser.getRenderPassDepthAttachmentDescriptor("rpass_depth_attach_desc")
+                let stencilAttach = metalParser.getRenderPassStencilAttachmentDescriptor("rpass_stencil_attach_desc")
                 
                 expect(desc.colorAttachments[0]) == colorAttach
                 expect(desc.depthAttachment) == depthAttach
