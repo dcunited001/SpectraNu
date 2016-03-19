@@ -21,10 +21,6 @@
 		4317EA191C8C31760019B2E2 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA171C8C31760019B2E2 /* Quick.framework */; };
 		4317EA1A1C8C317C0019B2E2 /* Nimble.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA161C8C31760019B2E2 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4317EA1B1C8C317C0019B2E2 /* Quick.framework in Copy Quick/Nimble Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA171C8C31760019B2E2 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4317EA221C8C36840019B2E2 /* RandomMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9DE1C8BAE010019B2E2 /* RandomMeshGeneratorsSpec.swift */; };
-		4317EA231C8C368F0019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9DF1C8BAE010019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift */; };
-		4317EA241C8C36940019B2E2 /* ModelIOMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9DD1C8BAE010019B2E2 /* ModelIOMeshGeneratorsSpec.swift */; };
-		4317EA251C8C36980019B2E2 /* PlatonicSolidMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9DC1C8BAE010019B2E2 /* PlatonicSolidMeshGeneratorsSpec.swift */; };
 		4317EA391C8C47C20019B2E2 /* Spectra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; };
 		4317EA3A1C8C47C20019B2E2 /* Spectra.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF8561C0A301300EA2B30 /* Spectra.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4317EA3E1C8C47E90019B2E2 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4317E9FE1C8C237B0019B2E2 /* Fuzi.framework */; };
@@ -34,7 +30,6 @@
 		4334D6881C1F6D2900D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */; };
 		4334D68D1C1F6EE300D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */; };
 		4334D6BD1C1FAAE800D2DCA6 /* Spectra_OSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF8651C0A301300EA2B30 /* Spectra_OSXTests.swift */; };
-		4334D6DB1C1FACB200D2DCA6 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6D61C1FACB200D2DCA6 /* S3DXMLSpec.swift */; };
 		4338B8AB1C18C278007D3DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8AA1C18C278007D3DF6 /* AppDelegate.swift */; };
 		4338B8AD1C18C278007D3DF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8AC1C18C278007D3DF6 /* ViewController.swift */; };
 		4338B8AF1C18C278007D3DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8AE1C18C278007D3DF6 /* Assets.xcassets */; };
@@ -73,10 +68,7 @@
 		437D18F61C8CF28D00C70975 /* LightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437D18F41C8CF28D00C70975 /* LightGenerator.swift */; };
 		437D18FC1C8EB1F900C70975 /* BufferAllocatorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437D18FA1C8EB1F900C70975 /* BufferAllocatorGenerator.swift */; };
 		4388340A1C9390C30098D71A /* SubmeshGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438834081C9390C30098D71A /* SubmeshGenerator.swift */; };
-		438834141C9392000098D71A /* BasicSubmeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438834121C9392000098D71A /* BasicSubmeshGeneratorsSpec.swift */; };
 		438834171C9393830098D71A /* BasicSubmeshGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438834151C9393800098D71A /* BasicSubmeshGenerators.swift */; };
-		43AC4F001C942C820006F4B5 /* SpectraSharedExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AC4EFE1C941F540006F4B5 /* SpectraSharedExamples.swift */; };
-		43BDD4631C8EDF0900AEFA9E /* ModelIOTextureGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BDD4581C8ED63700AEFA9E /* ModelIOTextureGeneratorsSpec.swift */; };
 		43BDD4671C8EF3C800AEFA9E /* ModelIOTextureGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BDD4661C8EF3C800AEFA9E /* ModelIOTextureGenerators.swift */; };
 		43C472821C8F0BA600F90CED /* ModelIOMeshGeneratorsSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472791C8F0BA600F90CED /* ModelIOMeshGeneratorsSpec.xml */; };
 		43C472831C8F0BA600F90CED /* ModelIOTextureGeneratorsSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C4727A1C8F0BA600F90CED /* ModelIOTextureGeneratorsSpec.xml */; };
@@ -90,17 +82,16 @@
 		43D40E101C90882500DB35D3 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D40E0C1C90882500DB35D3 /* Nodes.swift */; };
 		43D40E111C90882500DB35D3 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D40E0D1C90882500DB35D3 /* Parser.swift */; };
 		43D40E121C90882500DB35D3 /* XSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D40E0E1C90882500DB35D3 /* XSD.swift */; };
-		43D40E171C923B7B00DB35D3 /* XSDSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D40E131C923B7B00DB35D3 /* XSDSpec.swift */; };
 		43D40E181C923B7B00DB35D3 /* NodesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D40E141C923B7B00DB35D3 /* NodesSpec.swift */; };
-		43D40E191C923B7B00DB35D3 /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D40E151C923B7B00DB35D3 /* ParserSpec.swift */; };
 		43D4FDB81C7B393E004E2CF7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDB71C7B393E004E2CF7 /* main.swift */; };
 		43D4FDC61C7B511B004E2CF7 /* SpectraEnumDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDC51C7B511B004E2CF7 /* SpectraEnumDefs.swift */; };
 		43D4FDC81C7B6AAC004E2CF7 /* AssetManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDC71C7B6AAC004E2CF7 /* AssetManagerSpec.swift */; };
 		43D4FDCA1C7B6F77004E2CF7 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDC91C7B6F77004E2CF7 /* AssetManager.swift */; };
 		43D4FDCE1C7B7475004E2CF7 /* SpectraEnums.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 43D4FDCD1C7B7475004E2CF7 /* SpectraEnums.xsd */; };
-		43D4FDD01C7C3E76004E2CF7 /* SpectraXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDCF1C7C3E76004E2CF7 /* SpectraXMLSpec.swift */; };
 		43D4FDD41C7C5025004E2CF7 /* SpectraXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDD31C7C5025004E2CF7 /* SpectraXML.swift */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43F7F8171C9D230900DC802E /* ModelIOMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9DD1C8BAE010019B2E2 /* ModelIOMeshGeneratorsSpec.swift */; };
+		43F7F8181C9D235D00DC802E /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6D61C1FACB200D2DCA6 /* S3DXMLSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -925,20 +916,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43AC4F001C942C820006F4B5 /* SpectraSharedExamples.swift in Sources */,
-				43D40E171C923B7B00DB35D3 /* XSDSpec.swift in Sources */,
 				4334D6BD1C1FAAE800D2DCA6 /* Spectra_OSXTests.swift in Sources */,
-				438834141C9392000098D71A /* BasicSubmeshGeneratorsSpec.swift in Sources */,
-				4334D6DB1C1FACB200D2DCA6 /* S3DXMLSpec.swift in Sources */,
-				43D4FDD01C7C3E76004E2CF7 /* SpectraXMLSpec.swift in Sources */,
 				43D4FDC81C7B6AAC004E2CF7 /* AssetManagerSpec.swift in Sources */,
-				4317EA221C8C36840019B2E2 /* RandomMeshGeneratorsSpec.swift in Sources */,
-				4317EA241C8C36940019B2E2 /* ModelIOMeshGeneratorsSpec.swift in Sources */,
-				43D40E191C923B7B00DB35D3 /* ParserSpec.swift in Sources */,
+				43F7F8181C9D235D00DC802E /* S3DXMLSpec.swift in Sources */,
+				43F7F8171C9D230900DC802E /* ModelIOMeshGeneratorsSpec.swift in Sources */,
 				43D40E181C923B7B00DB35D3 /* NodesSpec.swift in Sources */,
-				43BDD4631C8EDF0900AEFA9E /* ModelIOTextureGeneratorsSpec.swift in Sources */,
-				4317EA251C8C36980019B2E2 /* PlatonicSolidMeshGeneratorsSpec.swift in Sources */,
-				4317EA231C8C368F0019B2E2 /* BasicTessellationMeshGeneratorsSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
