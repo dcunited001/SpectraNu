@@ -26,88 +26,78 @@ class ModelIOMeshGeneratorsSharedExamples: QuickConfiguration {
 class ModelIOMeshGeneratorsSpec: QuickSpec {
     
     override func spec() {
-        describe("must foo") {
-            it("to bar") {
+        let parsedEnums = Container()
+        
+        let spectraEnumXSD = SpectraXSD.readXSD("SpectraEnums")!
+        let spectraXSD = SpectraXSD()
+        spectraXSD.parseXSD(spectraEnumXSD, container: parsedEnums)
+        let parsedNodes = Container(parent: parsedEnums)
+
+        let testBundle = NSBundle(forClass: ModelIOMeshGeneratorsSpec.self)
+        let sp = SpectraParser(nodes: parsedNodes)
+        let spectraXML = SpectraParser.readXML(testBundle, filename: "ModelIOMeshGeneratorsSpec", bundleResourceName: nil)!
+        
+        ModelIOMeshGenerators.loadMeshGenerators(sp.nodes)
+        sp.parseXML(spectraXML)
+        
+        let device = MTLCreateSystemDefaultDevice()!
+        let allocator = MTKMeshBufferAllocator(device: device)
+        
+        describe("EllipsoidMeshGen") {
+            // gengen, yeh it sounds redundant, i know.  
+            // - but this abstraction allows heavy resources like meshes to be attached to mesh generators that persist
+//            let gen = sp.getMeshGenerator("ellipsoid_mesh_gen")!.generate(["models": sp.nodes]) as! EllipsoidMeshGen
+            let gen2 = sp.getMeshGenerator("ellipsoid_mesh_gen2")!.generate(["models": sp.nodes]) as! EllipsoidMeshGen
+            
+            it("can extend the model i/o mesh generators") {
+//                expect(SpectraSimd.compareFloat3(gen.radii, with: float3(10, 10, 10))).to(beTrue())
+//                expect(gen.radialSegments) == 30
+//                expect(gen.verticalSegments) == 10
+                expect(SpectraSimd.compareFloat3(gen2.radii, with: float3(5, 5, 5))).to(beTrue())
+                expect(gen2.radialSegments) == 5
+                expect(gen2.verticalSegments) == 5
+            }
+            
+            it("can generate a MDLMesh with the appropriate vertices & submeshes") {
+//                let mesh = gen.generate(sp.nodes)
+                let mesh2: MDLMesh = gen2.generate(sp.nodes)
                 
+//                expect(mesh.vertexCount) == 281
+//                expect(mesh.submeshes.count) == 1
+//                expect(mesh.vertexBuffers.count) == 1
+//                
+//                expect(mesh.vertexDescriptor.attributes[0].name) == "position"
+//                expect(mesh.vertexDescriptor.attributes[0].offset) == 0
+//                expect(mesh.vertexDescriptor.attributes[1].name) == "normal"
+//                expect(mesh.vertexDescriptor.attributes[1].offset) == 12
+//                expect(mesh.vertexDescriptor.attributes[2].name) == "textureCoordinate"
+//                expect(mesh.vertexDescriptor.attributes[2].offset) == 24
+//                
+//                expect(mesh2.vertexCount) == 26
+//                expect(mesh.submeshes.count) == 1
+//                expect(mesh.vertexBuffers.count) == 1
             }
         }
+        
+        describe("EllipticalConeMeshGen") {
+            let coneGen = sp.getMeshGenerator("elliptical_cone_mesh_gen2")!.generate(["models": sp.nodes]) as! EllipticalConeMeshGen
+            
+            it("can extend the model i/o mesh generators") {
+                expect(coneGen.height) == 100.0
+                expect(SpectraSimd.compareFloat2(coneGen.radii, with: float2(5, 5))).to(beTrue())
+                expect(coneGen.radialSegments) == 5
+                expect(coneGen.verticalSegments) == 5
+            }
+            
+            it("can generate a MDLMesh with the appropriate vertices & submeshes") {
+                let cone = sp.getMesh("elliptical_cone_mesh2")!.generate(["models": sp.nodes]) as! MDLMesh
+                expect(cone.submeshes.count) == 1
+                expect(cone.vertexBuffers.count) == 1
+                expect(cone.vertexCount) == 43
+            }
 
-//        let parser = Container()
-//        
-//        let spectraEnumData = SpectraXSD.readXSD("SpectraEnums")
-//        let spectraEnumXSD = SpectraXSD(data: spectraEnumData)
-//        spectraEnumXSD.parseEnumTypes(parser)
-//        
-//        let testBundle = NSBundle(forClass: ModelIOMeshGeneratorsSpec.self)
-//        let xmlData: NSData = SpectraXML.readXML(testBundle, filename: "ModelIOMeshGeneratorsSpec")
-//        let assetContainer = Container(parent: parser)
-//        
-//        ModelIOMeshGenerators.loadMeshGenerators(assetContainer)
-//        
-//        SpectraXML.initParser(parser)
-//        let spectraXML = SpectraXML(parser: parser, data: xmlData)
-//        spectraXML.parse(assetContainer, options: [:])
-//        
-//        let device = MTLCreateSystemDefaultDevice()!
-//        let allocator = MTKMeshBufferAllocator(device: device)
-//        
-//        describe("EllipsoidMeshGen") {
-//            let ellipsoid = assetContainer.resolve(MeshGenerator.self, name: "ellipsoid_mesh_gen") as! EllipsoidMeshGen
-//            let ellipsoid2 = assetContainer.resolve(MeshGenerator.self, name: "ellipsoid_mesh_gen2") as! EllipsoidMeshGen
-//            
-//            ellipsoid.allocator = allocator
-//            ellipsoid2.allocator = allocator
-//            
-//            it("can extend the model i/o mesh generators") {
-//                expect(SpectraSimd.compareFloat3(ellipsoid.radii, with: float3(10, 10, 10))).to(beTrue())
-//                expect(ellipsoid.radialSegments) == 30
-//                expect(ellipsoid.verticalSegments) == 10
-//                expect(SpectraSimd.compareFloat3(ellipsoid2.radii, with: float3(5, 5, 5))).to(beTrue())
-//                expect(ellipsoid2.radialSegments) == 5
-//                expect(ellipsoid2.verticalSegments) == 5
-//            }
-//            
-//            it("can generate a MDLMesh with the appropriate vertices & submeshes") {
-//                let ellipsoidMesh = ellipsoid.generate(assetContainer)
-//                let ellipsoidMesh2: MDLMesh = ellipsoid2.generate(assetContainer)
-//                
-//                expect(ellipsoidMesh.vertexCount) == 281
-//                expect(ellipsoidMesh.submeshes.count) == 1
-//                expect(ellipsoidMesh.vertexBuffers.count) == 1
-//                
-//                expect(ellipsoidMesh.vertexDescriptor.attributes[0].name) == "position"
-//                expect(ellipsoidMesh.vertexDescriptor.attributes[0].offset) == 0
-//                expect(ellipsoidMesh.vertexDescriptor.attributes[1].name) == "normal"
-//                expect(ellipsoidMesh.vertexDescriptor.attributes[1].offset) == 12
-//                expect(ellipsoidMesh.vertexDescriptor.attributes[2].name) == "textureCoordinate"
-//                expect(ellipsoidMesh.vertexDescriptor.attributes[2].offset) == 24
-//                
-//                expect(ellipsoidMesh2.vertexCount) == 26
-//                expect(ellipsoidMesh.submeshes.count) == 1
-//                expect(ellipsoidMesh.vertexBuffers.count) == 1
-//            }
-//        }
-//        
-//        describe("EllipticalConeMeshGen") {
-//            let coneGen = assetContainer.resolve(MeshGenerator.self, name: "elliptical_cone_mesh_gen2") as! EllipticalConeMeshGen
-//            
-//            it("can extend the model i/o mesh generators") {
-//                expect(coneGen.height) == 100.0
-//                expect(SpectraSimd.compareFloat2(coneGen.radii, with: float2(5, 5))).to(beTrue())
-//                expect(coneGen.radialSegments) == 5
-//                expect(coneGen.verticalSegments) == 5
-//            }
-//            
-//            it("can generate a MDLMesh with the appropriate vertices & submeshes") {
-//                let cone = assetContainer.resolve(MDLMesh.self, name: "elliptical_cone_mesh2")!
-//                
-//                expect(cone.submeshes.count) == 1
-//                expect(cone.vertexBuffers.count) == 1
-//                expect(cone.vertexCount) == 43
-//            }
-//
-//        }
-//        
+        }
+        
 //        describe("CylinderMeshGen") {
 //            let cylinderGen = assetContainer.resolve(MeshGenerator.self, name: "cylinder_mesh_gen") as! CylinderMeshGen
 //            let cylinderGen2 = assetContainer.resolve(MeshGenerator.self, name: "cylinder_mesh_gen2") as! CylinderMeshGen
