@@ -90,7 +90,6 @@
 		43D4FDCE1C7B7475004E2CF7 /* SpectraEnums.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 43D4FDCD1C7B7475004E2CF7 /* SpectraEnums.xsd */; };
 		43D4FDD41C7C5025004E2CF7 /* SpectraXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D4FDD31C7C5025004E2CF7 /* SpectraXML.swift */; };
 		43EAF85A1C0A301300EA2B30 /* Spectra-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 43EAF8591C0A301300EA2B30 /* Spectra-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43F7F8171C9D230900DC802E /* ModelIOMeshGeneratorsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317E9DD1C8BAE010019B2E2 /* ModelIOMeshGeneratorsSpec.swift */; };
 		43F7F8181C9D235D00DC802E /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6D61C1FACB200D2DCA6 /* S3DXMLSpec.swift */; };
 /* End PBXBuildFile section */
 
@@ -919,7 +918,6 @@
 				4334D6BD1C1FAAE800D2DCA6 /* Spectra_OSXTests.swift in Sources */,
 				43D4FDC81C7B6AAC004E2CF7 /* AssetManagerSpec.swift in Sources */,
 				43F7F8181C9D235D00DC802E /* S3DXMLSpec.swift in Sources */,
-				43F7F8171C9D230900DC802E /* ModelIOMeshGeneratorsSpec.swift in Sources */,
 				43D40E181C923B7B00DB35D3 /* NodesSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
