@@ -60,7 +60,7 @@ public class S3DXMLMTLFunctionNode: S3DXMLNodeParser {
     }
     
     public func parse(container: Container, elem: XMLElement, options: [String: AnyObject] = [:]) -> NodeType {
-        let name = elem.attributes["key"]
+        let name = elem.attributes["id"]
         let mtlFunction = library.newFunctionWithName(name!)
         return mtlFunction!
     }
@@ -317,8 +317,8 @@ public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
                 depthDesc.frontFaceStencil = frontFaceStencil
                 
                 // also, register the descriptor, if named (not thread friendly)
-                if (frontFaceTag.attributes["key"] != nil) {
-                    container.register(MTLStencilDescriptor.self, name: frontFaceTag.attributes["key"]!) { _ in
+                if let id = frontFaceTag.attributes["id"] {
+                    container.register(MTLStencilDescriptor.self, name: id) { _ in
                         return frontFaceStencil.copy() as! MTLStencilDescriptor
                         }.inObjectScope(.Container)
                 }
@@ -333,8 +333,8 @@ public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
                 depthDesc.backFaceStencil = backFaceStencil
                 
                 // also, register the descriptor, if named (not thread friendly)
-                if (backFaceTag.attributes["key"] != nil) {
-                    container.register(MTLStencilDescriptor.self, name: backFaceTag.attributes["key"]!) { _ in
+                if let id = backFaceTag.attributes["id"] {
+                    container.register(MTLStencilDescriptor.self, name: id) { _ in
                         return backFaceStencil.copy() as! MTLStencilDescriptor
                     }.inObjectScope(.Container)
                 }
@@ -410,8 +410,8 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
                 let vertexFunction = S3DXMLMTLFunctionNode(library: lib).parse(container, elem: vertexFunctionTag)
                 desc.vertexFunction = vertexFunction
                 
-                if (vertexFunctionTag.attributes["key"] != nil) {
-                    container.register(MTLFunction.self, name: vertexFunctionTag.attributes["key"]!) { _ in
+                if let id = vertexFunctionTag.attributes["id"] {
+                    container.register(MTLFunction.self, name: id) { _ in
                         return vertexFunction
                         }.inObjectScope(.Container)
                 }
@@ -427,8 +427,8 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
                 let fragmentFunction = S3DXMLMTLFunctionNode(library: lib).parse(container, elem: fragmentFunctionTag)
                 desc.fragmentFunction = fragmentFunction
                 
-                if (fragmentFunctionTag.attributes["key"] != nil) {
-                    container.register(MTLFunction.self, name: fragmentFunctionTag.attributes["key"]!) { _ in
+                if let id = fragmentFunctionTag.attributes["id"] {
+                    container.register(MTLFunction.self, name: fragmentFunctionTag.attributes["id"]!) { _ in
                         return fragmentFunction
                         }.inObjectScope(.Container)
                 }
@@ -442,8 +442,8 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
                 let vertexDesc = S3DXMLMTLVertexDescriptorNode().parse(container, elem: vertexDescTag)
                 desc.vertexDescriptor = vertexDesc
                 
-                if (vertexDescTag.attributes["key"] != nil) {
-                    container.register(MTLVertexDescriptor.self, name: vertexDescTag.attributes["key"]!) { _ in
+                if let id = vertexDescTag.attributes["id"] {
+                    container.register(MTLVertexDescriptor.self, name: id) { _ in
                         return vertexDesc.copy() as! MTLVertexDescriptor
                         }.inObjectScope(.Container)
                 }
@@ -458,8 +458,8 @@ public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
                 let colorAttachDesc = S3DXMLMTLColorAttachmentDescriptorNode().parse(container, elem: el)
                 desc.colorAttachments[Int(idx)] = colorAttachDesc
                 
-                if (el.attributes["key"] != nil) {
-                    container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: el.attributes["key"]!) { _ in
+                if let id = el.attributes["id"] {
+                    container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: id) { _ in
                         return colorAttachDesc.copy() as! MTLRenderPipelineColorAttachmentDescriptor
                         }.inObjectScope(.Container)
                 }
@@ -511,8 +511,8 @@ public class S3DXMLMTLComputePipelineDescriptorNode: S3DXMLNodeParser {
                 let computeFunction = S3DXMLMTLFunctionNode(library: lib).parse(container, elem: computeFunctionTag)
                 desc.computeFunction = computeFunction
                 
-                if (computeFunctionTag.attributes["key"] != nil) {
-                    container.register(MTLFunction.self, name: computeFunctionTag.attributes["key"]!) { _ in
+                if let id = computeFunctionTag.attributes["id"] {
+                    container.register(MTLFunction.self, name: id) { _ in
                         return computeFunction
                         }.inObjectScope(.Container)
                 }
@@ -599,8 +599,8 @@ public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode: S3DXMLNodeParser 
                 let clearColor = S3DXMLMTLClearColorNode().parse(container, elem: clearColorTag)
                 desc.clearColor = clearColor
                 
-                if (clearColorTag.attributes["key"] != nil) {
-                    container.register(MTLClearColor.self, name: clearColorTag.attributes["key"]!) { _ in
+                if let id = clearColorTag.attributes["id"] {
+                    container.register(MTLClearColor.self, name: id) { _ in
                         return clearColor
                         }.inObjectScope(.Container)
                 }
@@ -725,8 +725,8 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
                 let colorAttach = S3DXMLMTLRenderPassColorAttachmentDescriptorNode().parse(container, elem: el)
                 desc.colorAttachments[Int(idx)] = colorAttach
                 
-                if (el.attributes["key"] != nil) {
-                    container.register(MTLRenderPassColorAttachmentDescriptor.self, name: el.attributes["key"]!) { _ in
+                if let id = el.attributes["id"] {
+                    container.register(MTLRenderPassColorAttachmentDescriptor.self, name: id) { _ in
                         return colorAttach.copy() as! MTLRenderPassColorAttachmentDescriptor
                         }.inObjectScope(.Container)
                 }
@@ -740,8 +740,8 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
                 let depthAttach = S3DXMLMTLRenderPassDepthAttachmentDescriptorNode().parse(container, elem: depthAttachTag)
                 desc.depthAttachment = depthAttach
                 
-                if (depthAttachTag.attributes["key"] != nil) {
-                    container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: depthAttachTag.attributes["key"]!) { _ in
+                if let id = depthAttachTag.attributes["id"] {
+                    container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: id) { _ in
                         return depthAttach.copy() as! MTLRenderPassDepthAttachmentDescriptor
                         }.inObjectScope(.Container)
                 }
@@ -755,8 +755,8 @@ public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
                 let stencilAttach = S3DXMLMTLRenderPassStencilAttachmentDescriptorNode().parse(container, elem: stencilAttachTag)
                 desc.stencilAttachment = stencilAttach
                 
-                if (stencilAttachTag.attributes["key"] != nil) {
-                    container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: stencilAttachTag.attributes["key"]!) { _ in
+                if let id = stencilAttachTag.attributes["id"] {
+                    container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: id) { _ in
                         return stencilAttach.copy() as! MTLRenderPassStencilAttachmentDescriptor
                         }.inObjectScope(.Container)
                 }

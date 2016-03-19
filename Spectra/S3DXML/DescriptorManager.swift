@@ -18,68 +18,68 @@ public class DescriptorManager {
     public var container: Container = Container()
     
     //TODO: consolidate vertex/fragment/compute functions as getMtlFunction()?
-    public func getVertexFunction(key: String) -> MTLFunction {
-        return container.resolve(MTLFunction.self, name: key)!
+    public func getVertexFunction(id: String) -> MTLFunction {
+        return container.resolve(MTLFunction.self, name: id)!
     }
     
-    public func getFragmentFunction(key: String) -> MTLFunction {
-        return container.resolve(MTLFunction.self, name: key)!
+    public func getFragmentFunction(id: String) -> MTLFunction {
+        return container.resolve(MTLFunction.self, name: id)!
     }
     
-    public func getComputeFunction(key: String) -> MTLFunction {
-        return container.resolve(MTLFunction.self, name: key)!
+    public func getComputeFunction(id: String) -> MTLFunction {
+        return container.resolve(MTLFunction.self, name: id)!
     }
     
-    public func getVertexDescriptor(key: String) -> MTLVertexDescriptor {
-        return container.resolve(MTLVertexDescriptor.self, name: key)!
+    public func getVertexDescriptor(id: String) -> MTLVertexDescriptor {
+        return container.resolve(MTLVertexDescriptor.self, name: id)!
     }
     
-    public func getTextureDescriptor(key: String) -> MTLTextureDescriptor {
-        return container.resolve(MTLTextureDescriptor.self, name: key)!
+    public func getTextureDescriptor(id: String) -> MTLTextureDescriptor {
+        return container.resolve(MTLTextureDescriptor.self, name: id)!
     }
     
-    public func getSamplerDescriptor(key: String) -> MTLSamplerDescriptor {
-        return container.resolve(MTLSamplerDescriptor.self, name: key)!
+    public func getSamplerDescriptor(id: String) -> MTLSamplerDescriptor {
+        return container.resolve(MTLSamplerDescriptor.self, name: id)!
     }
     
-    public func getStencilDescriptor(key: String) -> MTLStencilDescriptor {
-        return container.resolve(MTLStencilDescriptor.self, name: key)!
+    public func getStencilDescriptor(id: String) -> MTLStencilDescriptor {
+        return container.resolve(MTLStencilDescriptor.self, name: id)!
     }
     
-    public func getDepthStencilDescriptor(key: String) -> MTLDepthStencilDescriptor {
-        return container.resolve(MTLDepthStencilDescriptor.self, name: key)!
+    public func getDepthStencilDescriptor(id: String) -> MTLDepthStencilDescriptor {
+        return container.resolve(MTLDepthStencilDescriptor.self, name: id)!
     }
     
-    public func getColorAttachmentDescriptor(key: String) -> MTLRenderPipelineColorAttachmentDescriptor {
-        return container.resolve(MTLRenderPipelineColorAttachmentDescriptor.self, name: key)!
+    public func getColorAttachmentDescriptor(id: String) -> MTLRenderPipelineColorAttachmentDescriptor {
+        return container.resolve(MTLRenderPipelineColorAttachmentDescriptor.self, name: id)!
     }
     
-    public func getRenderPipelineDescriptor(key: String) -> MTLRenderPipelineDescriptor {
-        return container.resolve(MTLRenderPipelineDescriptor.self, name: key)!
+    public func getRenderPipelineDescriptor(id: String) -> MTLRenderPipelineDescriptor {
+        return container.resolve(MTLRenderPipelineDescriptor.self, name: id)!
     }
     
-    public func getClearColor(key: String) -> MTLClearColor {
-        return container.resolve(MTLClearColor.self, name: key)!
+    public func getClearColor(id: String) -> MTLClearColor {
+        return container.resolve(MTLClearColor.self, name: id)!
     }
     
-    public func getRenderPassColorAttachmentDescriptor(key: String) -> MTLRenderPassColorAttachmentDescriptor {
-        return container.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: key)!
+    public func getRenderPassColorAttachmentDescriptor(id: String) -> MTLRenderPassColorAttachmentDescriptor {
+        return container.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: id)!
     }
     
-    public func getRenderPassDepthAttachmentDescriptor(key: String) -> MTLRenderPassDepthAttachmentDescriptor {
-        return container.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: key)!
+    public func getRenderPassDepthAttachmentDescriptor(id: String) -> MTLRenderPassDepthAttachmentDescriptor {
+        return container.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: id)!
     }
     
-    public func getRenderPassStencilAttachmentDescriptor(key: String) -> MTLRenderPassStencilAttachmentDescriptor {
-        return container.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: key)!
+    public func getRenderPassStencilAttachmentDescriptor(id: String) -> MTLRenderPassStencilAttachmentDescriptor {
+        return container.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: id)!
     }
     
-    public func getRenderPassDescriptor(key: String) -> MTLRenderPassDescriptor {
-        return container.resolve(MTLRenderPassDescriptor.self, name: key)!
+    public func getRenderPassDescriptor(id: String) -> MTLRenderPassDescriptor {
+        return container.resolve(MTLRenderPassDescriptor.self, name: id)!
     }
     
-    public func getComputePipelineDescriptor(key: String) -> MTLComputePipelineDescriptor {
-        return container.resolve(MTLComputePipelineDescriptor.self, name: key)!
+    public func getComputePipelineDescriptor(id: String) -> MTLComputePipelineDescriptor {
+        return container.resolve(MTLComputePipelineDescriptor.self, name: id)!
     }
     
     public init(library: MTLLibrary) {
@@ -92,8 +92,8 @@ public class DescriptorManager {
         xsd.parseEnumTypes(container)
     }
     
-    public func getMtlEnum(name: String, key: String) -> UInt {
-        return container.resolve(S3DMtlEnum.self, name: name)!.getValue(key)
+    public func getMtlEnum(name: String, id: String) -> UInt {
+        return container.resolve(S3DMtlEnum.self, name: name)!.getValue(id)
     }
     
     public func assembleHigherOrderFactories() {
@@ -109,87 +109,77 @@ public class DescriptorManager {
     public func parseS3DXML(s3d: S3DXML) {
         for child in s3d.xml!.root!.children {
             let tag = child.tag!
-            let key = child.attributes["key"]
+            let id = child.attributes["id"]
             
             switch tag {
             case "vertex-function", "fragment-function", "compute-function":
                 let mtlFunction = S3DXMLMTLFunctionNode(library: library).parse(container, elem: child)
-                container.register(MTLFunction.self, name: key!) { _ in
+                container.register(MTLFunction.self, name: id!) { _ in
                     return mtlFunction
                     }.inObjectScope(.Container)
-                
-                //TODO: remove if a single type is sufficient
-                //            case "fragment-function":
-                //                container.register(MTLFunction.self, name: key!) { _ in
-                //                    return S3DXMLMTLFunctionNode().parse(container, elem: child)
-                //                }.inObjectScope(.Container)
-                //            case "compute-function":
-                //                container.register(MTLFunction.self, name: key!) { _ in
-                //                    return S3DXMLMTLFunctionNode().parse(container, elem: child)
-                //                    }.inObjectScope(.Container)
             case "vertex-descriptor":
                 let vertexDesc = S3DXMLMTLVertexDescriptorNode().parse(container, elem: child)
-                container.register(MTLVertexDescriptor.self, name: key!) { _ in
+                container.register(MTLVertexDescriptor.self, name: id!) { _ in
                     return vertexDesc.copy() as! MTLVertexDescriptor
                     }.inObjectScope(.Container)
             case "texture-descriptor":
                 let textureDesc = S3DXMLMTLTextureDescriptorNode().parse(container, elem: child)
-                container.register(MTLTextureDescriptor.self, name: key!) { _ in
+                container.register(MTLTextureDescriptor.self, name: id!) { _ in
                     return textureDesc.copy() as! MTLTextureDescriptor
                     }.inObjectScope(.Container)
             case "sampler-descriptor":
                 let samplerDesc = S3DXMLMTLSamplerDescriptorNode().parse(container, elem: child)
-                container.register(MTLSamplerDescriptor.self, name: key!) { _ in
+                container.register(MTLSamplerDescriptor.self, name: id!) { _ in
                     return samplerDesc.copy() as! MTLSamplerDescriptor
                     }.inObjectScope(.Container)
             case "stencil-descriptor":
                 let stencilDesc = S3DXMLMTLStencilDescriptorNode().parse(container, elem: child)
-                container.register(MTLStencilDescriptor.self, name: key!) { _ in
+                container.register(MTLStencilDescriptor.self, name: id!) { _ in
                     return stencilDesc.copy() as! MTLStencilDescriptor
                     }.inObjectScope(.Container)
             case "depth-stencil-descriptor":
                 let depthStencilDesc = S3DXMLMTLDepthStencilDescriptorNode().parse(container, elem: child)
-                container.register(MTLDepthStencilDescriptor.self, name: key!) { _ in
+                container.register(MTLDepthStencilDescriptor.self, name: id!) { _ in
                     return depthStencilDesc.copy() as! MTLDepthStencilDescriptor
                     }.inObjectScope(.Container)
             case "render-pipeline-color-attachment-descriptor":
                 let colorAttachmentDesc = S3DXMLMTLColorAttachmentDescriptorNode().parse(container, elem: child)
-                container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: key!) { _ in
+                container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: id!) { _ in
                     return colorAttachmentDesc.copy() as! MTLRenderPipelineColorAttachmentDescriptor
                     }.inObjectScope(.Container)
             case "render-pipeline-descriptor":
                 let renderPipelineDesc = S3DXMLMTLRenderPipelineDescriptorNode().parse(container, elem: child)
-                container.register(MTLRenderPipelineDescriptor.self, name: key!) { _ in
+                container.register(MTLRenderPipelineDescriptor.self, name: id!) { _ in
                     return renderPipelineDesc.copy() as! MTLRenderPipelineDescriptor
                     }.inObjectScope(.Container)
             case "compute-pipeline-descriptor":
                 let computePipelineDesc = S3DXMLMTLComputePipelineDescriptorNode().parse(container, elem: child)
-                container.register(MTLComputePipelineDescriptor.self, name: key!) { _ in
+                container.register(MTLComputePipelineDescriptor.self, name: id!) { _ in
                     return computePipelineDesc.copy() as! MTLComputePipelineDescriptor
                     }.inObjectScope(.Container)
             case "clear-color":
                 let clearColor = S3DXMLMTLClearColorNode().parse(container, elem: child)
-                container.register(MTLClearColor.self, name: key!) { _ in
+                container.register(MTLClearColor.self, name: id!) { _ in
                     return clearColor // struct (no need for copy)
                 }.inObjectScope(.Container)
             case "render-pass-color-attachment-descriptor":
                 let renderPassColorAttachDesc = S3DXMLMTLRenderPassColorAttachmentDescriptorNode().parse(container, elem: child)
-                container.register(MTLRenderPassColorAttachmentDescriptor.self, name: key!) { _ in
+                container.register(MTLRenderPassColorAttachmentDescriptor.self, name: id!) { _ in
                     return renderPassColorAttachDesc.copy() as! MTLRenderPassColorAttachmentDescriptor
                 }.inObjectScope(.Container)
             case "render-pass-depth-attachment-descriptor":
                 let renderPassDepthAttachDesc = S3DXMLMTLRenderPassDepthAttachmentDescriptorNode().parse(container, elem: child)
-                container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: key!) { _ in
+                container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: id!) { _ in
                     return renderPassDepthAttachDesc.copy() as! MTLRenderPassDepthAttachmentDescriptor
                 }.inObjectScope(.Container)
             case "render-pass-stencil-attachment-descriptor":
                 let renderPassStencilAttachDesc = S3DXMLMTLRenderPassStencilAttachmentDescriptorNode().parse(container, elem: child)
-                container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: key!) { _ in
+                container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: id!) { _ in
                     return renderPassStencilAttachDesc.copy() as! MTLRenderPassStencilAttachmentDescriptor
                 }.inObjectScope(.Container)
             case "render-pass-descriptor":
                 let renderPassDescriptor = S3DXMLMTLRenderPassDescriptorNode().parse(container, elem: child)
-                container.register(MTLRenderPassDescriptor.self, name: key!) { _ in
+                container.register(MTLRenderPassDescriptor.self, name: id!) { _ in
                     return renderPassDescriptor.copy() as! MTLRenderPassDescriptor
                 }.inObjectScope(.Container)
             default:
@@ -212,17 +202,17 @@ public class DescriptorManager {
         
         // MTLRenderPassColorAttachmentDescriptor
         
-        container.register(MTLRenderPassColorAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture) in
-            // look up base color attachment by key, then copy and attach the texture
-            var desc = r.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: key)!
+        container.register(MTLRenderPassColorAttachmentDescriptor.self) { (r, id: String, texture: MTLTexture) in
+            // look up base color attachment by id, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: id)!
             desc = desc.copy() as! MTLRenderPassColorAttachmentDescriptor
             desc.texture = texture
             return desc
             }.inObjectScope(.None) // .None ensure the function always creates a new object
         
-        container.register(MTLRenderPassColorAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture, resolveTexture: MTLTexture) in
-            // look up base color attachment by key, then copy and attach the texture
-            var desc = r.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: key)!
+        container.register(MTLRenderPassColorAttachmentDescriptor.self) { (r, id: String, texture: MTLTexture, resolveTexture: MTLTexture) in
+            // look up base color attachment by id, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: id)!
             desc = desc.copy() as! MTLRenderPassColorAttachmentDescriptor
             desc.texture = texture
             desc.resolveTexture = resolveTexture
@@ -231,17 +221,17 @@ public class DescriptorManager {
         
         // MTLRenderPassDepthAttachmentDescriptor
         
-        container.register(MTLRenderPassDepthAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture) in
-            // look up base color attachment by key, then copy and attach the texture
-            var desc = r.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: key)!
+        container.register(MTLRenderPassDepthAttachmentDescriptor.self) { (r, id: String, texture: MTLTexture) in
+            // look up base color attachment by id, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: id)!
             desc = desc.copy() as! MTLRenderPassDepthAttachmentDescriptor
             desc.texture = texture
             return desc
             }.inObjectScope(.None) // .None ensure the function always creates a new object
         
-        container.register(MTLRenderPassDepthAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture, resolveTexture: MTLTexture) in
-            // look up base color attachment by key, then copy and attach the texture
-            var desc = r.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: key)!
+        container.register(MTLRenderPassDepthAttachmentDescriptor.self) { (r, id: String, texture: MTLTexture, resolveTexture: MTLTexture) in
+            // look up base color attachment by id, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: id)!
             desc = desc.copy() as! MTLRenderPassDepthAttachmentDescriptor
             desc.texture = texture
             desc.resolveTexture = resolveTexture
@@ -250,17 +240,17 @@ public class DescriptorManager {
         
         // MTLRenderPassStencilAttachmentDescriptor
         
-        container.register(MTLRenderPassStencilAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture) in
-            // look up base color attachment by key, then copy and attach the texture
-            var desc = r.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: key)!
+        container.register(MTLRenderPassStencilAttachmentDescriptor.self) { (r, id: String, texture: MTLTexture) in
+            // look up base color attachment by id, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: id)!
             desc = desc.copy() as! MTLRenderPassStencilAttachmentDescriptor
             desc.texture = texture
             return desc
             }.inObjectScope(.None) // .None ensure the function always creates a new object
         
-        container.register(MTLRenderPassStencilAttachmentDescriptor.self) { (r, key: String, texture: MTLTexture, resolveTexture: MTLTexture) in
-            // look up base color attachment by key, then copy and attach the texture
-            var desc = r.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: key)!
+        container.register(MTLRenderPassStencilAttachmentDescriptor.self) { (r, id: String, texture: MTLTexture, resolveTexture: MTLTexture) in
+            // look up base color attachment by id, then copy and attach the texture
+            var desc = r.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: id)!
             desc = desc.copy() as! MTLRenderPassStencilAttachmentDescriptor
             desc.texture = texture
             desc.resolveTexture = resolveTexture

@@ -23,22 +23,22 @@ class AssetManagerSpec: QuickSpec {
         
         describe("SpectraEnums") {
             it("loads the enums for ModelIO and/or Metal") {
-                let f4 = assetMan.getEnum("mdlVertexFormat", key: "Float4")
+                let f4 = assetMan.getEnum("mdlVertexFormat", id: "Float4")
                 expect(f4) == MDLVertexFormat.Float4.rawValue
                 
-                let materialSemantic = assetMan.getEnum("mdlMaterialSemantic", key: "SpecularExponent")
+                let materialSemantic = assetMan.getEnum("mdlMaterialSemantic", id: "SpecularExponent")
                 expect(materialSemantic) == MDLMaterialSemantic.SpecularExponent.rawValue
                 
-                let materialPropertyType = assetMan.getEnum("mdlMaterialPropertyType", key: "Texture")
+                let materialPropertyType = assetMan.getEnum("mdlMaterialPropertyType", id: "Texture")
                 expect(materialPropertyType) == MDLMaterialPropertyType.Texture.rawValue
                 
-                let textureWrapMode = assetMan.getEnum("mdlMaterialTextureWrapMode", key: "Clamp")
+                let textureWrapMode = assetMan.getEnum("mdlMaterialTextureWrapMode", id: "Clamp")
                 expect(textureWrapMode) == MDLMaterialTextureWrapMode.Clamp.rawValue
                 
-                let textureFilterMode = assetMan.getEnum("mdlMaterialTextureFilterMode", key: "Linear")
+                let textureFilterMode = assetMan.getEnum("mdlMaterialTextureFilterMode", id: "Linear")
                 expect(textureFilterMode) == MDLMaterialTextureFilterMode.Linear.rawValue
                 
-                let mipMapFilterMode = assetMan.getEnum("mdlMaterialMipMapFilterMode", key: "Linear")
+                let mipMapFilterMode = assetMan.getEnum("mdlMaterialMipMapFilterMode", id: "Linear")
                 expect(mipMapFilterMode) == MDLMaterialMipMapFilterMode.Linear.rawValue
             }
         }

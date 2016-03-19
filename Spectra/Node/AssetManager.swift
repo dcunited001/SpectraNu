@@ -22,8 +22,8 @@ public class AssetManager {
         container = spectraXSD.parseXSD(spectraEnumXSD, container: container)
     }
     
-    public func getEnum(name: String, key: String) -> UInt {
-        return container.resolve(SpectraEnum.self, name: name)!.getValue(key)
+    public func getEnum(name: String, id: String) -> UInt {
+        return container.resolve(SpectraEnum.self, name: name)!.getValue(id)
     }
 }
 

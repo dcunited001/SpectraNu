@@ -57,18 +57,18 @@ class SpectraXMLSpec: QuickSpec {
 //        }
 //        
 //        describe("object") {
-//            let scene1: MDLObject = self.containerGet(assetContainer, key: "scene1")!
+//            let scene1: MDLObject = self.containerGet(assetContainer, id: "scene1")!
 //            
 //            it("can create basic objects") {
-//                let objDefault: MDLObject = self.containerGet(assetContainer, key: "default")!
+//                let objDefault: MDLObject = self.containerGet(assetContainer, id: "default")!
 //                expect(objDefault.transform).to(beNil())
 //                expect(objDefault.name) == "default"
 //            }
 //            
 //            it("can create nested objects") {
-//                let xform: MDLTransform = self.containerGet(assetContainer, key: "xform_translate")!
-//                let cam: MDLCamera = self.containerGet(assetContainer, key: "default")!
-//                let stereoCam: MDLStereoscopicCamera = self.containerGet(assetContainer, key: "default")!
+//                let xform: MDLTransform = self.containerGet(assetContainer, id: "xform_translate")!
+//                let cam: MDLCamera = self.containerGet(assetContainer, id: "default")!
+//                let stereoCam: MDLStereoscopicCamera = self.containerGet(assetContainer, id: "default")!
 //                
 //                expect(scene1.children)
 //            }

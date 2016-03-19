@@ -25,10 +25,8 @@ public class S3DMtlEnum {
         }
     }
     
-    // TODO: why didn't a simple [String: UInt] dictionary suffice? instead of MtlEnum class?
-    // TODO: why not just use UInt?
-    public func getValue(key: String) -> UInt {
-        return values[key]!
+    public func getValue(id: String) -> UInt {
+        return values[id]!
     }
     
 //    public func convertToEnum(key: String, val: Int) -> AnyObject {

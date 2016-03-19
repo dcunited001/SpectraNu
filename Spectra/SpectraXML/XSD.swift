@@ -25,8 +25,8 @@ public class SpectraEnum {
         }
     }
 
-    public func getValue(key: String) -> UInt {
-        return values[key]!
+    public func getValue(id: String) -> UInt {
+        return values[id]!
     }
 }
 

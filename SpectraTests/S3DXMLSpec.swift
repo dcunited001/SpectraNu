@@ -28,7 +28,7 @@ class S3DXMLSpec: QuickSpec {
         
         describe("DescriptorManager") {
             it("parses enumGroups from XSD") {
-                expect(descMan.getMtlEnum("mtlSamplerAddressMode", key: "ClampToEdge") == 0)
+                expect(descMan.getMtlEnum("mtlSamplerAddressMode", id: "ClampToEdge") == 0)
             }
         }
         

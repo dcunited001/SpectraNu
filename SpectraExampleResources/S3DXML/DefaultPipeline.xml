@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <vertex-function key="basic_color_vertex"/>
-    <fragment-function key="basic_color_fragment"/>
+    <vertex-function id="basic_color_vertex"/>
+    <fragment-function id="basic_color_fragment"/>
     
-    <vertex-descriptor key="common_vertex_desc">
+    <vertex-descriptor id="common_vertex_desc">
         <vertex-attribute-descriptors>
             <vertex-attribute-descriptor name="pos"   format="Float4" offset="0" buffer-index="0" />
             <vertex-attribute-descriptor name="rgba"  format="Float4" offset="16" buffer-index="0" />
@@ -16,7 +16,7 @@
         </vertex-buffer-layout-descriptors>
     </vertex-descriptor>
     
-    <render-pipeline-descriptor key="render_pipeline_desc"
+    <render-pipeline-descriptor id="render_pipeline_desc"
         label="render-pipeline-descriptor"
         depth-attachment-pixel-format="Depth32Float"
         stencil-attachment-pixel-format="Stencil8">
