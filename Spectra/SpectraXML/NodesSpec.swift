@@ -13,7 +13,7 @@ import Fuzi
 import Swinject
 import ModelIO
 
-class SpectraXMLNodesSpec: QuickSpec {
+class SpectraNodeSpec: QuickSpec {
     
     override func spec() {
         let parsedEnums = Container()
@@ -23,7 +23,7 @@ class SpectraXMLNodesSpec: QuickSpec {
         spectraXSD.parseXSD(spectraEnumXSD, container: parsedEnums)
         let parsedNodes = Container(parent: parsedEnums)
         
-        let testBundle = NSBundle(forClass: SpectraXMLSpec.self)
+        let testBundle = NSBundle(forClass: SpectraNodeSpec.self)
         let spectraParser = SpectraParser(nodes: parsedNodes)
         let spectraXML = SpectraParser.readXML(testBundle, filename: "SpectraXMLSpec", bundleResourceName: nil)!
         spectraParser.parseXML(spectraXML)
