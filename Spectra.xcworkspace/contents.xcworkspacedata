@@ -53,7 +53,7 @@
       </Group>
       <Group
          location = "group:S3DXML"
-         name = "S3DXML">
+         name = "MetalParser">
          <FileRef
             location = "group:DescriptorManager.swift">
          </FileRef>
@@ -61,7 +61,7 @@
             location = "group:S3DXML.swift">
          </FileRef>
          <FileRef
-            location = "group:S3DXSD.swift">
+            location = "group:/Users/dc/dev/apple/Spectra/Spectra/S3DXML/MetalXSD.swift">
          </FileRef>
          <FileRef
             location = "group:StateManager.swift">
