@@ -260,7 +260,7 @@
          </FileRef>
       </Group>
       <FileRef
-         location = "group:S3DXMLSpec.swift">
+         location = "group:/Users/dc/dev/apple/Spectra/SpectraTests/MetalNodeSpec.swift">
       </FileRef>
       <FileRef
          location = "group:AssetManagerSpec.swift">
