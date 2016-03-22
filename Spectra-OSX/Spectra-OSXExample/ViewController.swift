@@ -10,6 +10,7 @@ import Cocoa
 import Spectra
 import Fuzi
 import Metal
+import Swinject
 
 class ViewController: NSViewController {
     
@@ -19,16 +20,20 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // TODO: tie device/library to those initialized in containers
+        
         self.device = MTLCreateSystemDefaultDevice()
         self.library = device!.newDefaultLibrary()
 
         // Do any additional setup after loading the view.
         let appBundle = NSBundle(forClass: ViewController.self)
-        let xmlData: NSData = S3DXML.readXML(appBundle, filename: "DefaultPipeline")
-        let s3d = S3DXML(data: xmlData)
-
-        var descMan = DescriptorManager(library: library!)
-        descMan.parseS3DXML(s3d)
+        let xml = MetalParser.readXML(appBundle, filename: "DefaultPipeline", bundleResourceName: nil)!
+        
+        let metaContainer = MetalParser.initMetalEnums(Container())
+        MetalParser.initMetal(metaContainer)
+        
+        let metalParser = MetalParser(parentContainer: metaContainer)
+        metalParser.parseXML(xml)
     }
 
     override var representedObject: AnyObject? {
