@@ -29,15 +29,6 @@ class S3DXMLSpec: QuickSpec {
         let metalParser = MetalParser(parentContainer: metaContainer)
         metalParser.parseXML(xml)
         
-//        var metalParser = DescriptorManager(library: library!)
-//        metalParser.parseS3DXML(s3d)
-        
-//        describe("DescriptorManager") {
-//            it("parses enumGroups from XSD") {
-//                expect(metalParser.getMtlEnum("mtlSamplerAddressMode", id: "ClampToEdge") == 0)
-//            }
-//        }
-        
         describe("MetalParser") {
             
             it("has a container with a default device & library") {

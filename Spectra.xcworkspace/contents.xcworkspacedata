@@ -55,9 +55,6 @@
          location = "group:S3DXML"
          name = "MetalParser">
          <FileRef
-            location = "group:DescriptorManager.swift">
-         </FileRef>
-         <FileRef
             location = "group:/Users/dc/dev/apple/Spectra/Spectra/S3DXML/MetalNodes.swift">
          </FileRef>
          <FileRef

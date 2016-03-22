@@ -42,7 +42,6 @@
 		435C270F1C8F6F0000CEEFD0 /* SpectraXMLSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 435C270E1C8F6F0000CEEFD0 /* SpectraXMLSpec.xml */; };
 		43719B331C8808F900C14D56 /* MetalEnums.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 43719B321C8808F900C14D56 /* MetalEnums.xsd */; };
 		43719B371C88FEDF00C14D56 /* ArchimedeanSolids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43719B361C88FEDF00C14D56 /* ArchimedeanSolids.swift */; };
-		4371E89B1C190952001D1C39 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */; };
 		4371E89C1C190952001D1C39 /* MetalParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FA1C18B39A007D3DF6 /* MetalParser.swift */; };
 		4371E89D1C190952001D1C39 /* MetalNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FB1C18B39A007D3DF6 /* MetalNodes.swift */; };
 		4371E89F1C190952001D1C39 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B7FD1C18B39A007D3DF6 /* StateManager.swift */; };
@@ -174,7 +173,6 @@
 		4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
 		4334D6E21C1FAF4E00D2DCA6 /* MetalNodeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalNodeSpec.swift; sourceTree = "<group>"; };
-		4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptorManager.swift; sourceTree = "<group>"; };
 		4338B7FA1C18B39A007D3DF6 /* MetalParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalParser.swift; sourceTree = "<group>"; };
 		4338B7FB1C18B39A007D3DF6 /* MetalNodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalNodes.swift; sourceTree = "<group>"; };
 		4338B7FD1C18B39A007D3DF6 /* StateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
@@ -362,7 +360,6 @@
 		4338B7FE1C18B39A007D3DF6 /* S3DXML */ = {
 			isa = PBXGroup;
 			children = (
-				4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */,
 				4338B7FA1C18B39A007D3DF6 /* MetalParser.swift */,
 				4338B7FB1C18B39A007D3DF6 /* MetalNodes.swift */,
 				4338B7FD1C18B39A007D3DF6 /* StateManager.swift */,
@@ -850,7 +847,6 @@
 				4371E8A11C190957001D1C39 /* Mesh.swift in Sources */,
 				4371E89C1C190952001D1C39 /* MetalParser.swift in Sources */,
 				4371E8B41C190960001D1C39 /* PipelineGenerator.swift in Sources */,
-				4371E89B1C190952001D1C39 /* DescriptorManager.swift in Sources */,
 				4388340D1C9391170098D71A /* SubmeshGenerator.swift in Sources */,
 				4371E89F1C190952001D1C39 /* StateManager.swift in Sources */,
 				4371E8B51C190960001D1C39 /* Renderer.swift in Sources */,
