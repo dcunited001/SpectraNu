@@ -33,7 +33,7 @@
 		4317EA4C1C8C4A4A0019B2E2 /* Fuzi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4317EA0A1C8C23AD0019B2E2 /* Fuzi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4334D67E1C1F5E7700D2DCA6 /* BasicShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */; };
 		4334D68E1C1F6EF600D2DCA6 /* Spectra3D.xsd in Resources */ = {isa = PBXBuildFile; fileRef = 4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */; };
-		4334D6E71C1FAF4E00D2DCA6 /* S3DXMLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */; };
+		4334D6E71C1FAF4E00D2DCA6 /* MetalNodeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4334D6E21C1FAF4E00D2DCA6 /* MetalNodeSpec.swift */; };
 		4338B8D11C18DC92007D3DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8D01C18DC92007D3DF6 /* AppDelegate.swift */; };
 		4338B8D31C18DC92007D3DF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8D21C18DC92007D3DF6 /* ViewController.swift */; };
 		4338B8D61C18DC92007D3DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4338B8D41C18DC92007D3DF6 /* Main.storyboard */; };
@@ -173,7 +173,7 @@
 		4317EA1D1C8C31940019B2E2 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = ../Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		4334D67C1C1F5E7700D2DCA6 /* BasicShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = BasicShaders.metal; sourceTree = "<group>"; };
 		4334D6891C1F6ECA00D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
-		4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXMLSpec.swift; sourceTree = "<group>"; };
+		4334D6E21C1FAF4E00D2DCA6 /* MetalNodeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalNodeSpec.swift; sourceTree = "<group>"; };
 		4338B7F91C18B39A007D3DF6 /* DescriptorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptorManager.swift; sourceTree = "<group>"; };
 		4338B7FA1C18B39A007D3DF6 /* MetalParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalParser.swift; sourceTree = "<group>"; };
 		4338B7FB1C18B39A007D3DF6 /* MetalNodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalNodes.swift; sourceTree = "<group>"; };
@@ -339,7 +339,7 @@
 				43BDD45C1C8ED64800AEFA9E /* Textures */,
 				4334D6E11C1FAF4E00D2DCA6 /* MeshGenerators */,
 				4388340F1C9391DF0098D71A /* Submeshes */,
-				4334D6E21C1FAF4E00D2DCA6 /* S3DXMLSpec.swift */,
+				4334D6E21C1FAF4E00D2DCA6 /* MetalNodeSpec.swift */,
 				43D4FDD11C7C3E9D004E2CF7 /* SpectraXMLSpec.swift */,
 				43AC4EFA1C941F220006F4B5 /* AssetManagerSpec.swift */,
 				43AC4EFB1C941F220006F4B5 /* SpectraSharedExamples.swift */,
@@ -879,7 +879,7 @@
 				43EAF8421C0A2FF500EA2B30 /* Spectra_iOSTests.swift in Sources */,
 				43D40E1E1C923B9600DB35D3 /* XSDSpec.swift in Sources */,
 				43D4FDD21C7C3E9D004E2CF7 /* SpectraXMLSpec.swift in Sources */,
-				4334D6E71C1FAF4E00D2DCA6 /* S3DXMLSpec.swift in Sources */,
+				4334D6E71C1FAF4E00D2DCA6 /* MetalNodeSpec.swift in Sources */,
 				43D40E201C923B9600DB35D3 /* ParserSpec.swift in Sources */,
 				4317EA291C8C36E10019B2E2 /* RandomMeshGeneratorsSpec.swift in Sources */,
 				438834111C9391E60098D71A /* BasicSubmeshGeneratorsSpec.swift in Sources */,
