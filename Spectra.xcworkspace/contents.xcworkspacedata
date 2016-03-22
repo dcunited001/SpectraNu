@@ -58,10 +58,10 @@
             location = "group:DescriptorManager.swift">
          </FileRef>
          <FileRef
-            location = "group:S3DXML.swift">
+            location = "group:/Users/dc/dev/apple/Spectra/Spectra/S3DXML/MetalNodes.swift">
          </FileRef>
          <FileRef
-            location = "group:/Users/dc/dev/apple/Spectra/Spectra/S3DXML/MetalXSD.swift">
+            location = "group:/Users/dc/dev/apple/Spectra/Spectra/S3DXML/MetalParser.swift">
          </FileRef>
          <FileRef
             location = "group:StateManager.swift">

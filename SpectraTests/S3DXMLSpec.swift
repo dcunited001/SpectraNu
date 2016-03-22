@@ -21,12 +21,13 @@ class S3DXMLSpec: QuickSpec {
         let device = MTLCreateSystemDefaultDevice()
         let library = device!.newDefaultLibrary()
         let testBundle = NSBundle(forClass: S3DXMLSpec.self)
-        let xmlData: NSData = S3DXML.readXML(testBundle, filename: "S3DXMLTest")
+        let xml = MetalParser.readXML(testBundle, filename: "S3DXMLTest", bundleResourceName: nil)!
 
         let metaContainer = MetalParser.initMetalEnums(Container())
         MetalParser.initMetal(metaContainer)
         
         let metalParser = MetalParser(parentContainer: metaContainer)
+        metalParser.parseXML(xml)
         
 //        var metalParser = DescriptorManager(library: library!)
 //        metalParser.parseS3DXML(s3d)

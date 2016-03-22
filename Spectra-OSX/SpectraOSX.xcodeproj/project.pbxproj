@@ -61,8 +61,8 @@
 		4371E8941C19092F001D1C39 /* Vertexable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B84E1C18B3AF007D3DF6 /* Vertexable.swift */; };
 		4371E8951C19092F001D1C39 /* WorldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B84F1C18B3AF007D3DF6 /* WorldView.swift */; };
 		4371E8961C190934001D1C39 /* DescriptorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8401C18B3AF007D3DF6 /* DescriptorManager.swift */; };
-		4371E8971C190934001D1C39 /* S3DXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8411C18B3AF007D3DF6 /* S3DXML.swift */; };
-		4371E8981C190934001D1C39 /* S3DXSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8421C18B3AF007D3DF6 /* S3DXSD.swift */; };
+		4371E8971C190934001D1C39 /* MetalNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8411C18B3AF007D3DF6 /* MetalNodes.swift */; };
+		4371E8981C190934001D1C39 /* MetalParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8421C18B3AF007D3DF6 /* MetalParser.swift */; };
 		4371E89A1C190934001D1C39 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8441C18B3AF007D3DF6 /* StateManager.swift */; };
 		4371E8BC1C190991001D1C39 /* Spectra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4338B8641C18B3AF007D3DF6 /* Spectra.swift */; };
 		437D18F61C8CF28D00C70975 /* LightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437D18F41C8CF28D00C70975 /* LightGenerator.swift */; };
@@ -183,8 +183,8 @@
 		4334D68B1C1F6ED800D2DCA6 /* Spectra3D.xsd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Spectra3D.xsd; path = ../../SpectraAssets/Spectra3D.xsd; sourceTree = "<group>"; };
 		4334D6D61C1FACB200D2DCA6 /* S3DXMLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXMLSpec.swift; sourceTree = "<group>"; };
 		4338B8401C18B3AF007D3DF6 /* DescriptorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptorManager.swift; sourceTree = "<group>"; };
-		4338B8411C18B3AF007D3DF6 /* S3DXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXML.swift; sourceTree = "<group>"; };
-		4338B8421C18B3AF007D3DF6 /* S3DXSD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3DXSD.swift; sourceTree = "<group>"; };
+		4338B8411C18B3AF007D3DF6 /* MetalNodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalNodes.swift; sourceTree = "<group>"; };
+		4338B8421C18B3AF007D3DF6 /* MetalParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalParser.swift; sourceTree = "<group>"; };
 		4338B8441C18B3AF007D3DF6 /* StateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		4338B8461C18B3AF007D3DF6 /* Camable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camable.swift; sourceTree = "<group>"; };
 		4338B8471C18B3AF007D3DF6 /* Mesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
@@ -381,8 +381,8 @@
 			isa = PBXGroup;
 			children = (
 				4338B8401C18B3AF007D3DF6 /* DescriptorManager.swift */,
-				4338B8411C18B3AF007D3DF6 /* S3DXML.swift */,
-				4338B8421C18B3AF007D3DF6 /* S3DXSD.swift */,
+				4338B8411C18B3AF007D3DF6 /* MetalNodes.swift */,
+				4338B8421C18B3AF007D3DF6 /* MetalParser.swift */,
 				4338B8441C18B3AF007D3DF6 /* StateManager.swift */,
 			);
 			path = S3DXML;
@@ -876,7 +876,7 @@
 				4371E87C1C190921001D1C39 /* BufferTexture.swift in Sources */,
 				4371E88E1C19092F001D1C39 /* Modelable.swift in Sources */,
 				4371E8951C19092F001D1C39 /* WorldView.swift in Sources */,
-				4371E8971C190934001D1C39 /* S3DXML.swift in Sources */,
+				4371E8971C190934001D1C39 /* MetalNodes.swift in Sources */,
 				43D40E121C90882500DB35D3 /* XSD.swift in Sources */,
 				4388340A1C9390C30098D71A /* SubmeshGenerator.swift in Sources */,
 				43D40E111C90882500DB35D3 /* Parser.swift in Sources */,
@@ -900,7 +900,7 @@
 				4371E88D1C19092F001D1C39 /* Mesh.swift in Sources */,
 				4317E9E61C8BC1E30019B2E2 /* TextureGenerator.swift in Sources */,
 				4371E87E1C190921001D1C39 /* InflightResourceManager.swift in Sources */,
-				4371E8981C190934001D1C39 /* S3DXSD.swift in Sources */,
+				4371E8981C190934001D1C39 /* MetalParser.swift in Sources */,
 				43BDD4671C8EF3C800AEFA9E /* ModelIOTextureGenerators.swift in Sources */,
 				4317E9D11C8BAD470019B2E2 /* ModelIOMeshGenerators.swift in Sources */,
 				4371E8881C190928001D1C39 /* MeshGenerator.swift in Sources */,

@@ -27,8 +27,7 @@ import ModelIO
 //     - how to distinguish the params defined in option for a parent node and child nodes
 //   - (3) otherwise, run the default behavior for fetching params from Container Map
 // ...
-public typealias GeneratorClosure = ((containers: [String: Container], options: [String: Any]?) ->
-    (containers: [String: Container], options: [String: Any]?))
+public typealias GeneratorClosure = ((containers: [String: Container], options: [String: Any]?) -> (containers: [String: Container], options: [String: Any]?))
 public typealias RegisterClosure = (containers: [String: Container], options: [String: Any]?) -> (containers: [String: Container], options: [String: Any]?)
 
 public protocol SpectraParserNode {

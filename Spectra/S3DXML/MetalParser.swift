@@ -11,6 +11,8 @@ import Fuzi
 import Swinject
 
 public enum MetalNodeType: String {
+    // TODO: add MTLLibrary node? how to specify method to retrieve libraries?
+    // TODO: add MTLDevice node?  how to specify?
     case VertexFunction = "vertex-function"
     case FragmentFunction = "fragment-function"
     case ComputeFunction = "compute-function"
@@ -22,6 +24,7 @@ public enum MetalNodeType: String {
     case SamplerDescriptor = "sampler-descriptor"
     case StencilDescriptor = "stencil-descriptor"
     case DepthStencilDescriptor = "depth-stencil-descriptor"
+    case RenderPipelineColorAttachmentDescriptor = "render-pipeline-color-attachment-descriptor"
     case RenderPipelineDescriptor = "render-pipeline-descriptor"
     case ComputePipelineDescriptor = "compute-pipeline-descriptor"
     case RenderPassColorAttachmentDescriptor = "render-pass-color-attachment-descriptor"
@@ -30,19 +33,11 @@ public enum MetalNodeType: String {
     case RenderPassDescriptor = "render-pass-descriptor"
 }
 
-public typealias MetalNodeBuilder = ((containers: [String: Container], options: [String: Any]?)) -> (containers: [String: Container], options: [String: Any]?)
-public typealias MetalRegBuilder = ((containers: [String: Container], options: [String: Any]?)) -> (containers: [String: Container], options: [String: Any]?)
-
-// TODO: switch to format similar to SpectraXML 
-// - maybe? these objects are all easily copyable
-public protocol MetalNode {
-    typealias NodeType
-    func parse(container: Container, elem: XMLElement, options: [String: AnyObject]) -> NodeType
-}
-
 public class MetalParser {
     // NOTE: if device/library
     public var nodes: Container!
+    
+    // TODO: copy on resolve setting (false == never copy, true == always copy)
     
     public init(nodes: Container = Container()) {
         self.nodes = nodes
@@ -56,71 +51,117 @@ public class MetalParser {
         return nodes.resolve(MetalEnum.self, name: name)!.getValue(id)
     }
     
-    public func getVertexFunction(id: String) -> MTLFunction {
-        return nodes.resolve(MTLFunction.self, name: id)!
+    public func getVertexFunction(id: String) -> FunctionNode {
+        let n = nodes.resolve(FunctionNode.self, name: id)!
+        return n.copy()
     }
     
-    public func getFragmentFunction(id: String) -> MTLFunction {
-        return nodes.resolve(MTLFunction.self, name: id)!
+    public func getFragmentFunction(id: String) -> FunctionNode {
+        let n = nodes.resolve(FunctionNode.self, name: id)!
+        return n.copy()
     }
     
-    public func getComputeFunction(id: String) -> MTLFunction {
-        return nodes.resolve(MTLFunction.self, name: id)!
+    public func getComputeFunction(id: String) -> FunctionNode {
+        let n = nodes.resolve(FunctionNode.self, name: id)!
+        return n.copy()
     }
     
-    public func getVertexDescriptor(id: String) -> MTLVertexDescriptor {
-        return nodes.resolve(MTLVertexDescriptor.self, name: id)!
+    public func getVertexDescriptor(id: String) -> MetalVertexDescriptorNode {
+        let n = nodes.resolve(MetalVertexDescriptorNode.self, name: id)!
+        return n.copy()
     }
     
-    public func getTextureDescriptor(id: String) -> MTLTextureDescriptor {
-        return nodes.resolve(MTLTextureDescriptor.self, name: id)!
-    }
+//    public func getTextureDescriptor(id: String) -> TextureDescriptorNode {
+//        return nodes.resolve(TextureDescriptorNode.self, name: id)!
+//    }
+//    
+//    public func getSamplerDescriptor(id: String) -> SamplerDescriptorNode {
+//        return nodes.resolve(SamplerDescriptorNode.self, name: id)!
+//    }
+//    
+//    public func getStencilDescriptor(id: String) -> StencilDescriptorNode {
+//        return nodes.resolve(StencilDescriptorNode.self, name: id)!
+//    }
+//    
+//    public func getDepthStencilDescriptor(id: String) -> DepthStencilDescriptorNode {
+//        return nodes.resolve(DepthStencilDescriptorNode.self, name: id)!
+//    }
     
-    public func getSamplerDescriptor(id: String) -> MTLSamplerDescriptor {
-        return nodes.resolve(MTLSamplerDescriptor.self, name: id)!
-    }
+//    public func getColorAttachmentDescriptor(id: String) -> MTLRenderPipelineColorAttachmentDescriptor {
+//        return nodes.resolve(MTLRenderPipelineColorAttachmentDescriptor.self, name: id)!
+//    }
+//    
+//    public func getRenderPipelineDescriptor(id: String) -> MTLRenderPipelineDescriptor {
+//        return nodes.resolve(MTLRenderPipelineDescriptor.self, name: id)!
+//    }
+//    
+//    public func getClearColor(id: String) -> MTLClearColor {
+//        return nodes.resolve(MTLClearColor.self, name: id)!
+//    }
+//    
+//    public func getRenderPassColorAttachmentDescriptor(id: String) -> MTLRenderPassColorAttachmentDescriptor {
+//        return nodes.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: id)!
+//    }
+//    
+//    public func getRenderPassDepthAttachmentDescriptor(id: String) -> MTLRenderPassDepthAttachmentDescriptor {
+//        return nodes.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: id)!
+//    }
+//    
+//    public func getRenderPassStencilAttachmentDescriptor(id: String) -> MTLRenderPassStencilAttachmentDescriptor {
+//        return nodes.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: id)!
+//    }
+//    
+//    public func getRenderPassDescriptor(id: String) -> MTLRenderPassDescriptor {
+//        return nodes.resolve(MTLRenderPassDescriptor.self, name: id)!
+//    }
+//    
+//    public func getComputePipelineDescriptor(id: String) -> MTLComputePipelineDescriptor {
+//        return nodes.resolve(MTLComputePipelineDescriptor.self, name: id)!
+//    }
     
-    public func getStencilDescriptor(id: String) -> MTLStencilDescriptor {
-        return nodes.resolve(MTLStencilDescriptor.self, name: id)!
+    public func parseXML(xml: XMLDocument) {
+        for elem in xml.root!.children {
+            let (tag, id) = (elem.tag!, elem.attributes["id"])
+            
+            if let nodeType = MetalNodeType(rawValue: tag) {
+                
+                switch nodeType {
+                case .VertexFunction:
+                    let node = FunctionNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
+                case .FragmentFunction:
+                    let node = FunctionNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
+                case .ComputeFunction:
+                    let node = FunctionNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
+                // TODO: case: .OptionSet? : break
+                case .VertexDescriptor:
+                    let node = MetalVertexDescriptorNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
+                case .VertexAttributeDescriptor:
+                    let node = VertexAttributeDescriptorNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
+                case .VertexBufferLayoutDescriptor:
+                    let node = VertexBufferLayoutDescriptorNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
+                case .TextureDescriptor: break
+                case .SamplerDescriptor: break
+                case .StencilDescriptor: break
+                case .DepthStencilDescriptor: break
+                case .RenderPipelineColorAttachmentDescriptor: break
+                case .RenderPipelineDescriptor: break
+                case .ComputePipelineDescriptor: break
+                case .ClearColor: break
+                case .RenderPassColorAttachmentDescriptor: break
+                case .RenderPassDepthAttachmentDescriptor: break
+                case .RenderPassStencilAttachmentDescriptor: break
+                case .RenderPassDescriptor: break
+                default: break
+                }
+            }
+        }
     }
-    
-    public func getDepthStencilDescriptor(id: String) -> MTLDepthStencilDescriptor {
-        return nodes.resolve(MTLDepthStencilDescriptor.self, name: id)!
-    }
-    
-    public func getColorAttachmentDescriptor(id: String) -> MTLRenderPipelineColorAttachmentDescriptor {
-        return nodes.resolve(MTLRenderPipelineColorAttachmentDescriptor.self, name: id)!
-    }
-    
-    public func getRenderPipelineDescriptor(id: String) -> MTLRenderPipelineDescriptor {
-        return nodes.resolve(MTLRenderPipelineDescriptor.self, name: id)!
-    }
-    
-    public func getClearColor(id: String) -> MTLClearColor {
-        return nodes.resolve(MTLClearColor.self, name: id)!
-    }
-    
-    public func getRenderPassColorAttachmentDescriptor(id: String) -> MTLRenderPassColorAttachmentDescriptor {
-        return nodes.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: id)!
-    }
-    
-    public func getRenderPassDepthAttachmentDescriptor(id: String) -> MTLRenderPassDepthAttachmentDescriptor {
-        return nodes.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: id)!
-    }
-    
-    public func getRenderPassStencilAttachmentDescriptor(id: String) -> MTLRenderPassStencilAttachmentDescriptor {
-        return nodes.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: id)!
-    }
-    
-    public func getRenderPassDescriptor(id: String) -> MTLRenderPassDescriptor {
-        return nodes.resolve(MTLRenderPassDescriptor.self, name: id)!
-    }
-    
-    public func getComputePipelineDescriptor(id: String) -> MTLComputePipelineDescriptor {
-        return nodes.resolve(MTLComputePipelineDescriptor.self, name: id)!
-    }
-    
-    // TODO: parse XML
     
     public static func initMetalEnums(container: Container) -> Container {
         let xmlData = MetalXSD.readXSD("MetalEnums")
