@@ -20,7 +20,7 @@ class MetalNodeSpec: QuickSpec {
         
         let device = MTLCreateSystemDefaultDevice()
         let library = device!.newDefaultLibrary()
-        let testBundle = NSBundle(forClass: S3DXMLSpec.self)
+        let testBundle = NSBundle(forClass: MetalNodeSpec.self)
         let xml = MetalParser.readXML(testBundle, filename: "S3DXMLTest", bundleResourceName: nil)!
 
         let metaContainer = MetalParser.initMetalEnums(Container())

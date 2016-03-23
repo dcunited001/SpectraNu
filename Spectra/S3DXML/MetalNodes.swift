@@ -577,59 +577,88 @@ public class StencilDescriptorNode: MetalNode {
     }
 }
 
-//public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLDepthStencilDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let depthDesc = NodeType()
-//        
-//        if let label = elem.attributes["label"] {
-//            depthDesc.label = label
-//        }
-//        if let depthCompare = elem.attributes["depth-compare-function"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlCompareFunction")!
-//            let enumVal = mtlEnum.getValue(depthCompare)
-//            depthDesc.depthCompareFunction = MTLCompareFunction(rawValue: enumVal)!
-//        }
-//        if let _ = elem.attributes["depth-write-enabled"] {
-//            depthDesc.depthWriteEnabled = true
-//        }
-//        
-//        if let frontFaceTag = elem.firstChild(tag: "front-face-stencil") {
-//            if let frontFaceName = frontFaceTag.attributes["ref"] {
-//                depthDesc.frontFaceStencil = container.resolve(MTLStencilDescriptor.self, name: frontFaceName)!
-//            } else {
-//                let frontFaceStencil = S3DXMLMTLStencilDescriptorNode().parse(container, elem: frontFaceTag)
-//                depthDesc.frontFaceStencil = frontFaceStencil
-//                
-//                // also, register the descriptor, if named (not thread friendly)
-//                if let id = frontFaceTag.attributes["id"] {
-//                    container.register(MTLStencilDescriptor.self, name: id) { _ in
-//                        return frontFaceStencil.copy() as! MTLStencilDescriptor
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        if let backFaceTag = elem.firstChild(tag: "back-face-stencil") {
-//            if let backFaceName = backFaceTag.attributes["ref"] {
-//                depthDesc.backFaceStencil = container.resolve(MTLStencilDescriptor.self, name: backFaceName)!
-//            } else {
-//                let backFaceStencil = S3DXMLMTLStencilDescriptorNode().parse(container, elem: backFaceTag)
-//                depthDesc.backFaceStencil = backFaceStencil
-//                
-//                // also, register the descriptor, if named (not thread friendly)
-//                if let id = backFaceTag.attributes["id"] {
-//                    container.register(MTLStencilDescriptor.self, name: id) { _ in
-//                        return backFaceStencil.copy() as! MTLStencilDescriptor
-//                    }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        return depthDesc
-//    }
-//}
+public class DepthStencilDescriptorNode: MetalNode {
+    public typealias NodeType = DepthStencilDescriptorNode
+    public typealias MTLType = MTLDepthStencilDescriptor
+    
+    public var id: String?
+    public var label: String?
+    public var depthCompareFunction: MTLCompareFunction?
+    public var depthWriteEnabled: Bool?
+    public var frontFaceStencil: StencilDescriptorNode?
+    public var backFaceStencil: StencilDescriptorNode?
+
+    public required init() {
+        
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        if let val = elem.attributes["label"] { self.label = val }
+        if let val = elem.attributes["depth-write-enabled"] { self.depthWriteEnabled = NSString(string: val).boolValue }
+        
+        if let val = elem.attributes["depth-compare-function"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlCompareFunction")!
+            let enumVal = mtlEnum.getValue(val)
+            self.depthCompareFunction = MTLCompareFunction(rawValue: enumVal)!
+        }
+        
+        if let frontFaceTag = elem.firstChild(tag: "front-face-stencil") {
+            if let frontFaceName = frontFaceTag.attributes["ref"] {
+                self.frontFaceStencil = nodes.resolve(StencilDescriptorNode.self, name: frontFaceName)!
+            } else {
+                let frontFaceStencil = StencilDescriptorNode(nodes: nodes, elem: frontFaceTag)
+                self.frontFaceStencil = frontFaceStencil
+                
+                if let id = frontFaceTag.attributes["id"] {
+                    nodes.register(StencilDescriptorNode.self, name: id) { _ in
+                        return frontFaceStencil
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+        
+        if let backFaceTag = elem.firstChild(tag: "back-face-stencil") {
+            if let backFaceName = backFaceTag.attributes["ref"] {
+                self.backFaceStencil = nodes.resolve(StencilDescriptorNode.self, name: backFaceName)!
+            } else {
+                let backFaceStencil = StencilDescriptorNode(nodes: nodes, elem: backFaceTag)
+                self.backFaceStencil = backFaceStencil
+                
+                if let id = backFaceTag.attributes["id"] {
+                    nodes.register(StencilDescriptorNode.self, name: id) { _ in
+                        return backFaceStencil
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+        if let val = self.label { desc.label = val }
+        if let val = self.depthCompareFunction { desc.depthCompareFunction = val }
+        if let val = self.depthWriteEnabled { desc.depthWriteEnabled = val }
+        //TODO: generate
+//        if let val = self.frontFaceStencil { desc.frontFaceStencil = val }
+//        if let val = self.backFaceStencil { desc.backFaceStencil = val }
+        return desc
+    }
+
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.label = self.label
+        cp.depthCompareFunction = self.depthCompareFunction
+        cp.depthWriteEnabled = self.depthWriteEnabled
+        cp.frontFaceStencil = self.frontFaceStencil?.copy()
+        cp.backFaceStencil = self.backFaceStencil?.copy()
+        return cp
+    }
+}
 
 public class RenderPipelineColorAttachmentDescriptorNode: MetalNode {
     public typealias NodeType = RenderPipelineColorAttachmentDescriptorNode
@@ -722,106 +751,203 @@ public class RenderPipelineColorAttachmentDescriptorNode: MetalNode {
     }
 }
 
-//public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLRenderPipelineDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let desc = MTLRenderPipelineDescriptor()
-//        
-//        if let vertexFunctionTag = elem.firstChild(tag: "vertex-function") {
-//            if let vertexFunctionName = vertexFunctionTag.attributes["ref"] {
-//                desc.vertexFunction = container.resolve(MTLFunction.self, name: vertexFunctionName)
-//            } else {
-//                //TODO: attribute tag for library
-//                let lib = container.resolve(MTLLibrary.self, name: "default")!
-//                let vertexFunction = S3DXMLMTLFunctionNode(library: lib).parse(container, elem: vertexFunctionTag)
-//                desc.vertexFunction = vertexFunction
-//                
-//                if let id = vertexFunctionTag.attributes["id"] {
-//                    container.register(MTLFunction.self, name: id) { _ in
-//                        return vertexFunction
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        if let fragmentFunctionTag = elem.firstChild(tag: "fragment-function") {
-//            if let fragmentFunctionName = fragmentFunctionTag.attributes["ref"] {
-//                desc.fragmentFunction = container.resolve(MTLFunction.self, name: fragmentFunctionName)
-//            } else {
-//                //TODO: attribute tag for library
-//                let lib = container.resolve(MTLLibrary.self, name: "default")!
-//                let fragmentFunction = S3DXMLMTLFunctionNode(library: lib).parse(container, elem: fragmentFunctionTag)
-//                desc.fragmentFunction = fragmentFunction
-//                
-//                if let id = fragmentFunctionTag.attributes["id"] {
-//                    container.register(MTLFunction.self, name: fragmentFunctionTag.attributes["id"]!) { _ in
-//                        return fragmentFunction
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        if let vertexDescTag = elem.firstChild(tag: "vertex-descriptor") {
-//            if let vertexDescName = vertexDescTag.attributes["ref"] {
-//                desc.vertexDescriptor = container.resolve(MTLVertexDescriptor.self, name: vertexDescName)
-//            } else {
-//                let vertexDesc = S3DXMLMTLVertexDescriptorNode().parse(container, elem: vertexDescTag)
-//                desc.vertexDescriptor = vertexDesc
-//                
-//                if let id = vertexDescTag.attributes["id"] {
-//                    container.register(MTLVertexDescriptor.self, name: id) { _ in
-//                        return vertexDesc.copy() as! MTLVertexDescriptor
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        let colorAttachSelector = "color-attachment-descriptors > color-attachment-descriptor"
-//        for (idx, el) in elem.css(colorAttachSelector).enumerate() {
-//            if let colorAttachName = el.attributes["ref"] {
-//                desc.colorAttachments[Int(idx)] = container.resolve(MTLRenderPipelineColorAttachmentDescriptor.self, name: colorAttachName)
-//            } else {
-//                let colorAttachDesc = S3DXMLMTLColorAttachmentDescriptorNode().parse(container, elem: el)
-//                desc.colorAttachments[Int(idx)] = colorAttachDesc
-//                
-//                if let id = el.attributes["id"] {
-//                    container.register(MTLRenderPipelineColorAttachmentDescriptor.self, name: id) { _ in
-//                        return colorAttachDesc.copy() as! MTLRenderPipelineColorAttachmentDescriptor
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        if let label = elem.attributes["label"] {
-//            desc.label = label
-//        }
-//        if let sampleCount = elem.attributes["sample-count"] {
-//            desc.sampleCount = Int(sampleCount)!
-//        }
-//        if let _ = elem.attributes["alpha-to-coverage-enabled"] {
-//            desc.alphaToCoverageEnabled = true
-//        }
-//        if let _ = elem.attributes["alpha-to-one-enabled"] {
-//            desc.alphaToOneEnabled = true
-//        }
-//        if let _ = elem.attributes["rasterization-enabled"] {
-//            desc.rasterizationEnabled = true
-//        }
-//        if let depthPixelFormat = elem.attributes["depth-attachment-pixel-format"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlPixelFormat")!
-//            let enumVal = mtlEnum.getValue(depthPixelFormat)
-//            desc.depthAttachmentPixelFormat = MTLPixelFormat(rawValue: enumVal)!
-//        }
-//        if let stencilPixelFormat = elem.attributes["stencil-attachment-pixel-format"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlPixelFormat")!
-//            let enumVal = mtlEnum.getValue(stencilPixelFormat)
-//            desc.stencilAttachmentPixelFormat = MTLPixelFormat(rawValue: enumVal)!
-//        }
-//        
-//        return desc
-//    }
-//}
+public class RenderPipelineDescriptorNode: MetalNode {
+    public typealias NodeType = RenderPipelineDescriptorNode
+    public typealias MTLType = MTLRenderPipelineDescriptor
+
+    public var id: String?
+    public var vertexFunction: FunctionNode?
+    public var fragmentFunction: FunctionNode?
+    public var vertexDescriptor: VertexDescriptorNode?
+    public var colorAttachmentDescriptors: [RenderPipelineColorAttachmentDescriptorNode] = []
+    public var label: String?
+    public var sampleCount: Int?
+    public var alphaToCoverageEnabled: Bool?
+    public var alphaToOneEnabled: Bool?
+    public var rasterizationEnabled: Bool?
+    public var depthAttachmentPixelFormat: MTLPixelFormat?
+    public var stencilAttachmentPixelFormat: MTLPixelFormat?
+    
+    public required init() {
+
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        if let val = elem.attributes["label"] { self.label = val }
+        if let val = elem.attributes["sample-count"] { self.sampleCount = Int(val)! }
+        if let val = elem.attributes["alpha-to-coverage-enabled"] { self.alphaToCoverageEnabled = NSString(string: val).boolValue }
+        if let val = elem.attributes["alpha-to-one-enabled"] {
+            self.alphaToOneEnabled = NSString(string: val).boolValue
+        }
+        if let val = elem.attributes["rasterization-enabled"] {
+            self.rasterizationEnabled = NSString(string: val).boolValue
+        }
+        if let val = elem.attributes["depth-attachment-pixel-format"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlPixelFormat")!
+            let enumVal = mtlEnum.getValue(val)
+            self.depthAttachmentPixelFormat = MTLPixelFormat(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["stencil-attachment-pixel-format"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlPixelFormat")!
+            let enumVal = mtlEnum.getValue(val)
+            self.stencilAttachmentPixelFormat = MTLPixelFormat(rawValue: enumVal)!
+        }
+
+        if let vertexFunctionTag = elem.firstChild(tag: "vertex-function") {
+            if let vertexFunctionName = vertexFunctionTag.attributes["ref"] {
+                self.vertexFunction = nodes.resolve(FunctionNode.self, name: vertexFunctionName)
+            } else {
+                //TODO: attribute tag for library
+                //TODO: set function type
+                let vertexFunction = FunctionNode(nodes: nodes, elem: vertexFunctionTag)
+                self.vertexFunction = vertexFunction
+
+                if let id = vertexFunctionTag.attributes["id"] {
+                    nodes.register(FunctionNode.self, name: id) { _ in
+                        return vertexFunction
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+
+        if let fragmentFunctionTag = elem.firstChild(tag: "fragment-function") {
+            if let fragmentFunctionName = fragmentFunctionTag.attributes["ref"] {
+                self.fragmentFunction = nodes.resolve(FunctionNode.self, name: fragmentFunctionName)
+            } else {
+                //TODO: attribute tag for library
+                //TODO: set function type
+                let fragmentFunction = FunctionNode(nodes: nodes, elem: fragmentFunctionTag)
+                self.fragmentFunction = fragmentFunction
+
+                if let id = fragmentFunctionTag.attributes["id"] {
+                    nodes.register(FunctionNode.self, name: id) { _ in
+                        return fragmentFunction
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+
+        if let vertexDescTag = elem.firstChild(tag: "vertex-descriptor") {
+            if let vertexDescName = vertexDescTag.attributes["ref"] {
+                self.vertexDescriptor = nodes.resolve(VertexDescriptorNode.self, name: vertexDescName)
+            } else {
+                let vertexDesc = VertexDescriptorNode(nodes: nodes, elem: vertexDescTag)
+                self.vertexDescriptor = vertexDesc
+
+                if let id = vertexDescTag.attributes["id"] {
+                    nodes.register(VertexDescriptorNode.self, name: id) { _ in
+                        return vertexDesc
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+
+        let colorAttachSelector = "color-attachment-descriptors > color-attachment-descriptor"
+        for (idx, el) in elem.css(colorAttachSelector).enumerate() {
+            if let colorAttachName = el.attributes["ref"] {
+                let colorAttachDesc = nodes.resolve(RenderPipelineColorAttachmentDescriptorNode.self, name: colorAttachName)!
+                self.colorAttachmentDescriptors.append(colorAttachDesc)
+            } else {
+                let colorAttachDesc = RenderPipelineColorAttachmentDescriptorNode(nodes: nodes, elem: el)
+                self.colorAttachmentDescriptors.append(colorAttachDesc)
+                
+                if let id = el.attributes["id"] {
+                    nodes.register(RenderPipelineColorAttachmentDescriptorNode.self, name: id) { _ in
+                        return colorAttachDesc
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+
+        // TODO: generate render pipeline descriptor
+        
+        return desc
+    }
+
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.id = self.id
+        cp.vertexFunction = self.vertexFunction?.copy()
+        cp.fragmentFunction = self.fragmentFunction?.copy()
+        cp.vertexDescriptor = self.vertexDescriptor?.copy()
+        cp.colorAttachmentDescriptors = self.colorAttachmentDescriptors.map { $0.copy() }
+        cp.label = self.label
+        cp.sampleCount = self.sampleCount
+        cp.alphaToCoverageEnabled = self.alphaToCoverageEnabled
+        cp.alphaToOneEnabled = self.alphaToOneEnabled
+        cp.rasterizationEnabled = self.rasterizationEnabled
+        cp.depthAttachmentPixelFormat = self.depthAttachmentPixelFormat
+        cp.stencilAttachmentPixelFormat = self.stencilAttachmentPixelFormat
+        return cp
+    }
+}
+
+public class ComputePipelineDescriptorNode: MetalNode {
+    public typealias NodeType = ComputePipelineDescriptorNode
+    public typealias MTLType = MTLComputePipelineDescriptor
+
+    public var id: String?
+    public var computeFunction: FunctionNode?
+    public var label: String?
+    public var threadGroupSizeIsMultipleOfThreadExecutionWidth: Bool?
+
+    public required init() {
+
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        if let val = elem.attributes["label"] { self.label = val }
+        if let val = elem.attributes["thread-group-size-is-multiple-of-thread-execution-width"] { self.threadGroupSizeIsMultipleOfThreadExecutionWidth = NSString(string: val).boolValue }
+        
+        if let computeFunctionTag = elem.firstChild(tag: "compute-function") {
+            if let computeFunctionName = computeFunctionTag.attributes["ref"] {
+                self.computeFunction = nodes.resolve(FunctionNode.self, name: computeFunctionName)
+            } else {
+                //TODO: attribute tag for library
+                //TODO: set function type
+                let computeFunction = FunctionNode(nodes: nodes, elem: computeFunctionTag)
+                self.computeFunction = computeFunction
+
+                if let id = computeFunctionTag.attributes["id"] {
+                    nodes.register(FunctionNode.self, name: id) { _ in
+                        return computeFunction
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+
+        return desc
+    }
+
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.id = self.id
+        cp.computeFunction = self.computeFunction
+        cp.label = self.label
+        cp.threadGroupSizeIsMultipleOfThreadExecutionWidth = self.threadGroupSizeIsMultipleOfThreadExecutionWidth
+        return cp
+    }
+}
+
 //
 //public class S3DXMLMTLComputePipelineDescriptorNode: S3DXMLNodeParser {
 //    public typealias NodeType = MTLComputePipelineDescriptor
