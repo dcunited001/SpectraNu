@@ -34,6 +34,7 @@ public protocol MetalNode {
     typealias MTLType
     
     var id: String? { get set }
+    init() // adding this blank initializer allows me to work with Self() in RenderPassAttachmentDescriptorNode extension
     init(nodes: Container, elem: XMLElement)
     func parseXML(nodes: Container, elem: XMLElement)
     func generate(inj: SpectraInjected,
@@ -107,7 +108,7 @@ public class FunctionNode: MetalNode {
     // TODO: allow library to be specified?
     // public var library: String = "default"
     
-    init() {
+    public required init() {
         // required for copy
     }
     
@@ -144,8 +145,8 @@ public class MetalVertexDescriptorNode: MetalNode {
     public var attributes: [VertexAttributeDescriptorNode] = []
     public var layouts: [VertexBufferLayoutDescriptorNode] = []
     
-    init() {
-        
+    public required init() {
+        // required for copy
     }
     
     public required init(nodes: Container, elem: XMLElement) {
@@ -203,8 +204,8 @@ public class VertexAttributeDescriptorNode: MetalNode {
     public var offset: Int?
     public var bufferIndex: Int?
     
-    init() {
-        
+    public required init() {
+        // required for copy
     }
     
     public required init(nodes: Container, elem: XMLElement) {
@@ -249,8 +250,8 @@ public class VertexBufferLayoutDescriptorNode: MetalNode {
     public var stepFunction: MTLVertexStepFunction?
     public var stepRate: Int?
     
-    init() {
-        
+    public required init() {
+        // required for copy
     }
     
     public required init(nodes: Container, elem: XMLElement) {
@@ -308,8 +309,8 @@ public class TextureDescriptorNode: MetalNode {
     public var storageMode: MTLStorageMode?
     public var usage: MTLTextureUsage?
     
-    init() {
-    
+    public required init() {
+        // required for copy
     }
     
     public required init(nodes: Container, elem: XMLElement) {
@@ -422,8 +423,8 @@ public class SamplerDescriptorNode: MetalNode {
     public var lodAverage: Bool?
     public var compareFunction: MTLCompareFunction?
     
-    init() {
-
+    public required init() {
+        // required for copy
     }
 
     public required init(nodes: Container, elem: XMLElement) {
@@ -538,11 +539,11 @@ public class StencilDescriptorNode: MetalNode {
     public var depthStencilPassOperation: MTLStencilOperation?
     public var readMask: UInt32?
     public var writeMask: UInt32?
-
-    init() {
-
+    
+    public required init() {
+        // required for copy
     }
-
+    
     public required init(nodes: Container, elem: XMLElement) {
         parseXML(nodes, elem: elem)
     }
