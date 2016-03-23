@@ -96,10 +96,10 @@
     </compute-pipeline-descriptor>
     
     <clear-color id="clear_color_black"
-        clear-red="0.0"
-        clear-blue="0.0"
-        clear-green="0.0"
-        clear-alpha="1.0" />
+        red="0.0"
+        blue="0.0"
+        green="0.0"
+        alpha="1.0" />
     
     <render-pass-color-attachment-descriptor id="rpass_color_attach_desc"
         level="1"

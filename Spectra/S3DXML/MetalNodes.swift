@@ -268,9 +268,7 @@ public class VertexBufferLayoutDescriptorNode: MetalNode {
             let enumVal = mtlEnum.getValue(stepFunction)
             self.stepFunction = MTLVertexStepFunction(rawValue: enumVal)!
         }
-        if let stepRate = elem.attributes["step-rate"] {
-            self.stepRate = Int(stepRate)!
-        }
+        if let stepRate = elem.attributes["step-rate"] { self.stepRate = Int(stepRate)! }
     }
     
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
@@ -330,24 +328,13 @@ public class TextureDescriptorNode: MetalNode {
             let enumVal = mtlEnum.getValue(val)
             self.pixelFormat = MTLPixelFormat(rawValue: enumVal)!
         }
-        if let val = elem.attributes["width"] {
-            self.width = Int(val)!
-        }
-        if let val = elem.attributes["height"] {
-            self.height = Int(val)!
-        }
-        if let val = elem.attributes["depth"] {
-            self.depth = Int(val)!
-        }
-        if let val = elem.attributes["mipmap-level-count"] {
-            self.mipmapLevelCount = Int(val)!
-        }
-        if let val = elem.attributes["sample-count"] {
-            self.sampleCount = Int(val)!
-        }
-        if let val = elem.attributes["array-length"] {
-            self.arrayLength = Int(val)!
-        }
+        if let val = elem.attributes["width"] { self.width = Int(val)! }
+        if let val = elem.attributes["height"] { self.height = Int(val)! }
+        if let val = elem.attributes["depth"] { self.depth = Int(val)! }
+        if let val = elem.attributes["mipmap-level-count"] { self.mipmapLevelCount = Int(val)! }
+        if let val = elem.attributes["sample-count"] { self.sampleCount = Int(val)! }
+        if let val = elem.attributes["array-length"] { self.arrayLength = Int(val)! }
+        
         //TODO: resource options is an option set type, haven't decided on XML specification
         if let val = elem.attributes["cpu-cache-mode"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlCpuCacheMode")!
@@ -433,9 +420,7 @@ public class SamplerDescriptorNode: MetalNode {
 
     public func parseXML(nodes: Container, elem: XMLElement) {
         if let val = elem.attributes["id"] { self.id = val }
-        if let label = elem.attributes["label"] {
-            self.label = label
-        }
+        if let label = elem.attributes["label"] { self.label = label }
         if let val = elem.attributes["min-filter"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlSamplerMinMagFilter")!
             let enumVal = mtlEnum.getValue(val)
@@ -451,9 +436,7 @@ public class SamplerDescriptorNode: MetalNode {
             let enumVal = mtlEnum.getValue(val)
             self.mipFilter = MTLSamplerMipFilter(rawValue: enumVal)!
         }
-        if let val = elem.attributes["max-anisotropy"] {
-            self.maxAnisotropy = Int(val)!
-        }
+        if let val = elem.attributes["max-anisotropy"] { self.maxAnisotropy = Int(val)! }
         if let val = elem.attributes["s-address-mode"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
             let enumVal = mtlEnum.getValue(val)
@@ -469,18 +452,10 @@ public class SamplerDescriptorNode: MetalNode {
             let enumVal = mtlEnum.getValue(val)
             self.tAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
         }
-        if let val = elem.attributes["normalized-coordinates"] {
-            self.normalizedCoordinates = (val == "true")
-        }
-        if let val = elem.attributes["lod-min-clamp"] {
-            self.lodMinClamp = Float(val)!
-        }
-        if let val = elem.attributes["lod-max-clamp"] {
-            self.lodMaxClamp = Float(val)!
-        }
-        if let val = elem.attributes["lod-average"] {
-             self.lodAverage = true
-        }
+        if let val = elem.attributes["normalized-coordinates"] { self.normalizedCoordinates = NSString(string: val).boolValue }
+        if let val = elem.attributes["lod-min-clamp"] { self.lodMinClamp = Float(val)! }
+        if let val = elem.attributes["lod-max-clamp"] { self.lodMaxClamp = Float(val)! }
+        if let val = elem.attributes["lod-average"] { self.lodAverage = NSString(string: val).boolValue }
         if let val = elem.attributes["compare-function"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlCompareFunction")!
             let enumVal = mtlEnum.getValue(val)
@@ -550,32 +525,28 @@ public class StencilDescriptorNode: MetalNode {
 
     public func parseXML(nodes: Container, elem: XMLElement) {
         if let val = elem.attributes["id"] { self.id = val }
-        if let stencilCompare = elem.attributes["stencil-compare-function"] {
+        if let val = elem.attributes["stencil-compare-function"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlCompareFunction")!
-            let enumVal = mtlEnum.getValue(stencilCompare)
+            let enumVal = mtlEnum.getValue(val)
             self.stencilCompareFunction = MTLCompareFunction(rawValue: enumVal)!
         }
-        if let stencilFailureOp = elem.attributes["stencil-failure-operation"] {
+        if let val = elem.attributes["stencil-failure-operation"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlStencilOperation")!
-            let enumVal = mtlEnum.getValue(stencilFailureOp)
+            let enumVal = mtlEnum.getValue(val)
             self.stencilFailureOperation = MTLStencilOperation(rawValue: enumVal)!
         }
-        if let depthFailureOp = elem.attributes["depth-failure-operation"] {
+        if let val = elem.attributes["depth-failure-operation"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlStencilOperation")!
-            let enumVal = mtlEnum.getValue(depthFailureOp)
+            let enumVal = mtlEnum.getValue(val)
             self.depthFailureOperation = MTLStencilOperation(rawValue: enumVal)!
         }
-        if let depthStencilPassOp = elem.attributes["depth-stencil-pass-operation"] {
+        if let val = elem.attributes["depth-stencil-pass-operation"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlStencilOperation")!
-            let enumVal = mtlEnum.getValue(depthStencilPassOp)
+            let enumVal = mtlEnum.getValue(val)
             self.depthStencilPassOperation = MTLStencilOperation(rawValue: enumVal)!
         }
-        if let readMask = elem.attributes["read-mask"] {
-            self.readMask = UInt32(readMask)!
-        }
-        if let writeMask = elem.attributes["write-mask"] {
-            self.writeMask = UInt32(writeMask)!
-        }
+        if let val = elem.attributes["read-mask"] { self.readMask = UInt32(val)! }
+        if let val = elem.attributes["write-mask"] { self.writeMask = UInt32(val)! }
     }
 
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
@@ -654,57 +625,98 @@ public class StencilDescriptorNode: MetalNode {
 //        return depthDesc
 //    }
 //}
-//
-//public class S3DXMLMTLColorAttachmentDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLRenderPipelineColorAttachmentDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let desc = MTLRenderPipelineColorAttachmentDescriptor()
-//        
-//        if let pixelFormat = elem.attributes["pixel-format"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlPixelFormat")!
-//            let enumVal = mtlEnum.getValue(pixelFormat)
-//            desc.pixelFormat = MTLPixelFormat(rawValue: enumVal)!
-//        }
-//        if let _ = elem.attributes["blending-enabled"] {
-//            desc.blendingEnabled = true
-//        }
-//        if let sourceRgbBlendFactor = elem.attributes["source-rgb-blend-factor"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendFactor")!
-//            let enumVal = mtlEnum.getValue(sourceRgbBlendFactor)
-//            desc.sourceRGBBlendFactor = MTLBlendFactor(rawValue: enumVal)!
-//        }
-//        if let destRgbBlendFactor = elem.attributes["destination-rgb-blend-factor"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendFactor")!
-//            let enumVal = mtlEnum.getValue(destRgbBlendFactor)
-//            desc.destinationRGBBlendFactor = MTLBlendFactor(rawValue: enumVal)!
-//        }
-//        if let rgbBlendOp = elem.attributes["rgb-blend-operation"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendOperation")!
-//            let enumVal = mtlEnum.getValue(rgbBlendOp)
-//            desc.rgbBlendOperation = MTLBlendOperation(rawValue: enumVal)!
-//        }
-//        if let sourceAlphaBlendFactor = elem.attributes["source-alpha-blend-factor"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendFactor")!
-//            let enumVal = mtlEnum.getValue(sourceAlphaBlendFactor)
-//            desc.sourceAlphaBlendFactor = MTLBlendFactor(rawValue: enumVal)!
-//        }
-//        if let destAlphaBlendFactor = elem.attributes["destination-alpha-blend-factor"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendFactor")!
-//            let enumVal = mtlEnum.getValue(destAlphaBlendFactor)
-//            desc.destinationAlphaBlendFactor = MTLBlendFactor(rawValue: enumVal)!
-//        }
-//        if let alphaBlendOp = elem.attributes["alpha-blend-operation"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlBlendOperation")!
-//            let enumVal = mtlEnum.getValue(alphaBlendOp)
-//            desc.alphaBlendOperation = MTLBlendOperation(rawValue: enumVal)!
-//        }
-//        //TODO: writeMask
-//        
-//        return desc
-//    }
-//}
-//
+
+public class RenderPipelineColorAttachmentDescriptorNode: MetalNode {
+    public typealias NodeType = RenderPipelineColorAttachmentDescriptorNode
+    public typealias MTLType = MTLRenderPipelineColorAttachmentDescriptor
+
+    public var id: String?
+    public var pixelFormat: MTLPixelFormat?
+    public var blendingEnabled: Bool?
+    public var sourceRGBBlendFactor: MTLBlendFactor?
+    public var destinationRGBBlendFactor: MTLBlendFactor?
+    public var rgbBlendOperation: MTLBlendOperation?
+    public var sourceAlphaBlendFactor: MTLBlendFactor?
+    public var destinationAlphaBlendFactor: MTLBlendFactor?
+    public var alphaBlendOperation: MTLBlendOperation?
+    //TODO: public var writeMask: MTLColorWriteMask?
+    
+    public required init() {
+        // required for copy
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        if let val = elem.attributes["blending-enabled"] { self.blendingEnabled = NSString(string: val).boolValue }
+        if let val = elem.attributes["pixel-format"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlPixelFormat")!
+            let enumVal = mtlEnum.getValue(val)
+            self.pixelFormat = MTLPixelFormat(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["source-rgb-blend-factor"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlBlendFactor")!
+            let enumVal = mtlEnum.getValue(val)
+            self.sourceRGBBlendFactor = MTLBlendFactor(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["destination-rgb-blend-factor"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlBlendFactor")!
+            let enumVal = mtlEnum.getValue(val)
+            self.destinationRGBBlendFactor = MTLBlendFactor(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["rgb-blend-operation"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlBlendOperation")!
+            let enumVal = mtlEnum.getValue(val)
+            self.rgbBlendOperation = MTLBlendOperation(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["source-alpha-blend-factor"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlBlendFactor")!
+            let enumVal = mtlEnum.getValue(val)
+            self.sourceAlphaBlendFactor = MTLBlendFactor(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["destination-alpha-blend-factor"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlBlendFactor")!
+            let enumVal = mtlEnum.getValue(val)
+            self.destinationAlphaBlendFactor = MTLBlendFactor(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["alpha-blend-operation"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlBlendOperation")!
+            let enumVal = mtlEnum.getValue(val)
+            self.alphaBlendOperation = MTLBlendOperation(rawValue: enumVal)!
+        }
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+        if let val = self.pixelFormat { desc.pixelFormat = val }
+        if let val = self.blendingEnabled { desc.blendingEnabled = val }
+        if let val = self.sourceRGBBlendFactor { desc.sourceRGBBlendFactor = val }
+        if let val = self.destinationRGBBlendFactor { desc.destinationRGBBlendFactor = val }
+        if let val = self.rgbBlendOperation { desc.rgbBlendOperation = val }
+        if let val = self.sourceAlphaBlendFactor { desc.sourceAlphaBlendFactor = val }
+        if let val = self.destinationAlphaBlendFactor { desc.destinationAlphaBlendFactor = val }
+        if let val = self.alphaBlendOperation { desc.alphaBlendOperation = val }
+        return desc
+    }
+
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.id = self.id
+        cp.pixelFormat = self.pixelFormat
+        cp.blendingEnabled = self.blendingEnabled
+        cp.sourceRGBBlendFactor = self.sourceRGBBlendFactor
+        cp.destinationRGBBlendFactor = self.destinationRGBBlendFactor
+        cp.rgbBlendOperation = self.rgbBlendOperation
+        cp.sourceAlphaBlendFactor = self.sourceAlphaBlendFactor
+        cp.destinationAlphaBlendFactor = self.destinationAlphaBlendFactor
+        cp.alphaBlendOperation = self.alphaBlendOperation
+        return cp
+    }
+}
+
 //public class S3DXMLMTLRenderPipelineDescriptorNode: S3DXMLNodeParser {
 //    public typealias NodeType = MTLRenderPipelineDescriptor
 //    
@@ -838,189 +850,310 @@ public class StencilDescriptorNode: MetalNode {
 //        return desc
 //    }
 //}
-//
-//public class S3DXMLMTLClearColorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLClearColor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        var clearColor = MTLClearColor()
-//        
-//        if let red = elem.attributes["clear-red"] {
-//            clearColor.red = Double(red)!
-//        }
-//        if let green = elem.attributes["clear-green"] {
-//            clearColor.green = Double(green)!
-//        }
-//        if let blue = elem.attributes["clear-blue"] {
-//            clearColor.blue = Double(blue)!
-//        }
-//        if let alpha = elem.attributes["clear-alpha"] {
-//            clearColor.alpha = Double(alpha)!
-//        }
-//        
-//        return clearColor
-//    }
+
+public class ClearColorNode: MetalNode {
+    public typealias NodeType = ClearColorNode
+    public typealias MTLType = MTLClearColor
+
+    public var id: String?
+    public var red: Double?
+    public var blue: Double?
+    public var green: Double?
+    public var alpha: Double?
+    
+    public required init() {
+        // required for copy
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        if let val = elem.attributes["red"] { self.red = Double(val)! }
+        if let val = elem.attributes["green"] { self.green = Double(val)! }
+        if let val = elem.attributes["blue"] { self.blue = Double(val)! }
+        if let val = elem.attributes["alpha"] { self.alpha = Double(val)! }
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        return MTLClearColor(red: self.red!, green: self.green!, blue: self.blue!, alpha: self.alpha!)
+    }
+
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.id = self.id
+        cp.red = self.red
+        cp.green = self.green
+        cp.blue = self.blue
+        cp.alpha = self.alpha
+        return cp
+    }
+}
+
+public protocol RenderPassAttachmentDescriptorNode: class {
+    associatedtype MTLType: MTLRenderPassAttachmentDescriptor
+    
+    var texture: TextureNode? { get set }
+    var level: Int? { get set }
+    var slice: Int? { get set }
+    var depthPlane: Int? { get set }
+    
+    var loadAction: MTLLoadAction? { get set }
+    var storeAction: MTLStoreAction? { get set }
+    
+    var resolveTexture: TextureNode? { get set }
+    var resolveLevel: Int? { get set }
+    var resolveSlice: Int? { get set }
+    var resolveDepthPlane: Int? { get set }
+    
+    func parseRenderPassAttachmentXML(nodes: Container, elem: XMLElement)
+    func generateRenderPassAttachment(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType
+    func copyRenderPassAttachment() -> Self
+}
+
+extension RenderPassAttachmentDescriptorNode where Self: MetalNode {
+    
+    public func parseRenderPassAttachmentXML(nodes: Container, elem: XMLElement) {
+        //TODO: texture & ref
+        if let val = elem.attributes["level"] { self.level = Int(val)! }
+        if let val = elem.attributes["slice"] { self.slice = Int(val)! }
+        if let val = elem.attributes["depth-plane"] { self.depthPlane = Int(val)! }
+        
+        //TODO: resolveTexture & ref
+        if let val = elem.attributes["resolve-level"] { self.resolveLevel = Int(val)! }
+        if let val = elem.attributes["resolve-slice"] {self.resolveSlice = Int(val)! }
+        if let val = elem.attributes["resolve-depth-plane"] { self.resolveDepthPlane = Int(val)! }
+        
+        if let val = elem.attributes["load-action"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlLoadAction")!
+            let enumVal = mtlEnum.getValue(val)
+            self.loadAction = MTLLoadAction(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["store-action"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlStoreAction")!
+            let enumVal = mtlEnum.getValue(val)
+            self.storeAction = MTLStoreAction(rawValue: enumVal)!
+        }
+    }
+    
+    public func generateRenderPassAttachment(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+        let ninj = injector?(inj) ?? inj
+        
+        if let val = self.loadAction { desc.loadAction = val }
+        if let val = self.storeAction { desc.storeAction = val }
+        
+        // TODO: texture: check options, then injector, then try to generate the texture node
+        if let val = self.level { desc.level = val }
+        if let val = self.slice { desc.slice = val }
+        if let val = self.depthPlane { desc.depthPlane = val }
+        
+        // TODO: resolveTexture: check options, then injector, then try to generate the texture node
+        if let val = self.resolveLevel { desc.resolveLevel = val }
+        if let val = self.resolveSlice { desc.resolveSlice = val }
+        if let val = self.resolveDepthPlane { desc.resolveDepthPlane = val }
+        return desc
+    }
+    
+    public func copyRenderPassAttachment() -> Self {
+        var cp = Self()
+        cp.texture = self.texture
+        cp.level = self.level
+        cp.slice = self.slice
+        cp.depthPlane = self.depthPlane
+        cp.loadAction = self.loadAction
+        cp.storeAction = self.storeAction
+        cp.resolveTexture = self.resolveTexture
+        cp.resolveLevel = self.resolveLevel
+        cp.resolveSlice = self.resolveSlice
+        cp.resolveDepthPlane = self.resolveDepthPlane
+        return cp
+    }
+}
+
+public final class RenderPassColorAttachmentDescriptorNode: MetalNode, RenderPassAttachmentDescriptorNode {
+    public typealias NodeType = RenderPassColorAttachmentDescriptorNode
+    public typealias MTLType = MTLRenderPassColorAttachmentDescriptor
+
+    public var id: String?
+    public var clearColor: ClearColorNode?
+    
+    public var texture: TextureNode?
+    public var level: Int?
+    public var slice: Int?
+    public var depthPlane: Int?
+    public var loadAction: MTLLoadAction?
+    public var storeAction: MTLStoreAction?
+    public var resolveTexture: TextureNode?
+    public var resolveLevel: Int?
+    public var resolveSlice: Int?
+    public var resolveDepthPlane: Int?
+    
+    public required init() {
+        // required for copy
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+
+        parseRenderPassAttachmentXML(nodes, elem: elem)
+
+        if let clearColorTag = elem.firstChild(tag: "clear-color") {
+            if let clearColorName = clearColorTag.attributes["ref"] {
+                self.clearColor = nodes.resolve(ClearColorNode.self, name: clearColorName)!
+            } else {
+                let clearColor = ClearColorNode(nodes: nodes, elem: clearColorTag)
+                self.clearColor = clearColor
+
+                if let id = clearColorTag.attributes["id"] {
+                    nodes.register(ClearColorNode.self, name: id) { _ in
+                        return clearColor
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = generateRenderPassAttachment(inj, injector: injector)
+        if let clearColor = self.clearColor?.generate(inj, injector: injector) {
+            desc.clearColor = clearColor
+        }
+        return desc
+    }
+
+    public func copy() -> NodeType {
+        let cp = copyRenderPassAttachment()
+        cp.clearColor = self.clearColor?.copy()
+        return cp
+    }
+}
+
+
+public final class RenderPassStencilAttachmentDescriptorNode: MetalNode, RenderPassAttachmentDescriptorNode {
+    public typealias NodeType = RenderPassStencilAttachmentDescriptorNode
+    public typealias MTLType = MTLRenderPassStencilAttachmentDescriptor
+    
+    public var id: String?
+    public var clearStencil: UInt32?
+    
+    public var texture: TextureNode?
+    public var level: Int?
+    public var slice: Int?
+    public var depthPlane: Int?
+    public var loadAction: MTLLoadAction?
+    public var storeAction: MTLStoreAction?
+    public var resolveTexture: TextureNode?
+    public var resolveLevel: Int?
+    public var resolveSlice: Int?
+    public var resolveDepthPlane: Int?
+    
+    public required init() {
+        // required for copy
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+    
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        
+        parseRenderPassAttachmentXML(nodes, elem: elem)
+        
+        if let val = elem.attributes["clear-stencil"] {
+            self.clearStencil = UInt32(val)!
+        }
+    }
+    
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = generateRenderPassAttachment(inj, injector: injector)
+        if let val = self.clearStencil { desc.clearStencil = val }
+        return desc
+    }
+    
+    public func copy() -> NodeType {
+        let cp = copyRenderPassAttachment()
+        cp.clearStencil = self.clearStencil
+        return cp
+    }
+}
+
+public final class RenderPassDepthAttachmentDescriptorNode: MetalNode, RenderPassAttachmentDescriptorNode {
+    public typealias NodeType = RenderPassDepthAttachmentDescriptorNode
+    public typealias MTLType = MTLRenderPassDepthAttachmentDescriptor
+    
+    public var id: String?
+    public var clearDepth: Double?
+    #if os(iOS)
+    public var depthResolveFilter: MTLMultisampleDepthResolveFilter?
+    #endif
+    
+    public var texture: TextureNode?
+    public var level: Int?
+    public var slice: Int?
+    public var depthPlane: Int?
+    public var loadAction: MTLLoadAction?
+    public var storeAction: MTLStoreAction?
+    public var resolveTexture: TextureNode?
+    public var resolveLevel: Int?
+    public var resolveSlice: Int?
+    public var resolveDepthPlane: Int?
+    
+    public required init() {
+        // required for copy
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+    
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        
+        parseRenderPassAttachmentXML(nodes, elem: elem)
+        
+        if let val = elem.attributes["clear-depth"] { self.clearDepth = Double(val)! }
+        
+        #if os(iOS)
+            if let val = elem.attributes["depth-resolve-filter"] {
+                let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlMultisampleDepthResolveFilter")!
+                let enumVal = mtlEnum.getValue(val)
+                self.depthResolveFilter = MTLMultisampleDepthResolveFilter(rawValue: enumVal)!
+            }
+        #endif
+    }
+    
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = generateRenderPassAttachment(inj, injector: injector)
+        if let val = self.clearDepth { desc.clearDepth = val }
+        
+        #if os(iOS)
+            if let val = self.depthResolveFilter { desc.depthResolveFilter = val }
+        #endif
+        return desc
+    }
+    
+    public func copy() -> NodeType {
+        let cp = copyRenderPassAttachment()
+        cp.clearDepth = self.clearDepth
+        #if os(iOS)
+            cp.depthResolveFilter = self.depthResolveFilter
+        #endif
+        return cp
+    }
+}
+
+//public class RenderPassDescriptorNode: MetalNode {
+//    // NOTE: this node has to handle transforming options to send to lower render pass attachment descriptors!!
 //}
-//
-//public class S3DXMLMTLRenderPassColorAttachmentDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLRenderPassColorAttachmentDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let desc = MTLRenderPassColorAttachmentDescriptor()
-//        
-//        //TODO: texture & ref
-//        
-//        if let level = elem.attributes["level"] {
-//            desc.level = Int(level)!
-//        }
-//        if let slice = elem.attributes["slice"] {
-//            desc.slice = Int(slice)!
-//        }
-//        if let depthPlane = elem.attributes["depth-plane"] {
-//            desc.depthPlane = Int(depthPlane)!
-//        }
-//        
-//        //TODO: resolveTexture & ref
-//        
-//        if let resolveLevel = elem.attributes["resolve-level"] {
-//            desc.resolveLevel = Int(resolveLevel)!
-//        }
-//        if let resolveSlice = elem.attributes["resolve-slice"] {
-//            desc.resolveSlice = Int(resolveSlice)!
-//        }
-//        if let resolveDepthPlane = elem.attributes["resolve-depth-plane"] {
-//            desc.resolveDepthPlane = Int(resolveDepthPlane)!
-//        }
-//        if let loadAction = elem.attributes["load-action"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlLoadAction")!
-//            let enumVal = mtlEnum.getValue(loadAction)
-//            desc.loadAction = MTLLoadAction(rawValue: enumVal)!
-//        }
-//        if let storeAction = elem.attributes["store-action"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStoreAction")!
-//            let enumVal = mtlEnum.getValue(storeAction)
-//            desc.storeAction = MTLStoreAction(rawValue: enumVal)!
-//        }
-//        
-//        if let clearColorTag = elem.firstChild(tag: "clear-color") {
-//            if let clearColorName = clearColorTag.attributes["ref"] {
-//                desc.clearColor = container.resolve(MTLClearColor.self, name: clearColorName)!
-//            } else {
-//                let clearColor = S3DXMLMTLClearColorNode().parse(container, elem: clearColorTag)
-//                desc.clearColor = clearColor
-//                
-//                if let id = clearColorTag.attributes["id"] {
-//                    container.register(MTLClearColor.self, name: id) { _ in
-//                        return clearColor
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        return desc
-//    }
-//}
-//
-//public class S3DXMLMTLRenderPassDepthAttachmentDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLRenderPassDepthAttachmentDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let desc = MTLRenderPassDepthAttachmentDescriptor()
-//        
-//        //TODO: texture & ref
-//        
-//        if let level = elem.attributes["level"] {
-//            desc.level = Int(level)!
-//        }
-//        if let slice = elem.attributes["slice"] {
-//            desc.slice = Int(slice)!
-//        }
-//        if let depthPlane = elem.attributes["depth-plane"] {
-//            desc.depthPlane = Int(depthPlane)!
-//        }
-//        
-//        //TODO: resolveTexture & ref
-//        
-//        if let resolveLevel = elem.attributes["resolve-level"] {
-//            desc.resolveLevel = Int(resolveLevel)!
-//        }
-//        if let resolveSlice = elem.attributes["resolve-slice"] {
-//            desc.resolveSlice = Int(resolveSlice)!
-//        }
-//        if let resolveDepthPlane = elem.attributes["resolve-depth-plane"] {
-//            desc.resolveDepthPlane = Int(resolveDepthPlane)!
-//        }
-//        if let loadAction = elem.attributes["load-action"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlLoadAction")!
-//            let enumVal = mtlEnum.getValue(loadAction)
-//            desc.loadAction = MTLLoadAction(rawValue: enumVal)!
-//        }
-//        if let storeAction = elem.attributes["store-action"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStoreAction")!
-//            let enumVal = mtlEnum.getValue(storeAction)
-//            desc.storeAction = MTLStoreAction(rawValue: enumVal)!
-//        }
-//        if let clearDepth = elem.attributes["clear-depth"] {
-//            desc.clearDepth = Double(clearDepth)!
-//        }
-//        #if os(iOS)
-//        if let depthResolveFilter = elem.attributes["depth-resolve-filter"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlMultisampleDepthResolveFilter")!
-//            let enumVal = mtlEnum.getValue(depthResolveFilter)
-//            desc.depthResolveFilter = MTLMultisampleDepthResolveFilter(rawValue: enumVal)!
-//        }
-//        #endif
-//        return desc
-//    }
-//}
-//
-//public class S3DXMLMTLRenderPassStencilAttachmentDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLRenderPassStencilAttachmentDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let desc = MTLRenderPassStencilAttachmentDescriptor()
-//        
-//        //TODO: texture & ref
-//        
-//        if let level = elem.attributes["level"] {
-//            desc.level = Int(level)!
-//        }
-//        if let slice = elem.attributes["slice"] {
-//            desc.slice = Int(slice)!
-//        }
-//        if let depthPlane = elem.attributes["depth-plane"] {
-//            desc.depthPlane = Int(depthPlane)!
-//        }
-//        
-//        //TODO: resolveTexture & ref
-//        
-//        if let resolveLevel = elem.attributes["resolve-level"] {
-//            desc.resolveLevel = Int(resolveLevel)!
-//        }
-//        if let resolveSlice = elem.attributes["resolve-slice"] {
-//            desc.resolveSlice = Int(resolveSlice)!
-//        }
-//        if let resolveDepthPlane = elem.attributes["resolve-depth-plane"] {
-//            desc.resolveDepthPlane = Int(resolveDepthPlane)!
-//        }
-//        if let loadAction = elem.attributes["load-action"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlLoadAction")!
-//            let enumVal = mtlEnum.getValue(loadAction)
-//            desc.loadAction = MTLLoadAction(rawValue: enumVal)!
-//        }
-//        if let storeAction = elem.attributes["store-action"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStoreAction")!
-//            let enumVal = mtlEnum.getValue(storeAction)
-//            desc.storeAction = MTLStoreAction(rawValue: enumVal)!
-//        }
-//        if let clearStencil = elem.attributes["clear-stencil"] {
-//            desc.clearStencil = UInt32(clearStencil)!
-//        }
-//        
-//        return desc
-//    }
-//}
-//
+
 //public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
 //    public typealias NodeType = MTLRenderPassDescriptor
 //    

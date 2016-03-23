@@ -154,22 +154,22 @@ class MetalNodeSpec: QuickSpec {
 //                expect(desc.backFaceStencil) == metalParser.getStencilDescriptor("stencil_desc")
 //            }
 //        }
-//        
-//        describe("S3DXMLMTLRenderPipelineColorAttachmentDescriptorNode") {
-//            it("can parse a render pipeline color attachment descriptor") {
-//                let desc = metalParser.getColorAttachmentDescriptor("color_attach_desc")
-//                expect(desc.blendingEnabled) == true
-//                expect(desc.sourceRGBBlendFactor) == MTLBlendFactor.Zero
-//                expect(desc.destinationRGBBlendFactor) == MTLBlendFactor.SourceColor
-//                expect(desc.rgbBlendOperation) == MTLBlendOperation.Subtract
-//                expect(desc.sourceAlphaBlendFactor) == MTLBlendFactor.BlendAlpha
-//                expect(desc.destinationAlphaBlendFactor) == MTLBlendFactor.OneMinusBlendAlpha
-//                expect(desc.alphaBlendOperation) == MTLBlendOperation.Max
-//                expect(desc.pixelFormat) == MTLPixelFormat.BGRA8Unorm
-//            }
-//        }
-//        
-//        describe("S3DXMLMTLRenderPipelineDescriptorNode") {
+        
+        describe("RenderPipelineColorAttachmentDescriptorNode") {
+            it("can parse a render pipeline color attachment descriptor") {
+                let desc = metalParser.getRenderPipelineColorAttachmentDescriptor("color_attach_desc")
+                expect(desc.blendingEnabled) == true
+                expect(desc.sourceRGBBlendFactor) == MTLBlendFactor.Zero
+                expect(desc.destinationRGBBlendFactor) == MTLBlendFactor.SourceColor
+                expect(desc.rgbBlendOperation) == MTLBlendOperation.Subtract
+                expect(desc.sourceAlphaBlendFactor) == MTLBlendFactor.BlendAlpha
+                expect(desc.destinationAlphaBlendFactor) == MTLBlendFactor.OneMinusBlendAlpha
+                expect(desc.alphaBlendOperation) == MTLBlendOperation.Max
+                expect(desc.pixelFormat) == MTLPixelFormat.BGRA8Unorm
+            }
+        }
+        
+//        describe("RenderPipelineDescriptorNode") {
 //            it("can parse a render pipeline descriptor") {
 //                let desc = metalParser.getRenderPipelineDescriptor("render_pipeline_desc")
 //                expect(desc.label) == "render-pipeline-descriptor"
@@ -194,68 +194,68 @@ class MetalNodeSpec: QuickSpec {
 //                expect(desc.computeFunction!.name) == "test_compute_function"
 //            }
 //        }
-//        
-//        describe("S3DXMLMTLClearColorNode") {
-//            it("can parse a clear color") {
-//                let color = metalParser.getClearColor("clear_color_black")
-//                expect(color.red) == 0.0
-//                expect(color.green) == 0.0
-//                expect(color.blue) == 0.0
-//                expect(color.alpha) == 1.0
-//            }
-//        }
-//        
-//        describe("S3DXMLMTLRenderPassColorAttachmentDescriptorNode") {
-//            it("can parse a render pass color attachment descriptor") {
-//                let desc = metalParser.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
-//                let clearColor = metalParser.getClearColor("clear_color_black")
-//                
-//                expect(desc.level) == 1
-//                expect(desc.slice) == 1
-//                expect(desc.depthPlane) == 1
-//                expect(desc.resolveLevel) == 1
-//                expect(desc.resolveSlice) == 1
-//                expect(desc.resolveDepthPlane) == 1
-//                expect(desc.loadAction) == MTLLoadAction.Load
-//                expect(desc.storeAction) == MTLStoreAction.Store
-//                expect(desc.clearColor.red) == clearColor.red
-//                expect(desc.clearColor.alpha) == clearColor.alpha
-//            }
-//        }
-//        
-//        describe("S3DXMLMTLRenderPassDepthAttachmentDescriptorNode") {
-//            it("can parse a render pass depth attachment descriptor") {
-//                let desc = metalParser.getRenderPassDepthAttachmentDescriptor("rpass_depth_attach_desc")
-//                expect(desc.level) == 1
-//                expect(desc.slice) == 1
-//                expect(desc.depthPlane) == 1
-//                expect(desc.resolveLevel) == 1
-//                expect(desc.resolveSlice) == 1
-//                expect(desc.resolveDepthPlane) == 1
-//                expect(desc.loadAction) == MTLLoadAction.Load
-//                expect(desc.storeAction) == MTLStoreAction.Store
-//                expect(desc.clearDepth) == 2.0
-////                TODO: MTLMultisampleDepthResolveFilter not available in iOS
-////                expect(desc.depthResolveFilter) == MTLMultisampleDepthResolveFilter.Min
-//            }
-//        }
-//        
-//        describe("S3DXMLMTLRenderPassStencilAttachmentDescriptorNode") {
-//            it("can parse a render pass stencil attachment descriptor") {
-//                let desc = metalParser.getRenderPassStencilAttachmentDescriptor("rpass_stencil_attach_desc")
-//                expect(desc.level) == 1
-//                expect(desc.slice) == 1
-//                expect(desc.depthPlane) == 1
-//                expect(desc.resolveLevel) == 1
-//                expect(desc.resolveSlice) == 1
-//                expect(desc.resolveDepthPlane) == 1
-//                expect(desc.loadAction) == MTLLoadAction.Load
-//                expect(desc.storeAction) == MTLStoreAction.Store
-//                expect(desc.clearStencil) == 0
-//            }
-//        }
-//        
-//        describe("S3DXMLMTLRenderPassDescriptorNode") {
+        
+        describe("ClearColorNode") {
+            it("can parse a clear color") {
+                let color = metalParser.getClearColor("clear_color_black")
+                expect(color.red) == 0.0
+                expect(color.green) == 0.0
+                expect(color.blue) == 0.0
+                expect(color.alpha) == 1.0
+            }
+        }
+        
+        describe("RenderPassColorAttachmentDescriptorNode") {
+            it("can parse a render pass color attachment descriptor") {
+                let desc = metalParser.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
+                let clearColor = metalParser.getClearColor("clear_color_black")
+                
+                expect(desc.level) == 1
+                expect(desc.slice) == 1
+                expect(desc.depthPlane) == 1
+                expect(desc.resolveLevel) == 1
+                expect(desc.resolveSlice) == 1
+                expect(desc.resolveDepthPlane) == 1
+                expect(desc.loadAction) == MTLLoadAction.Load
+                expect(desc.storeAction) == MTLStoreAction.Store
+                expect(desc.clearColor!.red) == clearColor.red
+                expect(desc.clearColor!.alpha) == clearColor.alpha
+            }
+        }
+        
+        describe("RenderPassDepthAttachmentDescriptorNode") {
+            it("can parse a render pass depth attachment descriptor") {
+                let desc = metalParser.getRenderPassDepthAttachmentDescriptor("rpass_depth_attach_desc")
+                expect(desc.level) == 1
+                expect(desc.slice) == 1
+                expect(desc.depthPlane) == 1
+                expect(desc.resolveLevel) == 1
+                expect(desc.resolveSlice) == 1
+                expect(desc.resolveDepthPlane) == 1
+                expect(desc.loadAction) == MTLLoadAction.Load
+                expect(desc.storeAction) == MTLStoreAction.Store
+                expect(desc.clearDepth) == 2.0
+//                TODO: MTLMultisampleDepthResolveFilter not available in iOS
+//                expect(desc.depthResolveFilter) == MTLMultisampleDepthResolveFilter.Min
+            }
+        }
+        
+        describe("RenderPassStencilAttachmentDescriptorNode") {
+            it("can parse a render pass stencil attachment descriptor") {
+                let desc = metalParser.getRenderPassStencilAttachmentDescriptor("rpass_stencil_attach_desc")
+                expect(desc.level) == 1
+                expect(desc.slice) == 1
+                expect(desc.depthPlane) == 1
+                expect(desc.resolveLevel) == 1
+                expect(desc.resolveSlice) == 1
+                expect(desc.resolveDepthPlane) == 1
+                expect(desc.loadAction) == MTLLoadAction.Load
+                expect(desc.storeAction) == MTLStoreAction.Store
+                expect(desc.clearStencil) == 0
+            }
+        }
+        
+//        describe("RenderPassDescriptorNode") {
 //            it("can parse a render pass descriptor") {
 //                let desc = metalParser.getRenderPassDescriptor("render_pass_desc")
 //                let colorAttach = metalParser.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")

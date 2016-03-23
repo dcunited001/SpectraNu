@@ -87,88 +87,104 @@ public class MetalParser {
 //        return nodes.resolve(DepthStencilDescriptorNode.self, name: id)!
 //    }
     
-//    public func getColorAttachmentDescriptor(id: String) -> MTLRenderPipelineColorAttachmentDescriptor {
-//        return nodes.resolve(MTLRenderPipelineColorAttachmentDescriptor.self, name: id)!
-//    }
-//    
-//    public func getRenderPipelineDescriptor(id: String) -> MTLRenderPipelineDescriptor {
-//        return nodes.resolve(MTLRenderPipelineDescriptor.self, name: id)!
-//    }
-//    
-//    public func getClearColor(id: String) -> MTLClearColor {
-//        return nodes.resolve(MTLClearColor.self, name: id)!
-//    }
-//    
-//    public func getRenderPassColorAttachmentDescriptor(id: String) -> MTLRenderPassColorAttachmentDescriptor {
-//        return nodes.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: id)!
-//    }
-//    
-//    public func getRenderPassDepthAttachmentDescriptor(id: String) -> MTLRenderPassDepthAttachmentDescriptor {
-//        return nodes.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: id)!
-//    }
-//    
-//    public func getRenderPassStencilAttachmentDescriptor(id: String) -> MTLRenderPassStencilAttachmentDescriptor {
-//        return nodes.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: id)!
-//    }
-//    
-//    public func getRenderPassDescriptor(id: String) -> MTLRenderPassDescriptor {
-//        return nodes.resolve(MTLRenderPassDescriptor.self, name: id)!
-//    }
-//    
-//    public func getComputePipelineDescriptor(id: String) -> MTLComputePipelineDescriptor {
-//        return nodes.resolve(MTLComputePipelineDescriptor.self, name: id)!
+    public func getRenderPipelineColorAttachmentDescriptor(id: String) -> RenderPipelineColorAttachmentDescriptorNode {
+        return nodes.resolve(RenderPipelineColorAttachmentDescriptorNode.self, name: id)!
+    }
+
+//    public func getRenderPipelineDescriptor(id: String) -> RenderPipelineDescriptorNode {
+//        return nodes.resolve(RenderPipelineDescriptorNode.self, name: id)!
 //    }
     
+    public func getClearColor(id: String) -> ClearColorNode {
+        return nodes.resolve(ClearColorNode.self, name: id)!
+    }
+    
+    public func getRenderPassColorAttachmentDescriptor(id: String) -> RenderPassColorAttachmentDescriptorNode {
+        return nodes.resolve(RenderPassColorAttachmentDescriptorNode.self, name: id)!
+    }
+    
+    public func getRenderPassDepthAttachmentDescriptor(id: String) -> RenderPassDepthAttachmentDescriptorNode {
+        return nodes.resolve(RenderPassDepthAttachmentDescriptorNode.self, name: id)!
+    }
+    
+    public func getRenderPassStencilAttachmentDescriptor(id: String) -> RenderPassStencilAttachmentDescriptorNode {
+        return nodes.resolve(RenderPassStencilAttachmentDescriptorNode.self, name: id)!
+    }
+    
+//    public func getRenderPassDescriptor(id: String) -> RenderPassDescriptorNode {
+//        return nodes.resolve(RenderPassDescriptorNode.self, name: id)!
+//    }
+    
+//    public func getComputePipelineDescriptor(id: String) -> ComputePipelineDescriptorNode {
+//        return nodes.resolve(ComputePipelineDescriptorNode.self, name: id)!
+//    }
+    
+    // TODO: figure out how to break this out into parseNode() -> MetalNode
+    // - however, the problem is that
     public func parseXML(xml: XMLDocument) {
         for elem in xml.root!.children {
-            let (tag, id) = (elem.tag!, elem.attributes["id"])
-            
-            if let nodeType = MetalNodeType(rawValue: tag) {
-                
-                switch nodeType {
-                case .VertexFunction:
-                    let node = FunctionNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .FragmentFunction:
-                    let node = FunctionNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .ComputeFunction:
-                    let node = FunctionNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                // TODO: case: .OptionSet? : break
-                case .VertexDescriptor:
-                    let node = MetalVertexDescriptorNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .VertexAttributeDescriptor:
-                    let node = VertexAttributeDescriptorNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .VertexBufferLayoutDescriptor:
-                    let node = VertexBufferLayoutDescriptorNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .TextureDescriptor:
-                    let node = TextureDescriptorNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .SamplerDescriptor:
-                    let node = SamplerDescriptorNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .StencilDescriptor:
-                    let node = StencilDescriptorNode(nodes: nodes, elem: elem)
-                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .DepthStencilDescriptor: break
-                case .RenderPipelineColorAttachmentDescriptor: break
-                case .RenderPipelineDescriptor: break
-                case .ComputePipelineDescriptor: break
-                case .ClearColor: break
-                case .RenderPassColorAttachmentDescriptor: break
-                case .RenderPassDepthAttachmentDescriptor: break
-                case .RenderPassStencilAttachmentDescriptor: break
-                case .RenderPassDescriptor: break
-                default: break
-                }
-            }
+            parseNode(elem)
         }
     }
     
+    public func parseNode(elem: XMLElement) {
+        let (tag, id, ref) = (elem.tag!, elem.attributes["id"], elem.attributes["ref"])
+        
+        if let nodeType = MetalNodeType(rawValue: tag) {
+            
+            switch nodeType {
+            case .VertexFunction:
+                let node = FunctionNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .FragmentFunction:
+                let node = FunctionNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .ComputeFunction:
+                let node = FunctionNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            // TODO: case: .OptionSet? : break
+            case .VertexDescriptor:
+                let node = MetalVertexDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .VertexAttributeDescriptor:
+                let node = VertexAttributeDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .VertexBufferLayoutDescriptor:
+                let node = VertexBufferLayoutDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .TextureDescriptor:
+                let node = TextureDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .SamplerDescriptor:
+                let node = SamplerDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .StencilDescriptor:
+                let node = StencilDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .DepthStencilDescriptor: break
+            case .RenderPipelineColorAttachmentDescriptor:
+                let node = RenderPipelineColorAttachmentDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .RenderPipelineDescriptor: break
+            case .ComputePipelineDescriptor: break
+            case .ClearColor:
+                let node = ClearColorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .RenderPassColorAttachmentDescriptor:
+                let node = RenderPassColorAttachmentDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .RenderPassDepthAttachmentDescriptor:
+                let node = RenderPassDepthAttachmentDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .RenderPassStencilAttachmentDescriptor:
+                let node = RenderPassStencilAttachmentDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .RenderPassDescriptor: break
+            default: break
+            }
+        }
+    }
+
     public static func initMetalEnums(container: Container) -> Container {
         let xmlData = MetalXSD.readXSD("MetalEnums")
         let xsd = MetalXSD(data: xmlData)
