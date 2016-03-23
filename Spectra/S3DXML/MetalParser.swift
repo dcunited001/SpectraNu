@@ -72,23 +72,28 @@ public class MetalParser {
     }
     
     public func getTextureDescriptor(id: String) -> TextureDescriptorNode {
-        return nodes.resolve(TextureDescriptorNode.self, name: id)!
+        let n = nodes.resolve(TextureDescriptorNode.self, name: id)!
+        return n.copy()
     }
     
     public func getSamplerDescriptor(id: String) -> SamplerDescriptorNode {
-        return nodes.resolve(SamplerDescriptorNode.self, name: id)!
+        let n = nodes.resolve(SamplerDescriptorNode.self, name: id)!
+        return n.copy()
     }
 
     public func getStencilDescriptor(id: String) -> StencilDescriptorNode {
-        return nodes.resolve(StencilDescriptorNode.self, name: id)!
+        let n = nodes.resolve(StencilDescriptorNode.self, name: id)!
+        return n.copy()
     }
     
-//    public func getDepthStencilDescriptor(id: String) -> DepthStencilDescriptorNode {
-//        return nodes.resolve(DepthStencilDescriptorNode.self, name: id)!
-//    }
+    public func getDepthStencilDescriptor(id: String) -> DepthStencilDescriptorNode {
+        let n = nodes.resolve(DepthStencilDescriptorNode.self, name: id)!
+        return n.copy()
+    }
     
     public func getRenderPipelineColorAttachmentDescriptor(id: String) -> RenderPipelineColorAttachmentDescriptorNode {
-        return nodes.resolve(RenderPipelineColorAttachmentDescriptorNode.self, name: id)!
+        let n = nodes.resolve(RenderPipelineColorAttachmentDescriptorNode.self, name: id)!
+        return n.copy()
     }
 
 //    public func getRenderPipelineDescriptor(id: String) -> RenderPipelineDescriptorNode {
@@ -96,19 +101,23 @@ public class MetalParser {
 //    }
     
     public func getClearColor(id: String) -> ClearColorNode {
-        return nodes.resolve(ClearColorNode.self, name: id)!
+        let n = nodes.resolve(ClearColorNode.self, name: id)!
+        return n.copy()
     }
     
     public func getRenderPassColorAttachmentDescriptor(id: String) -> RenderPassColorAttachmentDescriptorNode {
-        return nodes.resolve(RenderPassColorAttachmentDescriptorNode.self, name: id)!
+        let n = nodes.resolve(RenderPassColorAttachmentDescriptorNode.self, name: id)!
+        return n.copy()
     }
     
     public func getRenderPassDepthAttachmentDescriptor(id: String) -> RenderPassDepthAttachmentDescriptorNode {
-        return nodes.resolve(RenderPassDepthAttachmentDescriptorNode.self, name: id)!
+        let n = nodes.resolve(RenderPassDepthAttachmentDescriptorNode.self, name: id)!
+        return n.copy()
     }
     
     public func getRenderPassStencilAttachmentDescriptor(id: String) -> RenderPassStencilAttachmentDescriptorNode {
-        return nodes.resolve(RenderPassStencilAttachmentDescriptorNode.self, name: id)!
+        let n = nodes.resolve(RenderPassStencilAttachmentDescriptorNode.self, name: id)!
+        return n.copy()
     }
     
 //    public func getRenderPassDescriptor(id: String) -> RenderPassDescriptorNode {
