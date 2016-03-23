@@ -15,7 +15,7 @@ import Swinject
 //TODO: fix filepath must not be nil error
 //let library = device!.newDefaultLibrary()
 
-class S3DXMLSpec: QuickSpec {
+class MetalNodeSpec: QuickSpec {
     override func spec() {
         
         let device = MTLCreateSystemDefaultDevice()
@@ -41,7 +41,7 @@ class S3DXMLSpec: QuickSpec {
             
         }
 
-        describe("S3DXMLMTLFunctionNode") {
+        describe("FunctionNode") {
             let vertName = "basic_color_vertex"
             let fragName = "basic_color_fragment"
             let compName = "test_compute_function"
@@ -62,7 +62,7 @@ class S3DXMLSpec: QuickSpec {
             // it("generates libraries")
         }
 
-        describe("S3DXMLMTLVertexDescriptorNode") {
+        describe("VertexDescriptorNode") {
             it("can parse the attribute descriptor array") {
                 let vertDesc = metalParser.getVertexDescriptor("common_vertex_desc")
                 expect(vertDesc.attributes[0].format) == MTLVertexFormat.Float4
@@ -86,7 +86,7 @@ class S3DXMLSpec: QuickSpec {
         // TODO: MTLVertexAttributeDescriptor
         // TODO: MTLVertexBufferLayoutDescriptor
         
-        describe("S3DXMLMTLTextureDescriptorNode") {
+        describe("TextureDescriptorNode") {
             it("can parse a MTLVertexDescriptor") {
                 let desc = metalParser.getTextureDescriptor("texture_desc")
                 expect(desc.textureType) == MTLTextureType.Type3D
@@ -110,7 +110,7 @@ class S3DXMLSpec: QuickSpec {
             // it("generates a texture descriptor")
         }
 
-        describe("S3DXMLMTLSamplerDescriptorNode") {
+        describe("SamplerDescriptorNode") {
             it("can parse a sampler descriptor") {
                 let desc = metalParser.getSamplerDescriptor("sampler_desc")
                 expect(desc.minFilter) == MTLSamplerMinMagFilter.Linear
@@ -133,7 +133,7 @@ class S3DXMLSpec: QuickSpec {
             // it("generates a sampler descriptor")
         }
         
-        describe("S3DXMLMTLStencilDescriptorNode") {
+        describe("StencilDescriptorNode") {
             it("can parse a stencil descriptor") {
                 let desc = metalParser.getStencilDescriptor("stencil_desc")
                 expect(desc.stencilCompareFunction) == MTLCompareFunction.Never
@@ -145,7 +145,7 @@ class S3DXMLSpec: QuickSpec {
             // it("generates a stencil descriptor")
         }
 
-//        describe("S3DXMLMTLDepthStencilDescriptorNode") {
+//        describe("DepthStencilDescriptorNode") {
 //            it("can parse a depth stencil descriptor") {
 //                let desc = metalParser.getDepthStencilDescriptor("depth_stencil_desc")
 //                expect(desc.depthCompareFunction) == MTLCompareFunction.Never
@@ -186,7 +186,7 @@ class S3DXMLSpec: QuickSpec {
 //            }
 //        }
 //        
-//        describe("S3DXMLMTLComputePipelineDescribeNode") {
+//        describe("ComputePipelineDescribeNode") {
 //            it("can parse a compute pipeline descriptor") {
 //                let desc = metalParser.getComputePipelineDescriptor("compute_pipeline_desc")
 //                expect(desc.label) == "compute-pipeline-descriptor"
