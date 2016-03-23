@@ -172,15 +172,16 @@ public class MetalVertexDescriptorNode: MetalNode {
     }
     
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector? = nil) -> MTLType {
+        let ninj = injector?(inj) ?? inj
         let desc = MTLType()
         // TODO: reduce over attributes & layouts.  merge injected.options?
         for (idx, node) in self.attributes.enumerate() {
             //TODO: should injector be nil for nested objects? with option to read from inj.options?
-            let attrDesc = node.generate(inj, injector: nil)
+            let attrDesc = node.generate(ninj, injector: nil)
             desc.attributes[idx] = attrDesc
         }
         for (idx, node) in self.layouts.enumerate() {
-            let layoutDesc = node.generate(inj, injector: nil)
+            let layoutDesc = node.generate(ninj, injector: nil)
             desc.layouts[idx] = layoutDesc
         }
         return desc
@@ -224,6 +225,7 @@ public class VertexAttributeDescriptorNode: MetalNode {
     }
     
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let ninj = injector?(inj) ?? inj
         let desc = MTLType()
         if let val = self.format { desc.format = val }
         if let val = self.offset { desc.offset = val }
@@ -272,6 +274,7 @@ public class VertexBufferLayoutDescriptorNode: MetalNode {
     }
     
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let ninj = injector?(inj) ?? inj
         let desc = MTLType()
         desc.stride = self.stride!
         if let val = self.stepFunction { desc.stepFunction = val }
@@ -356,6 +359,7 @@ public class TextureDescriptorNode: MetalNode {
     }
     
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let ninj = injector?(inj) ?? inj
         let desc = MTLType()
         if let val = self.textureType { desc.textureType = val }
         if let val = self.pixelFormat { desc.pixelFormat = val }
@@ -464,6 +468,7 @@ public class SamplerDescriptorNode: MetalNode {
     }
 
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let ninj = injector?(inj) ?? inj
         let desc = MTLType()
         if let val = self.label { desc.label = val }
         if let val = self.minFilter { desc.minFilter = val }
@@ -1021,6 +1026,7 @@ public final class RenderPassColorAttachmentDescriptorNode: MetalNode, RenderPas
     }
 
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let ninj = injector?(inj) ?? inj
         let desc = generateRenderPassAttachment(inj, injector: injector)
         if let clearColor = self.clearColor?.generate(inj, injector: injector) {
             desc.clearColor = clearColor
@@ -1073,6 +1079,7 @@ public final class RenderPassStencilAttachmentDescriptorNode: MetalNode, RenderP
     }
     
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let ninj = injector?(inj) ?? inj
         let desc = generateRenderPassAttachment(inj, injector: injector)
         if let val = self.clearStencil { desc.clearStencil = val }
         return desc
@@ -1131,6 +1138,7 @@ public final class RenderPassDepthAttachmentDescriptorNode: MetalNode, RenderPas
     }
     
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let ninj = injector?(inj) ?? inj
         let desc = generateRenderPassAttachment(inj, injector: injector)
         if let val = self.clearDepth { desc.clearDepth = val }
         
