@@ -261,6 +261,7 @@ public class VertexBufferLayoutDescriptorNode: MetalNode {
         let stride = elem.attributes["stride"]!
         self.stride = Int(stride)!
         
+        if let val = elem.attributes["id"] { self.id = val }
         if let stepFunction = elem.attributes["step-function"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlVertexStepFunction")!
             let enumVal = mtlEnum.getValue(stepFunction)
@@ -289,165 +290,316 @@ public class VertexBufferLayoutDescriptorNode: MetalNode {
     }
 }
 
-//public class S3DXMLMTLTextureDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLTextureDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        
-//        let texDesc = MTLTextureDescriptor()
-//        if let textureType = elem.attributes["texture-type"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlTextureType")!
-//            let enumVal = mtlEnum.getValue(textureType)
-//            texDesc.textureType = MTLTextureType(rawValue: enumVal)!
-//        }
-//        if let pixelFormat = elem.attributes["pixel-format"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlPixelFormat")!
-//            let enumVal = mtlEnum.getValue(pixelFormat)
-//            texDesc.pixelFormat = MTLPixelFormat(rawValue: enumVal)!
-//        }
-//        if let width = elem.attributes["width"] {
-//            texDesc.width = Int(width)!
-//        }
-//        if let height = elem.attributes["height"] {
-//            texDesc.height = Int(height)!
-//        }
-//        if let depth = elem.attributes["depth"] {
-//            texDesc.depth = Int(depth)!
-//        }
-//        if let mipmapLevelCount = elem.attributes["mipmap-level-count"] {
-//            texDesc.mipmapLevelCount = Int(mipmapLevelCount)!
-//        }
-//        if let sampleCount = elem.attributes["sample-count"] {
-//            texDesc.sampleCount = Int(sampleCount)!
-//        }
-//        if let arrayLength = elem.attributes["array-length"] {
-//            texDesc.arrayLength = Int(arrayLength)!
-//        }
-//        //TODO: resource options is an option set type, haven't decided on XML specification
-//        if let cpuCacheMode = elem.attributes["cpu-cache-mode"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlCpuCacheMode")!
-//            let enumVal = mtlEnum.getValue(cpuCacheMode)
-//            texDesc.cpuCacheMode = MTLCPUCacheMode(rawValue: enumVal)!
-//        }
-//        if let storageMode = elem.attributes["storage-mode"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStorageMode")!
-//            let enumVal = mtlEnum.getValue(storageMode)
-//            texDesc.storageMode = MTLStorageMode(rawValue: enumVal)!
-//        }
-//        //TODO: usage is an option set type, haven't decided on XML specification
-////        if let usage = elem.attributes["usage"] {
-////            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlTextureUsage")!
-////            let enumVal = mtlEnum.getValue(usage)
-////            texDesc.usage = MTLTextureUsage(rawValue: enumVal)
-////        }
-//        
-//        return texDesc
-//    }
-//}
-//
-//public class S3DXMLMTLSamplerDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLSamplerDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let samplerDesc = MTLSamplerDescriptor()
-//        
-//        if let label = elem.attributes["label"] {
-//            samplerDesc.label = label
-//        }
-//        if let minFilter = elem.attributes["min-filter"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerMinMagFilter")!
-//            let enumVal = mtlEnum.getValue(minFilter)
-//            samplerDesc.minFilter = MTLSamplerMinMagFilter(rawValue: enumVal)!
-//        }
-//        if let magFilter = elem.attributes["mag-filter"]{
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerMinMagFilter")!
-//            let enumVal = mtlEnum.getValue(magFilter)
-//            samplerDesc.magFilter = MTLSamplerMinMagFilter(rawValue: enumVal)!
-//        }
-//        if let mipFilter = elem.attributes["mip-filter"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerMipFilter")!
-//            let enumVal = mtlEnum.getValue(mipFilter)
-//            samplerDesc.mipFilter = MTLSamplerMipFilter(rawValue: enumVal)!
-//        }
-//        if let maxAnisotropy = elem.attributes["max-anisotropy"] {
-//            samplerDesc.maxAnisotropy = Int(maxAnisotropy)!
-//        }
-//        if let sAddress = elem.attributes["s-address-mode"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
-//            let enumVal = mtlEnum.getValue(sAddress)
-//            samplerDesc.sAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
-//        }
-//        if let rAddress = elem.attributes["r-address-mode"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
-//            let enumVal = mtlEnum.getValue(rAddress)
-//            samplerDesc.rAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
-//        }
-//        if let tAddress = elem.attributes["t-address-mode"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
-//            let enumVal = mtlEnum.getValue(tAddress)
-//            samplerDesc.tAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
-//        }
-//        if let normCoord = elem.attributes["normalized-coordinates"] {
-//            samplerDesc.normalizedCoordinates = (normCoord == "true")
-//        }
-//        if let lodMinClamp = elem.attributes["lod-min-clamp"] {
-//            samplerDesc.lodMinClamp = Float(lodMinClamp)!
-//        }
-//        if let lodMaxClamp = elem.attributes["lod-max-clamp"] {
-//            samplerDesc.lodMaxClamp = Float(lodMaxClamp)!
-//        }
-//        #if os(iOS)
-//        if let _ = elem.attributes["lod-average"] {
-//             samplerDesc.lodAverage = true
-//        }
-//        #endif
-//        if let compareFn = elem.attributes["compare-function"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlCompareFunction")!
-//            let enumVal = mtlEnum.getValue(compareFn)
-//            samplerDesc.compareFunction = MTLCompareFunction(rawValue: enumVal)!
-//        }
-//        
-//        return samplerDesc
-//    }
-//}
-//
-//public class S3DXMLMTLStencilDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLStencilDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let stencilDesc = MTLStencilDescriptor()
-//        
-//        if let stencilCompare = elem.attributes["stencil-compare-function"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlCompareFunction")!
-//            let enumVal = mtlEnum.getValue(stencilCompare)
-//            stencilDesc.stencilCompareFunction = MTLCompareFunction(rawValue: enumVal)!
-//        }
-//        if let stencilFailureOp = elem.attributes["stencil-failure-operation"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStencilOperation")!
-//            let enumVal = mtlEnum.getValue(stencilFailureOp)
-//            stencilDesc.stencilFailureOperation = MTLStencilOperation(rawValue: enumVal)!
-//        }
-//        if let depthFailureOp = elem.attributes["depth-failure-operation"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStencilOperation")!
-//            let enumVal = mtlEnum.getValue(depthFailureOp)
-//            stencilDesc.depthFailureOperation = MTLStencilOperation(rawValue: enumVal)!
-//        }
-//        if let depthStencilPassOp = elem.attributes["depth-stencil-pass-operation"] {
-//            let mtlEnum = container.resolve(MetalEnum.self, name: "mtlStencilOperation")!
-//            let enumVal = mtlEnum.getValue(depthStencilPassOp)
-//            stencilDesc.depthStencilPassOperation = MTLStencilOperation(rawValue: enumVal)!
-//        }
-//        if let readMask = elem.attributes["read-mask"] {
-//            stencilDesc.readMask = UInt32(readMask)!
-//        }
-//        if let writeMask = elem.attributes["write-mask"] {
-//            stencilDesc.writeMask = UInt32(writeMask)!
-//        }
-//        
-//        return stencilDesc
-//    }
-//}
-//
+public class TextureDescriptorNode: MetalNode {
+    public typealias NodeType = TextureDescriptorNode
+    public typealias MTLType = MTLTextureDescriptor
+    
+    public var id: String?
+    public var textureType: MTLTextureType?
+    public var pixelFormat: MTLPixelFormat?
+    public var width: Int?
+    public var height: Int?
+    public var depth: Int?
+    public var mipmapLevelCount: Int?
+    public var sampleCount: Int?
+    public var arrayLength: Int?
+    public var resourceOptions: MTLResourceOptions?
+    public var cpuCacheMode: MTLCPUCacheMode?
+    public var storageMode: MTLStorageMode?
+    public var usage: MTLTextureUsage?
+    
+    init() {
+    
+    }
+    
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+    
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        
+        if let val = elem.attributes["texture-type"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlTextureType")!
+            let enumVal = mtlEnum.getValue(val)
+            self.textureType = MTLTextureType(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["pixel-format"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlPixelFormat")!
+            let enumVal = mtlEnum.getValue(val)
+            self.pixelFormat = MTLPixelFormat(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["width"] {
+            self.width = Int(val)!
+        }
+        if let val = elem.attributes["height"] {
+            self.height = Int(val)!
+        }
+        if let val = elem.attributes["depth"] {
+            self.depth = Int(val)!
+        }
+        if let val = elem.attributes["mipmap-level-count"] {
+            self.mipmapLevelCount = Int(val)!
+        }
+        if let val = elem.attributes["sample-count"] {
+            self.sampleCount = Int(val)!
+        }
+        if let val = elem.attributes["array-length"] {
+            self.arrayLength = Int(val)!
+        }
+        //TODO: resource options is an option set type, haven't decided on XML specification
+        if let val = elem.attributes["cpu-cache-mode"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlCpuCacheMode")!
+            let enumVal = mtlEnum.getValue(val)
+            self.cpuCacheMode = MTLCPUCacheMode(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["storage-mode"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlStorageMode")!
+            let enumVal = mtlEnum.getValue(val)
+            self.storageMode = MTLStorageMode(rawValue: enumVal)!
+        }
+        //TODO: usage is an option set type, haven't decided on XML specification
+        //        if let val = elem.attributes["usage"] {
+        //            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlTextureUsage")!
+        //            let enumVal = mtlEnum.getValue(val)
+        //            texDesc.usage = MTLTextureUsage(rawValue: enumVal)
+        //        }
+        
+    }
+    
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+        if let val = self.textureType { desc.textureType = val }
+        if let val = self.pixelFormat { desc.pixelFormat = val }
+        if let val = self.width { desc.width = val }
+        if let val = self.height { desc.height = val }
+        if let val = self.depth { desc.depth = val }
+        if let val = self.mipmapLevelCount { desc.mipmapLevelCount = val }
+        if let val = self.sampleCount { desc.sampleCount = val }
+        if let val = self.arrayLength { desc.arrayLength = val }
+        if let val = self.resourceOptions { desc.resourceOptions = val }
+        if let val = self.cpuCacheMode { desc.cpuCacheMode = val }
+        if let val = self.cpuCacheMode { desc.cpuCacheMode = val }
+        if let val = self.storageMode { desc.storageMode = val }
+        if let val = self.usage { desc.usage = val }
+        return desc
+    }
+    
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.textureType = self.textureType
+        cp.pixelFormat = self.pixelFormat
+        cp.width = self.width
+        cp.height = self.height
+        cp.depth = self.depth
+        cp.mipmapLevelCount = self.mipmapLevelCount
+        cp.sampleCount = self.sampleCount
+        cp.arrayLength = self.arrayLength
+        cp.resourceOptions = self.resourceOptions
+        cp.cpuCacheMode = self.cpuCacheMode
+        cp.storageMode = self.storageMode
+        cp.usage = self.usage
+        return cp
+    }
+}
+
+public class SamplerDescriptorNode: MetalNode {
+    public typealias NodeType = SamplerDescriptorNode
+    public typealias MTLType = MTLSamplerDescriptor
+
+    public var id: String?
+    public var label: String?
+    public var minFilter: MTLSamplerMinMagFilter?
+    public var magFilter: MTLSamplerMinMagFilter?
+    public var mipFilter: MTLSamplerMipFilter?
+    public var maxAnisotropy: Int?
+    public var rAddressMode: MTLSamplerAddressMode?
+    public var tAddressMode: MTLSamplerAddressMode?
+    public var sAddressMode: MTLSamplerAddressMode?
+    public var normalizedCoordinates: Bool?
+    public var lodMinClamp: Float?
+    public var lodMaxClamp: Float?
+    public var lodAverage: Bool?
+    public var compareFunction: MTLCompareFunction?
+    
+    init() {
+
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        if let label = elem.attributes["label"] {
+            self.label = label
+        }
+        if let val = elem.attributes["min-filter"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlSamplerMinMagFilter")!
+            let enumVal = mtlEnum.getValue(val)
+            self.minFilter = MTLSamplerMinMagFilter(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["mag-filter"]{
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlSamplerMinMagFilter")!
+            let enumVal = mtlEnum.getValue(val)
+            self.magFilter = MTLSamplerMinMagFilter(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["mip-filter"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlSamplerMipFilter")!
+            let enumVal = mtlEnum.getValue(val)
+            self.mipFilter = MTLSamplerMipFilter(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["max-anisotropy"] {
+            self.maxAnisotropy = Int(val)!
+        }
+        if let val = elem.attributes["s-address-mode"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
+            let enumVal = mtlEnum.getValue(val)
+            self.sAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["r-address-mode"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
+            let enumVal = mtlEnum.getValue(val)
+            self.rAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["t-address-mode"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlSamplerAddressMode")!
+            let enumVal = mtlEnum.getValue(val)
+            self.tAddressMode = MTLSamplerAddressMode(rawValue: enumVal)!
+        }
+        if let val = elem.attributes["normalized-coordinates"] {
+            self.normalizedCoordinates = (val == "true")
+        }
+        if let val = elem.attributes["lod-min-clamp"] {
+            self.lodMinClamp = Float(val)!
+        }
+        if let val = elem.attributes["lod-max-clamp"] {
+            self.lodMaxClamp = Float(val)!
+        }
+        if let val = elem.attributes["lod-average"] {
+             self.lodAverage = true
+        }
+        if let val = elem.attributes["compare-function"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlCompareFunction")!
+            let enumVal = mtlEnum.getValue(val)
+            self.compareFunction = MTLCompareFunction(rawValue: enumVal)!
+        }
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+        if let val = self.label { desc.label = val }
+        if let val = self.minFilter { desc.minFilter = val }
+        if let val = self.magFilter { desc.magFilter = val }
+        if let val = self.mipFilter { desc.mipFilter = val }
+        if let val = self.maxAnisotropy { desc.maxAnisotropy = val }
+        if let val = self.rAddressMode { desc.rAddressMode = val }
+        if let val = self.tAddressMode { desc.tAddressMode = val }
+        if let val = self.sAddressMode { desc.sAddressMode = val }
+        if let val = self.normalizedCoordinates { desc.normalizedCoordinates = val }
+        if let val = self.lodMinClamp { desc.lodMinClamp = val }
+        if let val = self.lodMaxClamp { desc.lodMaxClamp = val }
+        #if os(iOS)
+        if let val = self.lodAverage { desc.lodAverage = val }
+        #endif
+        if let val = self.compareFunction { desc.compareFunction = val }
+        return desc
+    }
+
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.id = self.id
+        cp.label = self.label
+        cp.minFilter = self.minFilter
+        cp.magFilter = self.magFilter
+        cp.mipFilter = self.mipFilter
+        cp.maxAnisotropy = self.maxAnisotropy
+        cp.rAddressMode = self.rAddressMode
+        cp.tAddressMode = self.tAddressMode
+        cp.sAddressMode = self.sAddressMode
+        cp.normalizedCoordinates = self.normalizedCoordinates
+        cp.lodMinClamp = self.lodMinClamp
+        cp.lodMaxClamp = self.lodMaxClamp
+        cp.lodAverage = self.lodAverage
+        cp.compareFunction = self.compareFunction
+        return cp
+    }
+}
+
+public class StencilDescriptorNode: MetalNode {
+    public typealias NodeType = StencilDescriptorNode
+    public typealias MTLType = MTLStencilDescriptor
+
+    public var id: String?
+    public var stencilCompareFunction: MTLCompareFunction?
+    public var stencilFailureOperation: MTLStencilOperation?
+    public var depthFailureOperation: MTLStencilOperation?
+    public var depthStencilPassOperation: MTLStencilOperation?
+    public var readMask: UInt32?
+    public var writeMask: UInt32?
+
+    init() {
+
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+        if let stencilCompare = elem.attributes["stencil-compare-function"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlCompareFunction")!
+            let enumVal = mtlEnum.getValue(stencilCompare)
+            self.stencilCompareFunction = MTLCompareFunction(rawValue: enumVal)!
+        }
+        if let stencilFailureOp = elem.attributes["stencil-failure-operation"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlStencilOperation")!
+            let enumVal = mtlEnum.getValue(stencilFailureOp)
+            self.stencilFailureOperation = MTLStencilOperation(rawValue: enumVal)!
+        }
+        if let depthFailureOp = elem.attributes["depth-failure-operation"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlStencilOperation")!
+            let enumVal = mtlEnum.getValue(depthFailureOp)
+            self.depthFailureOperation = MTLStencilOperation(rawValue: enumVal)!
+        }
+        if let depthStencilPassOp = elem.attributes["depth-stencil-pass-operation"] {
+            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlStencilOperation")!
+            let enumVal = mtlEnum.getValue(depthStencilPassOp)
+            self.depthStencilPassOperation = MTLStencilOperation(rawValue: enumVal)!
+        }
+        if let readMask = elem.attributes["read-mask"] {
+            self.readMask = UInt32(readMask)!
+        }
+        if let writeMask = elem.attributes["write-mask"] {
+            self.writeMask = UInt32(writeMask)!
+        }
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+        if let val = self.stencilCompareFunction { desc.stencilCompareFunction = val }
+        if let val = self.stencilFailureOperation { desc.stencilFailureOperation = val }
+        if let val = self.depthFailureOperation { desc.depthFailureOperation = val }
+        if let val = self.depthStencilPassOperation { desc.depthStencilPassOperation = val }
+        if let val = self.readMask { desc.readMask = val }
+        if let val = self.writeMask { desc.writeMask = val }
+        return desc
+    }
+
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.stencilCompareFunction = self.stencilCompareFunction
+        cp.stencilFailureOperation = self.stencilFailureOperation
+        cp.depthFailureOperation = self.depthFailureOperation
+        cp.depthStencilPassOperation = self.depthStencilPassOperation
+        cp.readMask = self.readMask
+        cp.writeMask = self.writeMask
+        return cp
+    }
+}
+
 //public class S3DXMLMTLDepthStencilDescriptorNode: S3DXMLNodeParser {
 //    public typealias NodeType = MTLDepthStencilDescriptor
 //    

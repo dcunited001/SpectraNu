@@ -58,6 +58,8 @@ class S3DXMLSpec: QuickSpec {
 //            it("can parse from references") {
 //                
 //            }
+            
+            // it("generates libraries")
         }
 
         describe("S3DXMLMTLVertexDescriptorNode") {
@@ -77,59 +79,72 @@ class S3DXMLSpec: QuickSpec {
 //            it("can parse from references") {
 //                let vertDesc = metalParser.vertexDescriptors["common_vertex_desc"]!
 //            }
+            
+            // it("generates vertex descriptors")
         }
         
-//        describe("S3DXMLMTLTextureDescriptorNode") {
-//            it("can parse a MTLVertexDescriptor") {
-//                let desc = metalParser.getTextureDescriptor("texture_desc")
-//                expect(desc.textureType) == MTLTextureType.Type3D
-//                expect(desc.pixelFormat) == MTLPixelFormat.RGBA32Float
-//                expect(desc.width) == 100
-//                expect(desc.height) == 100
-//                expect(desc.depth) == 100
-//                expect(desc.mipmapLevelCount) == 100
-//                expect(desc.sampleCount) == 100
-//                expect(desc.arrayLength) == 100
-//                // desc.resourceOptions
-//                expect(desc.cpuCacheMode) == MTLCPUCacheMode.WriteCombined
-//                expect(desc.storageMode) == MTLStorageMode.Shared
-////                expect(desc.usage) == MTLTextureUsage.PixelFormatView
+        // TODO: MTLVertexAttributeDescriptor
+        // TODO: MTLVertexBufferLayoutDescriptor
+        
+        describe("S3DXMLMTLTextureDescriptorNode") {
+            it("can parse a MTLVertexDescriptor") {
+                let desc = metalParser.getTextureDescriptor("texture_desc")
+                expect(desc.textureType) == MTLTextureType.Type3D
+                expect(desc.pixelFormat) == MTLPixelFormat.RGBA32Float
+                expect(desc.width) == 100
+                expect(desc.height) == 100
+                expect(desc.depth) == 100
+                expect(desc.mipmapLevelCount) == 100
+                expect(desc.sampleCount) == 100
+                expect(desc.arrayLength) == 100
+                // desc.resourceOptions
+                expect(desc.cpuCacheMode) == MTLCPUCacheMode.WriteCombined
+                expect(desc.storageMode) == MTLStorageMode.Shared
+                // expect(desc.usage) == MTLTextureUsage.PixelFormatView
+            }
+            
+//            it("can parse from references") {
+//                
 //            }
-//            
-////            it("can parse from references") {
-////                
-////            }
-//        }
-//        
-//        describe("S3DXMLMTLSamplerDescriptorNode") {
-//            it("can parse a sampler descriptor") {
-//                let desc = metalParser.getSamplerDescriptor("sampler_desc")
-//                expect(desc.minFilter) == MTLSamplerMinMagFilter.Linear
-//                expect(desc.magFilter) == MTLSamplerMinMagFilter.Linear
-//                expect(desc.mipFilter) == MTLSamplerMipFilter.Linear
-//                expect(desc.maxAnisotropy) == 10
-//                expect(desc.sAddressMode) == MTLSamplerAddressMode.Repeat
-//                expect(desc.tAddressMode) == MTLSamplerAddressMode.MirrorRepeat
-//                expect(desc.rAddressMode) == MTLSamplerAddressMode.ClampToZero
-//                expect(desc.normalizedCoordinates) == false
-//                expect(desc.lodMinClamp) == 1.0
-//                expect(desc.lodMaxClamp) == 10.0
-////                TODO: fix lodAverage (unavailable on OSX)
-////                expect(desc.lodAverage) == true
-//                expect(desc.compareFunction) == MTLCompareFunction.Always
-//            }
-//        }
-//        
-//        describe("S3DXMLMTLStencilDescriptorNode") {
-//            it("can parse a stencil descriptor") {
-//                let desc = metalParser.getStencilDescriptor("stencil_desc")
-//                expect(desc.stencilCompareFunction) == MTLCompareFunction.Never
-//                expect(desc.stencilFailureOperation) == MTLStencilOperation.Replace
-//                expect(desc.depthFailureOperation) == MTLStencilOperation.IncrementWrap
-//                expect(desc.depthStencilPassOperation) == MTLStencilOperation.DecrementWrap
-//            }
-//        }
-//        
+            
+            // it("generates a texture descriptor")
+        }
+
+        describe("S3DXMLMTLSamplerDescriptorNode") {
+            it("can parse a sampler descriptor") {
+                let desc = metalParser.getSamplerDescriptor("sampler_desc")
+                expect(desc.minFilter) == MTLSamplerMinMagFilter.Linear
+                expect(desc.magFilter) == MTLSamplerMinMagFilter.Linear
+                expect(desc.mipFilter) == MTLSamplerMipFilter.Linear
+                expect(desc.maxAnisotropy) == 10
+                expect(desc.sAddressMode) == MTLSamplerAddressMode.Repeat
+                expect(desc.tAddressMode) == MTLSamplerAddressMode.MirrorRepeat
+                expect(desc.rAddressMode) == MTLSamplerAddressMode.ClampToZero
+                expect(desc.normalizedCoordinates) == false
+                expect(desc.lodMinClamp) == 1.0
+                expect(desc.lodMaxClamp) == 10.0
+//                TODO: fix lodAverage (unavailable on OSX)
+                #if os(iOS)
+//                expect(desc.lodAverage) == true
+                #endif
+                expect(desc.compareFunction) == MTLCompareFunction.Always
+            }
+            
+            // it("generates a sampler descriptor")
+        }
+        
+        describe("S3DXMLMTLStencilDescriptorNode") {
+            it("can parse a stencil descriptor") {
+                let desc = metalParser.getStencilDescriptor("stencil_desc")
+                expect(desc.stencilCompareFunction) == MTLCompareFunction.Never
+                expect(desc.stencilFailureOperation) == MTLStencilOperation.Replace
+                expect(desc.depthFailureOperation) == MTLStencilOperation.IncrementWrap
+                expect(desc.depthStencilPassOperation) == MTLStencilOperation.DecrementWrap
+            }
+            
+            // it("generates a stencil descriptor")
+        }
+
 //        describe("S3DXMLMTLDepthStencilDescriptorNode") {
 //            it("can parse a depth stencil descriptor") {
 //                let desc = metalParser.getDepthStencilDescriptor("depth_stencil_desc")

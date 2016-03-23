@@ -71,18 +71,18 @@ public class MetalParser {
         return n.copy()
     }
     
-//    public func getTextureDescriptor(id: String) -> TextureDescriptorNode {
-//        return nodes.resolve(TextureDescriptorNode.self, name: id)!
-//    }
-//    
-//    public func getSamplerDescriptor(id: String) -> SamplerDescriptorNode {
-//        return nodes.resolve(SamplerDescriptorNode.self, name: id)!
-//    }
-//    
-//    public func getStencilDescriptor(id: String) -> StencilDescriptorNode {
-//        return nodes.resolve(StencilDescriptorNode.self, name: id)!
-//    }
-//    
+    public func getTextureDescriptor(id: String) -> TextureDescriptorNode {
+        return nodes.resolve(TextureDescriptorNode.self, name: id)!
+    }
+    
+    public func getSamplerDescriptor(id: String) -> SamplerDescriptorNode {
+        return nodes.resolve(SamplerDescriptorNode.self, name: id)!
+    }
+
+    public func getStencilDescriptor(id: String) -> StencilDescriptorNode {
+        return nodes.resolve(StencilDescriptorNode.self, name: id)!
+    }
+    
 //    public func getDepthStencilDescriptor(id: String) -> DepthStencilDescriptorNode {
 //        return nodes.resolve(DepthStencilDescriptorNode.self, name: id)!
 //    }
@@ -145,9 +145,15 @@ public class MetalParser {
                 case .VertexBufferLayoutDescriptor:
                     let node = VertexBufferLayoutDescriptorNode(nodes: nodes, elem: elem)
                     if (node.id != nil) { node.register(nodes, objectScope: .None) }
-                case .TextureDescriptor: break
-                case .SamplerDescriptor: break
-                case .StencilDescriptor: break
+                case .TextureDescriptor:
+                    let node = TextureDescriptorNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
+                case .SamplerDescriptor:
+                    let node = SamplerDescriptorNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
+                case .StencilDescriptor:
+                    let node = StencilDescriptorNode(nodes: nodes, elem: elem)
+                    if (node.id != nil) { node.register(nodes, objectScope: .None) }
                 case .DepthStencilDescriptor: break
                 case .RenderPipelineColorAttachmentDescriptor: break
                 case .RenderPipelineDescriptor: break
