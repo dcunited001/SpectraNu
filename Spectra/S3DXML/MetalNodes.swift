@@ -948,40 +948,6 @@ public class ComputePipelineDescriptorNode: MetalNode {
     }
 }
 
-//
-//public class S3DXMLMTLComputePipelineDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLComputePipelineDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let desc = MTLComputePipelineDescriptor()
-//        
-//        if let computeFunctionTag = elem.firstChild(tag: "compute-function") {
-//            if let computeFunctionName = computeFunctionTag.attributes["ref"] {
-//                desc.computeFunction = container.resolve(MTLFunction.self, name: computeFunctionName)
-//            } else {
-//                //TODO: attribute tag for library
-//                let lib = container.resolve(MTLLibrary.self, name: "default")!
-//                let computeFunction = S3DXMLMTLFunctionNode(library: lib).parse(container, elem: computeFunctionTag)
-//                desc.computeFunction = computeFunction
-//                
-//                if let id = computeFunctionTag.attributes["id"] {
-//                    container.register(MTLFunction.self, name: id) { _ in
-//                        return computeFunction
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        if let label = elem.attributes["label"] {
-//            desc.label = label
-//        }
-//        if let _ = elem.attributes["thread-group-size-is-multiple-of-thread-execution-width"] {
-//            desc.threadGroupSizeIsMultipleOfThreadExecutionWidth = true
-//        }
-//        
-//        return desc
-//    }
-//}
-
 public class ClearColorNode: MetalNode {
     public typealias NodeType = ClearColorNode
     public typealias MTLType = MTLClearColor

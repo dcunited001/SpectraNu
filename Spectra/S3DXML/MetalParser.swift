@@ -96,9 +96,10 @@ public class MetalParser {
         return n.copy()
     }
 
-//    public func getRenderPipelineDescriptor(id: String) -> RenderPipelineDescriptorNode {
-//        return nodes.resolve(RenderPipelineDescriptorNode.self, name: id)!
-//    }
+    public func getRenderPipelineDescriptor(id: String) -> RenderPipelineDescriptorNode {
+        let n = nodes.resolve(RenderPipelineDescriptorNode.self, name: id)!
+        return n.copy()
+    }
     
     public func getClearColor(id: String) -> ClearColorNode {
         let n = nodes.resolve(ClearColorNode.self, name: id)!
@@ -124,9 +125,9 @@ public class MetalParser {
 //        return nodes.resolve(RenderPassDescriptorNode.self, name: id)!
 //    }
     
-//    public func getComputePipelineDescriptor(id: String) -> ComputePipelineDescriptorNode {
-//        return nodes.resolve(ComputePipelineDescriptorNode.self, name: id)!
-//    }
+    public func getComputePipelineDescriptor(id: String) -> ComputePipelineDescriptorNode {
+        return nodes.resolve(ComputePipelineDescriptorNode.self, name: id)!
+    }
     
     // TODO: figure out how to break this out into parseNode() -> MetalNode
     // - however, the problem is that
@@ -170,12 +171,18 @@ public class MetalParser {
             case .StencilDescriptor:
                 let node = StencilDescriptorNode(nodes: nodes, elem: elem)
                 if (node.id != nil) { node.register(nodes, objectScope: .None) }
-            case .DepthStencilDescriptor: break
+            case .DepthStencilDescriptor:
+                let node = DepthStencilDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
             case .RenderPipelineColorAttachmentDescriptor:
                 let node = RenderPipelineColorAttachmentDescriptorNode(nodes: nodes, elem: elem)
                 if (node.id != nil) { node.register(nodes, objectScope: .None) }
-            case .RenderPipelineDescriptor: break
-            case .ComputePipelineDescriptor: break
+            case .RenderPipelineDescriptor:
+                let node = RenderPipelineDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .ComputePipelineDescriptor:
+                let node = ComputePipelineDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
             case .ClearColor:
                 let node = ClearColorNode(nodes: nodes, elem: elem)
                 if (node.id != nil) { node.register(nodes, objectScope: .None) }
@@ -189,6 +196,8 @@ public class MetalParser {
                 let node = RenderPassStencilAttachmentDescriptorNode(nodes: nodes, elem: elem)
                 if (node.id != nil) { node.register(nodes, objectScope: .None) }
             case .RenderPassDescriptor: break
+//                let node = RenderPassDescriptorNode(nodes: nodes, elem: elem)
+//                if (node.id != nil) { node.register(nodes, objectScope: .None) }
             default: break
             }
         }
@@ -201,6 +210,7 @@ public class MetalParser {
         return container
     }
     
+    // TODO: remove this, since both are only used on generate()
     public static func initMetal(container: Container) -> Container {
         // TODO: decide whether or not to let the device persist for the lifetime of the top-level container
         // - many classes require the device (and for some, i think object id matters, like for MTLLibrary)
