@@ -1291,10 +1291,11 @@ public class RenderPassDescriptorNode: MetalNode {
         let attachSelector = "render-pass-color-attachment-descriptors > render-pass-color-attachment-descriptor"
         for (idx, el) in elem.css(attachSelector).enumerate() {
             if let colorAttachName = el.attributes["ref"] {
-                self.colorAttachments[Int(idx)] = nodes.resolve(RenderPassColorAttachmentDescriptorNode.self, name: colorAttachName)!
+                let colorAttach = nodes.resolve(RenderPassColorAttachmentDescriptorNode.self, name: colorAttachName)!
+                self.colorAttachments.append(colorAttach)
             } else {
                 let colorAttach = RenderPassColorAttachmentDescriptorNode(nodes: nodes, elem: el)
-                self.colorAttachments[Int(idx)] = colorAttach
+                self.colorAttachments.append(colorAttach)
 
                 if let id = el.attributes["id"] {
                     nodes.register(RenderPassColorAttachmentDescriptorNode.self, name: id) { _ in

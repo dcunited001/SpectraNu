@@ -16,6 +16,16 @@
         </vertex-buffer-layout-descriptors>
     </vertex-descriptor>
     
+    <render-pipeline-color-attachment-descriptor id="color_attach_desc"
+        blending-enabled="true"
+        source-rgb-blend-factor="Zero"
+        destination-rgb-blend-factor="SourceColor"
+        rgb-blend-operation="Subtract"
+        source-alpha-blend-factor="BlendAlpha"
+        destination-alpha-blend-factor="OneMinusBlendAlpha"
+        alpha-blend-operation="Max"
+        pixel-format="BGRA8Unorm" />
+    
     <render-pipeline-descriptor id="render_pipeline_desc"
         label="render-pipeline-descriptor"
         depth-attachment-pixel-format="Depth32Float"
