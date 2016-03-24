@@ -952,7 +952,7 @@ public class ComputePipelineDescriptorNode: MetalNode {
     }
 }
 
-public class ClearColorNode: MetalNode {
+public class ClearColorNode: MetalNode, Equatable {
     public typealias NodeType = ClearColorNode
     public typealias MTLType = MTLClearColor
 
@@ -991,6 +991,14 @@ public class ClearColorNode: MetalNode {
         cp.alpha = self.alpha
         return cp
     }
+    
+}
+
+public func ==(lhs: ClearColorNode, rhs: ClearColorNode) -> Bool {
+    return lhs.red == rhs.red
+        && lhs.green == rhs.green
+        && lhs.blue == rhs.blue
+        && lhs.alpha == rhs.alpha
 }
 
 public protocol RenderPassAttachmentDescriptorNode: class {
