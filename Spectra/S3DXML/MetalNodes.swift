@@ -992,7 +992,8 @@ public class ClearColorNode: MetalNode {
 public protocol RenderPassAttachmentDescriptorNode: class {
     associatedtype MTLType: MTLRenderPassAttachmentDescriptor
     
-    var texture: TextureNode? { get set }
+    // TODO: decide on texture descriptor node here? or just assuming this will be bundled in with the generator?
+    var texture: TextureDescriptorNode? { get set }
     var level: Int? { get set }
     var slice: Int? { get set }
     var depthPlane: Int? { get set }
@@ -1000,7 +1001,8 @@ public protocol RenderPassAttachmentDescriptorNode: class {
     var loadAction: MTLLoadAction? { get set }
     var storeAction: MTLStoreAction? { get set }
     
-    var resolveTexture: TextureNode? { get set }
+    // TODO: decide on texture descriptor node here? or just assuming this will be bundled in with the generator?
+    var resolveTexture: TextureDescriptorNode? { get set }
     var resolveLevel: Int? { get set }
     var resolveSlice: Int? { get set }
     var resolveDepthPlane: Int? { get set }
@@ -1077,13 +1079,13 @@ public final class RenderPassColorAttachmentDescriptorNode: MetalNode, RenderPas
     public var id: String?
     public var clearColor: ClearColorNode?
     
-    public var texture: TextureNode?
+    public var texture: TextureDescriptorNode?
     public var level: Int?
     public var slice: Int?
     public var depthPlane: Int?
     public var loadAction: MTLLoadAction?
     public var storeAction: MTLStoreAction?
-    public var resolveTexture: TextureNode?
+    public var resolveTexture: TextureDescriptorNode?
     public var resolveLevel: Int?
     public var resolveSlice: Int?
     public var resolveDepthPlane: Int?
@@ -1141,13 +1143,13 @@ public final class RenderPassStencilAttachmentDescriptorNode: MetalNode, RenderP
     public var id: String?
     public var clearStencil: UInt32?
     
-    public var texture: TextureNode?
+    public var texture: TextureDescriptorNode?
     public var level: Int?
     public var slice: Int?
     public var depthPlane: Int?
     public var loadAction: MTLLoadAction?
     public var storeAction: MTLStoreAction?
-    public var resolveTexture: TextureNode?
+    public var resolveTexture: TextureDescriptorNode?
     public var resolveLevel: Int?
     public var resolveSlice: Int?
     public var resolveDepthPlane: Int?
@@ -1194,13 +1196,13 @@ public final class RenderPassDepthAttachmentDescriptorNode: MetalNode, RenderPas
     public var depthResolveFilter: MTLMultisampleDepthResolveFilter?
     #endif
     
-    public var texture: TextureNode?
+    public var texture: TextureDescriptorNode?
     public var level: Int?
     public var slice: Int?
     public var depthPlane: Int?
     public var loadAction: MTLLoadAction?
     public var storeAction: MTLStoreAction?
-    public var resolveTexture: TextureNode?
+    public var resolveTexture: TextureDescriptorNode?
     public var resolveLevel: Int?
     public var resolveSlice: Int?
     public var resolveDepthPlane: Int?
@@ -1250,63 +1252,87 @@ public final class RenderPassDepthAttachmentDescriptorNode: MetalNode, RenderPas
     }
 }
 
-//public class RenderPassDescriptorNode: MetalNode {
-//    // NOTE: this node has to handle transforming options to send to lower render pass attachment descriptors!!
-//}
+public class RenderPassDescriptorNode: MetalNode {
+    // NOTE: this node has to handle transforming options to send to lower render pass attachment descriptors!!
+    
+    public typealias NodeType = RenderPassDescriptorNode
+    public typealias MTLType = MTLRenderPassDescriptor
 
-//public class S3DXMLMTLRenderPassDescriptorNode: S3DXMLNodeParser {
-//    public typealias NodeType = MTLRenderPassDescriptor
-//    
-//    public func parse(container: Container, elem: XMLElement, options: [String : AnyObject] = [:]) -> NodeType {
-//        let desc = MTLRenderPassDescriptor()
-//        
-//        let attachSelector = "render-pass-color-attachment-descriptors > render-pass-color-attachment-descriptor"
-//        for (idx, el) in elem.css(attachSelector).enumerate() {
-//            if let colorAttachName = el.attributes["ref"] {
-//                desc.colorAttachments[Int(idx)] = container.resolve(MTLRenderPassColorAttachmentDescriptor.self, name: colorAttachName)
-//            } else {
-//                let colorAttach = S3DXMLMTLRenderPassColorAttachmentDescriptorNode().parse(container, elem: el)
-//                desc.colorAttachments[Int(idx)] = colorAttach
-//                
-//                if let id = el.attributes["id"] {
-//                    container.register(MTLRenderPassColorAttachmentDescriptor.self, name: id) { _ in
-//                        return colorAttach.copy() as! MTLRenderPassColorAttachmentDescriptor
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        if let depthAttachTag = elem.firstChild(tag: "render-pass-depth-attachment-descriptor") {
-//            if let depthAttachName = depthAttachTag.attributes["ref"] {
-//                desc.depthAttachment = container.resolve(MTLRenderPassDepthAttachmentDescriptor.self, name: depthAttachName)
-//            } else {
-//                let depthAttach = S3DXMLMTLRenderPassDepthAttachmentDescriptorNode().parse(container, elem: depthAttachTag)
-//                desc.depthAttachment = depthAttach
-//                
-//                if let id = depthAttachTag.attributes["id"] {
-//                    container.register(MTLRenderPassDepthAttachmentDescriptor.self, name: id) { _ in
-//                        return depthAttach.copy() as! MTLRenderPassDepthAttachmentDescriptor
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        if let stencilAttachTag = elem.firstChild(tag: "render-pass-stencil-attachment-descriptor") {
-//            if let stencilAttachName = stencilAttachTag.attributes["ref"] {
-//                desc.stencilAttachment = container.resolve(MTLRenderPassStencilAttachmentDescriptor.self, name: stencilAttachName)
-//            } else {
-//                let stencilAttach = S3DXMLMTLRenderPassStencilAttachmentDescriptorNode().parse(container, elem: stencilAttachTag)
-//                desc.stencilAttachment = stencilAttach
-//                
-//                if let id = stencilAttachTag.attributes["id"] {
-//                    container.register(MTLRenderPassStencilAttachmentDescriptor.self, name: id) { _ in
-//                        return stencilAttach.copy() as! MTLRenderPassStencilAttachmentDescriptor
-//                        }.inObjectScope(.Container)
-//                }
-//            }
-//        }
-//        
-//        return desc
-//    }
-//}
-//
+    public var id: String?
+    
+    public var colorAttachments: [RenderPassColorAttachmentDescriptorNode] = []
+    public var depthAttachment: RenderPassDepthAttachmentDescriptorNode?
+    public var stencilAttachment: RenderPassStencilAttachmentDescriptorNode?
+
+    public required init() {
+        
+    }
+
+    public required init(nodes: Container, elem: XMLElement) {
+        parseXML(nodes, elem: elem)
+    }
+
+    public func parseXML(nodes: Container, elem: XMLElement) {
+        if let val = elem.attributes["id"] { self.id = val }
+
+        let attachSelector = "render-pass-color-attachment-descriptors > render-pass-color-attachment-descriptor"
+        for (idx, el) in elem.css(attachSelector).enumerate() {
+            if let colorAttachName = el.attributes["ref"] {
+                self.colorAttachments[Int(idx)] = nodes.resolve(RenderPassColorAttachmentDescriptorNode.self, name: colorAttachName)!
+            } else {
+                let colorAttach = RenderPassColorAttachmentDescriptorNode(nodes: nodes, elem: el)
+                self.colorAttachments[Int(idx)] = colorAttach
+
+                if let id = el.attributes["id"] {
+                    nodes.register(RenderPassColorAttachmentDescriptorNode.self, name: id) { _ in
+                        return colorAttach
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+
+        if let depthAttachTag = elem.firstChild(tag: "render-pass-depth-attachment-descriptor") {
+            if let depthAttachName = depthAttachTag.attributes["ref"] {
+                self.depthAttachment = nodes.resolve(RenderPassDepthAttachmentDescriptorNode.self, name: depthAttachName)!
+            } else {
+                let depthAttach = RenderPassDepthAttachmentDescriptorNode(nodes: nodes, elem: depthAttachTag)
+                self.depthAttachment = depthAttach
+
+                if let id = depthAttachTag.attributes["id"] {
+                    nodes.register(RenderPassDepthAttachmentDescriptorNode.self, name: id) { _ in
+                        return depthAttach
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+
+        if let stencilAttachTag = elem.firstChild(tag: "render-pass-stencil-attachment-descriptor") {
+            if let stencilAttachName = stencilAttachTag.attributes["ref"] {
+                self.stencilAttachment = nodes.resolve(RenderPassStencilAttachmentDescriptorNode.self, name: stencilAttachName)!
+            } else {
+                let stencilAttach = RenderPassStencilAttachmentDescriptorNode(nodes: nodes, elem: stencilAttachTag)
+                self.stencilAttachment = stencilAttach
+
+                if let id = stencilAttachTag.attributes["id"] {
+                    nodes.register(RenderPassStencilAttachmentDescriptorNode.self, name: id) { _ in
+                        return stencilAttach
+                        }.inObjectScope(.None)
+                }
+            }
+        }
+    }
+
+    public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
+        let desc = MTLType()
+
+        return desc
+    }
+
+    public func copy() -> NodeType {
+        let cp = NodeType()
+        cp.colorAttachments = self.colorAttachments.map { $0.copy() }
+        cp.depthAttachment = self.depthAttachment?.copy()
+        cp.stencilAttachment = self.stencilAttachment?.copy()
+        return cp
+    }
+}
