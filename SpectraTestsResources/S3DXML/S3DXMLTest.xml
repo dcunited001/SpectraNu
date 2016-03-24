@@ -27,10 +27,10 @@
         mipmap-level-count="100"
         sample-count="100"
         array-length="100"
+        usage="ShaderRead ShaderWrite PixelFormatView"
+        resource-options="CPUCacheModeDefaultCache CPUCacheModeWriteCombined"
         cpu-cache-mode="WriteCombined"
         storage-mode="Shared" />
-        <!-- usage="PixelFormatView"-->
-        <!-- resource-options="" -->
 
     <sampler-descriptor id="sampler_desc"
         label="stencil-descriptor"

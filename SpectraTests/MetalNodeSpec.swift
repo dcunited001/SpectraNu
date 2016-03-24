@@ -88,6 +88,8 @@ class MetalNodeSpec: QuickSpec {
         
         describe("TextureDescriptorNode") {
             it("can parse a MTLVertexDescriptor") {
+                let resourceOpts: MTLResourceOptions = [.CPUCacheModeDefaultCache, .CPUCacheModeWriteCombined]
+                let textureUsage: MTLTextureUsage = [.ShaderRead, .ShaderWrite, .PixelFormatView]
                 let desc = metalParser.getTextureDescriptor("texture_desc")
                 expect(desc.textureType) == MTLTextureType.Type3D
                 expect(desc.pixelFormat) == MTLPixelFormat.RGBA32Float
@@ -97,10 +99,10 @@ class MetalNodeSpec: QuickSpec {
                 expect(desc.mipmapLevelCount) == 100
                 expect(desc.sampleCount) == 100
                 expect(desc.arrayLength) == 100
-                // desc.resourceOptions
+                expect(desc.resourceOptions) == resourceOpts
                 expect(desc.cpuCacheMode) == MTLCPUCacheMode.WriteCombined
                 expect(desc.storageMode) == MTLStorageMode.Shared
-                // expect(desc.usage) == MTLTextureUsage.PixelFormatView
+                expect(desc.usage) == textureUsage
             }
             
 //            it("can parse from references") {

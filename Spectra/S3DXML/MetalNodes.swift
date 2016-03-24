@@ -83,6 +83,16 @@ extension MetalNode {
             return ninj
         }
     }
+    
+    public func parseOptionSetType(nodes: Container, key: String, val: String) -> UInt {
+        let mtlEnum = nodes.resolve(MetalEnum.self, name: key)!
+        let values = val.componentsSeparatedByString(" ")
+        let optionSetVal: UInt = values.reduce(0) {
+            return $0 | mtlEnum.getValue($1)
+        }
+        
+        return UInt(optionSetVal)
+    }
 }
 
 // TODO: add MTLLibrary node? how to specify method to retrieve libraries?
@@ -340,6 +350,10 @@ public class TextureDescriptorNode: MetalNode {
         if let val = elem.attributes["array-length"] { self.arrayLength = Int(val)! }
         
         //TODO: resource options is an option set type, haven't decided on XML specification
+        if let val = elem.attributes["resource-options"] {
+            let optionSetVal = parseOptionSetType(nodes, key: "mtlResourceOptions", val: val)
+            self.resourceOptions = MTLResourceOptions(rawValue: optionSetVal)
+        }
         if let val = elem.attributes["cpu-cache-mode"] {
             let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlCpuCacheMode")!
             let enumVal = mtlEnum.getValue(val)
@@ -350,12 +364,10 @@ public class TextureDescriptorNode: MetalNode {
             let enumVal = mtlEnum.getValue(val)
             self.storageMode = MTLStorageMode(rawValue: enumVal)!
         }
-        //TODO: usage is an option set type, haven't decided on XML specification
-        //        if let val = elem.attributes["usage"] {
-        //            let mtlEnum = nodes.resolve(MetalEnum.self, name: "mtlTextureUsage")!
-        //            let enumVal = mtlEnum.getValue(val)
-        //            texDesc.usage = MTLTextureUsage(rawValue: enumVal)
-        //        }
+        if let val = elem.attributes["usage"] {
+            let optionSetVal = parseOptionSetType(nodes, key: "mtlTextureUsage", val: val)
+            self.usage = MTLTextureUsage(rawValue: optionSetVal)
+        }
         
     }
     
