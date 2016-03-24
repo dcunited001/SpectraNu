@@ -152,9 +152,7 @@
 
   <xs:simpleType name="mtlResourceOptions" mtl-enum="true">
     <xs:restriction base="xs:string">
-      <xs:enumeration id="0" value="OptionCPUCacheModeDefault"/>
-      <xs:enumeration id="1" value="OptionCPUCacheModeWriteCombined"/>
-      <xs:enumeration id="0" value="CPUModeDefaultCache"/>
+      <xs:enumeration id="0" value="CPUCacheModeDefaultCache"/>
       <xs:enumeration id="1" value="CPUCacheModeWriteCombined"/>
       <xs:enumeration id="32" value="StorageModePrivate"/>
       <xs:enumeration id="0" value="StorageModeShared"/>

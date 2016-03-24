@@ -417,11 +417,7 @@ class MetalEnumDefs {
         
         "StorageModeShared": MTLResourceOptions.StorageModeShared.rawValue,
         "StorageModeManaged": MTLResourceOptions.StorageModeManaged.rawValue,
-        "StorageModePrivate": MTLResourceOptions.StorageModePrivate.rawValue,
-        
-        // NOTE: Deprecated spellings
-        "OptionCPUCacheModeDefault": MTLResourceOptions.OptionCPUCacheModeDefault.rawValue,
-        "OptionCPUCacheModeWriteCombined": MTLResourceOptions.OptionCPUCacheModeWriteCombined.rawValue
+        "StorageModePrivate": MTLResourceOptions.StorageModePrivate.rawValue
     ]
     
     // NOTE: values for an OptionSetType
