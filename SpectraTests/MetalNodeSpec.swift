@@ -123,9 +123,8 @@ class MetalNodeSpec: QuickSpec {
                 expect(desc.normalizedCoordinates) == false
                 expect(desc.lodMinClamp) == 1.0
                 expect(desc.lodMaxClamp) == 10.0
-//                TODO: fix lodAverage (unavailable on OSX)
                 #if os(iOS)
-//                expect(desc.lodAverage) == true
+                expect(desc.lodAverage) == true
                 #endif
                 expect(desc.compareFunction) == MTLCompareFunction.Always
             }
@@ -145,15 +144,17 @@ class MetalNodeSpec: QuickSpec {
             // it("generates a stencil descriptor")
         }
 
-//        describe("DepthStencilDescriptorNode") {
-//            it("can parse a depth stencil descriptor") {
-//                let desc = metalParser.getDepthStencilDescriptor("depth_stencil_desc")
-//                expect(desc.depthCompareFunction) == MTLCompareFunction.Never
-//                expect(desc.depthWriteEnabled) == true
-//                expect(desc.frontFaceStencil) == metalParser.getStencilDescriptor("stencil_desc")
-//                expect(desc.backFaceStencil) == metalParser.getStencilDescriptor("stencil_desc")
-//            }
-//        }
+        describe("DepthStencilDescriptorNode") {
+            it("can parse a depth stencil descriptor") {
+                let desc = metalParser.getDepthStencilDescriptor("depth_stencil_desc")
+                expect(desc.depthCompareFunction) == MTLCompareFunction.Never
+                expect(desc.depthWriteEnabled) == true
+                expect(desc.frontFaceStencil!.stencilCompareFunction) == metalParser.getStencilDescriptor("stencil_desc").stencilCompareFunction
+                expect(desc.frontFaceStencil!.depthStencilPassOperation) == metalParser.getStencilDescriptor("stencil_desc").depthStencilPassOperation
+                expect(desc.backFaceStencil!.stencilCompareFunction) == metalParser.getStencilDescriptor("stencil_desc").stencilCompareFunction
+                expect(desc.backFaceStencil!.depthStencilPassOperation) == metalParser.getStencilDescriptor("stencil_desc").depthStencilPassOperation
+            }
+        }
         
         describe("RenderPipelineColorAttachmentDescriptorNode") {
             it("can parse a render pipeline color attachment descriptor") {
@@ -169,31 +170,32 @@ class MetalNodeSpec: QuickSpec {
             }
         }
         
-//        describe("RenderPipelineDescriptorNode") {
-//            it("can parse a render pipeline descriptor") {
-//                let desc = metalParser.getRenderPipelineDescriptor("render_pipeline_desc")
-//                expect(desc.label) == "render-pipeline-descriptor"
-//                expect(desc.sampleCount) == 2
-//                expect(desc.alphaToCoverageEnabled) == true
-//                expect(desc.alphaToOneEnabled) == true
-//                expect(desc.rasterizationEnabled) == true
-//                expect(desc.depthAttachmentPixelFormat) == MTLPixelFormat.Depth32Float
-//                expect(desc.stencilAttachmentPixelFormat) == MTLPixelFormat.Stencil8
-//                expect(desc.vertexFunction!.name) == "basic_color_vertex"
-//                expect(desc.fragmentFunction!.name) == "basic_color_fragment"
-//                expect(desc.vertexDescriptor) == metalParser.getVertexDescriptor("common_vertex_desc")
-//                expect(desc.colorAttachments[0]) == metalParser.getColorAttachmentDescriptor("color_attach_desc")
-//            }
-//        }
-//        
-//        describe("ComputePipelineDescribeNode") {
-//            it("can parse a compute pipeline descriptor") {
-//                let desc = metalParser.getComputePipelineDescriptor("compute_pipeline_desc")
-//                expect(desc.label) == "compute-pipeline-descriptor"
-//                expect(desc.threadGroupSizeIsMultipleOfThreadExecutionWidth) == true
-//                expect(desc.computeFunction!.name) == "test_compute_function"
-//            }
-//        }
+        describe("RenderPipelineDescriptorNode") {
+            it("can parse a render pipeline descriptor") {
+                let desc = metalParser.getRenderPipelineDescriptor("render_pipeline_desc")
+                expect(desc.label) == "render-pipeline-descriptor"
+                expect(desc.sampleCount) == 2
+                expect(desc.alphaToCoverageEnabled) == true
+                expect(desc.alphaToOneEnabled) == true
+                expect(desc.rasterizationEnabled) == false
+                expect(desc.depthAttachmentPixelFormat) == MTLPixelFormat.Depth32Float
+                expect(desc.stencilAttachmentPixelFormat) == MTLPixelFormat.Stencil8
+                expect(desc.vertexFunction!.name) == "basic_color_vertex"
+                expect(desc.fragmentFunction!.name) == "basic_color_fragment"
+                expect(desc.vertexDescriptor!.attributes.count) == 4
+                expect(desc.colorAttachmentDescriptors[0].sourceRGBBlendFactor) == .Zero
+                expect(desc.colorAttachmentDescriptors[0].rgbBlendOperation) == .Subtract
+            }
+        }
+        
+        describe("ComputePipelineDescribeNode") {
+            it("can parse a compute pipeline descriptor") {
+                let desc = metalParser.getComputePipelineDescriptor("compute_pipeline_desc")
+                expect(desc.label) == "compute-pipeline-descriptor"
+                expect(desc.threadGroupSizeIsMultipleOfThreadExecutionWidth) == true
+                expect(desc.computeFunction!.name) == "test_compute_function"
+            }
+        }
         
         describe("ClearColorNode") {
             it("can parse a clear color") {
@@ -255,18 +257,20 @@ class MetalNodeSpec: QuickSpec {
             }
         }
         
-//        describe("RenderPassDescriptorNode") {
-//            it("can parse a render pass descriptor") {
-//                let desc = metalParser.getRenderPassDescriptor("render_pass_desc")
-//                let colorAttach = metalParser.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
-//                let depthAttach = metalParser.getRenderPassDepthAttachmentDescriptor("rpass_depth_attach_desc")
-//                let stencilAttach = metalParser.getRenderPassStencilAttachmentDescriptor("rpass_stencil_attach_desc")
-//                
-//                expect(desc.colorAttachments[0]) == colorAttach
-//                expect(desc.depthAttachment) == depthAttach
-//                expect(desc.stencilAttachment) == stencilAttach
-//            }
-//        }
-        
+        describe("RenderPassDescriptorNode") {
+            it("can parse a render pass descriptor") {
+                let desc = metalParser.getRenderPassDescriptor("render_pass_desc")
+                let colorAttach = metalParser.getRenderPassColorAttachmentDescriptor("rpass_color_attach_desc")
+                let depthAttach = metalParser.getRenderPassDepthAttachmentDescriptor("rpass_depth_attach_desc")
+                let stencilAttach = metalParser.getRenderPassStencilAttachmentDescriptor("rpass_stencil_attach_desc")
+                
+                expect(desc.colorAttachments[0].level) == colorAttach.level
+                expect(desc.colorAttachments[0].clearColor) == colorAttach.clearColor
+                expect(desc.depthAttachment!.level) == depthAttach.level
+                expect(desc.depthAttachment!.clearDepth) == depthAttach.clearDepth
+                expect(desc.stencilAttachment!.level) == stencilAttach.level
+                expect(desc.stencilAttachment!.clearStencil) == stencilAttach.clearStencil
+            }
+        }
     }
 }

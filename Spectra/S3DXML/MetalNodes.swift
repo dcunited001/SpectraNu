@@ -762,7 +762,7 @@ public class RenderPipelineDescriptorNode: MetalNode {
     public var id: String?
     public var vertexFunction: FunctionNode?
     public var fragmentFunction: FunctionNode?
-    public var vertexDescriptor: VertexDescriptorNode?
+    public var vertexDescriptor: MetalVertexDescriptorNode?
     public var colorAttachmentDescriptors: [RenderPipelineColorAttachmentDescriptorNode] = []
     public var label: String?
     public var sampleCount: Int?
@@ -804,7 +804,7 @@ public class RenderPipelineDescriptorNode: MetalNode {
 
         if let vertexFunctionTag = elem.firstChild(tag: "vertex-function") {
             if let vertexFunctionName = vertexFunctionTag.attributes["ref"] {
-                self.vertexFunction = nodes.resolve(FunctionNode.self, name: vertexFunctionName)
+                self.vertexFunction = nodes.resolve(FunctionNode.self, name: vertexFunctionName)!
             } else {
                 //TODO: attribute tag for library
                 //TODO: set function type
@@ -821,7 +821,7 @@ public class RenderPipelineDescriptorNode: MetalNode {
 
         if let fragmentFunctionTag = elem.firstChild(tag: "fragment-function") {
             if let fragmentFunctionName = fragmentFunctionTag.attributes["ref"] {
-                self.fragmentFunction = nodes.resolve(FunctionNode.self, name: fragmentFunctionName)
+                self.fragmentFunction = nodes.resolve(FunctionNode.self, name: fragmentFunctionName)!
             } else {
                 //TODO: attribute tag for library
                 //TODO: set function type
@@ -838,13 +838,13 @@ public class RenderPipelineDescriptorNode: MetalNode {
 
         if let vertexDescTag = elem.firstChild(tag: "vertex-descriptor") {
             if let vertexDescName = vertexDescTag.attributes["ref"] {
-                self.vertexDescriptor = nodes.resolve(VertexDescriptorNode.self, name: vertexDescName)
+                self.vertexDescriptor = nodes.resolve(MetalVertexDescriptorNode.self, name: vertexDescName)!
             } else {
-                let vertexDesc = VertexDescriptorNode(nodes: nodes, elem: vertexDescTag)
+                let vertexDesc = MetalVertexDescriptorNode(nodes: nodes, elem: vertexDescTag)
                 self.vertexDescriptor = vertexDesc
 
                 if let id = vertexDescTag.attributes["id"] {
-                    nodes.register(VertexDescriptorNode.self, name: id) { _ in
+                    nodes.register(MetalVertexDescriptorNode.self, name: id) { _ in
                         return vertexDesc
                         }.inObjectScope(.None)
                 }

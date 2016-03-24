@@ -121,12 +121,14 @@ public class MetalParser {
         return n.copy()
     }
     
-//    public func getRenderPassDescriptor(id: String) -> RenderPassDescriptorNode {
-//        return nodes.resolve(RenderPassDescriptorNode.self, name: id)!
-//    }
+    public func getRenderPassDescriptor(id: String) -> RenderPassDescriptorNode {
+        let n = nodes.resolve(RenderPassDescriptorNode.self, name: id)!
+        return n.copy()
+    }
     
     public func getComputePipelineDescriptor(id: String) -> ComputePipelineDescriptorNode {
-        return nodes.resolve(ComputePipelineDescriptorNode.self, name: id)!
+        let n = nodes.resolve(ComputePipelineDescriptorNode.self, name: id)!
+        return n.copy()
     }
     
     // TODO: figure out how to break this out into parseNode() -> MetalNode
@@ -195,9 +197,9 @@ public class MetalParser {
             case .RenderPassStencilAttachmentDescriptor:
                 let node = RenderPassStencilAttachmentDescriptorNode(nodes: nodes, elem: elem)
                 if (node.id != nil) { node.register(nodes, objectScope: .None) }
-            case .RenderPassDescriptor: break
-//                let node = RenderPassDescriptorNode(nodes: nodes, elem: elem)
-//                if (node.id != nil) { node.register(nodes, objectScope: .None) }
+            case .RenderPassDescriptor:
+                let node = RenderPassDescriptorNode(nodes: nodes, elem: elem)
+                if (node.id != nil) { node.register(nodes, objectScope: .None) }
             default: break
             }
         }
