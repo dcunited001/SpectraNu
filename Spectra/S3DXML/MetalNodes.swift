@@ -189,6 +189,7 @@ public class MetalVertexDescriptorNode: MetalNode {
     
     public func copy() -> NodeType {
         let cp = NodeType()
+        cp.id = self.id
         cp.attributes = self.attributes.map { $0.copy() }
         cp.layouts = self.layouts.map { $0.copy() }
         return cp
@@ -379,6 +380,7 @@ public class TextureDescriptorNode: MetalNode {
     
     public func copy() -> NodeType {
         let cp = NodeType()
+        cp.id = self.id
         cp.textureType = self.textureType
         cp.pixelFormat = self.pixelFormat
         cp.width = self.width
@@ -567,6 +569,7 @@ public class StencilDescriptorNode: MetalNode {
 
     public func copy() -> NodeType {
         let cp = NodeType()
+        cp.id = self.id
         cp.stencilCompareFunction = self.stencilCompareFunction
         cp.stencilFailureOperation = self.stencilFailureOperation
         cp.depthFailureOperation = self.depthFailureOperation
@@ -651,6 +654,7 @@ public class DepthStencilDescriptorNode: MetalNode {
 
     public func copy() -> NodeType {
         let cp = NodeType()
+        cp.id = self.id
         cp.label = self.label
         cp.depthCompareFunction = self.depthCompareFunction
         cp.depthWriteEnabled = self.depthWriteEnabled
@@ -1058,6 +1062,7 @@ extension RenderPassAttachmentDescriptorNode where Self: MetalNode {
     
     public func copyRenderPassAttachment() -> Self {
         var cp = Self()
+        cp.id = self.id
         cp.texture = self.texture?.copy()
         cp.level = self.level
         cp.slice = self.slice
@@ -1325,11 +1330,13 @@ public class RenderPassDescriptorNode: MetalNode {
     public func generate(inj: SpectraInjected, injector: MetalNodeInjector?) -> MTLType {
         let desc = MTLType()
 
+        // NOTE: to create color attachments, use setObject atIndexedSubscript
         return desc
     }
 
     public func copy() -> NodeType {
         let cp = NodeType()
+        cp.id = self.id
         cp.colorAttachments = self.colorAttachments.map { $0.copy() }
         cp.depthAttachment = self.depthAttachment?.copy()
         cp.stencilAttachment = self.stencilAttachment?.copy()
