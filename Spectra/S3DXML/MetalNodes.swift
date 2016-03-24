@@ -189,8 +189,8 @@ public class MetalVertexDescriptorNode: MetalNode {
     
     public func copy() -> NodeType {
         let cp = NodeType()
-        cp.attributes = self.attributes.reduce([], combine: {$0 + [$1.copy()]})
-        cp.layouts = self.layouts.reduce([], combine: {$0 + [$1.copy()]})
+        cp.attributes = self.attributes.map { $0.copy() }
+        cp.layouts = self.layouts.map { $0.copy() }
         return cp
     }
     
@@ -1058,13 +1058,13 @@ extension RenderPassAttachmentDescriptorNode where Self: MetalNode {
     
     public func copyRenderPassAttachment() -> Self {
         var cp = Self()
-        cp.texture = self.texture
+        cp.texture = self.texture?.copy()
         cp.level = self.level
         cp.slice = self.slice
         cp.depthPlane = self.depthPlane
         cp.loadAction = self.loadAction
         cp.storeAction = self.storeAction
-        cp.resolveTexture = self.resolveTexture
+        cp.resolveTexture = self.resolveTexture?.copy()
         cp.resolveLevel = self.resolveLevel
         cp.resolveSlice = self.resolveSlice
         cp.resolveDepthPlane = self.resolveDepthPlane
