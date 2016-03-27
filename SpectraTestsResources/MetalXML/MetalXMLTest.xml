@@ -51,9 +51,9 @@
         stencil-compare-function="Never"
         stencil-failure-operation="Replace"
         depth-failure-operation="IncrementWrap"
-        depth-stencil-pass-operation="DecrementWrap" />
-        <!--    <xs:attribute name="read-mask" type="xs:integer" /> <!-- uint32 -->
-        <!--    <xs:attribute name="write-mask" type="xs:integer" /> <!-- uint32 -->
+        depth-stencil-pass-operation="DecrementWrap"
+        read-mask="7"
+        write-mask="7" />
     
     <depth-stencil-descriptor id="depth_stencil_desc"
         depth-compare-function="Never"

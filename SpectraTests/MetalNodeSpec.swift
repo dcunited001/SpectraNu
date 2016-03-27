@@ -141,6 +141,8 @@ class MetalNodeSpec: QuickSpec {
                 expect(desc.stencilFailureOperation) == MTLStencilOperation.Replace
                 expect(desc.depthFailureOperation) == MTLStencilOperation.IncrementWrap
                 expect(desc.depthStencilPassOperation) == MTLStencilOperation.DecrementWrap
+                expect(desc.readMask) == 7
+                expect(desc.writeMask) == 7
             }
             
             // it("generates a stencil descriptor")
