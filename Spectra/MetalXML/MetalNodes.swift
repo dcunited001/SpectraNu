@@ -72,7 +72,7 @@ extension MetalNode {
     
     // resolves a metal device, either from options or container/options
     // - these resolve functions are used when generating nodes
-    public func resolveMtlDevice(inj: [String: Container], options: [String: Any], key: String = "device") -> MTLDevice {
+    public func resolveMtlDevice(inj: [String: Container], options: [String: Any] = [:], key: String = "device") -> MTLDevice {
         let (idKey, containerKey) = ("\(key)_id", "\(key)_container")
         if let obj = options[key] as? MTLDevice {
             return obj
@@ -92,7 +92,7 @@ extension MetalNode {
     // resolves a metal library, either from: 
     // - a library found in the options
     // - or a library resolved from a container, the location of which is specified in options
-    public func resolveMtlLibrary(inj: [String: Container], options: [String: Any], key: String = "library") -> MTLLibrary {
+    public func resolveMtlLibrary(inj: [String: Container], options: [String: Any] = [:], key: String = "library") -> MTLLibrary {
         let (idKey, containerKey) = ("\(key)_id", "\(key)_container")
         if let obj = options[key] as? MTLLibrary {
             return obj
@@ -103,8 +103,8 @@ extension MetalNode {
             if let obj = metalContainer?.resolve(MTLLibrary.self, name: libraryId) {
                 return obj
             } else {
-                let device = resolveMtlDevice() //TODO: pass device key
-                device.newDefaultLibrary()!
+                let device = resolveMtlDevice(inj, options: options) //TODO: pass device key
+                return device.newDefaultLibrary()!
             }
         }
     }
@@ -154,8 +154,9 @@ public class FunctionNode: MetalNode {
     }
     
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector? = nil) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
-        let library = resolveMtlLibrary(ninj, options: options).options["library"] as! MTLLibrary
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let library = resolveMtlLibrary(ninj, options: ops)
+        // TODO: append to options?
         return library.newFunctionWithName(self.name!)!
     }
     
@@ -203,15 +204,15 @@ public class MetalVertexDescriptorNode: MetalNode {
     }
     
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector? = nil) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         // TODO: reduce over attributes & layouts.  merge injected.options?
         for (idx, node) in self.attributes.enumerate() {
-            let attrDesc = node.generate(ninj.inj, options: ninj.options, injector: nil)
+            let attrDesc = node.generate(ninj, options: ops, injector: nil)
             desc.attributes[idx] = attrDesc
         }
         for (idx, node) in self.layouts.enumerate() {
-            let layoutDesc = node.generate(ninj.inj, options: ninj.options, injector: nil)
+            let layoutDesc = node.generate(ninj, options: ops, injector: nil)
             desc.layouts[idx] = layoutDesc
         }
         return desc
@@ -256,7 +257,7 @@ public class VertexAttributeDescriptorNode: MetalNode {
     }
     
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         if let val = self.format { desc.format = val }
         if let val = self.offset { desc.offset = val }
@@ -305,7 +306,7 @@ public class VertexBufferLayoutDescriptorNode: MetalNode {
     }
     
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         desc.stride = self.stride!
         if let val = self.stepFunction { desc.stepFunction = val }
@@ -392,7 +393,7 @@ public class TextureDescriptorNode: MetalNode {
     }
     
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         if let val = self.textureType { desc.textureType = val }
         if let val = self.pixelFormat { desc.pixelFormat = val }
@@ -502,7 +503,7 @@ public class SamplerDescriptorNode: MetalNode {
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         if let val = self.label { desc.label = val }
         if let val = self.minFilter { desc.minFilter = val }
@@ -589,7 +590,7 @@ public class StencilDescriptorNode: MetalNode {
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         if let val = self.stencilCompareFunction { desc.stencilCompareFunction = val }
         if let val = self.stencilFailureOperation { desc.stencilFailureOperation = val }
@@ -675,7 +676,7 @@ public class DepthStencilDescriptorNode: MetalNode {
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         if let val = self.label { desc.label = val }
         if let val = self.depthCompareFunction { desc.depthCompareFunction = val }
@@ -683,10 +684,10 @@ public class DepthStencilDescriptorNode: MetalNode {
         
         //TODO: generate
         if let val = self.frontFaceStencil {
-            desc.frontFaceStencil = val.generate(inj, injector: nil)
+            desc.frontFaceStencil = val.generate(ninj, options: ops, injector: nil)
         }
         if let val = self.backFaceStencil {
-            desc.backFaceStencil = val.generate(inj, injector: nil)
+            desc.backFaceStencil = val.generate(ninj, options: ops, injector: nil)
         }
         return desc
     }
@@ -767,7 +768,7 @@ public class RenderPipelineColorAttachmentDescriptorNode: MetalNode {
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         if let val = self.pixelFormat { desc.pixelFormat = val }
         if let val = self.blendingEnabled { desc.blendingEnabled = val }
@@ -910,19 +911,18 @@ public class RenderPipelineDescriptorNode: MetalNode {
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
         
-        let options = inj.options
-        
-        let vertexDescriptor = inj.options["vertex_desc_options"]
+        let vertexDescriptor = ops["vertex_desc_options"]
         
         // TODO: generate render pipeline descriptor
-        desc.vertexFunction = self.vertexFunction?.generate(inj, injector: nil)
-        desc.fragmentFunction = self.fragmentFunction?.generate(inj, injector: nil)
-        desc.vertexDescriptor = self.vertexDescriptor?.generate(inj, injector: nil)
-        desc.colorAttachments = self.colorAttachmentDescriptors.map {
-            $0.generate(inj, injector: nil)
+        desc.vertexFunction = self.vertexFunction?.generate(ninj, options: ops, injector: nil)
+        desc.fragmentFunction = self.fragmentFunction?.generate(inj, options: ops, injector: nil)
+        desc.vertexDescriptor = self.vertexDescriptor?.generate(inj, options: ops, injector: nil)
+        for (idx,colorAttach) in self.colorAttachmentDescriptors.enumerate() {
+            let colorAttachDesc = colorAttach.generate(inj, options: ops, injector: nil)
+            desc.colorAttachments[idx] = colorAttachDesc
         }
 
         return desc
@@ -987,7 +987,7 @@ public class ComputePipelineDescriptorNode: MetalNode {
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
 
         return desc
@@ -1030,7 +1030,7 @@ public class ClearColorNode: MetalNode, Equatable {
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         return MTLClearColor(red: self.red!, green: self.green!, blue: self.blue!, alpha: self.alpha!)
     }
 
@@ -1103,7 +1103,7 @@ extension RenderPassAttachmentDescriptorNode where Self: MetalNode {
     
     public func generateRenderPassAttachment(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
         let desc = MTLType()
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         
         if let val = self.loadAction { desc.loadAction = val }
         if let val = self.storeAction { desc.storeAction = val }
@@ -1185,9 +1185,9 @@ public final class RenderPassColorAttachmentDescriptorNode: MetalNode, RenderPas
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
-        let desc = generateRenderPassAttachment(inj, injector: injector)
-        if let clearColor = self.clearColor?.generate(inj, injector: injector) {
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let desc = generateRenderPassAttachment(inj, options: ops, injector: injector)
+        if let clearColor = self.clearColor?.generate(inj, options: ops, injector: injector) {
             desc.clearColor = clearColor
         }
         return desc
@@ -1238,8 +1238,8 @@ public final class RenderPassStencilAttachmentDescriptorNode: MetalNode, RenderP
     }
     
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
-        let desc = generateRenderPassAttachment(inj, injector: injector)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let desc = generateRenderPassAttachment(inj, options: ops, injector: injector)
         if let val = self.clearStencil { desc.clearStencil = val }
         return desc
     }
@@ -1297,8 +1297,8 @@ public final class RenderPassDepthAttachmentDescriptorNode: MetalNode, RenderPas
     }
     
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
-        let desc = generateRenderPassAttachment(inj, injector: injector)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let desc = generateRenderPassAttachment(inj, options: ops, injector: injector)
         if let val = self.clearDepth { desc.clearDepth = val }
         
         #if os(iOS)
@@ -1389,7 +1389,7 @@ public class RenderPassDescriptorNode: MetalNode {
     }
 
     public func generate(inj: [String: Container], options: [String: Any], injector: MetalNodeInjector?) -> MTLType {
-        let ninj = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
+        let (ninj, ops) = injector?(inj: inj, options: options) ?? (inj: inj, options: options)
         let desc = MTLType()
 
         // NOTE: to create color attachments, use setObject atIndexedSubscript
