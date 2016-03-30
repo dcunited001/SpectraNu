@@ -71,7 +71,7 @@
 		43BDD4671C8EF3C800AEFA9E /* ModelIOTextureGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BDD4661C8EF3C800AEFA9E /* ModelIOTextureGenerators.swift */; };
 		43C472821C8F0BA600F90CED /* ModelIOMeshGeneratorsSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C472791C8F0BA600F90CED /* ModelIOMeshGeneratorsSpec.xml */; };
 		43C472831C8F0BA600F90CED /* ModelIOTextureGeneratorsSpec.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C4727A1C8F0BA600F90CED /* ModelIOTextureGeneratorsSpec.xml */; };
-		43C472841C8F0BA600F90CED /* S3DXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C4727C1C8F0BA600F90CED /* S3DXMLTest.xml */; };
+		43C472841C8F0BA600F90CED /* MetalXMLTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 43C4727C1C8F0BA600F90CED /* MetalXMLTest.xml */; };
 		43C472851C8F0BA600F90CED /* defaultTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43C4727E1C8F0BA600F90CED /* defaultTexture.jpg */; };
 		43C472861C8F0BA600F90CED /* pencil.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43C472801C8F0BA600F90CED /* pencil.obj */; };
 		43C4728F1C8F0BE100F90CED /* defaultTexture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 43C472881C8F0BE100F90CED /* defaultTexture.jpg */; };
@@ -227,7 +227,7 @@
 		43BDD4661C8EF3C800AEFA9E /* ModelIOTextureGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelIOTextureGenerators.swift; sourceTree = "<group>"; };
 		43C472791C8F0BA600F90CED /* ModelIOMeshGeneratorsSpec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ModelIOMeshGeneratorsSpec.xml; sourceTree = "<group>"; };
 		43C4727A1C8F0BA600F90CED /* ModelIOTextureGeneratorsSpec.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ModelIOTextureGeneratorsSpec.xml; sourceTree = "<group>"; };
-		43C4727C1C8F0BA600F90CED /* S3DXMLTest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = S3DXMLTest.xml; sourceTree = "<group>"; };
+		43C4727C1C8F0BA600F90CED /* MetalXMLTest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MetalXMLTest.xml; sourceTree = "<group>"; };
 		43C4727E1C8F0BA600F90CED /* defaultTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultTexture.jpg; sourceTree = "<group>"; };
 		43C472801C8F0BA600F90CED /* pencil.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pencil.obj; sourceTree = "<group>"; };
 		43C472881C8F0BE100F90CED /* defaultTexture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = defaultTexture.jpg; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 			children = (
 				43C472871C8F0BE100F90CED /* Models */,
 				43C472891C8F0BE100F90CED /* Textures */,
-				43C4728B1C8F0BE100F90CED /* S3DXML */,
+				43C4728B1C8F0BE100F90CED /* MetalXML */,
 				43C4728E1C8F0BE100F90CED /* SpectraXML */,
 				4334D6811C1F5E8F00D2DCA6 /* BasicShaders.metal */,
 			);
@@ -368,21 +368,21 @@
 			isa = PBXGroup;
 			children = (
 				43C4727B1C8F0BA600F90CED /* SpectraXML */,
-				43C4727D1C8F0BA600F90CED /* S3DXML */,
+				43C4727D1C8F0BA600F90CED /* MetalXML */,
 				43C4727F1C8F0BA600F90CED /* Textures */,
 				43C472811C8F0BA600F90CED /* Models */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		4338B8451C18B3AF007D3DF6 /* S3DXML */ = {
+		4338B8451C18B3AF007D3DF6 /* MetalXML */ = {
 			isa = PBXGroup;
 			children = (
 				4338B8411C18B3AF007D3DF6 /* MetalNodes.swift */,
 				4338B8421C18B3AF007D3DF6 /* MetalParser.swift */,
 				4338B8441C18B3AF007D3DF6 /* StateManager.swift */,
 			);
-			path = S3DXML;
+			path = MetalXML;
 			sourceTree = "<group>";
 		};
 		4338B8501C18B3AF007D3DF6 /* Node */ = {
@@ -440,7 +440,7 @@
 			children = (
 				43D40E0F1C90882500DB35D3 /* SpectraXML */,
 				437D18FB1C8EB1F900C70975 /* Resources */,
-				4338B8451C18B3AF007D3DF6 /* S3DXML */,
+				4338B8451C18B3AF007D3DF6 /* MetalXML */,
 				4338B8501C18B3AF007D3DF6 /* Node */,
 				4338B8571C18B3AF007D3DF6 /* Meshes */,
 				438834091C9390C30098D71A /* Submeshes */,
@@ -518,13 +518,13 @@
 			path = ../../SpectraTestsResources/SpectraXML;
 			sourceTree = "<group>";
 		};
-		43C4727D1C8F0BA600F90CED /* S3DXML */ = {
+		43C4727D1C8F0BA600F90CED /* MetalXML */ = {
 			isa = PBXGroup;
 			children = (
-				43C4727C1C8F0BA600F90CED /* S3DXMLTest.xml */,
+				43C4727C1C8F0BA600F90CED /* MetalXMLTest.xml */,
 			);
-			name = S3DXML;
-			path = ../../SpectraTestsResources/S3DXML;
+			name = MetalXML;
+			path = ../../SpectraTestsResources/MetalXML;
 			sourceTree = "<group>";
 		};
 		43C4727F1C8F0BA600F90CED /* Textures */ = {
@@ -560,12 +560,12 @@
 			path = Textures;
 			sourceTree = "<group>";
 		};
-		43C4728B1C8F0BE100F90CED /* S3DXML */ = {
+		43C4728B1C8F0BE100F90CED /* MetalXML */ = {
 			isa = PBXGroup;
 			children = (
 				43C4728A1C8F0BE100F90CED /* DefaultPipeline.xml */,
 			);
-			path = S3DXML;
+			path = MetalXML;
 			sourceTree = "<group>";
 		};
 		43C4728E1C8F0BE100F90CED /* SpectraXML */ = {
@@ -830,7 +830,7 @@
 				43C472861C8F0BA600F90CED /* pencil.obj in Resources */,
 				435C27121C8F70F000CEEFD0 /* SpectraXMLSpec.xml in Resources */,
 				43C472821C8F0BA600F90CED /* ModelIOMeshGeneratorsSpec.xml in Resources */,
-				43C472841C8F0BA600F90CED /* S3DXMLTest.xml in Resources */,
+				43C472841C8F0BA600F90CED /* MetalXMLTest.xml in Resources */,
 				43C472831C8F0BA600F90CED /* ModelIOTextureGeneratorsSpec.xml in Resources */,
 				43C472851C8F0BA600F90CED /* defaultTexture.jpg in Resources */,
 			);

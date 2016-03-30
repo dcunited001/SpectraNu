@@ -284,8 +284,8 @@
          </FileRef>
       </Group>
       <Group
-         location = "container:SpectraExampleResources/S3DXML"
-         name = "S3DXML">
+         location = "container:SpectraExampleResources/MetalXML"
+         name = "MetalXML">
          <FileRef
             location = "group:DefaultPipeline.xml">
          </FileRef>
@@ -321,10 +321,10 @@
          </FileRef>
       </Group>
       <Group
-         location = "container:SpectraTestsResources/S3DXML"
-         name = "S3DXML">
+         location = "container:SpectraTestsResources/MetalXML"
+         name = "MetalXML">
          <FileRef
-            location = "group:S3DXMLTest.xml">
+            location = "group:MetalXMLTest.xml">
          </FileRef>
       </Group>
       <Group
