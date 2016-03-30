@@ -24,8 +24,8 @@ public typealias MetalNodeInjector = (inj: [String: Container], options: [String
 // TODO: switch to format similar to SpectraXML
 // - maybe? these objects are all easily copyable
 public protocol MetalNode {
-    typealias NodeType
-    typealias MTLType
+    associatedtype NodeType
+    associatedtype MTLType
     
     var id: String? { get set }
     init() // adding this blank initializer allows me to work with Self() in RenderPassAttachmentDescriptorNode extension

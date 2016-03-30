@@ -1,5 +1,5 @@
 //
-//  S3DXMLSpec.swift
+//  MetalNodeSpec.swift
 //  Spectra
 //
 //  Created by David Conner on 10/17/15.

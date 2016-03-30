@@ -46,7 +46,7 @@ public protocol EncodableBuffer: EncodableData {
 }
 
 public protocol EncodableInput: EncodableData {
-    typealias InputType
+    associatedtype InputType
     var data: InputType? { get set }
 }
 
