@@ -23,43 +23,126 @@ class MetalNodeSpec: QuickSpec {
         let testBundle = NSBundle(forClass: MetalNodeSpec.self)
         let xml = MetalParser.readXML(testBundle, filename: "S3DXMLTest", bundleResourceName: nil)!
 
-        let metaContainer = MetalParser.initMetalEnums(Container())
-        MetalParser.initMetal(metaContainer)
-        
-        let metalParser = MetalParser(parentContainer: metaContainer)
+        let metadataContainer = MetalParser.initMetalEnums(Container())
+        let metalParser = MetalParser(parentContainer: metadataContainer)
         metalParser.parseXML(xml)
         
+        let metalContainer = Container()
+        MetalParser.initMetal(metalContainer)
+        
         describe("MetalParser") {
-            
-            it("has a container with a default device & library") {
-                
-            }
-            
             it("reads the Metal Enums from the XSD File") {
                 
             }
-            
         }
+        
+        describe("MetalNode") {
+            
+            describe("resolveMtlDevice") {
+                let vert = metalParser.getVertexFunction("basic_color_vertex")
+                let nodes = metalParser.nodes
+                
+                // monads, monads, monads
+                // - oooh i want a thing like that ... but i only have this =[
+                //   ... how do i get that kind of thing?
+            
+                it("resolves given metal container only by creating new default device object") {
+                    let inj: [String: Container] = [:]
+                    let ops: [String: Any] = [:]
+                    let dev = vert.resolveMtlDevice(inj, options: ops)
+                    expect(dev) is MTLDevice
+                }
+                
+                it("resolves given metal container and device_id") {
+                    let inj: [String: Container] = ["metal": metalContainer]
+                    let ops: [String: Any] = ["device_container": "metal",
+                                              "device_id": "default"]
+                    let dev = vert.resolveMtlDevice(inj, options: ops)
+                    expect(dev) is MTLDevice
+                }
+                
+                it("resolves given 'device' in options") {
+                    let inj: [String: Container] = [:]
+                    let ops: [String: Any] = ["device": device]
+                    let dev = vert.resolveMtlDevice(inj, options: ops)
+                    expect(dev) is MTLDevice
+                }
+            }
+            
+            // TODO: create LibraryNode and move to generate()?
+            describe("resolveMtlLibrary") {
+                let vert = metalParser.getVertexFunction("basic_color_vertex")
+                let nodes = metalParser.nodes
+                
+                it("resolves given no args by creating new default device object") {
+                    let inj: [String: Container] = [:]
+                    let ops: [String: Any] = [:]
+                    let lib = vert.resolveMtlLibrary(inj, options: ops)
+                    expect(lib) is MTLLibrary
+                }
+                
+                it("resolves given a metal container and 'library_id'") {
+                    let inj: [String: Container] = ["metal": metalContainer]
+                    let ops: [String: Any] = ["library_container": "metal",
+                                              "library_id": "default"]
+                    let lib = vert.resolveMtlLibrary(inj, options: ops)
+                    expect(lib) is MTLLibrary
+                }
+                
+                it("resolves from the nodes container when it can't find 'library_id' in metal container") {
+                    let inj: [String: Container] = ["metal": nodes]
+                    let ops: [String: Any] = ["library_container": "metal"]
+                    let lib = vert.resolveMtlLibrary(inj, options: ops)
+                    expect(lib) is MTLLibrary
+                }
+                
+                it("resolves given 'library' in options") {
+                    let inj: [String: Container] = ["metal": nodes]
+                    let ops: [String: Any] = ["library_container": "metal"]
+                    let lib = vert.resolveMtlLibrary(inj, options: ops)
+                    expect(lib) is MTLLibrary
+                    // TODO: need to compare lib vs library (but labels are not set)
+                }
+            }
+        }
+        
+//        describe("LibraryNode") {
+//            it("parses given a *.metallib file name")
+//            it("parses given the location of *.metallib file data")
+//            it("parses given the location of a *.metal source string")
+//            it("parses given the location of *.metal source data")
+        // TODO: also test generation of each method
+//        }
 
         describe("FunctionNode") {
             let vertName = "basic_color_vertex"
             let fragName = "basic_color_fragment"
             let compName = "test_compute_function"
+            let vert = metalParser.getVertexFunction(vertName)
+            let frag = metalParser.getFragmentFunction(fragName)
+            let comp = metalParser.getComputeFunction("test_compute_function")
             
             it("can parse render and compute functions") {
-                let vert = metalParser.getVertexFunction(vertName)
                 expect(vert.name) == vertName
-                let frag = metalParser.getFragmentFunction(fragName)
                 expect(frag.name) == fragName
-                let comp = metalParser.getComputeFunction("test_compute_function")
                 expect(comp.name) == compName
             }
             
-//            it("can parse from references") {
-//                
-//            }
-            
-            // it("generates libraries")
+            // it("generates functions")
+            it("generates a MTLFunction with various injected options") {
+                // can specify the combination of a "metal" container & "device_id"
+                let nodes = metalParser.nodes
+                let inj: [String: Container] = ["metal": nodes]
+                let ops: [String: Any] = [:]
+                let fnVert = vert.generate(inj, options: ops)
+                expect(fnVert.name) == vertName
+                
+                // can specify the combination of a "library" container and ...
+                let inj2: [String: Container] = [:]
+                let ops2: [String: Any] = ["device": device]
+                let fnVert2 = vert.generate(inj2, options: ops2)
+                expect(fnVert2.name == vertName)
+            }
         }
 
         describe("VertexDescriptorNode") {
@@ -149,14 +232,26 @@ class MetalNodeSpec: QuickSpec {
         }
 
         describe("DepthStencilDescriptorNode") {
+            let desc = metalParser.getDepthStencilDescriptor("depth_stencil_desc")
+            
             it("can parse a depth stencil descriptor") {
-                let desc = metalParser.getDepthStencilDescriptor("depth_stencil_desc")
                 expect(desc.depthCompareFunction) == MTLCompareFunction.Never
                 expect(desc.depthWriteEnabled) == true
                 expect(desc.frontFaceStencil!.stencilCompareFunction) == metalParser.getStencilDescriptor("stencil_desc").stencilCompareFunction
                 expect(desc.frontFaceStencil!.depthStencilPassOperation) == metalParser.getStencilDescriptor("stencil_desc").depthStencilPassOperation
                 expect(desc.backFaceStencil!.stencilCompareFunction) == metalParser.getStencilDescriptor("stencil_desc").stencilCompareFunction
                 expect(desc.backFaceStencil!.depthStencilPassOperation) == metalParser.getStencilDescriptor("stencil_desc").depthStencilPassOperation
+            }
+            
+            it("generates a depth stencil descriptor") {
+//                let leftStencilOptions = [:]
+//                let rightStencilOptions = [:]
+//                let inj = SpectraInjected(inj: ["metal": metalContainer, "nodes": nodes],
+//                                          options: [
+//                                            "left_stencil_desc": leftStencilOptions,
+//                                            "right_stencil_desc": rightStencilOptions])
+                
+                
             }
         }
         
